@@ -24,7 +24,7 @@
             <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                 <div class="form-group breadcrum-right">
                     <div class="">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"data-toggle="tooltip" data-placement="left" title="Tambah Data <?=$subtitle;?>"><i class="feather icon-user-plus"></i></button>
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?=$subtitle;?>"><i class="feather icon-user-plus"></i></button>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                                                     <th>Nomor Induk</th>
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
-                                                    <th>Foto</th>
+                                                    <th>Absensi</th>
                                                     <th>Pembimbing</th>
                                                     <th>Action</th>
                                                 </tr>

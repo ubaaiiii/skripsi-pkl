@@ -1,10 +1,11 @@
 <?php namespace App\Controllers;
 
-class Tables extends BaseController
+class Modal extends BaseController
 {
-	public function index()
+
+	public function siswa()
 	{
-		return view('index');
+		return view('modals/siswa');
 	}
 
 	//--------------------------------------------------------------------
