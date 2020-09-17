@@ -13,29 +13,29 @@
                     </span>
                     <div class="todo-app-menu">
                         <div class="form-group text-center add-task">
-                            <button type="button" class="btn btn-primary btn-block my-1" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
+                            <button type="button" class="btn btn-primary btn-block my-1" data-toggle="modal" data-target="#addTaskModal">Tambah Kegiatan</button>
                         </div>
                         <div class="sidebar-menu-list">
                             <div class="list-group list-group-filters font-medium-1">
                                 <a href="#" class="list-group-item list-group-item-action border-0 pt-0 active">
-                                    <i class="font-medium-5 feather icon-mail mr-50"></i> All
+                                    <i class="font-medium-5 feather icon-mail mr-50"></i> Semua Kegiatan
                                 </a>
                             </div>
                             <hr>
-                            <h5 class="mt-2 mb-1 pt-25">Filters</h5>
+                            <h5 class="mt-2 mb-1 pt-25">Filter</h5>
                             <div class="list-group list-group-filters font-medium-1">
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-star mr-50"></i> Starred</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-info mr-50"></i> Important</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-check mr-50"></i> Completed</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-trash mr-50"></i> Trashed</a>
+                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-star mr-50"></i> Favorit</a>
+                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-info mr-50"></i> Penting</a>
+                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-check mr-50"></i> Selesai</a>
+                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-trash mr-50"></i> Dihapus</a>
                             </div>
                             <hr>
-                            <h5 class="mt-2 mb-1 pt-25">Labels</h5>
+                            <h5 class="mt-2 mb-1 pt-25">Label</h5>
                             <div class="list-group list-group-labels font-medium-1">
-                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-primary mr-1"></span> Frontend</a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-primary mr-1"></span> Aktifitas</a>
                                 <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-warning mr-1"></span> Backend</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-success mr-1"></span> Doc</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-danger mr-1"></span> Bug</a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-success mr-1"></span> Dokumen</a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-danger mr-1"></span> Kendala</a>
                             </div>
                         </div>
                     </div>
@@ -451,7 +451,7 @@
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
                                                                     </span>
                                                                 </span>
-                                                                <span>Bug</span>
+                                                                <span>Bugs</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -479,7 +479,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

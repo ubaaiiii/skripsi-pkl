@@ -7,6 +7,7 @@ class Data extends BaseController
 	{
 		$data = [
 			'title' 		=> "Data",
+			'subtitle' 	=> "Data",
 			// 'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>',
 		];
 		return view('data',$data);

@@ -32,6 +32,10 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/vendors.min.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/tables/datatable/datatables.min.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/calendars/fullcalendar.min.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/calendars/extensions/daygrid.min.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/calendars/extensions/timegrid.min.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/pickers/pickadate/pickadate.css');?>">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -45,7 +49,8 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/core/menu/menu-types/vertical-menu.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/core/colors/palette-gradient.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-todo.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/pages/app-todo.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/calendars/fullcalendar.css');?>">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -59,7 +64,7 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns todo-application navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
     <!-- BEGIN: Header-->
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
@@ -161,7 +166,7 @@
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">Ubaidillah</span><span class="user-status">Admin</span></div><span><img class="round" src="<?= base_url('vuexy/app-assets/images/portrait/small/avatar-s-11.jpg'); ?>" alt="avatar" height="40" width="40"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
+                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="<?=base_url('profile');?>"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
                             </div>
                         </li>
@@ -219,7 +224,7 @@
                 </li>
                 <li class=" nav-item"><a href="#"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="Ecommerce">Monitoring</span></a>
                     <ul class="menu-content">
-                        <li><a href="<?=base_url('/monitoring/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Data Absen</span></a>
+                        <li><a href="<?=base_url('/monitoring/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Absen Siswa</span></a>
                         </li>
                         <li><a href="<?=base_url('/monitoring/kegiatan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Kegiatan Siswa</span></a>
                         </li>
@@ -276,7 +281,13 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/moment.min.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/fullcalendar.min.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/extensions/daygrid.min.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/extensions/timegrid.min.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/extensions/interactions.min.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/pickers/pickadate/picker.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/pickers/pickadate/picker.date.js');?>"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -286,20 +297,18 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="../../../app-assets/js/scripts/pages/app-todo.js"></script>
-    <?=$script;?>
+    <?=(isset($script))?($script):('');?>
     <!-- END: Page JS-->
 
     <script>
       $(document).ready(function(){
 
-        <?php if ($subtitle) : ?>
-            $('li').has('span:contains("<?=$subtitle;?>")').click();
-            $('.menu-content').find('li').has('span:contains("<?=$subtitle;?>")').addClass('active');
-        <?php else: ?>
-            $('li').has('span:contains("<?=$title;?>")').click();
-            $('li.nav-item').has('span:contains("<?=$title;?>")').addClass('active');
-        <?php endif; ?>
+        var $elem = $('span:contains("<?=$subtitle;?>")').filter(function() {
+            return $(this).text() === '<?=$subtitle;?>';
+        }).closest('li');
+
+        $elem.addClass('active');
+        $elem.closest('li.has-sub').addClass('open')
 
       });
     </script>

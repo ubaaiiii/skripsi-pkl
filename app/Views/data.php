@@ -13,20 +13,12 @@
                         <?php if($subtitle): ?>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?=base_url('data');?>">Data</a>
+                                <li class="breadcrumb-item"><a href="<?=base_url('dashboard');?>">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item active"><?=$subtitle;?></li>
                             </ol>
                         </div>
                       <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                <div class="form-group breadcrum-right">
-                    <div class="">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?=$subtitle;?>"><i class="feather icon-user-plus"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
                     </div>
                 </div>
             </div>

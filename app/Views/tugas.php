@@ -13,7 +13,7 @@
                         <?php if($subtitle): ?>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?=base_url('data');?>">Tugas</a>
+                                <li class="breadcrumb-item"><a href="<?=base_url('dashboard');?>">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item active"><?=$subtitle;?></li>
                             </ol>

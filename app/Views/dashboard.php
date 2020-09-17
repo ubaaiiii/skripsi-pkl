@@ -10,15 +10,6 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0"><?=$title;?></h2>
-                        <?php if($subtitle): ?>
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?=base_url('data');?>">Data</a>
-                                </li>
-                                <li class="breadcrumb-item active"><?=$subtitle;?></li>
-                            </ol>
-                        </div>
-                      <?php endif; ?>
                     </div>
                 </div>
             </div>
