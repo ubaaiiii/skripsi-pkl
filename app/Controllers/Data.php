@@ -31,6 +31,60 @@ class Data extends BaseController
 		return view('tables/siswa',$data);
 	}
 
+	public function pembimbing()
+	{
+		$data = [
+			'title' 		=> "Data Pembimbing",
+			'subtitle'	=> "Pembimbing",
+			'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/pdfmake.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/vfs_fonts.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.html5.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.print.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js').'"></script>',
+		];
+		return view('tables/pembimbing',$data);
+	}
+
+	public function industri()
+	{
+		$data = [
+			'title' 		=> "Data Industri",
+			'subtitle'	=> "Industri",
+			'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/pdfmake.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/vfs_fonts.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.html5.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.print.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js').'"></script>',
+		];
+		return view('tables/industri',$data);
+	}
+
+	public function admin()
+	{
+		$data = [
+			'title' 		=> "Data Admin",
+			'subtitle'	=> "Admin",
+			'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/pdfmake.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/vfs_fonts.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.html5.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.print.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js').'"></script>
+											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js').'"></script>',
+		];
+		return view('tables/admin',$data);
+	}
+
 	//--------------------------------------------------------------------
 
 }

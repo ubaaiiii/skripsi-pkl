@@ -1,14 +1,14 @@
 <?php namespace App\Controllers;
 
-class Dashboard extends BaseController
+class Profile extends BaseController
 {
 	public function index()
 	{
 		$data = [
-			'title' 		=> "Dashboard",
-			'subtitle' 	=> "Dashboard",
+			'title' 		=> "Profile",
+			'subtitle' 	=> "Profile",
 		];
-		return view('dashboard',$data);
+		return view('profile',$data);
 	}
 
 	//--------------------------------------------------------------------

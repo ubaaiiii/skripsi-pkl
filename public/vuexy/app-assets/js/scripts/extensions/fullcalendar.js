@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     plugins: ["dayGrid", "timeGrid", "interaction"],
     customButtons: {
       addNew: {
-        text: ' Add',
+        text: ' Absen',
         click: function () {
           var calDate = new Date,
             todaysDate = calDate.toISOString().slice(0, 10);
@@ -47,16 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
           $(".modal-calendar .add-category .chip").remove();
           $("#cal-start-date").val(todaysDate);
           $("#cal-end-date").val(todaysDate);
-          $(".modal-calendar #cal-start-date").attr("disabled", false);
+          $(".modal-calendar #cal-start-date").attr("disabled", true);
         }
       }
     },
     header: {
       left: "addNew",
-      center: "dayGridMonth,timeGridWeek,timeGridDay",
       right: "prev,title,next"
     },
-    displayEventTime: false,
+    displayEventTime: true,
     navLinks: true,
     editable: true,
     allDay: true,
@@ -103,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Remove Event
   $(".remove-event").on("click", function () {
-    var removeEvent = calendar.getEventById('newEvent');
+    var removeEvent = calendar.getEventById('newEvent'); // TODO: Ganti IDnya jadi dinamis
     removeEvent.remove();
   });
 
