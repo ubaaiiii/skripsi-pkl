@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="192x192"  href="<?= base_url('images/favicon/android-icon-192x192.png'); ?>">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('images/favicon/favicon-32x32.png'); ?>">
     <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('images/favicon/favicon-96x96.png'); ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('images/favicon/favicon-16x16.png'); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('images/favicon/favicon-32x32.png'); ?>">
     <link rel="manifest" href="<?= base_url('images/favicon/manifest.json');?>">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="<?= base_url('images/favicon/ms-icon-144x144.png'); ?>">
@@ -45,6 +45,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/core/menu/menu-types/vertical-menu.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/core/colors/palette-gradient.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-todo.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -73,8 +74,8 @@
                             <!-- li.nav-item.mobile-menu.d-xl-none.mr-auto-->
                             <!--   a.nav-link.nav-menu-main.menu-toggle.hidden-xs(href='#')-->
                             <!--     i.ficon.feather.icon-menu-->
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/Kegiatan" data-toggle="tooltip" data-placement="top" title="Kegiatan"><i class="ficon feather icon-check-square"></i></a></li>
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/Absensi" data-toggle="tooltip" data-placement="top" title="Absensi"><i class="ficon feather icon-clock"></i></a></li>
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Kegiatan"><i class="ficon feather icon-check-square"></i></a></li>
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Absensi"><i class="ficon feather icon-clock"></i></a></li>
                             <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
                             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
                         </ul>
@@ -176,11 +177,18 @@
     <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="/">
+                <li class="nav-item mr-auto">
+                    <a class="navbar-brand" href="/">
                         <div class="brand-logo"></div>
-                        <h2 class="brand-text mb-0">Mandalahayu</h2>
-                    </a></li>
-                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i></a></li>
+                        <h2 class="brand-text mb-0" style="letter-spacing: -1.5px;">Mandalahayu</h2>
+                    </a>
+                </li>
+                <li class="nav-item nav-toggle">
+                    <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
+                        <i class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i>
+                        <!-- <i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i> -->
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="shadow-bottom"></div>
@@ -188,6 +196,8 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class=" navigation-header"><span>Halaman Utama</span>
                 <li class=" nav-item"><a href="/"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
+                </li>
+                <li class=" nav-item"><a href="/profile"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Profile">Profile</span></a>
                 </li>
                 <!-- <li class=" nav-item"><a href="index.html"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
                     <ul class="menu-content">
@@ -201,29 +211,29 @@
                 </li>
                 <li class=" nav-item"><a href="#"><i class="fa fa-list-alt"></i><span class="menu-title" data-i18n="Ecommerce">Tugas</span></a>
                     <ul class="menu-content">
-                        <li><a href="/absensi"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Absensi</span></a>
+                        <li><a href="<?=base_url('/tugas/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Absensi</span></a>
                         </li>
-                        <li><a href="/kegiatan"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Kegiatan</span></a>
+                        <li><a href="<?=base_url('/tugas/kegiatan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Agenda Kegiatan</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="Ecommerce">Monitoring</span></a>
                     <ul class="menu-content">
-                        <li><a href="/absensi"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Absensi</span></a>
+                        <li><a href="<?=base_url('/monitoring/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Data Absen</span></a>
                         </li>
-                        <li><a href="/kegiatan"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Kegiatan</span></a>
+                        <li><a href="<?=base_url('/monitoring/kegiatan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Kegiatan Siswa</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Ecommerce">Data</span></a>
                     <ul class="menu-content">
-                        <li><a href="/data/siswa"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Siswa</span></a>
+                        <li><a href="<?=base_url('/data/siswa');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Siswa</span></a>
                         </li>
-                        <li><a href="/data/pembimbing"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Pembimbing</span></a>
+                        <li><a href="<?=base_url('/data/pembimbing');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Pembimbing</span></a>
                         </li>
-                        <li><a href="/data/industri"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Industri</span></a>
+                        <li><a href="<?=base_url('/data/industri');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Industri</span></a>
                         </li>
-                        <li><a href="/data/admin"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Admin</span></a>
+                        <li><a href="<?=base_url('/data/admin');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Admin</span></a>
                         </li>
                     </ul>
                 </li>
@@ -250,9 +260,13 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+        <!-- <p class="clearfix blue-grey lighten-2 mb-0">
+          <span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span>
+          <span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
         </p>
+        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
+
     </footer>
     <!-- END: Footer-->
 
@@ -262,14 +276,7 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/pdfmake.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/vfs_fonts.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.html5.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.print.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js'); ?>"></script>
+
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -279,14 +286,21 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="<?= base_url('vuexy/app-assets/js/scripts/datatables/datatable.js'); ?>"></script>
+    <script src="../../../app-assets/js/scripts/pages/app-todo.js"></script>
     <?=$script;?>
     <!-- END: Page JS-->
 
     <script>
       $(document).ready(function(){
-        $('li').has('span:contains("<?=$subtitle;?>")').click();
-        $('.menu-content').find('li').has('span:contains("<?=$subtitle;?>")').addClass('active');
+
+        <?php if ($subtitle) : ?>
+            $('li').has('span:contains("<?=$subtitle;?>")').click();
+            $('.menu-content').find('li').has('span:contains("<?=$subtitle;?>")').addClass('active');
+        <?php else: ?>
+            $('li').has('span:contains("<?=$title;?>")').click();
+            $('li.nav-item').has('span:contains("<?=$title;?>")').addClass('active');
+        <?php endif; ?>
+
       });
     </script>
 

@@ -10,14 +10,15 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0"><?=$title;?></h2>
+                        <?php if($subtitle): ?>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item">Data
+                                <li class="breadcrumb-item"><a href="<?=base_url('data');?>">Data</a>
                                 </li>
-                                <li class="breadcrumb-item active"><?=$subtitle;?>
-                                </li>
+                                <li class="breadcrumb-item active"><?=$subtitle;?></li>
                             </ol>
                         </div>
+                      <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                                         The print button will open a new window in the end user's browser and, by default, automatically trigger the print function allowing the end user to print the table. The window will be closed once the print is complete, or has been cancelled.
                                     </p> -->
                                     <div class="table-responsive">
-                                        <table class="table table-striped dataex-html5-selectors">
+                                        <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Nomor Induk</th>

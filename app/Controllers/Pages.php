@@ -5,10 +5,9 @@ class Pages extends BaseController
 	public function index()
 	{
 		$data = [
-			'title' => "Home",
-			'subtitle' => "Dashboard",
+			'title' => "Dashboard",
 		];
-		return view('index',$data);
+		return view('dashboard',$data);
 	}
 
 	//--------------------------------------------------------------------
