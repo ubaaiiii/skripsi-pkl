@@ -1,22 +1,22 @@
 <?php namespace App\Controllers;
 
-class Tugas extends BaseController
+class Monitoring extends BaseController
 {
 
 	public function index()
 	{
 		$data = [
-			'title' 		=> "Tugas",
+			'title' 		=> "Monitoring",
 			// 'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>',
 		];
-		return view('tugas',$data);
+		return view('monitoring',$data);
 	}
 
 	public function kegiatan()
 	{
 		$data = [
 			'title' 		=> "Agenda Kegiatan",
-			'subtitle'	=> "Kegiatan",
+			'subtitle'	=> "Siswa",
 			'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>
 											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/pdfmake.min.js').'"></script>
 											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/vfs_fonts.js').'"></script>

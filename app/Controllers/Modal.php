@@ -8,6 +8,11 @@ class Modal extends BaseController
 		return view('modals/siswa');
 	}
 
+	public function kegiatan()
+	{
+		// code...
+	}
+
 	//--------------------------------------------------------------------
 
 }
