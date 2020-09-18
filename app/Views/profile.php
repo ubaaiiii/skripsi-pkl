@@ -257,7 +257,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-twitter">Twitter <i class="fa fa-twitter" style="color:#1A91DA;"></i></label>
-                                                            <input type="text" id="account-twitter" class="form-control" placeholder="Add link" value="https://www.twitter.com">
+                                                            <input type="text" id="account-twitter" class="form-control" placeholder="Tambah tautan" value="https://www.twitter.com">
                                                             <?php if(!isset($twitter)): ?>
                                                                 <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://twitter.com/mandalaschool" target="_blank">https://twitter.com/mandalaschool</a></li></ul></div>
                                                             <?php endif; ?>
@@ -266,7 +266,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-facebook">Facebook <i class="fa fa-facebook" style="color:#166FE5;"></i></label>
-                                                            <input type="text" id="account-facebook" class="form-control" placeholder="Add link">
+                                                            <input type="text" id="account-facebook" class="form-control" placeholder="Tambah tautan">
                                                             <?php if(!isset($facebook)): ?>
                                                                 <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.facebook.com/yayasan.mandalahayu" target="_blank">https://www.facebook.com/yayasan.mandalahayu</a></li></ul></div>
                                                             <?php endif; ?>
@@ -275,7 +275,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-linkedin">LinkedIn <i class="fa fa-linkedin-square" style="color:#0070B1;"></i></label>
-                                                            <input type="text" id="account-linkedin" class="form-control" placeholder="Add link" value="https://www.linkedin.com">
+                                                            <input type="text" id="account-linkedin" class="form-control" placeholder="Tambah tautan" value="https://www.linkedin.com">
                                                             <?php if(!isset($linkedin)): ?>
                                                                 <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/" target="_blank">https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/</a></li></ul></div>
                                                             <?php endif; ?>
@@ -284,7 +284,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-instagram">Instagram <i class="fa fa-instagram" style="color:#E9622E;"></i></label>
-                                                            <input type="text" id="account-instagram" class="form-control" placeholder="Add link">
+                                                            <input type="text" id="account-instagram" class="form-control" placeholder="Tambah tautan">
                                                             <?php if(!isset($linkedin)): ?>
                                                                 <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.instagram.com/osmanka1/" target="_blank">https://www.instagram.com/osmanka1/</a></li></ul></div>
                                                             <?php endif; ?>

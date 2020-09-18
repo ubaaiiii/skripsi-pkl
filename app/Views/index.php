@@ -57,6 +57,8 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/assets/css/style.css'); ?>">
     <!-- END: Custom CSS-->
+
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/vendors.min.js'); ?>"></script>
     <script>
       var base_url = "<?=base_url();?>";
     </script>
@@ -278,7 +280,6 @@
 
 
     <!-- BEGIN: Vendor JS-->
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/vendors.min.js'); ?>"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
