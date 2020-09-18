@@ -56,14 +56,14 @@
                         </a>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?=base_url('data/industri');?>">
+                        <a href="<?=base_url('data/perusahaan');?>">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Industri</h4>
+                                    <h4 class="card-title">Perusahaan</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
-                                        <img class="img-fluid" src="<?=base_url('images\pages\industri.png');?>" alt="">
+                                        <img class="img-fluid" src="<?=base_url('images\pages\perusahaan.png');?>" alt="">
                                     </div>
                                 </div>
                             </div>

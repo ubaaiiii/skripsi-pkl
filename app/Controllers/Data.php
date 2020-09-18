@@ -49,11 +49,11 @@ class Data extends BaseController
 		return view('tables/pembimbing',$data);
 	}
 
-	public function industri()
+	public function perusahaan()
 	{
 		$data = [
-			'title' 		=> "Data Industri",
-			'subtitle'	=> "Industri",
+			'title' 		=> "Data Perusahaan",
+			'subtitle'	=> "Perusahaan",
 			'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>
 											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/pdfmake.min.js').'"></script>
 											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/vfs_fonts.js').'"></script>
@@ -64,7 +64,7 @@ class Data extends BaseController
 											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js').'"></script>
 											<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js').'"></script>',
 		];
-		return view('tables/industri',$data);
+		return view('tables/perusahaan',$data);
 	}
 
 	public function admin()

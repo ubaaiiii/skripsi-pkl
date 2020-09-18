@@ -60,7 +60,7 @@
                                                 </a>
                                                 <div class="media-body mt-75">
                                                     <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
-                                                        <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Upload new photo</label>
+                                                        <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Ubah foto</label>
                                                         <input type="file" id="account-upload" hidden>
                                                         <button class="btn btn-sm btn-outline-warning ml-50">Reset</button>
                                                     </div>
@@ -74,7 +74,7 @@
                                                         <div class="form-group">
                                                             <div class="controls">
                                                                 <label for="account-username">Nama Pengguna</label>
-                                                                <input type="text" class="form-control" id="account-username" placeholder="Username" value="hermione007" required data-validation-required-message="This username field is required">
+                                                                <input type="text" class="form-control" id="account-username" placeholder="Username" value="hermione007" required data-validation-required-message="* Nama pengguna wajib diisi">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,7 +82,7 @@
                                                         <div class="form-group">
                                                             <div class="controls">
                                                                 <label for="account-name">Nama Lengkap</label>
-                                                                <input type="text" class="form-control" id="account-name" placeholder="Name" value="Hermione Granger" required data-validation-required-message="This name field is required">
+                                                                <input type="text" class="form-control" id="account-name" placeholder="Name" value="Hermione Granger" required data-validation-required-message="* Nama lengkap wajib diisi">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -90,7 +90,7 @@
                                                         <div class="form-group">
                                                             <div class="controls">
                                                                 <label for="account-e-mail">E-mail</label>
-                                                                <input type="email" class="form-control" id="account-e-mail" placeholder="Email" value="granger007@hogward.com" required data-validation-required-message="This email field is required">
+                                                                <input type="email" class="form-control" id="account-e-mail" placeholder="Email" value="granger007@hogward.com" required data-validation-email-message="Format email tidak valid" data-validation-required-message="* Email wajib diisi">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,7 +110,13 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-company">Perusahaan</label>
-                                                            <input type="text" class="form-control" id="account-company" placeholder="Company name">
+                                                            <select class="form-control" id="basicSelect" data-validation-required-message="* Perusahaan wajib diisi" required>
+                                                                <option value="">Pilih Salah Satu...</option>
+                                                                <option>IT</option>
+                                                                <option>Blade Runner</option>
+                                                                <option>Thor Ragnarok</option>
+                                                            </select>
+                                                            <p class="help-block"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
@@ -126,25 +132,24 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                                <label for="account-old-password">Old Password</label>
-                                                                <input type="password" class="form-control" id="account-old-password" required placeholder="Old Password" data-validation-required-message="This old password field is required">
+                                                                <label for="katasandi-lama">Katasandi Lama</label>
+                                                                <input type="password" class="form-control" name="katasandi-lama" id="katasandi-lama" required placeholder="Katasandi Lama" data-validation-required-message="Katasandi lama wajib diisi">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                                <label for="account-new-password">New Password</label>
-                                                                <input type="password" name="password" id="account-new-password" class="form-control" placeholder="New Password" required data-validation-required-message="The password field is required" minlength="6">
+                                                              <label for="katasandi-baru">Katasandi Baru</label>
+                                                              <input type="password" name="katasandi-baru" id="katasandi-baru" class="form-control" placeholder="Katasandi Baru" required data-validation-required-message="Katasandi baru wajib diisi" minlength="6">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                                <label for="account-retype-new-password">Retype New
-                                                                    Password</label>
-                                                                <input type="password" name="con-password" class="form-control" required id="account-retype-new-password" data-validation-match-match="password" placeholder="New Password" data-validation-required-message="The Confirm password field is required" minlength="6">
+                                                                <label for="katasandi-baru2">Ulangi Katasandi</label>
+                                                                <input type="password" name="katasandi-baru2" class="form-control" required id="katasandi-baru2" data-validation-match-match="katasandi-baru" placeholder="Ulangi Kata Sandi" data-validation-required-message="Harap mengulangi katasandi" minlength="6">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -253,24 +258,36 @@
                                                         <div class="form-group">
                                                             <label for="account-twitter">Twitter <i class="fa fa-twitter" style="color:#1A91DA;"></i></label>
                                                             <input type="text" id="account-twitter" class="form-control" placeholder="Add link" value="https://www.twitter.com">
+                                                            <?php if(!isset($twitter)): ?>
+                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://twitter.com/mandalaschool" target="_blank">https://twitter.com/mandalaschool</a></li></ul></div>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-facebook">Facebook <i class="fa fa-facebook" style="color:#166FE5;"></i></label>
                                                             <input type="text" id="account-facebook" class="form-control" placeholder="Add link">
+                                                            <?php if(!isset($facebook)): ?>
+                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.facebook.com/yayasan.mandalahayu" target="_blank">https://www.facebook.com/yayasan.mandalahayu</a></li></ul></div>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-linkedin">LinkedIn <i class="fa fa-linkedin-square" style="color:#0070B1;"></i></label>
                                                             <input type="text" id="account-linkedin" class="form-control" placeholder="Add link" value="https://www.linkedin.com">
+                                                            <?php if(!isset($linkedin)): ?>
+                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/" target="_blank">https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/</a></li></ul></div>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-instagram">Instagram <i class="fa fa-instagram" style="color:#E9622E;"></i></label>
                                                             <input type="text" id="account-instagram" class="form-control" placeholder="Add link">
+                                                            <?php if(!isset($linkedin)): ?>
+                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.instagram.com/osmanka1/" target="_blank">https://www.instagram.com/osmanka1/</a></li></ul></div>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">

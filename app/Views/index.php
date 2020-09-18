@@ -51,6 +51,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/core/colors/palette-gradient.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/pages/app-todo.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/calendars/fullcalendar.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/forms/validation/form-validation.css');?>">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -236,7 +237,7 @@
                         </li>
                         <li><a href="<?=base_url('data/pembimbing');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Pembimbing</span></a>
                         </li>
-                        <li><a href="<?=base_url('data/industri');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Industri</span></a>
+                        <li><a href="<?=base_url('data/perusahaan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Perusahaan</span></a>
                         </li>
                         <li><a href="<?=base_url('data/admin');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Admin</span></a>
                         </li>
@@ -288,6 +289,7 @@
     <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/extensions/interactions.min.js');?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/pickers/pickadate/picker.js');?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/pickers/pickadate/picker.date.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js');?>"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -298,6 +300,7 @@
 
     <!-- BEGIN: Page JS-->
     <?=(isset($script))?($script):('');?>
+    <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/validation/form-validation.js');?>"></script>
     <!-- END: Page JS-->
 
     <script>

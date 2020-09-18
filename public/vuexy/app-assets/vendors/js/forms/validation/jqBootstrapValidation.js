@@ -861,7 +861,7 @@
                         $.error("Can't find field '" + elementName + "' to match '" + $this.attr("name") + "' against in '" + name + "' validator");
                     }
 
-                    var message = "Must match";
+                    var message = "Harus sama dengan";
                     var $label = null;
                     if (($label = $form.find("label[for=\"" + elementName + "\"]")).length) {
                         message += " '" + $label.text() + "'";
@@ -948,7 +948,7 @@
 
                     result.minlength = $this.data("validation" + name + "Minlength");
 
-                    result.message = "Too short: Minimum of '" + result.minlength + "' characters";
+                    result.message = "Terlalu pendek: Minimal '" + result.minlength + "' karakter";
                     if ($this.data("validation" + name + "Message")) {
                         result.message = $this.data("validation" + name + "Message");
                     }
