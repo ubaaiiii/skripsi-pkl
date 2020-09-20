@@ -217,31 +217,33 @@
                 </li> -->
                 <li class=" navigation-header"><span>Menu</span>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="fa fa-list-alt"></i><span class="menu-title" data-i18n="Ecommerce">Tugas</span></a>
+                <li class=" nav-item"><a href="#"><i class="fa fa-list-alt"></i><span class="menu-title" data-i18n="Tugas">Tugas</span></a>
                     <ul class="menu-content">
-                        <li><a href="<?=base_url('tugas/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Absensi</span></a>
+                        <li><a href="<?=base_url('tugas/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absensi">Absensi</span></a>
                         </li>
-                        <li><a href="<?=base_url('tugas/kegiatan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Agenda Kegiatan</span></a>
+                        <li><a href="<?=base_url('tugas/kegiatan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Agenda Kegiatan">Agenda Kegiatan</span></a>
                         </li>
                     </ul>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="Ecommerce">Monitoring</span></a>
+                <li class=" nav-item"><a href="#"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="Monitoring">Monitoring</span></a>
                     <ul class="menu-content">
-                        <li><a href="<?=base_url('monitoring/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Absen Siswa</span></a>
+                        <li><a href="<?=base_url('monitoring/absensi');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absen Siswa">Absen Siswa</span></a>
                         </li>
-                        <li><a href="<?=base_url('monitoring/kegiatan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Kegiatan Siswa</span></a>
+                        <li><a href="<?=base_url('monitoring/kegiatan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Kegiatan Siswa">Kegiatan Siswa</span></a>
                         </li>
                     </ul>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Ecommerce">Data</span></a>
+                <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Data">Data</span></a>
                     <ul class="menu-content">
-                        <li><a href="<?=base_url('data/siswa');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Siswa</span></a>
+                        <li><a href="<?=base_url('data/siswa');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Siswa">Siswa</span></a>
                         </li>
-                        <li><a href="<?=base_url('data/pembimbing');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Pembimbing</span></a>
+                        <li><a href="<?=base_url('data/pembimbing');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pembimbing">Pembimbing</span></a>
                         </li>
-                        <li><a href="<?=base_url('data/perusahaan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Perusahaan</span></a>
+                        <li><a href="<?=base_url('data/perusahaan');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Perusahaan">Perusahaan</span></a>
                         </li>
-                        <li><a href="<?=base_url('data/admin');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Admin</span></a>
+                        <li><a href="<?=base_url('data/admin');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Admin">Admin</span></a>
+                        </li>
+                        <li><a href="<?=base_url('data/admin');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Nilai">Nilai</span></a>
                         </li>
                     </ul>
                 </li>

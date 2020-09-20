@@ -26,7 +26,7 @@ class Data extends BaseController
 	{
 		$siswaModel	= new SiswaModel();
 		if ($tipe == 'data') {
-			echo json_encode($this->siswaModel->findAll());
+			echo json_encode($this->siswaModel->tableSiswa());
 		} else {
 			$data = [
 				'title' 		=> "Data Siswa",

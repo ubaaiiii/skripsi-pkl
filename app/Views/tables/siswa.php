@@ -13,6 +13,8 @@
                         <?php if($subtitle): ?>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="<?=base_url('dashboard');?>">Dashboard</a>
+                                </li>
                                 <li class="breadcrumb-item"><a href="<?=base_url('data');?>">Data</a>
                                 </li>
                                 <li class="breadcrumb-item active"><?=$subtitle;?></li>
@@ -48,7 +50,7 @@
                                         The print button will open a new window in the end user's browser and, by default, automatically trigger the print function allowing the end user to print the table. The window will be closed once the print is complete, or has been cancelled.
                                     </p> -->
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
+                                        <table class="table table-striped" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Nomor Induk</th>
@@ -89,6 +91,19 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                            <tfoot>
+                                              <tr>
+                                                  <th><input type="text" class="form-control" placeholder="Nomor Induk" /></th>
+                                                  <th><input type="text" class="form-control" placeholder="Nama" /></th>
+                                                  <th><input type="text" class="form-control" placeholder="Jenis Kelamin" /></th>
+                                                  <th><input type="text" class="form-control" placeholder="Kelas" /></th>
+                                                  <th><input type="text" class="form-control" placeholder="Perusahaan" /></th>
+                                                  <th><input type="text" class="form-control" placeholder="Pembimbing" /></th>
+                                                  <th><input type="text" class="form-control" placeholder="Absensi" /></th>
+                                                  <th><input type="text" class="form-control" placeholder="Status" /></th>
+                                                  <th></th>
+                                              </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -105,9 +120,7 @@
                     });
                 });
 
-                console.log(base_url+"/data/siswa/data");
-
-                $('.table').DataTable( {
+                $('.table').DataTable({
                     language: {
                       url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json"
                     },
@@ -121,9 +134,11 @@
                       {
                         data    : "nama",
                         render  : function ( data, type, row, meta ) {
+                          var stats = row.stats.split(",");
+                          stats = stats[2];
                             return `<div class="avatar mr-1">
                                       <img src="/images/users/`+row.foto+`" alt="avtar img holder" width="32" height="32">
-                                      <span class="avatar-status-online fa fa-check"></span>
+                                      <span class="avatar-status-`+stats+`"></span>
                                     </div>` + data;
                         }
                       },
@@ -134,8 +149,8 @@
                         }
                       },
                       { data    : "kelas"},
-                      { data    : "id_perusahaan"},
-                      { data    : "id_pembimbing"},
+                      { data    : "perusahaan"},
+                      { data    : "pembimbing"},
                       {
                         data    : "absensi",
                         render  : function(data) {
@@ -160,7 +175,7 @@
                         }
                       },
                       {
-                        data    : "status",
+                        data    : "stats",
                         render  : function(data) {
                           data = data.split(",");
                           return `<div class="badge badge-pill badge-light-`+data[1]+`">`+data[0]+`</div>`;
@@ -169,26 +184,29 @@
                       {
                         data    : "status",
                         render  : function(data) {
-                          return `<button type="button" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>
-                                  <button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>
-                                  <button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>`;
+                          var button = "";
+                          button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>`;
+                          button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>`;
+                          button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>`;
+                          switch (data) {
+                            case "1":
+                              button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL"><i class="feather icon-check-square"></i></button>`;
+                              break;
+                            case "2":
+                              button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan"><i class="feather icon-alert-circle"></i></button>`;
+                              break;
+                            case "3":
+                              button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai"><i class="feather
+icon-star"></i></button>`;
+                              break;
+
+                          }
+                          button += "<span style='display:none;'>"+data+"</span>";    // Biar bisa sorting
+                          return button;
                         }
                       },
                       { data    : "foto", visible:false},
-                      // {
-                      //   // targets : 4,
-                      //   data    : "description",
-                      //   render  : function ( data, type, row, meta ) {
-                      //     return type === 'display' && data.length > 40 ?
-                      //       '<span title="'+data+'">'+data.substr( 0, 38 )+'...</span>' :
-                      //       data;
-                      //   }
-                      // },
                     ],
-                    // columnDefs  : [{
-                    //   targets   : [6],
-                    //   type      : "num-html"
-                    // }],
                     dom: 'lfBrtip',
                     buttons: [
                         {
@@ -221,6 +239,20 @@
                             }
                         }
                     ],
+                    initComplete: function () {
+                        // Apply the search
+                        this.api().columns().every( function () {
+                            var that = this;
+
+                            $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                                if ( that.search() !== this.value ) {
+                                    that
+                                        .search( this.value )
+                                        .draw();
+                                }
+                            } );
+                        } );
+                    },
                     fnDrawCallback: function(oSettings) {
                       $('[data-toggle="tooltip"]').tooltip({
                           "html": true,
