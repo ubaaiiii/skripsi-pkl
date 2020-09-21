@@ -66,28 +66,10 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>123123123</td>
-                                                    <td>
-                                                        <div class="avatar mr-1">
-                                                            <img src="/images/users/avatar-s-20.jpg" alt="avtar img holder" width="32" height="32">
-                                                            <span class="avatar-status-online fa fa-check"></span>
-                                                        </div>
-                                                        Tiger Nixon
-                                                    </td>
-                                                    <td>Laki-Laki</td>
-                                                    <td>XII RPL 2</td>
-                                                    <td>Toyota</td>
-                                                    <td>Dedibara</td>
-                                                    <td>
-                                                      <div class="progress progress-bar-success">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
+                                                    <td colspan="9">
+                                                      <div class="progress progress-bar-primary progress-xl">
+                                                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
                                                       </div>
-                                                    </td>
-                                                    <td><div class="badge badge-pill badge-light-danger">blocked</div></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>
-                                                        <button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>
-                                                        <button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>
                                                     </td>
                                                 </tr>
                                             </tbody>

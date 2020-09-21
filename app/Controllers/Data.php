@@ -14,6 +14,8 @@ class Data extends BaseController
 
 	public function index()
 	{
+		// $faker = \Faker\Factory::create('id_ID');
+		// dd($faker->name);
 		$data = [
 			'title' 		=> "Data",
 			'subtitle' 	=> "Data",
