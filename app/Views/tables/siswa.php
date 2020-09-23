@@ -28,7 +28,6 @@
                 <div class="form-group breadcrum-right">
                     <div class="">
                         <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?=$subtitle;?>"><i class="feather icon-user-plus"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
                     </div>
                 </div>
             </div>
@@ -57,9 +56,8 @@
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Kelas</th>
-                                                    <th>Perusahaan</th>
-                                                    <th>Pembimbing</th>
-                                                    <th>Absensi</th>
+                                                    <th>Email</th>
+                                                    <th>Alamat</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -73,19 +71,6 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                            <tfoot>
-                                              <tr>
-                                                  <th><input type="text" class="form-control" placeholder="Nomor Induk" /></th>
-                                                  <th><input type="text" class="form-control" placeholder="Nama" /></th>
-                                                  <th><input type="text" class="form-control" placeholder="Jenis Kelamin" /></th>
-                                                  <th><input type="text" class="form-control" placeholder="Kelas" /></th>
-                                                  <th><input type="text" class="form-control" placeholder="Perusahaan" /></th>
-                                                  <th><input type="text" class="form-control" placeholder="Pembimbing" /></th>
-                                                  <th><input type="text" class="form-control" placeholder="Absensi" /></th>
-                                                  <th><input type="text" class="form-control" placeholder="Status" /></th>
-                                                  <th></th>
-                                              </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -107,7 +92,7 @@
                       url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json"
                     },
                     ajax:{
-                        url: "/data/siswa/data",
+                        url: "/siswa/data",
                         type:"POST",
                         dataSrc: ""
                     },
@@ -131,31 +116,12 @@
                         }
                       },
                       { data    : "kelas"},
-                      { data    : "perusahaan"},
-                      { data    : "pembimbing"},
-                      {
-                        data    : "absensi",
-                        render  : function(data) {
-                          var warna = "";
-                          switch (true) {
-                            case (data < 20):
-                              warna = "danger";
-                              break;
-                            case (data < 50):
-                              warna = "warning";
-                              break;
-                            case (data < 70):
-                              warna = "info";
-                              break;
-                            default:
-                              warna = "primary";
-                              break;
-                          }
-                          return `<div class="progress progress-bar-`+warna+`">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="`+data+`" aria-valuemin="0" aria-valuemax="100" style="width:`+data+`%"><i style="display:none;">`+data+`</i></div>
-                                  </div>`;
+                      { data    : "email",
+                        render  : function (data) {
+                          return "<a href='mailto:"+data+"'>"+data+"</a>";
                         }
                       },
+                      { data    : "alamat"},
                       {
                         data    : "stats",
                         render  : function(data) {
@@ -221,20 +187,6 @@ icon-star"></i></button>`;
                             }
                         }
                     ],
-                    initComplete: function () {
-                        // Apply the search
-                        this.api().columns().every( function () {
-                            var that = this;
-
-                            $( 'input', this.footer() ).on( 'keyup change clear', function () {
-                                if ( that.search() !== this.value ) {
-                                    that
-                                        .search( this.value )
-                                        .draw();
-                                }
-                            } );
-                        } );
-                    },
                     fnDrawCallback: function(oSettings) {
                       $('[data-toggle="tooltip"]').tooltip({
                           "html": true,

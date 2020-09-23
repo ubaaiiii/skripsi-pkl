@@ -25,15 +25,16 @@ class SiswaModel extends Model
 
     }
 
-    public function tableSiswa()
+    public function tableSiswa($ni = false)
     {
       $db      = \Config\Database::connect();
       $builder = $db->table('siswa a');
-      $builder->select("a.*, b.nama 'pembimbing', c.nama 'perusahaan', d.msdesc 'stats'")
-              ->join("pembimbing b","a.id_pembimbing = b.id")
-              ->join("perusahaan c","a.id_perusahaan = c.id")
-              ->join("master d","a.status = d.msid AND d.mstype = 'status'");
+      $builder->select("a.*, b.msdesc 'stats'")
+              ->join("master b","a.status = b.msid");
+      if ($ni) {
+        $builder->where('nomor_induk',$ni);
+      }
 
-      return $query   = $builder->get()->getResult();  // Produces: SELECT * FROM mytable
+      return $builder->get()->getResult();
     }
 }
