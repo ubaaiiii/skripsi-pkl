@@ -5,6 +5,7 @@ use CodeIgniter\Model;
 class SiswaModel extends Model
 {
     protected $table          = 'siswa';
+    protected $primaryKey     = 'nomor_induk';
     protected $useSoftDeletes = true;
     protected $allowedFields  = [
                                   'nomor_induk',
@@ -37,4 +38,15 @@ class SiswaModel extends Model
 
       return $builder->get()->getResult();
     }
+
+    public function simpanGambar($img)
+    {
+      if ($img->isValid() && ! $img->hasMoved())
+      {
+         $newName = $img->getRandomName();
+         $img->move('images/users', $newName);
+      }
+      return $newName;
+    }
+
 }

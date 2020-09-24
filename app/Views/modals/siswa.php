@@ -14,11 +14,11 @@
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="number" required id="nomor-induk" class="form-control" name="nomor-induk" placeholder="Nomor Induk">
+              <input type="number" required id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk">
               <div class="form-control-position">
                   <i class="fa fa-id-card"></i>
               </div>
-              <label for="nomor-induk">Nomor Induk</label>
+              <label for="nomor_induk">Nomor Induk</label>
           </div>
       </div>
       <div class="col-12">
@@ -31,13 +31,13 @@
           </div>
       </div>
       <div class="col-12">
-        <label for="jenis-kelamin">Jenis Kelamin</label>
+        <label for="jenis_kelamin">Jenis Kelamin</label>
           <div class="form-label-group position-relative">
               <ul class="list-unstyled mb-0">
                   <li class="d-inline-block mr-2">
                       <fieldset>
                           <div class="vs-radio-con">
-                              <input required type="radio" name="jenis-kelamin" value="L">
+                              <input required type="radio" name="jenis_kelamin" value="L">
                               <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -49,7 +49,7 @@
                   <li class="d-inline-block mr-2">
                       <fieldset>
                           <div class="vs-radio-con">
-                              <input type="radio" name="jenis-kelamin" value="P">
+                              <input type="radio" name="jenis_kelamin" value="P">
                               <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -100,11 +100,11 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
-        <label for="upload-foto">Foto</label>
+        <label for="upload_foto">Foto</label>
         <fieldset class="form-group">
             <div class="custom-file">
-                <input type="file" required class="custom-file-input" id="upload-foto" name="upload-foto" accept="image/x-png,image/gif,image/jpeg">
-                <label class="custom-file-label" id="upload-label" for="upload-foto">Pilih file</label>
+                <input type="file" required class="custom-file-input" id="upload_foto" name="upload_foto" accept="image/x-png,image/gif,image/jpeg">
+                <label class="custom-file-label" id="upload-label" for="upload_foto">Pilih file</label>
             </div>
             <p class="font-italic text-black text-center mt-1">Gambar akan ditampilkan pada kotak di bawah.</p>
             <div class="image-area"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
@@ -130,8 +130,20 @@
         url:"/siswa/tambah",
         data:new FormData(this),
         type:"post",
+        processData: false,
+        contentType: false,
         success: function(resp){
-          console.log(resp);
+          if (resp !== "berhasil") {
+            // console.log(resp);
+            resp = JSON.parse(resp);
+            $.each(resp,function(index,value){
+              toastr.error(value, 'Error!', { "timeOut": 5000 });
+              $('#'+index).select();
+            });
+          } else {
+            toastr.success("Berhasil menyimpan data siswa", 'Success!', { "timeOut": 5000 });
+            $('#large').modal('hide');
+          }
           $('#btn-submit').html(buttonLama);
           $('.modal-footer button').attr('disabled',false);
         }
@@ -139,15 +151,22 @@
     })
 
 
-    $('#kelas').select2();
+    $('#kelas').select2({allowClear:true,placeholder:'Pilih Salah Satu...'});
 
     var kelasnya = <?=json_encode($kelas);?>;
     $('#kelas').change(function(){
-      var kodeKelas = $(this).val(),
-          kelas     = kelasnya.find(x => x.msid === kodeKelas).msdesc,
-          kelas     = kelas.split(",");
-      $('#kelasnya').val(kelas[0]);
-      $('#jurusannya').val(kelas[1]);
+      var kodeKelas = $(this).val();
+      if (kodeKelas == "") {
+        $('#kelasnya').val('');
+        $('#jurusannya').val('');
+      } else {
+
+        var kelas     = kelasnya.find(x => x.msid === kodeKelas).msdesc,
+            kelas     = kelas.split(",");
+        // console.log(kodeKelas);
+        $('#kelasnya').val(kelas[0]);
+        $('#jurusannya').val(kelas[1]);
+      }
     })
 
     function readURL(input) {
@@ -163,7 +182,7 @@
     }
 
     $(function () {
-        $('#upload-foto').on('change', function () {
+        $('#upload_foto').on('change', function () {
             readURL(input);
         });
         $('#btn-reset').click(function(){
@@ -175,7 +194,7 @@
     /*  ==========================================
         SHOW UPLOADED IMAGE NAME
     * ========================================== */
-    var input = document.getElementById( 'upload-foto' );
+    var input = document.getElementById( 'upload_foto' );
     var infoArea = document.getElementById( 'upload-label' );
 
     input.addEventListener( 'change', showFileName );

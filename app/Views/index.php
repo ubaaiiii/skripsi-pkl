@@ -36,7 +36,8 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/calendars/extensions/daygrid.min.css');?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/calendars/extensions/timegrid.min.css');?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/pickers/pickadate/pickadate.css');?>">
-    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/forms/select/select2.min.css'); ?>">">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/forms/select/select2.min.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/extensions/toastr.css');?>">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -53,6 +54,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/pages/app-todo.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/calendars/fullcalendar.css');?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/forms/validation/form-validation.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/extensions/toastr.css');?>">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -60,6 +62,7 @@
     <!-- END: Custom CSS-->
 
     <script src="<?= base_url('vuexy/app-assets/vendors/js/vendors.min.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/toastr.min.js');?>"></script>
     <script>
       var base_url = "<?=base_url();?>";
     </script>
@@ -171,7 +174,7 @@
                                 <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">Ubaidillah</span><span class="user-status">Admin</span></div><span><img class="round" src="<?= base_url('vuexy/app-assets/images/portrait/small/avatar-s-11.jpg'); ?>" alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="<?=base_url('profile');?>"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item" href="<?=base_url('auth/logout');?>"><i class="feather icon-power"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -307,6 +310,7 @@
     <?=(isset($script))?($script):('');?>
     <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/validation/form-validation.js');?>"></script>
     <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/select/form-select2.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/js/scripts/extensions/toastr.js');?>"></script>
     <!-- END: Page JS-->
 
     <script>
