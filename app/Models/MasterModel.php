@@ -18,14 +18,13 @@ class MasterModel extends Model
 
     }
 
-    public function get($ni = false)
+    public function getData($mstype = false)
     {
       $db      = \Config\Database::connect();
-      $builder = $db->table('siswa a');
-      $builder->select("a.*, b.msdesc 'stats'")
-              ->join("master b","a.status = b.msid");
-      if ($ni) {
-        $builder->where('nomor_induk',$ni);
+      $builder = $db->table('master');
+      $builder->select("*");
+      if ($mstype) {
+        $builder->where('mstype',$mstype);
       }
 
       return $builder->get()->getResult();

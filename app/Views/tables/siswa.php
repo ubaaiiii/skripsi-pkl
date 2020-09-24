@@ -83,7 +83,7 @@
               $(document).ready(function() {
                 $('.btn-tambah').click(function(){
                     $('#large .modal-content').load(base_url+'/modal/siswa',function(){
-                        $('#large').modal({backdrop: 'static', keyboard: false});
+                        $('#large').modal('show');
                     });
                 });
 
@@ -102,10 +102,9 @@
                         data    : "nama",
                         render  : function ( data, type, row, meta ) {
                           var stats = row.stats.split(",");
-                          stats = stats[2];
                             return `<div class="avatar mr-1">
                                       <img src="/images/users/`+row.foto+`" alt="avtar img holder" width="32" height="32">
-                                      <span class="avatar-status-`+stats+`"></span>
+                                      <span class="avatar-status-`+stats[2]+`"></span>
                                     </div>` + data;
                         }
                       },

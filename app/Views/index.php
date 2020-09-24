@@ -36,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/calendars/extensions/daygrid.min.css');?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/calendars/extensions/timegrid.min.css');?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/pickers/pickadate/pickadate.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/forms/select/select2.min.css'); ?>">">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -293,6 +294,7 @@
     <script src="<?= base_url('vuexy/app-assets/vendors/js/pickers/pickadate/picker.js');?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/pickers/pickadate/picker.date.js');?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/forms/select/select2.full.min.js'); ?>"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -304,6 +306,7 @@
     <!-- BEGIN: Page JS-->
     <?=(isset($script))?($script):('');?>
     <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/validation/form-validation.js');?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/select/form-select2.js'); ?>"></script>
     <!-- END: Page JS-->
 
     <script>

@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Models\SiswaModel;
 use App\Models\PerusahaanModel;
+use App\Models\MasterModel;
 
 class Data extends BaseController
 {
@@ -12,6 +13,7 @@ class Data extends BaseController
 	{
 		$this->siswaModel	= new SiswaModel();
 		$this->perusahaanModel	= new PerusahaanModel();
+		$this->masterModel	= new MasterModel();
 	}
 
 	public function index()

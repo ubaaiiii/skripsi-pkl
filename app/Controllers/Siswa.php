@@ -21,4 +21,14 @@ protected $siswaModel;
 		}
 	}
 
+	public function tambah()
+	{
+		$config['upload_path']    = "assets/images/bukti/";
+		$config['allowed_types']  = 'gif|jpg|png|jpeg';
+		$config['encrypt_name']   = true;
+		$config['max_size']       = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+	}
+
 }
