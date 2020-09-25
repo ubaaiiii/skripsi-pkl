@@ -50,13 +50,13 @@ class SiswaModel extends Model
       return $newName;
     }
 
-    public function cekSyarat($ni)
+    public function cekSyarat($kode_kelas)
     {
       $db      = $this->db;
-      $builder = $db->table('siswa a');
-      $builder->select('a.*, b.*')
-              ->join('master b','a.kelas = b.msid AND b.mstype = "kelas"')
-              ->where('nomor_induk',$ni);
+      $builder = $db->table('master');
+      $builder->select('*')
+              ->where('msid',$kode_kelas)
+              ->where('mstype','kelas');
       $result = $builder->get()->getResult()[0];
       $kelasnya = explode(",",$result->msdesc)[0];
       if ($kelasnya == 'Kelas X') {

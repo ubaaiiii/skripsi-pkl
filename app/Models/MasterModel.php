@@ -5,6 +5,7 @@ use CodeIgniter\Model;
 class MasterModel extends Model
 {
     protected $table          = 'master';
+    protected $primaryKey     = 'msid';
     protected $useSoftDeletes = true;
     protected $allowedFields  = [
                                   'msid',

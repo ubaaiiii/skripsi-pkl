@@ -3,16 +3,19 @@ namespace App\Controllers;
 
 use App\Models\SiswaModel;
 use App\Models\PerusahaanModel;
+use App\Models\PembimbingModel;
+use App\Models\AdminModel;
 use App\Models\MasterModel;
 
 class Data extends BaseController
 {
-	protected $siswaModel;
 
 	public function __construct()
 	{
 		$this->siswaModel	= new SiswaModel();
+		$this->pembimbingModel	= new PembimbingModel();
 		$this->perusahaanModel	= new PerusahaanModel();
+		$this->adminModel	= new AdminModel();
 		$this->masterModel	= new MasterModel();
 	}
 
@@ -21,9 +24,13 @@ class Data extends BaseController
 		// $faker = \Faker\Factory::create('id_ID');
 		// dd($faker->phoneNumber);
 		$data = [
-			'title' 		=> "Data",
-			'subtitle' 	=> "Data",
-			// 'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>',
+			'jml_siswa'				=> $this->siswaModel->countAllResults(),
+			'jml_pembimbing'	=> $this->pembimbingModel->countAllResults(),
+			'jml_perusahaan'	=> $this->perusahaanModel->countAllResults(),
+			'jml_admin'				=> $this->adminModel->countAllResults(),
+			'title' 					=> "Data",
+			'subtitle' 				=> "Data",
+			// 'script'				=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>',
 		];
 		return view('data',$data);
 	}

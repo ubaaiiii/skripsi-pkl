@@ -16,7 +16,7 @@ protected $siswaModel;
 	public function index($ni)
 	{
 		$siswa = $this->siswaModel;
-		dd($siswa->cekSyarat($ni));
+		echo $siswa->cekSyarat($ni);
 	}
 
 	public function data($ni = false)
@@ -61,8 +61,7 @@ protected $siswaModel;
 		} else {
 			$gambar = $this->request->getFile('upload_foto');
 			$nmFoto	= $siswa->simpanGambar($gambar);
-			$status	=	$siswa->cekSyarat($this->request->getPost('nomor_induk'));
-
+			$status	=	$siswa->cekSyarat($this->request->getPost('kelas'));
 			$data = [
 				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
 				'nama'          =>  $this->request->getPost('nama'),

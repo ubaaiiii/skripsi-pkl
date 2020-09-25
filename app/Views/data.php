@@ -32,6 +32,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Siswa</h4>
+                                    <div class="badge badge-primary badge-md">
+                                        <span>&nbsp;<?=$jml_siswa;?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                                    </div>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
@@ -46,6 +49,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Pembimbing</h4>
+                                    <div class="badge badge-primary badge-md">
+                                        <span>&nbsp;<?=$jml_pembimbing;?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-user-check"></i>
+                                    </div>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
@@ -60,6 +66,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Perusahaan</h4>
+                                    <div class="badge badge-primary badge-md">
+                                        <span>&nbsp;<?=$jml_perusahaan;?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
+                                    </div>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
@@ -74,6 +83,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Admin</h4>
+                                    <div class="badge badge-primary badge-md">
+                                        <span>&nbsp;<?=$jml_admin;?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                                    </div>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">

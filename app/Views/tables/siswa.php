@@ -118,7 +118,11 @@
                       { data    : "kelas"},
                       { data    : "email",
                         render  : function (data) {
-                          return "<a href='mailto:"+data+"'>"+data+"</a>";
+                          if (data !== null){
+                            return "<a href='mailto:"+data+"'>"+data+"</a>";
+                          } else {
+                            return `<div class="badge badge-pill bg-gradient-danger"><i>Belum Aktivasi Akun</i></div>`;
+                          }
                         }
                       },
                       { data    : "alamat"},
@@ -191,7 +195,7 @@ icon-star"></i></button>`;
                       $('[data-toggle="tooltip"]').tooltip({
                           "html": true,
                       });
-                    }
+                    },
                 });
               });
 
