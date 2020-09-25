@@ -8,7 +8,7 @@
     </button>
 </div>
 <form class="form" method="post" id="form-siswa">
-  <?= csrf_field() ?>
+  <?= csrf_field(); ?>
 <div class="modal-body">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -127,12 +127,13 @@
       $('.modal-footer button').attr('disabled',true);
       e.preventDefault();
       $.ajax({
-        url:"/siswa/tambah",
+        url:"/siswa/<?=$tipe;?>",
         data:new FormData(this),
         type:"post",
         processData: false,
         contentType: false,
         success: function(resp){
+          console.log(resp);
           if (resp !== "berhasil") {
             // console.log(resp);
             resp = JSON.parse(resp);
@@ -141,6 +142,7 @@
               $('#'+index).select();
             });
           } else {
+            $('.table').DataTable().ajax.reload();
             toastr.success("Berhasil menyimpan data siswa", 'Success!', { "timeOut": 5000 });
             $('#large').modal('hide');
           }

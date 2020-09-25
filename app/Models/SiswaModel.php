@@ -20,15 +20,16 @@ class SiswaModel extends Model
                                   'status',
                                 ];
     protected $useTimestamps   = true;
+    protected $db;
 
     public function __construct()
     {
-
+      $this->db = \Config\Database::connect();
     }
 
     public function tableSiswa($ni = false)
     {
-      $db      = \Config\Database::connect();
+      $db      = $this->db;
       $builder = $db->table('siswa a');
       $builder->select("a.*, b.msdesc 'stats'")
               ->join("master b","a.status = b.msid");
@@ -47,6 +48,22 @@ class SiswaModel extends Model
          $img->move('images/users', $newName);
       }
       return $newName;
+    }
+
+    public function cekSyarat($ni)
+    {
+      $db      = $this->db;
+      $builder = $db->table('siswa a');
+      $builder->select('a.*, b.*')
+              ->join('master b','a.kelas = b.msid AND b.mstype = "kelas"')
+              ->where('nomor_induk',$ni);
+      $result = $builder->get()->getResult()[0];
+      $kelasnya = explode(",",$result->msdesc)[0];
+      if ($kelasnya == 'Kelas X') {
+        return 0;
+      } else {
+        return 1;
+      }
     }
 
 }

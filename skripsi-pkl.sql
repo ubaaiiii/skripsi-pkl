@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2020 at 11:25 PM
+-- Generation Time: Sep 25, 2020 at 07:22 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -663,12 +663,30 @@ INSERT INTO `master` (`msid`, `msdesc`, `mstype`) VALUES
 ('pembimbing', 'Pembimbing', 'level'),
 ('siswa', 'Siswa', 'level'),
 ('wakasek', 'Wakil Kepala Sekolah', 'jabatan'),
+('X AK 1', 'Kelas X,Akutansi,1', 'kelas'),
+('X AK 2', 'Kelas X,Akutansi,2', 'kelas'),
+('X AK 3', 'Kelas X,Akutansi,3', 'kelas'),
+('X AP 1', 'Kelas X,Administrasi Perkantoran,1', 'kelas'),
+('X AP 2', 'Kelas X,Administrasi Perkantoran,2', 'kelas'),
+('X AP 3', 'Kelas X,Administrasi Perkantoran,3', 'kelas'),
 ('X RPL 1', 'Kelas X,Rekayasa Perangkat Lunak,1', 'kelas'),
 ('X RPL 2', 'Kelas X,Rekayasa Perangkat Lunak,2', 'kelas'),
 ('X RPL 3', 'Kelas X,Rekayasa Perangkat Lunak,3', 'kelas'),
+('XI AK 1', 'Kelas XI,Akutansi,1', 'kelas'),
+('XI AK 2', 'Kelas XI,Akutansi,2', 'kelas'),
+('XI AK 3', 'Kelas XI,Akutansi,3', 'kelas'),
+('XI AP 1', 'Kelas XI,Administrasi Perkantoran,1', 'kelas'),
+('XI AP 2', 'Kelas XI,Administrasi Perkantoran,2', 'kelas'),
+('XI AP 3', 'Kelas XI,Administrasi Perkantoran,3', 'kelas'),
 ('XI RPL 1', 'Kelas XI,Rekayasa Perangkat Lunak,1', 'kelas'),
 ('XI RPL 2', 'Kelas XI,Rekayasa Perangkat Lunak,2', 'kelas'),
 ('XI RPL 3', 'Kelas XI,Rekayasa Perangkat Lunak,3', 'kelas'),
+('XII AK 1', 'Kelas XII,Akutansi,1', 'kelas'),
+('XII AK 2', 'Kelas XII,Akutansi,2', 'kelas'),
+('XII AK 3', 'Kelas XII,Akutansi,3', 'kelas'),
+('XII AP 1', 'Kelas XII,Administrasi Perkantoran,1', 'kelas'),
+('XII AP 2', 'Kelas XII,Administrasi Perkantoran,2', 'kelas'),
+('XII AP 3', 'Kelas XII,Administrasi Perkantoran,3', 'kelas'),
 ('XII RPL 1', 'Kelas XII,Rekayasa Perangkat Lunak,1', 'kelas'),
 ('XII RPL 2', 'Kelas XII,Rekayasa Perangkat Lunak,2', 'kelas'),
 ('XII RPL 3', 'Kelas XII,Rekayasa Perangkat Lunak,3', 'kelas');
@@ -809,7 +827,7 @@ CREATE TABLE `siswa` (
   `nama` varchar(50) NOT NULL,
   `jenis_kelamin` varchar(1) NOT NULL,
   `alamat` text NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `kelas` varchar(10) NOT NULL,
   `foto` varchar(50) NOT NULL,
   `status` text DEFAULT NULL,
@@ -919,6 +937,7 @@ INSERT INTO `siswa` (`nomor_induk`, `nama`, `jenis_kelamin`, `alamat`, `email`, 
 ('11957580299', 'Allen Edwards', 'L', '250-9753 Tortor St.', 'allen.edwards@gmail.com', 'X RPL 1', 'avatar-s-21.jpg', '0', '2020-05-31 03:27:29', '2020-09-22 03:27:29', NULL),
 ('11986313999', 'Jacqueline Best', 'P', 'P.O. Box 984, 6144 Enim. Street', 'jacqueline.best@gmail.com', 'XII RPL 1', 'avatar-s-6.jpg', '3', '2020-06-13 03:27:29', '2020-09-22 03:27:29', NULL),
 ('12241960099', 'Blaine Bowman', 'L', 'Ap #265-4156 Aliquam St.', 'blaine.bowman@gmail.com', 'XI RPL 3', 'avatar-s-7.jpg', '3', '2020-06-01 03:27:29', '2020-09-22 03:27:29', NULL),
+('123123', 'asdf', 'L', 'asdf', NULL, 'X AP 1', '1601015502_ad5b7cf14c66cebad51e.png', '0', '2020-09-25 13:31:42', '2020-09-25 13:31:42', NULL),
 ('12508862199', 'Whoopi Decker', 'L', '4110 Quisque Ave', 'whoopi.decker@gmail.com', 'XI RPL 1', 'avatar-s-7.jpg', '3', '2020-09-10 03:27:29', '2020-09-22 03:27:29', NULL),
 ('12538069799', 'Patricia Hayes', 'L', '769-3701 Tellus Ave', 'patricia.hayes@gmail.com', 'XII RPL 2', 'avatar-s-7.jpg', '1', '2020-06-10 03:27:29', '2020-09-22 03:27:29', NULL),
 ('12613405499', 'Erich Collins', 'P', '4935 Phasellus Ave', 'erich.collins@gmail.com', 'XI RPL 3', 'avatar-s-24.jpg', '0', '2020-05-16 03:27:29', '2020-09-22 03:27:29', NULL),
@@ -1101,9 +1120,9 @@ INSERT INTO `siswa` (`nomor_induk`, `nama`, `jenis_kelamin`, `alamat`, `email`, 
 ('29617285299', 'Chiquita Dodson', 'L', '6916 Eu, Av.', 'chiquita.dodson@gmail.com', 'XI RPL 2', 'avatar-s-19.jpg', '3', '2020-09-03 03:27:29', '2020-09-22 03:27:29', NULL),
 ('29731704599', 'Denton Powers', 'P', '518-3783 In St.', 'denton.powers@gmail.com', 'XI RPL 2', 'avatar-s-4.jpg', '0', '2020-06-10 03:27:29', '2020-09-22 03:27:29', NULL),
 ('29749594199', 'Kylan Sheppard', 'P', 'P.O. Box 441, 8552 Vitae St.', 'kylan.sheppard@gmail.com', 'XII RPL 1', 'avatar-s-24.jpg', '2', '2020-05-07 03:27:29', '2020-09-22 03:27:29', NULL),
-('29786523799', 'Hu Holder', 'P', '875-3120 Velit. Avenue', 'hu.holder@gmail.com', 'XI RPL 3', 'avatar-s-4.jpg', '0', '2020-07-31 03:27:29', '2020-09-22 03:27:29', NULL),
-('29804495999', 'Nayda Bowman', 'P', 'Ap #417-4655 Tincidunt Rd.', 'nayda.bowman@gmail.com', 'XII RPL 3', 'avatar-s-8.jpg', '3', '2020-06-13 03:27:29', '2020-09-22 03:27:29', NULL);
+('29786523799', 'Hu Holder', 'P', '875-3120 Velit. Avenue', 'hu.holder@gmail.com', 'XI RPL 3', 'avatar-s-4.jpg', '0', '2020-07-31 03:27:29', '2020-09-22 03:27:29', NULL);
 INSERT INTO `siswa` (`nomor_induk`, `nama`, `jenis_kelamin`, `alamat`, `email`, `kelas`, `foto`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('29804495999', 'Nayda Bowman', 'P', 'Ap #417-4655 Tincidunt Rd.', 'nayda.bowman@gmail.com', 'XII RPL 3', 'avatar-s-8.jpg', '3', '2020-06-13 03:27:29', '2020-09-22 03:27:29', NULL),
 ('29850245699', 'Jarrod Stephenson', 'L', '9809 Ante Av.', 'jarrod.stephenson@gmail.com', 'XII RPL 2', 'avatar-s-11.jpg', '1', '2020-07-18 03:27:29', '2020-09-22 03:27:29', NULL),
 ('29927058099', 'Felix Elliott', 'L', '8500 Nunc St.', 'felix.elliott@gmail.com', 'XII RPL 3', 'avatar-s-17.jpg', '1', '2020-05-19 03:27:29', '2020-09-22 03:27:29', NULL),
 ('29932718799', 'Marny Baldwin', 'P', 'Ap #646-3816 Ullamcorper. Ave', 'marny.baldwin@gmail.com', 'XII RPL 2', 'avatar-s-24.jpg', '2', '2020-08-19 03:27:29', '2020-09-22 03:27:29', NULL),
@@ -1382,9 +1401,9 @@ INSERT INTO `siswa` (`nomor_induk`, `nama`, `jenis_kelamin`, `alamat`, `email`, 
 ('57843731699', 'Dahlia Mendoza', 'L', 'P.O. Box 446, 5465 Nunc Street', 'dahlia.mendoza@gmail.com', 'XII RPL 3', 'avatar-s-11.jpg', '1', '2020-07-16 03:27:29', '2020-09-22 03:27:29', NULL),
 ('57904570999', 'Xander Lewis', 'P', 'P.O. Box 179, 870 Metus. Ave', 'xander.lewis@gmail.com', 'XI RPL 2', 'avatar-s-24.jpg', '2', '2020-08-20 03:27:29', '2020-09-22 03:27:29', NULL),
 ('58477217399', 'Axel Hopper', 'P', 'P.O. Box 140, 308 Sed Av.', 'axel.hopper@gmail.com', 'X RPL 3', 'avatar-s-4.jpg', '0', '2020-09-08 03:27:29', '2020-09-22 03:27:29', NULL),
-('58548810299', 'Brody Hammond', 'L', 'P.O. Box 820, 2066 Sed St.', 'brody.hammond@gmail.com', 'X RPL 1', 'avatar-s-9.jpg', '0', '2020-08-21 03:27:29', '2020-09-22 03:27:29', NULL),
-('58848549799', 'Karen Lamb', 'L', '859-7272 Vel, Rd.', 'karen.lamb@gmail.com', 'XI RPL 3', 'avatar-s-25.jpg', '1', '2020-09-07 03:27:29', '2020-09-22 03:27:29', NULL);
+('58548810299', 'Brody Hammond', 'L', 'P.O. Box 820, 2066 Sed St.', 'brody.hammond@gmail.com', 'X RPL 1', 'avatar-s-9.jpg', '0', '2020-08-21 03:27:29', '2020-09-22 03:27:29', NULL);
 INSERT INTO `siswa` (`nomor_induk`, `nama`, `jenis_kelamin`, `alamat`, `email`, `kelas`, `foto`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('58848549799', 'Karen Lamb', 'L', '859-7272 Vel, Rd.', 'karen.lamb@gmail.com', 'XI RPL 3', 'avatar-s-25.jpg', '1', '2020-09-07 03:27:29', '2020-09-22 03:27:29', NULL),
 ('58893333999', 'Zephania Vega', 'L', '771-9587 Elit Road', 'zephania.vega@gmail.com', 'X RPL 3', 'avatar-s-15.jpg', '0', '2020-07-28 03:27:29', '2020-09-22 03:27:29', NULL),
 ('58946861299', 'Fredericka Holcomb', 'L', 'Ap #320-648 Quam, Street', 'fredericka.holcomb@gmail.com', 'XI RPL 2', 'avatar-s-19.jpg', '3', '2020-07-21 03:27:29', '2020-09-22 03:27:29', NULL),
 ('58975122799', 'Patricia Sandoval', 'P', '1363 Mauris. Road', 'patricia.sandoval@gmail.com', 'XI RPL 1', 'avatar-s-20.jpg', '2', '2020-08-16 03:27:29', '2020-09-22 03:27:29', NULL),
@@ -1664,9 +1683,9 @@ INSERT INTO `siswa` (`nomor_induk`, `nama`, `jenis_kelamin`, `alamat`, `email`, 
 ('85619601199', 'Carla Talley', 'L', '429-1819 In Avenue', 'carla.talley@gmail.com', 'X RPL 1', 'avatar-s-17.jpg', '0', '2020-04-25 03:27:29', '2020-09-22 03:27:29', NULL),
 ('85656517399', 'Christian Lopez', 'P', 'P.O. Box 975, 3129 Vulputate, Rd.', 'christian.lopez@gmail.com', 'XI RPL 3', 'avatar-s-14.jpg', '2', '2020-04-30 03:27:29', '2020-09-22 03:27:29', NULL),
 ('85677484599', 'Raya Mcneil', 'L', 'P.O. Box 812, 6826 Nonummy Rd.', 'raya.mcneil@gmail.com', 'XI RPL 1', 'avatar-s-5.jpg', '1', '2020-05-18 03:27:29', '2020-09-22 03:27:29', NULL),
-('85686194199', 'Gretchen Leon', 'L', 'P.O. Box 908, 5756 Ultrices, Ave', 'gretchen.leon@gmail.com', 'X RPL 2', 'avatar-s-5.jpg', '0', '2020-06-09 03:27:29', '2020-09-22 03:27:29', NULL),
-('85703673299', 'Bernard Flores', 'P', 'P.O. Box 174, 3429 Non St.', 'bernard.flores@gmail.com', 'X RPL 1', 'avatar-s-24.jpg', '0', '2020-07-08 03:27:29', '2020-09-22 03:27:29', NULL);
+('85686194199', 'Gretchen Leon', 'L', 'P.O. Box 908, 5756 Ultrices, Ave', 'gretchen.leon@gmail.com', 'X RPL 2', 'avatar-s-5.jpg', '0', '2020-06-09 03:27:29', '2020-09-22 03:27:29', NULL);
 INSERT INTO `siswa` (`nomor_induk`, `nama`, `jenis_kelamin`, `alamat`, `email`, `kelas`, `foto`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('85703673299', 'Bernard Flores', 'P', 'P.O. Box 174, 3429 Non St.', 'bernard.flores@gmail.com', 'X RPL 1', 'avatar-s-24.jpg', '0', '2020-07-08 03:27:29', '2020-09-22 03:27:29', NULL),
 ('85787563699', 'Taylor Huffman', 'L', 'Ap #897-5948 Vestibulum Road', 'taylor.huffman@gmail.com', 'XI RPL 1', 'avatar-s-19.jpg', '1', '2020-09-09 03:27:29', '2020-09-22 03:27:29', NULL),
 ('85849369399', 'Charity Ochoa', 'L', 'P.O. Box 203, 3123 Aenean St.', 'charity.ochoa@gmail.com', 'X RPL 1', 'avatar-s-9.jpg', '0', '2020-06-20 03:27:29', '2020-09-22 03:27:29', NULL),
 ('85981738599', 'Alexander Christensen', 'L', 'Ap #424-6513 Eu, Rd.', 'alexander.christensen@gmail.com', 'XII RPL 2', 'avatar-s-7.jpg', '1', '2020-06-10 03:27:29', '2020-09-22 03:27:29', NULL),

@@ -14,9 +14,10 @@ class Modal extends BaseController
 		$this->masterModel	= new MasterModel();
 	}
 
-	public function siswa()
+	public function siswa($tipe = "tambah")
 	{
 		$data = [
+			'tipe'				=> $tipe,
 			'kelas'				=> $this->masterModel->getData('kelas'),
 		];
 		return view('modals/siswa',$data);

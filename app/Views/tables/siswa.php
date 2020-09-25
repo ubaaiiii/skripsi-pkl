@@ -49,7 +49,7 @@
                                         The print button will open a new window in the end user's browser and, by default, automatically trigger the print function allowing the end user to print the table. The window will be closed once the print is complete, or has been cancelled.
                                     </p> -->
                                     <div class="table-responsive">
-                                        <table class="table table-striped" style="white-space: nowrap;">
+                                        <table class="table table-striped" style="white-space: nowrap;width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th>Nomor Induk</th>
@@ -91,6 +91,7 @@
                     language: {
                       url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json"
                     },
+                    responsive: true,
                     ajax:{
                         url: "/siswa/data",
                         type:"POST",
