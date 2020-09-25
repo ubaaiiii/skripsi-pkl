@@ -19,6 +19,7 @@ class SiswaModel extends Model
                                   'foto',
                                   'status',
                                 ];
+    protected $tempReturnType  = 'object';
     protected $useTimestamps   = true;
     protected $db;
 

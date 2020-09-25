@@ -81,6 +81,13 @@
             </section>
             <script>
               $(document).ready(function() {
+                $('.table tbody').on( 'click', '#edit', function () {
+                  var ni = $(this).attr('d-ni');
+                  $('#large .modal-content').load(base_url+'/modal/siswa/ubah/'+ni,function(){
+                      $('#large').modal('show');
+                  });
+                });
+
                 $('.btn-tambah').click(function(){
                     $('#large .modal-content').load(base_url+'/modal/siswa',function(){
                         $('#large').modal('show');
@@ -135,11 +142,11 @@
                       },
                       {
                         data    : "status",
-                        render  : function(data) {
+                        render  : function(data, type, row, meta) {
                           var button = "";
-                          button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>`;
-                          button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>`;
-                          button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>`;
+                          button += `<button type="button" id="view" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>`;
+                          button += `<button type="button" id="edit" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>`;
+                          button += `<button type="button" id="delete" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>`;
                           switch (data) {
                             case "1":
                               button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL"><i class="feather icon-check-square"></i></button>`;

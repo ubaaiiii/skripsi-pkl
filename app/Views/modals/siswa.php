@@ -2,7 +2,7 @@
   .image-area{border:2px dashed rgba(0,0,0,.7);padding:1rem;position:relative}.image-area::before{content:'Uploaded image result';color:#fff;font-weight:700;text-transform:uppercase;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.8rem;z-index:1}.image-area img{z-index:2;position:relative}
 </style>
 <div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel17">Tambah Data Siswa</h4>
+    <h4 class="modal-title" id="myModalLabel17"><?=$judul_modal;?></h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -14,7 +14,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="number" required id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk">
+              <input type="number" required id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk" value="<?=isset($siswa->nomor_induk)?$siswa->nomor_induk:'';?>">
               <div class="form-control-position">
                   <i class="fa fa-id-card"></i>
               </div>
@@ -23,7 +23,7 @@
       </div>
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="text" required id="nama" class="form-control" name="nama" placeholder="Nama Lengkap">
+              <input type="text" required id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?=isset($siswa->nama)?$siswa->nama:'';?>">
               <div class="form-control-position">
                   <i class="feather icon-user"></i>
               </div>
@@ -37,7 +37,7 @@
                   <li class="d-inline-block mr-2">
                       <fieldset>
                           <div class="vs-radio-con">
-                              <input required type="radio" name="jenis_kelamin" value="L">
+                              <input required type="radio" name="jenis_kelamin" value="L" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'L')?'checked':''):'';?>>
                               <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -49,7 +49,7 @@
                   <li class="d-inline-block mr-2">
                       <fieldset>
                           <div class="vs-radio-con">
-                              <input type="radio" name="jenis_kelamin" value="P">
+                              <input type="radio" name="jenis_kelamin" value="P" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'P')?'checked':''):'';?>>
                               <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -90,7 +90,7 @@
       </div>
       <div class="col-12 mt-2">
           <fieldset class="form-label-group position-relative has-icon-left">
-              <textarea class="form-control" id="alamat" rows="3" name="alamat" placeholder="Alamat"></textarea>
+              <textarea class="form-control" id="alamat" rows="3" name="alamat" placeholder="Alamat"><?=isset($siswa->alamat)?$siswa->alamat:'';?></textarea>
               <div class="form-control-position">
                   <i class="fa fa-home"></i>
               </div>
@@ -121,6 +121,10 @@
 
 <script>
   $(document).ready(function(){
+    <?php if ($tipe == 'ubah'): ?>
+      $('#imageResult').attr('src','/images/users/<?=$siswa->foto;?>');
+      $('#kelas').val('<?=$siswa->kelas;?>').change();
+    <?php endif; ?>
     $('#form-siswa').submit(function(e){
       var buttonLama  = $('#btn-submit').html();
       $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
