@@ -30,4 +30,24 @@ class MasterModel extends Model
 
       return $builder->get()->getResult();
     }
+
+    public function getJurusan()
+    {
+      $db      = \Config\Database::connect();
+      $builder = $db->table('master');
+      $builder->distinct("SUBSTRING_INDEX(SUBSTRING_INDEX(msdesc,',',-2),',',1)");
+      $builder->where('mstype','kelas');
+
+      return $builder->get()->getResult();
+    }
+
+    public function getKelas()
+    {
+      $db      = \Config\Database::connect();
+      $builder = $db->table('master');
+      $builder->distinct("SUBSTRING_INDEX(msdesc,',',1)");
+      $builder->where('mstype','kelas');
+
+      return $builder->get()->getResult();
+    }
 }

@@ -37,6 +37,95 @@
             <section id="column-selectors">
                 <div class="row">
                     <div class="col-12">
+                      <div class="card">
+                        <div class="card-header" style="padding-bottom: 1.5rem;">
+                            <h4 class="card-title">Filter</h4>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse" class=""><i class="feather icon-chevron-down"></i></a></li>
+                                    <li><a id="refresh-filter"><i class="feather icon-rotate-cw users-data-filter"></i></a></li>
+                                    <li><a data-action="close"><i class="feather icon-x"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-content collapse show" style="">
+                            <div class="card-body">
+                                <div class="users-list-filter">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-kelas">Kelas</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-kelas">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <?php
+                                                            $unique = array();
+                                                            foreach($kelas as $k) :
+                                                                $kelasnya = explode(",",$k->msdesc);
+                                                                if ( in_array($kelasnya[0], $unique) ) {
+                                                                    continue;
+                                                                }
+                                                                $unique[] = $kelasnya[0];
+                                                        ?>
+                                                        <option value="<?=$kelasnya[0];?>,"><?=$kelasnya[0];?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-jurusan">Jurusan</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-jurusan">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <?php
+                                                            $unique = array();
+                                                            foreach($kelas as $j) :
+                                                              $jurusan = explode(",",$j->msdesc);
+                                                              if ( in_array($jurusan[1], $unique) ) {
+                                                                  continue;
+                                                              }
+                                                              $unique[] = $jurusan[1];
+                                                        ?>
+                                                        <option value="<?=$jurusan[1];?>"><?=$jurusan[1];?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-status">Status</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-status">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <?php
+                                                          foreach ($status as $s) :
+                                                            $statusnya = explode(",",$s->msdesc);
+                                                          ?>
+                                                        <option value="<?=$statusnya[0];?>"><?=$statusnya[0];?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-kelamin">Jenis Kelamin</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-kelamin">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <option value="Laki-Laki">Laki-Laki</option>
+                                                        <option value="Perempuan">Perempuan</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <div class="card">
                             <!-- <div class="card-header">
                                 <h4 class="card-title">Column selectors with Export and Print Options</h4>
@@ -81,6 +170,22 @@
             </section>
             <script>
               $(document).ready(function() {
+                $('#refresh-filter').click(function(){
+                  $('.select').val(' ').change();
+                });
+
+                $('.select').change(function(){
+                  var kelas   = $('#select-kelas').val(),
+                      jurusan = $('#select-jurusan').val(),
+                      status  = $('#select-status').val(),
+                      kelamin = $('#select-kelamin').val(),
+                      keyword = kelas+" "+jurusan+" "+status+" "+kelamin;
+                  console.log(keyword);
+                  table.search( keyword ).draw();
+                })
+
+                $('.select').select2({allowClear:true,placeholder:"Pilih Salah Satu..."});
+
                 $('.table tbody').on( 'click', '#edit', function () {
                   var ni = $(this).attr('d-ni');
                   $('#large .modal-content').load(base_url+'/modal/siswa/ubah/'+ni,function(){
@@ -94,7 +199,7 @@
                     });
                 });
 
-                $('.table').DataTable({
+                var table = $('.table').DataTable({
                     language: {
                       url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json"
                     },
@@ -111,8 +216,10 @@
                         render  : function ( data, type, row, meta ) {
                           var stats = row.stats.split(",");
                             return `<div class="avatar mr-1">
-                                      <img src="/images/users/`+row.foto+`" alt="avtar img holder" width="32" height="32">
+                                      <a data-toggle="tooltip" data-placement="right" title="`+stats[0]+`">
+                                        <img src="/images/users/`+row.foto+`" alt="avtar img holder" width="32" height="32" alt="alternative text" title="this will be displayed as a tooltip">
                                       <span class="avatar-status-`+stats[2]+`"></span>
+                                      </a>
                                     </div>` + data;
                         }
                       },
@@ -133,13 +240,6 @@
                         }
                       },
                       { data    : "alamat"},
-                      {
-                        data    : "stats",
-                        render  : function(data) {
-                          data = data.split(",");
-                          return `<div class="badge badge-pill badge-light-`+data[1]+`">`+data[0]+`</div>`;
-                        }
-                      },
                       {
                         data    : "status",
                         render  : function(data, type, row, meta) {
@@ -164,7 +264,9 @@ icon-star"></i></button>`;
                           return button;
                         }
                       },
+                      { data    : "stats", visible:false},
                       { data    : "foto", visible:false},
+                      { data    : "klas", visible:false},
                     ],
                     dom: 'lfBrtip',
                     buttons: [

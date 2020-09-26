@@ -35,9 +35,8 @@ class Data extends BaseController
 		return view('data',$data);
 	}
 
-	public function siswa($tipe = null)
+	public function siswa()
 	{
-
 		$data = [
 			'title' 			=> "Data Siswa",
 			'subtitle'		=> "Siswa",
@@ -51,7 +50,11 @@ class Data extends BaseController
 												<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js').'"></script>
 												<script src="'.base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js').'"></script>',
 			'perusahaan'	=> $this->perusahaanModel->findAll(),
+			'kelas'				=> $this->masterModel->getData('kelas'),
+			'jurusan'			=> $this->masterModel->getData('kelas'),
+			'status'			=> $this->masterModel->getData('status'),
 		];
+		// dd($data['kelas']);
 		return view('tables/siswa',$data);
 	}
 
