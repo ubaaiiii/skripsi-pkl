@@ -9,6 +9,7 @@
 </div>
 <form class="form" method="post" id="form-siswa">
   <?= csrf_field(); ?>
+<input type="hidden" id="nomor_induk_real" name="nomor_induk_real" value="<?=isset($siswa->nomor_induk)?$siswa->nomor_induk:'';?>">
 <div class="modal-body">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -138,7 +139,7 @@
         contentType: false,
         success: function(resp){
           console.log(resp);
-          if (resp !== "berhasil") {
+          if (resp !== "berhasil" && resp !== "exists") {
             // console.log(resp);
             resp = JSON.parse(resp);
             $.each(resp,function(index,value){
@@ -146,9 +147,13 @@
               $('#'+index).select();
             });
           } else {
-            $('.table').DataTable().ajax.reload();
-            toastr.success("Berhasil menyimpan data siswa", 'Success!', { "timeOut": 5000 });
-            $('#large').modal('hide');
+            if (resp == 'berhasil') {
+              $('.table').DataTable().ajax.reload();
+              toastr.success("Berhasil menyimpan data siswa", 'Success!', { "timeOut": 5000 });
+              $('#large').modal('hide');
+            } else {
+              toastr.error("Nomor induk sudah terdaftar", 'Gagal!', { "timeOut": 5000 });
+            }
           }
           $('#btn-submit').html(buttonLama);
           $('.modal-footer button').attr('disabled',false);
