@@ -60,7 +60,7 @@ protected $siswaModel;
 			echo json_encode($validation->getErrors());
 		} else {
 			$gambar = $this->request->getFile('upload_foto');
-			$nmFoto	= $siswa->simpanGambar($gambar);
+			$nmFoto	= $siswa->simpanGambar($gambar,$this->request->getPost('nomor_induk'));
 			$status	=	$siswa->cekSyarat($this->request->getPost('kelas'));
 			$data = [
 				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),

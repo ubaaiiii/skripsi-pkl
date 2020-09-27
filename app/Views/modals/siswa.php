@@ -101,7 +101,7 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
-        <label for="upload_foto">Foto</label>
+        <label for="upload_foto">Foto Ukuran 3 x 4</label>
         <fieldset class="form-group">
             <div class="custom-file">
                 <input type="file" required class="custom-file-input" id="upload_foto" name="upload_foto" accept="image/x-png,image/gif,image/jpeg">

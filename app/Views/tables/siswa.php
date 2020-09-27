@@ -147,8 +147,7 @@
                                                     <th>Kelas</th>
                                                     <th>Email</th>
                                                     <th>Alamat</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -216,8 +215,21 @@
                         render  : function ( data, type, row, meta ) {
                           var stats = row.stats.split(",");
                             return `<div class="avatar mr-1">
-                                      <a data-toggle="tooltip" data-placement="right" title="`+stats[0]+`">
-                                        <img src="/images/users/`+row.foto+`" alt="avtar img holder" width="32" height="32" alt="alternative text" title="this will be displayed as a tooltip">
+                                      <a data-toggle="popover"
+                                         data-html="true"
+                                         data-placement="right"
+                                         data-trigger="hover"
+                                         data-content="<img width='200px' src='/images/users/`+row.foto+`' />"
+                                         data-original-title='<div class="chip chip-`+stats[1]+`">
+                                            <div class="chip-body">
+                                                <div class="avatar">
+                                                    <i class="`+stats[3]+`"></i>
+                                                </div>
+                                                <span class="chip-text"><strong>`+stats[0]+`</strong></span>
+                                            </div>
+                                        </div>'
+                                       >
+                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+row.foto+`" alt="Foto Siswa" width="32" height="32">
                                       <span class="avatar-status-`+stats[2]+`"></span>
                                       </a>
                                     </div>` + data;
@@ -304,6 +316,7 @@ icon-star"></i></button>`;
                       $('[data-toggle="tooltip"]').tooltip({
                           "html": true,
                       });
+                      $('[data-toggle="popover"]').popover();
                     },
                 });
               });

@@ -1262,7 +1262,9 @@ body.fixed-footer .main-menu.menu-fixed {
   .avatar .avatar-status-away {
     background-color: #7987F5; }
   .avatar .avatar-status-offline {
-    background-color: #bfbfbf; }
+    background-color: #ff9f43; }
+  .avatar .avatar-status-info {
+    background-color: #00cfe8; }
   .avatar img {
     border-radius: 50%; }
   .avatar.avatar-xl {
