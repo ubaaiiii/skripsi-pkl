@@ -57,7 +57,7 @@
                                             <div class="col-12 col-sm-6 col-lg-3">
                                                 <label for="select-kelas">Kelas</label>
                                                 <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-kelas">
+                                                    <select class="select form-control" id="select-kelas" style="width:100%;">
                                                         <option value=""></option>
                                                         <option value=" " selected>Semua</option>
                                                         <?php
@@ -77,7 +77,7 @@
                                             <div class="col-12 col-sm-6 col-lg-3">
                                                 <label for="select-jurusan">Jurusan</label>
                                                 <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-jurusan">
+                                                    <select class="select form-control" id="select-jurusan" style="width:100%;">
                                                         <option value=""></option>
                                                         <option value=" " selected>Semua</option>
                                                         <?php
@@ -97,7 +97,7 @@
                                             <div class="col-12 col-sm-6 col-lg-3">
                                                 <label for="select-status">Status</label>
                                                 <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-status">
+                                                    <select class="select form-control" id="select-status" style="width:100%;">
                                                         <option value=""></option>
                                                         <option value=" " selected>Semua</option>
                                                         <?php
@@ -112,7 +112,7 @@
                                             <div class="col-12 col-sm-6 col-lg-3">
                                                 <label for="select-kelamin">Jenis Kelamin</label>
                                                 <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-kelamin">
+                                                    <select class="select form-control" id="select-kelamin" style="width:100%;">
                                                         <option value=""></option>
                                                         <option value=" " selected>Semua</option>
                                                         <option value="Laki-Laki">Laki-Laki</option>
@@ -127,27 +127,19 @@
                         </div>
                     </div>
                         <div class="card">
-                            <!-- <div class="card-header">
-                                <h4 class="card-title">Column selectors with Export and Print Options</h4>
-                            </div> -->
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
-                                    <!-- <p class="card-text">All of the data export buttons have a exportOptions option which can be used to specify information about what data should be exported and how. The options given for this parameter are passed directly to the buttons.exportData() method to obtain the required data.
-                                    </p>
-                                    <p>
-                                        The print button will open a new window in the end user's browser and, by default, automatically trigger the print function allowing the end user to print the table. The window will be closed once the print is complete, or has been cancelled.
-                                    </p> -->
-                                    <div class="table-responsive">
+                                    <div class="">
                                         <table class="table table-striped" style="white-space: nowrap;width: 100%;">
                                             <thead>
                                                 <tr>
+                                                    <th>Proses </th>
                                                     <th>Nomor Induk</th>
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Kelas</th>
                                                     <th>Email</th>
                                                     <th>Alamat</th>
-                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -199,6 +191,7 @@
                 });
 
                 var table = $('.table').DataTable({
+                    scrollX: true,
                     language: {
                       url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json"
                     },
@@ -209,6 +202,40 @@
                         dataSrc: ""
                     },
                     columns: [
+                      {
+                        data    : "status",
+                        render  : function(data, type, row, meta) {
+                          var button = `<div class="btn-group">
+                                            <div class="dropdown">
+                                                <button class="btn btn-xs btn-flat-primary dropdown-toggle mr-1 mb-1 waves-effect waves-light" type="button" id="dropdownMenuButton100" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#</button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton100" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                                    <a class="dropdown-item" href="#">Option 1</a>
+                                                    <a class="dropdown-item" href="#">Option 2</a>
+                                                    <a class="dropdown-item" href="#">Option 3</a>
+                                                    <a id="view" d-ni="`+row.nomor_induk+`" class="dropdown-item" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>`;
+//                           button += `<button type="button" id="view" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>`;
+//                           button += `<button type="button" id="edit" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>`;
+//                           button += `<button type="button" id="delete" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>`;
+//                           switch (data) {
+//                             case "1":
+//                               button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL"><i class="feather icon-check-square"></i></button>`;
+//                               break;
+//                             case "2":
+//                               button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan"><i class="feather icon-alert-circle"></i></button>`;
+//                               break;
+//                             case "3":
+//                               button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai"><i class="feather
+// icon-star"></i></button>`;
+//                               break;
+//
+//                           }
+//                           button += "<span style='display:none;'>"+data+"</span>";    // Biar bisa sorting
+                          return button;
+                        }
+                      },
                       { data    : "nomor_induk"},
                       {
                         data    : "nama",
@@ -252,30 +279,6 @@
                         }
                       },
                       { data    : "alamat"},
-                      {
-                        data    : "status",
-                        render  : function(data, type, row, meta) {
-                          var button = "";
-                          button += `<button type="button" id="view" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>`;
-                          button += `<button type="button" id="edit" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>`;
-                          button += `<button type="button" id="delete" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>`;
-                          switch (data) {
-                            case "1":
-                              button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL"><i class="feather icon-check-square"></i></button>`;
-                              break;
-                            case "2":
-                              button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan"><i class="feather icon-alert-circle"></i></button>`;
-                              break;
-                            case "3":
-                              button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai"><i class="feather
-icon-star"></i></button>`;
-                              break;
-
-                          }
-                          button += "<span style='display:none;'>"+data+"</span>";    // Biar bisa sorting
-                          return button;
-                        }
-                      },
                       { data    : "stats", visible:false},
                       { data    : "foto", visible:false},
                       { data    : "klas", visible:false},

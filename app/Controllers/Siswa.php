@@ -86,17 +86,19 @@ protected $siswaModel;
 				}
 			}
 
-			$gambar = $this->request->getFile('upload_foto');
-			$nmFoto	= $siswa->simpanGambar($gambar);
-
 			$data = [
 				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
 				'nama'          =>  $this->request->getPost('nama'),
 				'jenis_kelamin' =>  $this->request->getPost('jenis_kelamin'),
 				'alamat'        =>  $this->request->getPost('alamat'),
 				'kelas'         =>  $this->request->getPost('kelas'),
-				'foto'					=>	$nmFoto,
 			];
+
+			if ($gambar = $this->request->getFile('upload_foto')) {
+				$nmFoto	= $siswa->simpanGambar($gambar);
+				$data['foto']		= $nmFoto;
+			}
+
 			$siswa->where('nomor_induk',$this->request->getPost('nomor_induk'))->update($data);
 			echo "berhasil";
 

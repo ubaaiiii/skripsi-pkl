@@ -104,7 +104,7 @@
         <label for="upload_foto">Foto Ukuran 3 x 4</label>
         <fieldset class="form-group">
             <div class="custom-file">
-                <input type="file" required class="custom-file-input" id="upload_foto" name="upload_foto" accept="image/x-png,image/gif,image/jpeg">
+                <input type="file" <?=($tipe=='tambah')?('required'):('');?> class="custom-file-input" id="upload_foto" name="upload_foto" accept="image/x-png,image/gif,image/jpeg">
                 <label class="custom-file-label" id="upload-label" for="upload_foto">Pilih file</label>
             </div>
             <p class="font-italic text-black text-center mt-1">Gambar akan ditampilkan pada kotak di bawah.</p>
