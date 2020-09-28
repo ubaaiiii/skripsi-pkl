@@ -11,11 +11,12 @@
   <?= csrf_field(); ?>
 <input type="hidden" id="nomor_induk_real" name="nomor_induk_real" value="<?=isset($siswa->nomor_induk)?$siswa->nomor_induk:'';?>">
 <div class="modal-body">
+  <br />
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="number" required id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk" value="<?=isset($siswa->nomor_induk)?$siswa->nomor_induk:'';?>">
+              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk" value="<?=isset($siswa->nomor_induk)?$siswa->nomor_induk:'';?>">
               <div class="form-control-position">
                   <i class="fa fa-id-card"></i>
               </div>
@@ -24,7 +25,7 @@
       </div>
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="text" required id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?=isset($siswa->nama)?$siswa->nama:'';?>">
+              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?=isset($siswa->nama)?$siswa->nama:'';?>">
               <div class="form-control-position">
                   <i class="feather icon-user"></i>
               </div>
@@ -38,7 +39,7 @@
                   <li class="d-inline-block mr-2">
                       <fieldset>
                           <div class="vs-radio-con">
-                              <input required type="radio" name="jenis_kelamin" value="L" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'L')?'checked':''):'';?>>
+                              <input <?=($tipe=='lihat')?('disabled'):('required');?> type="radio" name="jenis_kelamin" value="L" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'L')?'checked':''):'';?>>
                               <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -50,7 +51,7 @@
                   <li class="d-inline-block mr-2">
                       <fieldset>
                           <div class="vs-radio-con">
-                              <input type="radio" name="jenis_kelamin" value="P" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'P')?'checked':''):'';?>>
+                              <input <?=($tipe=='lihat')?('disabled'):('required');?> type="radio" name="jenis_kelamin" value="P" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'P')?'checked':''):'';?>>
                               <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -64,7 +65,7 @@
       </div>
       <div class="col-12">
           <label for="kelas">Kode Kelas</label>
-          <select class="form-control" id="kelas" name="kelas" required style="width:100%;">
+          <select class="form-control" id="kelas" name="kelas" <?=($tipe=='lihat')?('disabled'):('required');?> style="width:100%;">
               <option value="">Pilih Salah Satu...</option>
               <?php foreach ($kelas as $k): ?>
                 <option value="<?= $k->msid; ?>"><?= $k->msid; ?></option>
@@ -73,7 +74,7 @@
       </div>
       <div class="col-12 mt-2">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="text" required id="kelasnya" class="form-control" name="kelasnya" disabled placeholder="Kelas">
+              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="kelasnya" class="form-control" name="kelasnya" disabled placeholder="Kelas">
               <div class="form-control-position">
                   <i class="feather icon-users"></i>
               </div>
@@ -82,7 +83,7 @@
       </div>
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="text" required id="jurusannya" class="form-control" name="jurusannya" disabled placeholder="Jurusan">
+              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="jurusannya" class="form-control" name="jurusannya" disabled placeholder="Jurusan">
               <div class="form-control-position">
                   <i class="feather icon-star"></i>
               </div>
@@ -91,7 +92,7 @@
       </div>
       <div class="col-12 mt-2">
           <fieldset class="form-label-group position-relative has-icon-left">
-              <textarea class="form-control" id="alamat" rows="3" name="alamat" placeholder="Alamat"><?=isset($siswa->alamat)?$siswa->alamat:'';?></textarea>
+              <textarea class="form-control" id="alamat" rows="3" name="alamat" <?=($tipe=='lihat')?('disabled'):('required');?> placeholder="Alamat"><?=isset($siswa->alamat)?$siswa->alamat:'';?></textarea>
               <div class="form-control-position">
                   <i class="fa fa-home"></i>
               </div>
@@ -103,7 +104,7 @@
       <div class="col-12">
         <label for="upload_foto">Foto Ukuran 3 x 4</label>
         <fieldset class="form-group">
-            <div class="custom-file">
+            <div class="custom-file" style="<?=($tipe == 'lihat')?('display:none;'):('');?>">
                 <input type="file" <?=($tipe=='tambah')?('required'):('');?> class="custom-file-input" id="upload_foto" name="upload_foto" accept="image/x-png,image/gif,image/jpeg">
                 <label class="custom-file-label" id="upload-label" for="upload_foto">Pilih file</label>
             </div>
@@ -114,15 +115,17 @@
     </div>
   </div>
 </div>
+<?php if($tipe !== 'lihat') : ?>
 <div class="modal-footer">
     <button type="submit" id="btn-submit" class="btn btn-primary mr-1 mb-1">Simpan</button>
     <button type="reset" id="btn-reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>
 </div>
+<?php endif; ?>
 </form>
 
 <script>
   $(document).ready(function(){
-    <?php if ($tipe == 'ubah'): ?>
+    <?php if ($tipe == 'ubah' || $tipe == 'lihat'): ?>
       $('#imageResult').attr('src','/images/users/<?=$siswa->foto;?>');
       $('#kelas').val('<?=$siswa->kelas;?>').change();
     <?php endif; ?>

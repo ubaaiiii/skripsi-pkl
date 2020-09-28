@@ -41,7 +41,7 @@ protected $siswaModel;
 		[
 			'nomor_induk'		=> [
 				'required'	=> "Nomor induk wajib diisi",
-				'is_unique'	=> "Nomor induk sudah terdaftar",
+				'is_unique'	=> "Nomor induk sudah terdaftar atau mungkin terhapus",
 			],
 			'nama'					=> [
 				'required'	=> "Nama wajib diisi",
@@ -76,32 +76,40 @@ protected $siswaModel;
 		}
 	}
 
-		public function ubah()
-		{
-			$siswa = $this->siswaModel;
-			if ($this->request->getPost('nomor_induk') !== $this->request->getPost('nomor_induk_real')) {
-				$cekSiswa	= $siswa->find($this->request->getPost('nomor_induk'));
-				if ($cekSiswa !== null) {
-					return "exists";
-				}
+	public function ubah()
+	{
+		$siswa = $this->siswaModel;
+		if ($this->request->getPost('nomor_induk') !== $this->request->getPost('nomor_induk_real')) {
+			$cekSiswa	= $siswa->find($this->request->getPost('nomor_induk'));
+			if ($cekSiswa !== null) {
+				return "exists";
 			}
+		}
 
-			$data = [
-				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
-				'nama'          =>  $this->request->getPost('nama'),
-				'jenis_kelamin' =>  $this->request->getPost('jenis_kelamin'),
-				'alamat'        =>  $this->request->getPost('alamat'),
-				'kelas'         =>  $this->request->getPost('kelas'),
-			];
+		$data = [
+			'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
+			'nama'          =>  $this->request->getPost('nama'),
+			'jenis_kelamin' =>  $this->request->getPost('jenis_kelamin'),
+			'alamat'        =>  $this->request->getPost('alamat'),
+			'kelas'         =>  $this->request->getPost('kelas'),
+		];
 
-			if ($gambar = $this->request->getFile('upload_foto')) {
-				$nmFoto	= $siswa->simpanGambar($gambar);
-				$data['foto']		= $nmFoto;
-			}
+		if ($gambar = $this->request->getFile('upload_foto')) {
+			$nmFoto	= $siswa->simpanGambar($gambar);
+			$data['foto']		= $nmFoto;
+		}
 
-			$siswa->where('nomor_induk',$this->request->getPost('nomor_induk'))->update($data);
-			echo "berhasil";
+		$siswa->where('nomor_induk',$this->request->getPost('nomor_induk'))->update($data);
+		echo "berhasil";
 
 	}
+
+	public function hapus()
+	{
+		$siswa = $this->siswaModel;
+		return $siswa->delete($this->request->getPost('nomor_induk'));
+	}
+
+
 
 }

@@ -17,13 +17,16 @@ class Modal extends BaseController
 	public function siswa($tipe = "tambah", $ni = false)
 	{
 		$data = [
-			'judul_modal'	=> 'Tambah Data Siswa',
+			'judul_modal'	=> '<i class="feather icon-user-plus"></i> Tambah Data Siswa',
 			'tipe'				=> $tipe,
 			'kelas'				=> $this->masterModel->getData('kelas'),
 		];
 
 		if ($tipe == 'ubah') {
-			$data['judul_modal']	= 'Ubah Data Siswa';
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Ubah Data Siswa';
+			$data['siswa']				=	$this->siswaModel->find($ni);
+		} else if ($tipe == 'lihat') {
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Data Siswa';
 			$data['siswa']				=	$this->siswaModel->find($ni);
 		}
 

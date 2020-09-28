@@ -133,7 +133,7 @@
                                         <table class="table table-striped" style="white-space: nowrap;width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>Proses </th>
+                                                    <th></th>
                                                     <th>Nomor Induk</th>
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
@@ -184,6 +184,53 @@
                   });
                 });
 
+                $('.table tbody').on( 'click', '#view', function () {
+                  var ni = $(this).attr('d-ni');
+                  $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+ni,function(){
+                      $('#large').modal('show');
+                  });
+                });
+
+                $('.table tbody').on( 'click', '#delete', function () {
+                  var ni    = $(this).attr('d-ni'),
+                      nama  = $(this).attr('d-nama');
+                  Swal.fire({
+                    title: 'Apakah Anda Yakin?',
+                    html: "Data <b>"+nama+"</b> akan dihapus",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Tidak!',
+                    confirmButtonClass: 'btn btn-danger',
+                    cancelButtonClass: 'btn btn-info',
+                  }).then(function (result) {
+                    if (result.value) {
+                      $.ajax({
+                        url:"/siswa/hapus",
+                        type: "post",
+                        data: {'nomor_induk':ni},
+                        success: function(resp) {
+                          console.log(resp);
+                          Swal.fire({
+                            type: "success",
+                            title: 'Terhapus!',
+                            text: 'Data '+nama+' telah terhapus.',
+                            confirmButtonClass: 'btn btn-success',
+                          })
+                        }
+                      })
+                    }
+                    else if (result.dismiss === Swal.DismissReason.cancel) {
+                      Swal.fire({
+                        title: 'Dibatalkan',
+                        text: 'Data siswa batal dihapus.',
+                        type: 'info',
+                        confirmButtonClass: 'btn btn-success',
+                      })
+                    }
+                  })
+                });
+
                 $('.btn-tambah').click(function(){
                     $('#large .modal-content').load(base_url+'/modal/siswa',function(){
                         $('#large').modal('show');
@@ -205,34 +252,42 @@
                       {
                         data    : "status",
                         render  : function(data, type, row, meta) {
-                          var button = `<div class="btn-group">
-                                            <div class="dropdown">
-                                                <button class="btn btn-xs btn-flat-primary dropdown-toggle mr-1 mb-1 waves-effect waves-light" type="button" id="dropdownMenuButton100" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#</button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton100" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                                                    <a class="dropdown-item" href="#">Option 1</a>
-                                                    <a class="dropdown-item" href="#">Option 2</a>
-                                                    <a class="dropdown-item" href="#">Option 3</a>
-                                                    <a id="view" d-ni="`+row.nomor_induk+`" class="dropdown-item" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>`;
-//                           button += `<button type="button" id="view" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-primary waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat"><i class="feather icon-search"></i></button>`;
-//                           button += `<button type="button" id="edit" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah"><i class="feather icon-edit-1"></i></button>`;
-//                           button += `<button type="button" id="delete" d-ni="`+row.nomor_induk+`" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus"><i class="feather icon-trash-2"></i></button>`;
-//                           switch (data) {
-//                             case "1":
-//                               button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL"><i class="feather icon-check-square"></i></button>`;
-//                               break;
-//                             case "2":
-//                               button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan"><i class="feather icon-alert-circle"></i></button>`;
-//                               break;
-//                             case "3":
-//                               button += `<button type="button" class="btn btn-icon rounded-circle btn-outline-warning waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai"><i class="feather
-// icon-star"></i></button>`;
-//                               break;
-//
-//                           }
-//                           button += "<span style='display:none;'>"+data+"</span>";    // Biar bisa sorting
+                          var button = `<div class="btn-group dropdown dropdown-icon-wrapper mr-1 mb-1">
+                                          <button type="button" class="btn btn-flat-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <i class="fa fa-cog dropdown-icon"></i>
+                                          </button>
+                                          <div class="dropdown-menu ">
+                                              <a id="view" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
+                                                  <i class="feather icon-search primary"></i>
+                                              </a>
+                                              <a id="edit" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
+                                                  <i class="feather icon-edit-1 warning"></i>
+                                              </a>
+                                              <a id="delete" d-nama="`+row.nama+`" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
+                                                  <i class="feather icon-trash-2 danger"></i>
+                                              </a>`;
+                          switch (data) {
+                            case "1":
+                              button  += `<div class="dropdown-divider"></div>
+                                          <a id="salurkan" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
+                                              <i class="feather icon-check-square success"></i>
+                                          </a>`;
+                              break;
+                            case "2":
+                              button  += `<div class="dropdown-divider"></div>
+                                          <a id="berhenti" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
+                                              <i class="feather icon-alert-circle danger"></i>
+                                          </a>`;
+                              break;
+                            case "3":
+                              button  += `<div class="dropdown-divider"></div>
+                                          <a id="nilai" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai Siswa">
+                                              <i class="feather icon-star warning"></i>
+                                          </a>`;
+                              break;
+                          }
+
+                          button  += `</div></div>`;
                           return button;
                         }
                       },
@@ -321,6 +376,11 @@
                       });
                       $('[data-toggle="popover"]').popover();
                     },
+                    columnDefs: [ {
+                      targets  : [0],
+                      orderable: false,
+                    }],
+                    aaSorting: [],
                 });
               });
 
