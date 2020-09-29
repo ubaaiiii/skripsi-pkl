@@ -27,6 +27,7 @@
             <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                 <div class="form-group breadcrum-right">
                     <div class="">
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Data <?=$subtitle;?> Yang Terhapus"><i class="feather icon-trash-2"></i></button>
                         <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?=$subtitle;?>"><i class="feather icon-user-plus"></i></button>
                     </div>
                 </div>
@@ -37,258 +38,120 @@
             <section id="column-selectors">
                 <div class="row">
                     <div class="col-12">
+                      <div class="card">
+                        <div class="card-header" style="padding-bottom: 1.5rem;">
+                            <h4 class="card-title">Filter</h4>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse" class=""><i class="feather icon-chevron-down"></i></a></li>
+                                    <li><a id="refresh-filter"><i class="feather icon-rotate-cw users-data-filter"></i></a></li>
+                                    <li><a data-action="close"><i class="feather icon-x"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-content collapse show" style="">
+                            <div class="card-body">
+                                <div class="users-list-filter">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-kelas">Kelas</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-kelas" style="width:100%;">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <?php
+                                                            $unique = array();
+                                                            foreach($kelas as $k) :
+                                                                $kelasnya = explode(",",$k->msdesc);
+                                                                if ( in_array($kelasnya[0], $unique) ) {
+                                                                    continue;
+                                                                }
+                                                                $unique[] = $kelasnya[0];
+                                                        ?>
+                                                        <option value="<?=$kelasnya[0];?>,"><?=$kelasnya[0];?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-jurusan">Jurusan</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-jurusan" style="width:100%;">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <?php
+                                                            $unique = array();
+                                                            foreach($kelas as $j) :
+                                                              $jurusan = explode(",",$j->msdesc);
+                                                              if ( in_array($jurusan[1], $unique) ) {
+                                                                  continue;
+                                                              }
+                                                              $unique[] = $jurusan[1];
+                                                        ?>
+                                                        <option value="<?=$jurusan[1];?>"><?=$jurusan[1];?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-status">Status</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-status" style="width:100%;">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <?php
+                                                          foreach ($status as $s) :
+                                                            $statusnya = explode(",",$s->msdesc);
+                                                          ?>
+                                                        <option value="<?=$statusnya[0];?>"><?=$statusnya[0];?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <label for="select-kelamin">Jenis Kelamin</label>
+                                                <fieldset class="form-group">
+                                                    <select class="select form-control" id="select-kelamin" style="width:100%;">
+                                                        <option value=""></option>
+                                                        <option value=" " selected>Semua</option>
+                                                        <option value="Laki-Laki">Laki-Laki</option>
+                                                        <option value="Perempuan">Perempuan</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <div class="card">
-                            <!-- <div class="card-header">
-                                <h4 class="card-title">Column selectors with Export and Print Options</h4>
-                            </div> -->
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
-                                    <!-- <p class="card-text">All of the data export buttons have a exportOptions option which can be used to specify information about what data should be exported and how. The options given for this parameter are passed directly to the buttons.exportData() method to obtain the required data.
-                                    </p>
-                                    <p>
-                                        The print button will open a new window in the end user's browser and, by default, automatically trigger the print function allowing the end user to print the table. The window will be closed once the print is complete, or has been cancelled.
-                                    </p> -->
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
+                                    <div class="">
+                                        <table class="table table-striped" style="white-space: nowrap;width: 100%;">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th>Nomor Induk</th>
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
-                                                    <th>Absensi</th>
-                                                    <th>Pembimbing</th>
-                                                    <th>Action</th>
+                                                    <th>Kelas</th>
+                                                    <th>Email</th>
+                                                    <th>Alamat</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td>$320,800</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Garrett Winters</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                    <td>63</td>
-                                                    <td>2011/07/25</td>
-                                                    <td>$170,750</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ashton Cox</td>
-                                                    <td>Junior Technical Author</td>
-                                                    <td>San Francisco</td>
-                                                    <td>66</td>
-                                                    <td>2009/01/12</td>
-                                                    <td>$86,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cedric Kelly</td>
-                                                    <td>Senior Javascript Developer</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>22</td>
-                                                    <td>2012/03/29</td>
-                                                    <td>$433,060</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Airi Satou</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                    <td>33</td>
-                                                    <td>2008/11/28</td>
-                                                    <td>$162,700</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Brielle Williamson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>New York</td>
-                                                    <td>61</td>
-                                                    <td>2012/12/02</td>
-                                                    <td>$372,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Herrod Chandler</td>
-                                                    <td>Sales Assistant</td>
-                                                    <td>San Francisco</td>
-                                                    <td>59</td>
-                                                    <td>2012/08/06</td>
-                                                    <td>$137,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Rhona Davidson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>Tokyo</td>
-                                                    <td>55</td>
-                                                    <td>2010/10/14</td>
-                                                    <td>$327,900</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Colleen Hurst</td>
-                                                    <td>Javascript Developer</td>
-                                                    <td>San Francisco</td>
-                                                    <td>39</td>
-                                                    <td>2009/09/15</td>
-                                                    <td>$205,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sonya Frost</td>
-                                                    <td>Software Engineer</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>23</td>
-                                                    <td>2008/12/13</td>
-                                                    <td>$103,600</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Jena Gaines</td>
-                                                    <td>Office Manager</td>
-                                                    <td>London</td>
-                                                    <td>30</td>
-                                                    <td>2008/12/19</td>
-                                                    <td>$90,560</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quinn Flynn</td>
-                                                    <td>Support Lead</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>22</td>
-                                                    <td>2013/03/03</td>
-                                                    <td>$342,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Charde Marshall</td>
-                                                    <td>Regional Director</td>
-                                                    <td>San Francisco</td>
-                                                    <td>36</td>
-                                                    <td>2008/10/16</td>
-                                                    <td>$470,600</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Haley Kennedy</td>
-                                                    <td>Senior Marketing Designer</td>
-                                                    <td>London</td>
-                                                    <td>43</td>
-                                                    <td>2012/12/18</td>
-                                                    <td>$313,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Tatyana Fitzpatrick</td>
-                                                    <td>Regional Director</td>
-                                                    <td>London</td>
-                                                    <td>19</td>
-                                                    <td>2010/03/17</td>
-                                                    <td>$385,750</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Michael Silva</td>
-                                                    <td>Marketing Designer</td>
-                                                    <td>London</td>
-                                                    <td>66</td>
-                                                    <td>2012/11/27</td>
-                                                    <td>$198,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Paul Byrd</td>
-                                                    <td>Chief Financial Officer (CFO)</td>
-                                                    <td>New York</td>
-                                                    <td>64</td>
-                                                    <td>2010/06/09</td>
-                                                    <td>$725,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gloria Little</td>
-                                                    <td>Systems Administrator</td>
-                                                    <td>New York</td>
-                                                    <td>59</td>
-                                                    <td>2009/04/10</td>
-                                                    <td>$237,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Bradley Greer</td>
-                                                    <td>Software Engineer</td>
-                                                    <td>London</td>
-                                                    <td>41</td>
-                                                    <td>2012/10/13</td>
-                                                    <td>$132,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Dai Rios</td>
-                                                    <td>Personnel Lead</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>35</td>
-                                                    <td>2012/09/26</td>
-                                                    <td>$217,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Thor Walton</td>
-                                                    <td>Developer</td>
-                                                    <td>New York</td>
-                                                    <td>61</td>
-                                                    <td>2013/08/11</td>
-                                                    <td>$98,540</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Finn Camacho</td>
-                                                    <td>Support Engineer</td>
-                                                    <td>San Francisco</td>
-                                                    <td>47</td>
-                                                    <td>2009/07/07</td>
-                                                    <td>$87,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Serge Baldwin</td>
-                                                    <td>Data Coordinator</td>
-                                                    <td>Singapore</td>
-                                                    <td>64</td>
-                                                    <td>2012/04/09</td>
-                                                    <td>$138,575</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Zenaida Frank</td>
-                                                    <td>Software Engineer</td>
-                                                    <td>New York</td>
-                                                    <td>63</td>
-                                                    <td>2010/01/04</td>
-                                                    <td>$125,250</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Shad Decker</td>
-                                                    <td>Regional Director</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>51</td>
-                                                    <td>2008/11/13</td>
-                                                    <td>$183,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Michael Bruce</td>
-                                                    <td>Javascript Developer</td>
-                                                    <td>Singapore</td>
-                                                    <td>29</td>
-                                                    <td>2011/06/27</td>
-                                                    <td>$183,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Donna Snider</td>
-                                                    <td>Customer Support</td>
-                                                    <td>New York</td>
-                                                    <td>27</td>
-                                                    <td>2011/01/25</td>
-                                                    <td>$112,000</td>
+                                                    <td colspan="9">
+                                                      <div class="progress progress-bar-primary progress-xl">
+                                                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
+                                                      </div>
+                                                    </td>
                                                 </tr>
                                             </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Salary</th>
-                                                </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -297,6 +160,241 @@
                     </div>
                 </div>
             </section>
+            <script>
+              $(document).ready(function() {
+                $('#refresh-filter').click(function(){
+                  $('.select').val(' ').change();
+                });
+
+                $('.select').change(function(){
+                  var kelas   = $('#select-kelas').val(),
+                      jurusan = $('#select-jurusan').val(),
+                      status  = $('#select-status').val(),
+                      kelamin = $('#select-kelamin').val(),
+                      keyword = kelas+" "+jurusan+" "+status+" "+kelamin;
+                  console.log(keyword);
+                  table.search( keyword ).draw();
+                })
+
+                $('.select').select2({allowClear:true,placeholder:"Pilih Salah Satu..."});
+
+                $('.table tbody').on( 'click', '#edit', function () {
+                  var ni = $(this).attr('d-ni');
+                  $('#large .modal-content').load(base_url+'/modal/siswa/ubah/'+ni,function(){
+                      $('#large').modal('show');
+                  });
+                });
+
+                $('.table tbody').on( 'click', '#view', function () {
+                  var ni = $(this).attr('d-ni');
+                  $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+ni,function(){
+                      $('#large').modal('show');
+                  });
+                });
+
+                $('.table tbody').on( 'click', 'img', function () {
+                  if (table.rows().count() !== 0) {
+                    var data = table.row($(this).closest('tr')).data();
+                    $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+data.nomor_induk,function(){
+                        $('#large').modal('show');
+                    });
+                  }
+                });
+
+                $('.table tbody').on( 'click', '#delete', function () {
+                  var ni    = $(this).attr('d-ni'),
+                      nama  = $(this).attr('d-nama');
+                  Swal.fire({
+                    title: 'Apakah Anda Yakin?',
+                    html: "Data <b>"+nama+"</b> akan dihapus",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Tidak!',
+                    confirmButtonClass: 'btn btn-danger',
+                    cancelButtonClass: 'btn btn-info',
+                  }).then(function (result) {
+                    if (result.value) {
+                      $.ajax({
+                        url:"/siswa/hapus",
+                        type: "post",
+                        data: {'nomor_induk':ni},
+                        success: function(resp) {
+                          table.ajax.reload();
+                          Swal.fire({
+                            type: "success",
+                            title: 'Terhapus!',
+                            text: 'Data '+nama+' berhasil dihapus.',
+                            confirmButtonClass: 'btn btn-success',
+                          })
+                        }
+                      })
+                    }
+                    else if (result.dismiss === Swal.DismissReason.cancel) {
+                      Swal.fire({
+                        title: 'Dibatalkan',
+                        text: 'Data siswa batal dihapus.',
+                        type: 'info',
+                        confirmButtonClass: 'btn btn-success',
+                      })
+                    }
+                  })
+                });
+
+                $('.btn-tambah').click(function(){
+                    $('#large .modal-content').load(base_url+'/modal/siswa',function(){
+                        $('#large').modal('show');
+                    });
+                });
+
+                var table = $('.table').DataTable({
+                    scrollX: true,
+                    language: {
+                      url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json"
+                    },
+                    responsive: true,
+                    ajax:{
+                        url: "/siswa/data",
+                        type:"POST",
+                        dataSrc: ""
+                    },
+                    columns: [
+                      {
+                        data    : "status",
+                        render  : function(data, type, row, meta) {
+                          var button = `<div class="btn-group dropdown dropdown-icon-wrapper mr-1 mb-1">
+                                          <button type="button" class="btn btn-flat-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <i class="fa fa-cog dropdown-icon"></i>
+                                          </button>
+                                          <div class="dropdown-menu ">
+                                              <a id="view" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
+                                                  <i class="feather icon-search primary"></i>
+                                              </a>
+                                              <a id="edit" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
+                                                  <i class="feather icon-edit-1 warning"></i>
+                                              </a>
+                                              <a id="delete" d-nama="`+row.nama+`" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
+                                                  <i class="feather icon-trash-2 danger"></i>
+                                              </a>`;
+                          switch (data) {
+                            case "1":
+                              button  += `<div class="dropdown-divider"></div>
+                                          <a id="salurkan" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
+                                              <i class="feather icon-check-square success"></i>
+                                          </a>`;
+                              break;
+                            case "2":
+                              button  += `<div class="dropdown-divider"></div>
+                                          <a id="berhenti" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
+                                              <i class="feather icon-alert-circle danger"></i>
+                                          </a>`;
+                              break;
+                            case "3":
+                              button  += `<div class="dropdown-divider"></div>
+                                          <a id="nilai" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai Siswa">
+                                              <i class="feather icon-star warning"></i>
+                                          </a>`;
+                              break;
+                          }
+
+                          button  += `</div></div>`;
+                          return button;
+                        }
+                      },
+                      { data    : "nomor_induk"},
+                      {
+                        data    : "nama",
+                        render  : function ( data, type, row, meta ) {
+                          var stats = row.stats.split(",");
+                            return `<div class="avatar mr-1">
+                                      <a data-toggle="popover"
+                                         data-html="true"
+                                         data-placement="right"
+                                         data-trigger="hover"
+                                         data-content="<img width='200px' src='/images/users/`+row.foto+`' />"
+                                         data-original-title='<div class="chip chip-`+stats[1]+`">
+                                            <div class="chip-body">
+                                                <div class="avatar">
+                                                    <i class="`+stats[3]+`"></i>
+                                                </div>
+                                                <span class="chip-text"><strong>`+stats[0]+`</strong></span>
+                                            </div>
+                                        </div>'
+                                       >
+                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+row.foto+`" alt="Foto Siswa" width="32" height="32">
+                                      <span class="avatar-status-`+stats[2]+`"></span>
+                                      </a>
+                                    </div>` + data;
+                        }
+                      },
+                      {
+                        data    : "jenis_kelamin",
+                        render  : function (data) {
+                          return data == "L" ? "Laki-Laki" : "Perempuan";
+                        }
+                      },
+                      { data    : "kelas"},
+                      { data    : "email",
+                        render  : function (data) {
+                          if (data !== null){
+                            return "<a href='mailto:"+data+"'>"+data+"</a>";
+                          } else {
+                            return `<div class="badge badge-pill bg-gradient-danger"><i>Belum Aktivasi Akun</i></div>`;
+                          }
+                        }
+                      },
+                      { data    : "alamat"},
+                      { data    : "stats", visible:false},
+                      { data    : "foto", visible:false},
+                      { data    : "klas", visible:false},
+                    ],
+                    dom: 'lfBrtip',
+                    buttons: [
+                        {
+                            extend: 'copyHtml5',
+                            exportOptions: {
+                                columns: [ 0, ':visible' ]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            text: 'JSON',
+                            action: function ( e, dt, button, config ) {
+                                var data = dt.buttons.exportData();
+
+                                $.fn.dataTable.fileSave(
+                                    new Blob( [ JSON.stringify( data ) ] ),
+                                    'Export.json'
+                                );
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        }
+                    ],
+                    fnDrawCallback: function(oSettings) {
+                      $('[data-toggle="tooltip"]').tooltip({
+                          "html": true,
+                      });
+                      $('[data-toggle="popover"]').popover();
+                    },
+                    columnDefs: [ {
+                      targets  : [0],
+                      orderable: false,
+                    }],
+                    aaSorting: [],
+                });
+              });
+
+            </script>
             <!-- Column selectors with Export Options and print table -->
 
         </div>

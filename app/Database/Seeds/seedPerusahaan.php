@@ -7,13 +7,17 @@ class seedPerusahaan extends \CodeIgniter\Database\Seeder
 {
         public function run()
         {
-          $faker = \Faker\Factory::create('id_ID');
-          $data = [];
-          for ($i=0; $i < 20; $i++) {
+          $faker  = \Faker\Factory::create('id_ID');
+          $data   = [];
+          $count  = 20;
+          for ($i=0; $i < $count; $i++) {
+            $faker->seed($i);
             array_push($data,[
-              'nama'          =>  $faker->name,
+              'nama'          =>  $faker->company(),
               'alamat'        =>  $faker->address,
-              'notelp'        =>  $faker->phoneNumber,
+              'notelp'        =>  str_replace("(+62)","021",str_replace(" ","",$faker->phoneNumber)),
+              'created_at'    =>  Time::instance($faker->dateTimeBetween('-1 years','now','Asia/Jakarta')),
+              'updated_at'    =>  Time::now()
             ]);
           }
           $this->db->table('perusahaan')->insertBatch($data);

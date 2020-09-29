@@ -54,6 +54,10 @@ class Data extends BaseController
 		$data = [
 			'title' 		=> "Data Pembimbing",
 			'subtitle'	=> "Pembimbing",
+			'perusahaan'	=> $this->perusahaanModel->findAll(),
+			'kelas'				=> $this->masterModel->getData('kelas'),
+			'jurusan'			=> $this->masterModel->getData('kelas'),
+			'status'			=> $this->masterModel->getData('status'),
 		];
 		return view('tables/pembimbing',$data);
 	}

@@ -27,6 +27,7 @@
             <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                 <div class="form-group breadcrum-right">
                     <div class="">
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Data <?=$subtitle;?> Yang Terhapus"><i class="feather icon-trash-2"></i></button>
                         <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?=$subtitle;?>"><i class="feather icon-user-plus"></i></button>
                     </div>
                 </div>
@@ -189,6 +190,15 @@
                   $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+ni,function(){
                       $('#large').modal('show');
                   });
+                });
+
+                $('.table tbody').on( 'click', 'img', function () {
+                  if (table.rows().count() !== 0) {
+                    var data = table.row($(this).closest('tr')).data();
+                    $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+data.nomor_induk,function(){
+                        $('#large').modal('show');
+                    });
+                  }
                 });
 
                 $('.table tbody').on( 'click', '#delete', function () {
