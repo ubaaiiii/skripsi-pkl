@@ -43,11 +43,11 @@ class SiswaModel extends Model
       return $builder->get()->getResult();
     }
 
-    public function simpanGambar($img,$ni)
+    public function simpanGambar($img)
     {
       if ($img->isValid() && ! $img->hasMoved())
       {
-         $newName = "foto-siswa-".$ni.".".$img->getExtension();
+         $newName = $img->getRandomName();
          $img->move('images/users', $newName);
       }
       return $newName;

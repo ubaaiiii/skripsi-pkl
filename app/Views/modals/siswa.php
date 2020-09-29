@@ -16,7 +16,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk" value="<?=isset($siswa->nomor_induk)?$siswa->nomor_induk:'';?>">
+              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk" value="<?=isset($siswa->nomor_induk)?($siswa->nomor_induk):('');?>">
               <div class="form-control-position">
                   <i class="fa fa-id-card"></i>
               </div>
@@ -141,7 +141,7 @@
         processData: false,
         contentType: false,
         success: function(resp){
-          console.log(resp);
+          // console.log(resp);
           if (resp !== "berhasil" && resp !== "exists") {
             // console.log(resp);
             resp = JSON.parse(resp);

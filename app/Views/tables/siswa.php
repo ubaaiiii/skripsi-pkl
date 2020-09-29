@@ -210,11 +210,11 @@
                         type: "post",
                         data: {'nomor_induk':ni},
                         success: function(resp) {
-                          console.log(resp);
+                          table.ajax.reload();
                           Swal.fire({
                             type: "success",
                             title: 'Terhapus!',
-                            text: 'Data '+nama+' telah terhapus.',
+                            text: 'Data '+nama+' berhasil dihapus.',
                             confirmButtonClass: 'btn btn-success',
                           })
                         }
