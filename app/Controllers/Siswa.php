@@ -33,7 +33,7 @@ protected $siswaModel;
 		$siswa = $this->siswaModel;
 		if (!$this->validate([
 			'nomor_induk'		=>	'required|integer|is_unique[siswa.nomor_induk]',
-			'nama'					=>	'required',
+			'nama'					=>	'required|alpha_space',
 			'jenis_kelamin'	=>	'required',
 			'alamat'				=>	'required',
 			'kelas'					=>	'required',
@@ -45,7 +45,8 @@ protected $siswaModel;
 				'integer'		=> "Nomor induk hanya boleh diisi angka",
 			],
 			'nama'					=> [
-				'required'	=> "Nama wajib diisi",
+				'required'		=> "Nama wajib diisi",
+				'alpha_space'	=> "Nama hanya boleh mengandung huruf dan spasi",
 			],
 			'jenis_kelamin'	=> [
 				'required'	=> "Wajib memilih jenis kelamin",

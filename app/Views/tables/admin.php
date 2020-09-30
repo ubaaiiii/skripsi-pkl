@@ -27,7 +27,7 @@
             <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                 <div class="form-group breadcrum-right">
                     <div class="">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Data <?=$subtitle;?> Yang Terhapus"><i class="feather icon-trash-2"></i></button>
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-trash" type="button" data-toggle="tooltip" data-placement="left" title="Data <?=$subtitle;?> Yang Terhapus"><i class="feather icon-trash-2"></i></button>
                         <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?=$subtitle;?>"><i class="feather icon-user-plus"></i></button>
                     </div>
                 </div>
@@ -202,6 +202,12 @@
                     });
                 });
 
+                $('.btn-trash').click(function(){
+                    $('#extra-large .modal-content').load(base_url+'/modal/sampah/admin',function(){
+                        $('#extra-large').modal('show');
+                    });
+                });
+
                 var table = $('.table').DataTable({
                     scrollX: true,
                     language: {
@@ -240,19 +246,13 @@
                       {
                         data    : "nama",
                         render  : function ( data, type, row, meta ) {
-                          var email = row.email;
-                          if (email == 'Belum Aktivasi Akun') {
-                            var status = "Belum Aktivasi Akun";
-                          } else {
-                            var status = "Sudah Aktivasi Akun";
-                          }
                             return `<div class="avatar mr-1">
                                       <a data-toggle="popover"
                                          data-html="true"
                                          data-placement="right"
                                          data-trigger="hover"
                                          data-content="<img width='200px' src='/images/users/`+row.foto+`' />"
-                                         data-original-title='`+status+`'
+                                         data-original-title='`+data+`'
                                        >
                                         <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+row.foto+`" alt="Foto Admin" width="32" height="32">
                                       <span class="avatar-status-online"></span>

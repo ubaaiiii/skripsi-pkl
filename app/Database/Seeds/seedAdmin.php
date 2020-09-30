@@ -16,9 +16,11 @@ class seedAdmin extends \CodeIgniter\Database\Seeder
             if ($jenkel == 'male') {
               $jenkel     = 'female';
               $jenkelnya  = 'P';
+              $foto       = 'foto-guru-'.$faker->numberBetween(20, 36).".jpg";
             } else {
               $jenkel     = 'male';
               $jenkelnya  = 'L';
+              $foto       = 'foto-guru-'.$faker->numberBetween(1, 19).".jpg";
             }
             array_push($data,[
               'nama'          =>  $faker->name($jenkel),
@@ -27,7 +29,8 @@ class seedAdmin extends \CodeIgniter\Database\Seeder
               'jabatan'       =>  'guru',
               'email'         =>  $faker->freeEmail($jenkel),
               'alamat'        =>  $faker->address,
-              'foto'          =>  'foto-guru-'.$faker->numberBetween(1, 35).".jpg",
+              'notelp'        =>  str_replace("(+62)","021",str_replace(" ","",$faker->phoneNumber)),
+              'foto'          =>  $foto,
               'created_at'    =>  Time::instance($faker->dateTimeBetween('-1 years','now','Asia/Jakarta')),
               'updated_at'    =>  Time::now()
             ]);

@@ -57,12 +57,26 @@ class Modal extends BaseController
 	public function sampah($tabel)
 	{
 		$data = [
-			'judul_modal'	=> '<i class="feather icon-user-plus"></i> Tambah Data Admin',
-			'tipe'				=> $tipe,
-			'kelas'				=> $this->masterModel->getData('kelas'),
+			'judul_modal'	=> '<i class="feather icon-trash-2"></i> Tabel Sampah '.ucwords($tabel),
 		];
 
-		return view('modals/sampah/'.$tabel,$data);
+		switch ($tabel) {
+			case 'admin':
+				$data['datanya'] 	=	$this->adminModel->trashAdmin();
+				$data['kolomnya']	=	$this->adminModel->getFields();
+				$data['primary']	= "nomor_induk";
+				break;
+			case 'siswa':
+				$data['datanya'] = $this->siswaModel->trashSiswa();
+				break;
+
+			default:
+				// code...
+				break;
+		}
+		// dd($data);
+
+		return view('modals/sampah',$data);
 	}
 
 	//--------------------------------------------------------------------

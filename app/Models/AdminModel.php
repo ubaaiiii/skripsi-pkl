@@ -9,9 +9,12 @@ class AdminModel extends Model
     protected $allowedFields  = [
                                   'nomor_induk',
                                   'nama',
+                                  'jenis_kelamin',
                                   'jabatan',
+                                  'notelp',
                                   'email',
                                   'alamat',
+                                  'foto',
                                 ];
     protected $tempReturnType  = 'object';
     protected $useTimestamps   = true;
@@ -29,6 +32,20 @@ class AdminModel extends Model
       $builder->select("a.*, b.msdesc 'jbtn'")
               ->join("master b","a.jabatan = b.msid AND b.mstype = 'jabatan'")
               ->where('deleted_at',null);
+      if ($ni) {
+        $builder->where('nomor_induk',$ni);
+      }
+
+      return $builder->get()->getResult();
+    }
+
+    public function trashAdmin($ni = false)
+    {
+      $db      = $this->db;
+      $builder = $db->table('admin a');
+      $builder->select("a.*, b.msdesc 'jbtn'")
+              ->join("master b","a.jabatan = b.msid AND b.mstype = 'jabatan'")
+              ->where('deleted_at IS NOT NULL');
       if ($ni) {
         $builder->where('nomor_induk',$ni);
       }
@@ -60,6 +77,18 @@ class AdminModel extends Model
       } else {
         return 1;
       }
+    }
+
+    public function getFields()
+    {
+      $db       = $this->db;
+      return $db->getFieldNames('admin');
+    }
+
+    public function fieldData()
+    {
+      $db       = $this->db;
+      return $db->getFieldData('admin');
     }
 
 
