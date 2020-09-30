@@ -62,7 +62,7 @@
                                                         <option value=""></option>
                                                         <option value=" " selected>Semua</option>
                                                         <?php foreach($jabatan as $j) :?>
-                                                        <option value="<?=$j->msdesc;?>,"><?=$j->msdesc;?></option>
+                                                        <option value="<?=$j->msdesc;?>"><?=$j->msdesc;?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </fieldset>
@@ -95,7 +95,8 @@
                                                     <th>Nomor Induk</th>
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
-                                                    <th>Kelas</th>
+                                                    <th>Jabatan</th>
+                                                    <th>Nomor Telepon</th>
                                                     <th>Email</th>
                                                     <th>Alamat</th>
                                                 </tr>
@@ -266,6 +267,7 @@
                         }
                       },
                       { data    : "jbtn"},
+                      { data    : "notelp"},
                       { data    : "email",
                         render  : function (data) {
                           if (data !== null){

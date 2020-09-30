@@ -40,7 +40,7 @@ class Modal extends BaseController
 		$data = [
 			'judul_modal'	=> '<i class="feather icon-user-plus"></i> Tambah Data Admin',
 			'tipe'				=> $tipe,
-			'kelas'				=> $this->masterModel->getData('kelas'),
+			'jabatan'			=> $this->masterModel->getData('jabatan'),
 		];
 
 		if ($tipe == 'ubah') {

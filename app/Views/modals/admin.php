@@ -64,30 +64,30 @@
           </div>
       </div>
       <div class="col-12">
-          <label for="kelas">Kode Kelas</label>
-          <select class="form-control" id="kelas" name="kelas" <?=($tipe=='lihat')?('disabled'):('required');?> style="width:100%;">
+          <label for="kelas">Jabatan</label>
+          <select class="form-control" id="jabatan" name="jabatan" <?=($tipe=='lihat')?('disabled'):('required');?> style="width:100%;">
               <option value="">Pilih Salah Satu...</option>
-              <?php foreach ($kelas as $k): ?>
-                <option value="<?= $k->msid; ?>"><?= $k->msid; ?></option>
+              <?php foreach ($jabatan as $j): ?>
+                <option value="<?= $j->msid; ?>"><?= $j->msdesc; ?></option>
               <?php endforeach; ?>
           </select>
       </div>
       <div class="col-12 mt-2">
-          <div class="form-label-group position-relative has-icon-left">
-              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="kelasnya" class="form-control" name="kelasnya" disabled placeholder="Kelas">
+        <div class="form-label-group position-relative has-icon-left">
+              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="notelp" class="form-control" name="notelp" placeholder="Nomor Telepon" value="<?=isset($admin->notelp)?$admin->notelp:'';?>">
               <div class="form-control-position">
-                  <i class="feather icon-users"></i>
+                <i class="feather icon-phone"></i>
               </div>
-              <label for="kelasnya">Kelas</label>
+              <label for="notelp">Nomor Telepon</label>
           </div>
       </div>
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="jurusannya" class="form-control" name="jurusannya" disabled placeholder="Jurusan">
+              <input type="email" <?=($tipe=='lihat')?('disabled'):('required');?> id="email" class="form-control" name="email" placeholder="Email" value="<?=isset($admin->email)?$admin->email:'';?>">
               <div class="form-control-position">
-                  <i class="feather icon-star"></i>
+                  <i class="feather icon-mail"></i>
               </div>
-              <label for="jurusannya">Jurusan</label>
+              <label for="email">Email</label>
           </div>
       </div>
       <div class="col-12 mt-2">
@@ -127,7 +127,7 @@
   $(document).ready(function(){
     <?php if ($tipe == 'ubah' || $tipe == 'lihat'): ?>
       $('#imageResult').attr('src','/images/users/<?=$admin->foto;?>');
-      
+      $('#jabatan').val('<?=$admin->jabatan;?>').change();
     <?php endif; ?>
     $('#form-admin').submit(function(e){
       var buttonLama  = $('#btn-submit').html();
@@ -166,22 +166,6 @@
 
 
     $('#kelas').select2({allowClear:true,placeholder:'Pilih Salah Satu...'});
-
-    var kelasnya = <?=json_encode($kelas);?>;
-    $('#kelas').change(function(){
-      var kodeKelas = $(this).val();
-      if (kodeKelas == "") {
-        $('#kelasnya').val('');
-        $('#jurusannya').val('');
-      } else {
-
-        var kelas     = kelasnya.find(x => x.msid === kodeKelas).msdesc,
-            kelas     = kelas.split(",");
-        // console.log(kodeKelas);
-        $('#kelasnya').val(kelas[0]);
-        $('#jurusannya').val(kelas[1]);
-      }
-    })
 
     function readURL(input) {
         if (input.files && input.files[0]) {

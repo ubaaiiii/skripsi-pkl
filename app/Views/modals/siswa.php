@@ -130,7 +130,6 @@
       $('#kelas').val('<?=$siswa->kelas;?>').change();
     <?php endif; ?>
     $('#form-siswa').submit(function(e){
-      var buttonLama  = $('#btn-submit').html();
       $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
       $('.modal-footer button').attr('disabled',true);
       e.preventDefault();
@@ -158,7 +157,7 @@
               toastr.error("Nomor induk sudah terdaftar", 'Gagal!', { "timeOut": 5000 });
             }
           }
-          $('#btn-submit').html(buttonLama);
+          $('#btn-submit').html("Simpan");
           $('.modal-footer button').attr('disabled',false);
         }
       })

@@ -32,11 +32,12 @@ protected $adminModel;
 	{
 		$admin = $this->adminModel;
 		if (!$this->validate([
-			'nomor_induk'		=>	'required|is_unique[admin.nomor_induk]',
+			'nomor_induk'		=>	'required|integer|is_unique[admin.nomor_induk]',
 			'nama'					=>	'required',
 			'jenis_kelamin'	=>	'required',
+			'notelp'				=>	'required',
 			'alamat'				=>	'required',
-			'kelas'					=>	'required',
+			'jabatan'				=>	'required',
 		],
 		[
 			'nomor_induk'		=> [
