@@ -55,62 +55,19 @@
                                 <div class="users-list-filter">
                                     <form>
                                         <div class="row">
-                                            <div class="col-12 col-sm-6 col-lg-3">
-                                                <label for="select-kelas">Kelas</label>
+                                            <div class="col-12 col-sm-6 col-lg-6">
+                                                <label for="select-jabatan">Jabatan</label>
                                                 <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-kelas" style="width:100%;">
+                                                    <select class="select form-control" id="select-jabatan" style="width:100%;">
                                                         <option value=""></option>
                                                         <option value=" " selected>Semua</option>
-                                                        <?php
-                                                            $unique = array();
-                                                            foreach($kelas as $k) :
-                                                                $kelasnya = explode(",",$k->msdesc);
-                                                                if ( in_array($kelasnya[0], $unique) ) {
-                                                                    continue;
-                                                                }
-                                                                $unique[] = $kelasnya[0];
-                                                        ?>
-                                                        <option value="<?=$kelasnya[0];?>,"><?=$kelasnya[0];?></option>
+                                                        <?php foreach($jabatan as $j) :?>
+                                                        <option value="<?=$j->msdesc;?>,"><?=$j->msdesc;?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </fieldset>
                                             </div>
-                                            <div class="col-12 col-sm-6 col-lg-3">
-                                                <label for="select-jurusan">Jurusan</label>
-                                                <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-jurusan" style="width:100%;">
-                                                        <option value=""></option>
-                                                        <option value=" " selected>Semua</option>
-                                                        <?php
-                                                            $unique = array();
-                                                            foreach($kelas as $j) :
-                                                              $jurusan = explode(",",$j->msdesc);
-                                                              if ( in_array($jurusan[1], $unique) ) {
-                                                                  continue;
-                                                              }
-                                                              $unique[] = $jurusan[1];
-                                                        ?>
-                                                        <option value="<?=$jurusan[1];?>"><?=$jurusan[1];?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-6 col-lg-3">
-                                                <label for="select-status">Status</label>
-                                                <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-status" style="width:100%;">
-                                                        <option value=""></option>
-                                                        <option value=" " selected>Semua</option>
-                                                        <?php
-                                                          foreach ($status as $s) :
-                                                            $statusnya = explode(",",$s->msdesc);
-                                                          ?>
-                                                        <option value="<?=$statusnya[0];?>"><?=$statusnya[0];?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-6 col-lg-3">
+                                            <div class="col-12 col-sm-6 col-lg-6">
                                                 <label for="select-kelamin">Jenis Kelamin</label>
                                                 <fieldset class="form-group">
                                                     <select class="select form-control" id="select-kelamin" style="width:100%;">
@@ -167,12 +124,9 @@
                 });
 
                 $('.select').change(function(){
-                  var kelas   = $('#select-kelas').val(),
-                      jurusan = $('#select-jurusan').val(),
-                      status  = $('#select-status').val(),
+                  var jabatan   = $('#select-jabatan').val(),
                       kelamin = $('#select-kelamin').val(),
-                      keyword = kelas+" "+jurusan+" "+status+" "+kelamin;
-                  console.log(keyword);
+                      keyword = jabatan+" "+kelamin;
                   table.search( keyword ).draw();
                 })
 
@@ -180,14 +134,14 @@
 
                 $('.table tbody').on( 'click', '#edit', function () {
                   var ni = $(this).attr('d-ni');
-                  $('#large .modal-content').load(base_url+'/modal/siswa/ubah/'+ni,function(){
+                  $('#large .modal-content').load(base_url+'/modal/admin/ubah/'+ni,function(){
                       $('#large').modal('show');
                   });
                 });
 
                 $('.table tbody').on( 'click', '#view', function () {
                   var ni = $(this).attr('d-ni');
-                  $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+ni,function(){
+                  $('#large .modal-content').load(base_url+'/modal/admin/lihat/'+ni,function(){
                       $('#large').modal('show');
                   });
                 });
@@ -195,7 +149,7 @@
                 $('.table tbody').on( 'click', 'img', function () {
                   if (table.rows().count() !== 0) {
                     var data = table.row($(this).closest('tr')).data();
-                    $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+data.nomor_induk,function(){
+                    $('#large .modal-content').load(base_url+'/modal/admin/lihat/'+data.nomor_induk,function(){
                         $('#large').modal('show');
                     });
                   }
@@ -216,7 +170,7 @@
                   }).then(function (result) {
                     if (result.value) {
                       $.ajax({
-                        url:"/siswa/hapus",
+                        url:"/admin/hapus",
                         type: "post",
                         data: {'nomor_induk':ni},
                         success: function(resp) {
@@ -233,7 +187,7 @@
                     else if (result.dismiss === Swal.DismissReason.cancel) {
                       Swal.fire({
                         title: 'Dibatalkan',
-                        text: 'Data siswa batal dihapus.',
+                        text: 'Data Admin batal dihapus.',
                         type: 'info',
                         confirmButtonClass: 'btn btn-success',
                       })
@@ -242,7 +196,7 @@
                 });
 
                 $('.btn-tambah').click(function(){
-                    $('#large .modal-content').load(base_url+'/modal/siswa',function(){
+                    $('#large .modal-content').load(base_url+'/modal/admin',function(){
                         $('#large').modal('show');
                     });
                 });
@@ -254,13 +208,13 @@
                     },
                     responsive: true,
                     ajax:{
-                        url: "/siswa/data",
+                        url: "/admin/data",
                         type:"POST",
                         dataSrc: ""
                     },
                     columns: [
                       {
-                        data    : "status",
+                        data    : "nomor_induk",
                         render  : function(data, type, row, meta) {
                           var button = `<div class="btn-group dropdown dropdown-icon-wrapper mr-1 mb-1">
                                           <button type="button" class="btn btn-flat-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -275,29 +229,9 @@
                                               </a>
                                               <a id="delete" d-nama="`+row.nama+`" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
                                                   <i class="feather icon-trash-2 danger"></i>
-                                              </a>`;
-                          switch (data) {
-                            case "1":
-                              button  += `<div class="dropdown-divider"></div>
-                                          <a id="salurkan" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
-                                              <i class="feather icon-check-square success"></i>
-                                          </a>`;
-                              break;
-                            case "2":
-                              button  += `<div class="dropdown-divider"></div>
-                                          <a id="berhenti" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
-                                              <i class="feather icon-alert-circle danger"></i>
-                                          </a>`;
-                              break;
-                            case "3":
-                              button  += `<div class="dropdown-divider"></div>
-                                          <a id="nilai" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai Siswa">
-                                              <i class="feather icon-star warning"></i>
-                                          </a>`;
-                              break;
-                          }
-
-                          button  += `</div></div>`;
+                                              </a>
+                                            </div>
+                                          </div>`;
                           return button;
                         }
                       },
@@ -305,24 +239,22 @@
                       {
                         data    : "nama",
                         render  : function ( data, type, row, meta ) {
-                          var stats = row.stats.split(",");
+                          var email = row.email;
+                          if (email == 'Belum Aktivasi Akun') {
+                            var status = "Belum Aktivasi Akun";
+                          } else {
+                            var status = "Sudah Aktivasi Akun";
+                          }
                             return `<div class="avatar mr-1">
                                       <a data-toggle="popover"
                                          data-html="true"
                                          data-placement="right"
                                          data-trigger="hover"
                                          data-content="<img width='200px' src='/images/users/`+row.foto+`' />"
-                                         data-original-title='<div class="chip chip-`+stats[1]+`">
-                                            <div class="chip-body">
-                                                <div class="avatar">
-                                                    <i class="`+stats[3]+`"></i>
-                                                </div>
-                                                <span class="chip-text"><strong>`+stats[0]+`</strong></span>
-                                            </div>
-                                        </div>'
+                                         data-original-title='`+status+`'
                                        >
-                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+row.foto+`" alt="Foto Siswa" width="32" height="32">
-                                      <span class="avatar-status-`+stats[2]+`"></span>
+                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+row.foto+`" alt="Foto Admin" width="32" height="32">
+                                      <span class="avatar-status-online"></span>
                                       </a>
                                     </div>` + data;
                         }
@@ -333,7 +265,7 @@
                           return data == "L" ? "Laki-Laki" : "Perempuan";
                         }
                       },
-                      { data    : "kelas"},
+                      { data    : "jbtn"},
                       { data    : "email",
                         render  : function (data) {
                           if (data !== null){
@@ -344,9 +276,7 @@
                         }
                       },
                       { data    : "alamat"},
-                      { data    : "stats", visible:false},
                       { data    : "foto", visible:false},
-                      { data    : "klas", visible:false},
                     ],
                     dom: 'lfBrtip',
                     buttons: [

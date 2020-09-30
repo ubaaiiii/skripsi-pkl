@@ -43,6 +43,21 @@ class SiswaModel extends Model
       return $builder->get()->getResult();
     }
 
+    public function trashSiswa($ni = false)
+    {
+      $db      = $this->db;
+      $builder = $db->table('siswa a');
+      $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas'")
+              ->join("master b","a.status = b.msid")
+              ->join("master c","a.kelas = c.msid")
+              ->where('deleted_at IS NOT NULL');
+      if ($ni) {
+        $builder->where('nomor_induk',$ni);
+      }
+
+      return $builder->get()->getResult();
+    }
+
     public function simpanGambar($img)
     {
       if ($img->isValid() && ! $img->hasMoved())

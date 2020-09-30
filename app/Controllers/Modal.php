@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 
+use App\Models\AdminModel;
 use App\Models\SiswaModel;
 use App\Models\PerusahaanModel;
 use App\Models\MasterModel;
@@ -9,6 +10,7 @@ class Modal extends BaseController
 
 	public function __construct()
 	{
+		$this->adminModel	= new AdminModel();
 		$this->siswaModel	= new SiswaModel();
 		$this->perusahaanModel	= new PerusahaanModel();
 		$this->masterModel	= new MasterModel();
@@ -33,9 +35,34 @@ class Modal extends BaseController
 		return view('modals/siswa',$data);
 	}
 
-	public function kegiatan()
+	public function admin($tipe = "tambah", $ni = false)
 	{
-		// code...
+		$data = [
+			'judul_modal'	=> '<i class="feather icon-user-plus"></i> Tambah Data Admin',
+			'tipe'				=> $tipe,
+			'kelas'				=> $this->masterModel->getData('kelas'),
+		];
+
+		if ($tipe == 'ubah') {
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Ubah Data Admin';
+			$data['admin']				=	$this->adminModel->find($ni);
+		} else if ($tipe == 'lihat') {
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Data Admin';
+			$data['admin']				=	$this->adminModel->find($ni);
+		}
+
+		return view('modals/admin',$data);
+	}
+
+	public function sampah($tabel)
+	{
+		$data = [
+			'judul_modal'	=> '<i class="feather icon-user-plus"></i> Tambah Data Admin',
+			'tipe'				=> $tipe,
+			'kelas'				=> $this->masterModel->getData('kelas'),
+		];
+
+		return view('modals/sampah/'.$tabel,$data);
 	}
 
 	//--------------------------------------------------------------------

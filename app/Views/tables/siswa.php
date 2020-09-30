@@ -121,6 +121,14 @@
                                                     </select>
                                                 </fieldset>
                                             </div>
+                                            <br>
+                                            <div class="col-12">
+                                                <div class="alert alert-primary" role="alert">
+                                                    <i class="feather icon-info mr-1 align-middle"></i>
+                                                    <span>
+                                                        <strong>Syarat</strong> melakukan <strong>PKL</strong> (Praktek Kerja Lapangan) adalah <strong>harus sudah kelas XI</strong> ke atas.</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -312,14 +320,7 @@
                                          data-placement="right"
                                          data-trigger="hover"
                                          data-content="<img width='200px' src='/images/users/`+row.foto+`' />"
-                                         data-original-title='<div class="chip chip-`+stats[1]+`">
-                                            <div class="chip-body">
-                                                <div class="avatar">
-                                                    <i class="`+stats[3]+`"></i>
-                                                </div>
-                                                <span class="chip-text"><strong>`+stats[0]+`</strong></span>
-                                            </div>
-                                        </div>'
+                                         data-original-title='<i class="`+stats[3]+" "+stats[1]+`"></i> `+stats[0]+`'
                                        >
                                         <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+row.foto+`" alt="Foto Siswa" width="32" height="32">
                                       <span class="avatar-status-`+stats[2]+`"></span>

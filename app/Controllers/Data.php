@@ -74,8 +74,12 @@ class Data extends BaseController
 	public function admin()
 	{
 		$data = [
-			'title' 		=> "Data Admin",
-			'subtitle'	=> "Admin",
+			'title' 			=> "Data Admin",
+			'subtitle'		=> "Admin",
+			'perusahaan'	=> $this->perusahaanModel->findAll(),
+			'jabatan'			=> $this->masterModel->getData('jabatan'),
+			'jurusan'			=> $this->masterModel->getData('kelas'),
+			'status'			=> $this->masterModel->getData('status'),
 		];
 		return view('tables/admin',$data);
 	}

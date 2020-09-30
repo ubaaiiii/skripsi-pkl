@@ -1,38 +1,38 @@
 <?php namespace App\Controllers;
 
 use CodeIgniter\I18n\Time;
-use App\Models\SiswaModel;
+use App\Models\AdminModel;
 
-class Siswa extends BaseController
+class Admin extends BaseController
 {
 
-protected $siswaModel;
+protected $adminModel;
 
 	public function __construct()
 	{
-		$this->siswaModel = new SiswaModel();
+		$this->adminModel = new adminModel();
 	}
 
-	public function index($ni = false)
+	public function index($ni)
 	{
-		$siswa = $this->siswaModel;
-		dd($siswa->trashSiswa());
+		$admin = $this->adminModel;
+		echo $admin->cekSyarat($ni);
 	}
 
 	public function data($ni = false)
 	{
 		if ($ni) {
-			echo json_encode($this->siswaModel->tableSiswa($ni));
+			echo json_encode($this->adminModel->tableAdmin($ni));
 		} else {
-			echo json_encode($this->siswaModel->tableSiswa());
+			echo json_encode($this->adminModel->tableAdmin());
 		}
 	}
 
 	public function tambah()
 	{
-		$siswa = $this->siswaModel;
+		$admin = $this->adminModel;
 		if (!$this->validate([
-			'nomor_induk'		=>	'required|is_unique[siswa.nomor_induk]',
+			'nomor_induk'		=>	'required|is_unique[admin.nomor_induk]',
 			'nama'					=>	'required',
 			'jenis_kelamin'	=>	'required',
 			'alamat'				=>	'required',
@@ -60,8 +60,8 @@ protected $siswaModel;
 			echo json_encode($validation->getErrors());
 		} else {
 			$gambar = $this->request->getFile('upload_foto');
-			$nmFoto	= $siswa->simpanGambar($gambar,$this->request->getPost('nomor_induk'));
-			$status	=	$siswa->cekSyarat($this->request->getPost('kelas'));
+			$nmFoto	= $admin->simpanGambar($gambar,$this->request->getPost('nomor_induk'));
+			$status	=	$admin->cekSyarat($this->request->getPost('kelas'));
 			$data = [
 				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
 				'nama'          =>  $this->request->getPost('nama'),
@@ -71,17 +71,17 @@ protected $siswaModel;
 				'foto'					=>	$nmFoto,
 				'status'				=>	$status,
 			];
-			$siswa->insert($data);
+			$admin->insert($data);
 			echo "berhasil";
 		}
 	}
 
 	public function ubah()
 	{
-		$siswa = $this->siswaModel;
+		$admin = $this->adminModel;
 		if ($this->request->getPost('nomor_induk') !== $this->request->getPost('nomor_induk_real')) {
-			$cekSiswa	= $siswa->find($this->request->getPost('nomor_induk'));
-			if ($cekSiswa !== null) {
+			$cekadmin	= $admin->find($this->request->getPost('nomor_induk'));
+			if ($cekadmin !== null) {
 				return "exists";
 			}
 		}
@@ -95,24 +95,24 @@ protected $siswaModel;
 		];
 		$gambar = $this->request->getFile('upload_foto');
 		if ($gambar->isValid() && ! $gambar->hasMoved()) {
-			$dataSiswa	= $siswa->find($this->request->getPost('nomor_induk'));
-			$gambarLama	= "/images/users/".$dataSiswa->foto;
+			$dataadmin	= $admin->find($this->request->getPost('nomor_induk'));
+			$gambarLama	= "/images/users/".$dataadmin->foto;
 			if (file_exists($gambarLama)) {
 				unlink($gambarLama);
 			}
-			$nmFoto	= $siswa->simpanGambar($gambar);
+			$nmFoto	= $admin->simpanGambar($gambar);
 			$data['foto']		= $nmFoto;
 		}
 
-		$siswa->update($this->request->getPost('nomor_induk_real'),$data);
+		$admin->update($this->request->getPost('nomor_induk_real'),$data);
 		echo "berhasil";
 
 	}
 
 	public function hapus()
 	{
-		$siswa = $this->siswaModel;
-		return $siswa->delete($this->request->getPost('nomor_induk'));
+		$admin = $this->adminModel;
+		return $admin->delete($this->request->getPost('nomor_induk'));
 	}
 
 
