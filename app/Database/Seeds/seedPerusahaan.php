@@ -16,6 +16,7 @@ class seedPerusahaan extends \CodeIgniter\Database\Seeder
               'nama'          =>  $faker->company(),
               'alamat'        =>  $faker->address,
               'notelp'        =>  str_replace("(+62)","021",str_replace(" ","",$faker->phoneNumber)),
+              'logo'          =>  'logo-perusahaan-'.$faker->numberBetween(1, 26).".png",
               'created_at'    =>  Time::instance($faker->dateTimeBetween('-1 years','now','Asia/Jakarta')),
               'updated_at'    =>  Time::now()
             ]);

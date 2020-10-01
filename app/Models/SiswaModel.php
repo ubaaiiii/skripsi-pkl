@@ -18,6 +18,7 @@ class SiswaModel extends Model
                                   'id_perusahaaan',
                                   'foto',
                                   'status',
+                                  'deleted_at',
                                 ];
     protected $tempReturnType  = 'object';
     protected $useTimestamps   = true;
@@ -82,6 +83,12 @@ class SiswaModel extends Model
       } else {
         return 1;
       }
+    }
+
+    public function getFields()
+    {
+      $db       = $this->db;
+      return $db->getFieldNames('siswa');
     }
 
 

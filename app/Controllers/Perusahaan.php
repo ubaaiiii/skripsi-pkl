@@ -1,41 +1,41 @@
 <?php namespace App\Controllers;
 
 use CodeIgniter\I18n\Time;
-use App\Models\SiswaModel;
+use App\Models\PerusahaanModel;
 
-class Siswa extends BaseController
+class Perusahaan extends BaseController
 {
 
-protected $siswaModel;
+protected $perusahaanModel;
 
 	public function __construct()
 	{
-		$this->siswaModel = new SiswaModel();
+		$this->perusahaanModel = new PerusahaanModel();
 	}
 
-	public function index($ni = false)
+	public function index($id = false)
 	{
-		$siswa = $this->siswaModel;
+		$siswa = $this->perusahaanModel;
 		dd($siswa->trashSiswa());
 	}
 
-	public function data($ni = false)
+	public function data($id = false)
 	{
-		if ($ni) {
-			echo json_encode($this->siswaModel->tableSiswa($ni));
+		if ($id) {
+			echo json_encode($this->perusahaanModel->find($id));
 		} else {
-			echo json_encode($this->siswaModel->tableSiswa());
+			echo json_encode($this->perusahaanModel->findAll());
 		}
 	}
 
 	public function trash()
 	{
-		return json_encode($this->siswaModel->trashSiswa());
+		return json_encode($this->perusahaanModel->trashSiswa());
 	}
 
 	public function tambah()
 	{
-		$siswa = $this->siswaModel;
+		$siswa = $this->perusahaanModel;
 		if (!$this->validate([
 			'nomor_induk'		=>	'required|integer|is_unique[siswa.nomor_induk]',
 			'nama'					=>	'required|alpha_space',
@@ -85,7 +85,7 @@ protected $siswaModel;
 
 	public function ubah()
 	{
-		$siswa = $this->siswaModel;
+		$siswa = $this->perusahaanModel;
 		if ($this->request->getPost('nomor_induk') !== $this->request->getPost('nomor_induk_real')) {
 			$cekSiswa	= $siswa->find($this->request->getPost('nomor_induk'));
 			if ($cekSiswa !== null) {
@@ -118,7 +118,7 @@ protected $siswaModel;
 
 	public function hapus()
 	{
-		$siswa = $this->siswaModel;
+		$siswa = $this->perusahaanModel;
 		return $siswa->delete($this->request->getPost('nomor_induk'));
 	}
 

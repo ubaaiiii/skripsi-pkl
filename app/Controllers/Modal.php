@@ -10,10 +10,10 @@ class Modal extends BaseController
 
 	public function __construct()
 	{
-		$this->adminModel	= new AdminModel();
-		$this->siswaModel	= new SiswaModel();
+		$this->adminModel				= new AdminModel();
+		$this->siswaModel				= new SiswaModel();
 		$this->perusahaanModel	= new PerusahaanModel();
-		$this->masterModel	= new MasterModel();
+		$this->masterModel			= new MasterModel();
 	}
 
 	public function siswa($tipe = "tambah", $ni = false)
@@ -54,20 +54,40 @@ class Modal extends BaseController
 		return view('modals/admin',$data);
 	}
 
+	public function perusahaan($tipe = "tambah", $id = false)
+	{
+		$data = [
+			'judul_modal'	=> '<i class="feather icon-plus"></i> Tambah Data Perusahaan',
+			'tipe'				=> $tipe,
+			'jabatan'			=> $this->masterModel->getData('jabatan'),
+		];
+
+		if ($tipe == 'ubah') {
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Ubah Data Perusahaan';
+			$data['perusahaan']				=	$this->perusahaanModel->find($id);
+		} else if ($tipe == 'lihat') {
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Data Perusahaan';
+			$data['perusahaan']				=	$this->perusahaanModel->find($id);
+		}
+
+		return view('modals/perusahaan',$data);
+	}
+
 	public function sampah($tabel)
 	{
 		$data = [
 			'judul_modal'	=> '<i class="feather icon-trash-2"></i> Tabel Sampah '.ucwords($tabel),
+			'table'				=> $tabel,
 		];
 
 		switch ($tabel) {
 			case 'admin':
-				$data['datanya'] 	=	$this->adminModel->trashAdmin();
 				$data['kolomnya']	=	$this->adminModel->getFields();
 				$data['primary']	= "nomor_induk";
 				break;
 			case 'siswa':
-				$data['datanya'] = $this->siswaModel->trashSiswa();
+				$data['kolomnya']	=	$this->siswaModel->getFields();
+				$data['primary']	= "nomor_induk";
 				break;
 
 			default:

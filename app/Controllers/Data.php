@@ -65,9 +65,14 @@ class Data extends BaseController
 	public function perusahaan()
 	{
 		$data = [
-			'title' 		=> "Data Perusahaan",
-			'subtitle'	=> "Perusahaan",
+			'title' 			=> "Data Perusahaan",
+			'subtitle'		=> "Perusahaan",
+			'perusahaan'	=> $this->perusahaanModel->findAll(),
+			'kelas'				=> $this->masterModel->getData('kelas'),
+			'jurusan'			=> $this->masterModel->getData('kelas'),
+			'status'			=> $this->masterModel->getData('status'),
 		];
+		// dd($data['kelas']);
 		return view('tables/perusahaan',$data);
 	}
 

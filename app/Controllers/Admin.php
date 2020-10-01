@@ -28,6 +28,11 @@ protected $adminModel;
 		}
 	}
 
+	public function trash()
+	{
+		return json_encode($this->adminModel->trashAdmin());
+	}
+
 	public function tambah()
 	{
 		$admin = $this->adminModel;

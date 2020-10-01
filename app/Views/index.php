@@ -215,6 +215,12 @@
                         </li>
                     </ul>
                 </li>
+                <li class=" nav-item"><a href="#"><i class="fa fa-cog"></i><span class="menu-title" data-i18n="Proses">Proses</span></a>
+                    <ul class="menu-content">
+                        <li><a href="<?=base_url('proses/naik_kelas');?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Naik Kelas">Naik Kelas</span></a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -292,6 +298,7 @@
     <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/validation/form-validation.js');?>"></script>
     <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/select/form-select2.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/js/scripts/extensions/toastr.js');?>"></script>
+    <?php if (isset($script)) { echo $script; }; ?>
     <!-- END: Page JS-->
 
     <script>
@@ -302,7 +309,7 @@
         }).closest('li');
 
         $elem.addClass('active');
-        $elem.closest('li.has-sub').addClass('open')
+        $elem.closest('li.has-sub').addClass('open');
 
       });
     </script>

@@ -35,7 +35,7 @@
                     Menu
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <a href="<?=base_url('tugas');?>">
                             <div class="card">
                                 <div class="card-header">
@@ -49,7 +49,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <a href="<?=base_url('monitoring');?>">
                             <div class="card">
                                 <div class="card-header">
@@ -63,7 +63,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <a href="<?=base_url('data');?>">
                             <div class="card">
                                 <div class="card-header">
@@ -72,6 +72,20 @@
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
                                         <img class="img-fluid mx-auto d-block" src="<?=base_url('images\pages\data.png');?>" alt="Data">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <a href="<?=base_url('proses');?>">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Proses</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                        <img class="img-fluid mx-auto d-block" src="<?=base_url('images\pages\proses.png');?>" alt="Proses">
                                     </div>
                                 </div>
                             </div>

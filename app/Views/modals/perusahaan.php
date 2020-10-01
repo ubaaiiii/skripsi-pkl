@@ -7,92 +7,43 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form class="form" method="post" id="form-siswa">
+<form class="form" method="post" id="form-perusahaan">
   <?= csrf_field(); ?>
-<input type="hidden" id="nomor_induk_real" name="nomor_induk_real" value="<?=isset($siswa->nomor_induk)?$siswa->nomor_induk:'';?>">
+<input type="hidden" id="nomor_induk_real" name="nomor_induk_real" value="<?=isset($perusahaan->id)?$perusahaan->id:'';?>">
 <div class="modal-body">
   <br />
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk" value="<?=isset($siswa->nomor_induk)?($siswa->nomor_induk):('');?>">
+              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="nomor_induk" class="form-control" name="nomor_induk" placeholder="ID Perusahaan" value="<?=isset($perusahaan->id)?($perusahaan->id):('');?>">
               <div class="form-control-position">
                   <i class="fa fa-id-card"></i>
               </div>
-              <label for="nomor_induk">Nomor Induk</label>
+              <label for="nomor_induk">ID</label>
           </div>
       </div>
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?=isset($siswa->nama)?$siswa->nama:'';?>">
+              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="nama" class="form-control" name="nama" placeholder="Nama Perusahaan" value="<?=isset($perusahaan->nama)?$perusahaan->nama:'';?>">
               <div class="form-control-position">
                   <i class="feather icon-user"></i>
               </div>
-              <label for="nama">Nama Lengkap</label>
+              <label for="nama">Nama Perusahaan</label>
           </div>
-      </div>
-      <div class="col-12">
-        <label for="jenis_kelamin">Jenis Kelamin</label>
-          <div class="form-label-group position-relative">
-              <ul class="list-unstyled mb-0">
-                  <li class="d-inline-block mr-2">
-                      <fieldset>
-                          <div class="vs-radio-con">
-                              <input <?=($tipe=='lihat')?('disabled'):('required');?> type="radio" name="jenis_kelamin" value="L" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'L')?'checked':''):'';?>>
-                              <span class="vs-radio">
-                                  <span class="vs-radio--border"></span>
-                                  <span class="vs-radio--circle"></span>
-                              </span>
-                              <span class="">Laki-Laki</span>
-                          </div>
-                      </fieldset>
-                  </li>
-                  <li class="d-inline-block mr-2">
-                      <fieldset>
-                          <div class="vs-radio-con">
-                              <input <?=($tipe=='lihat')?('disabled'):('required');?> type="radio" name="jenis_kelamin" value="P" <?=isset($siswa->jenis_kelamin)?(($siswa->jenis_kelamin == 'P')?'checked':''):'';?>>
-                              <span class="vs-radio">
-                                  <span class="vs-radio--border"></span>
-                                  <span class="vs-radio--circle"></span>
-                              </span>
-                              <span class="">Perempuan</span>
-                          </div>
-                      </fieldset>
-                  </li>
-              </ul>
-          </div>
-      </div>
-      <div class="col-12">
-          <label for="kelas">Kode Kelas</label>
-          <select class="form-control" id="kelas" name="kelas" <?=($tipe=='lihat')?('disabled'):('required');?> style="width:100%;">
-              <option value="">Pilih Salah Satu...</option>
-              <?php foreach ($kelas as $k): ?>
-                <option value="<?= $k->msid; ?>"><?= $k->msid; ?></option>
-              <?php endforeach; ?>
-          </select>
       </div>
       <div class="col-12 mt-2">
-          <div class="form-label-group position-relative has-icon-left">
-              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="kelasnya" class="form-control" name="kelasnya" disabled placeholder="Kelas">
+        <div class="form-label-group position-relative has-icon-left">
+              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="notelp" class="form-control" name="notelp" placeholder="Nomor Telepon" value="<?=isset($perusahaan->notelp)?$perusahaan->notelp:'';?>">
               <div class="form-control-position">
-                  <i class="feather icon-users"></i>
+                <i class="feather icon-phone"></i>
               </div>
-              <label for="kelasnya">Kelas</label>
-          </div>
-      </div>
-      <div class="col-12">
-          <div class="form-label-group position-relative has-icon-left">
-              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="jurusannya" class="form-control" name="jurusannya" disabled placeholder="Jurusan">
-              <div class="form-control-position">
-                  <i class="feather icon-star"></i>
-              </div>
-              <label for="jurusannya">Jurusan</label>
+              <label for="notelp">Nomor Telepon</label>
           </div>
       </div>
       <div class="col-12 mt-2">
           <fieldset class="form-label-group position-relative has-icon-left">
-              <textarea class="form-control" id="alamat" rows="3" name="alamat" <?=($tipe=='lihat')?('disabled'):('required');?> placeholder="Alamat"><?=isset($siswa->alamat)?$siswa->alamat:'';?></textarea>
+              <textarea class="form-control" id="alamat" rows="3" name="alamat" <?=($tipe=='lihat')?('disabled'):('required');?> placeholder="Alamat"><?=isset($perusahaan->alamat)?$perusahaan->alamat:'';?></textarea>
               <div class="form-control-position">
                   <i class="fa fa-home"></i>
               </div>
@@ -126,15 +77,15 @@
 <script>
   $(document).ready(function(){
     <?php if ($tipe == 'ubah' || $tipe == 'lihat'): ?>
-      $('#imageResult').attr('src','/images/users/<?=$siswa->foto;?>');
-      $('#kelas').val('<?=$siswa->kelas;?>').change();
+      $('#imageResult').attr('src','/images/perusahaan/<?=$perusahaan->logo;?>');
     <?php endif; ?>
-    $('#form-siswa').submit(function(e){
+    $('#form-perusahaan').submit(function(e){
+      var buttonLama  = $('#btn-submit').html();
       $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
       $('.modal-footer button').attr('disabled',true);
       e.preventDefault();
       $.ajax({
-        url:"/siswa/<?=$tipe;?>",
+        url:"/perusahaan/<?=$tipe;?>",
         data:new FormData(this),
         type:"post",
         processData: false,
@@ -151,13 +102,13 @@
           } else {
             if (resp == 'berhasil') {
               $('.table').DataTable().ajax.reload();
-              toastr.success("Berhasil menyimpan data siswa", 'Success!', { "timeOut": 5000 });
+              toastr.success("Berhasil menyimpan data perusahaan", 'Success!', { "timeOut": 5000 });
               $('#large').modal('hide');
             } else {
               toastr.error("Nomor induk sudah terdaftar", 'Gagal!', { "timeOut": 5000 });
             }
           }
-          $('#btn-submit').html("Simpan");
+          $('#btn-submit').html(buttonLama);
           $('.modal-footer button').attr('disabled',false);
         }
       })
@@ -165,22 +116,6 @@
 
 
     $('#kelas').select2({allowClear:true,placeholder:'Pilih Salah Satu...'});
-
-    var kelasnya = <?=json_encode($kelas);?>;
-    $('#kelas').change(function(){
-      var kodeKelas = $(this).val();
-      if (kodeKelas == "") {
-        $('#kelasnya').val('');
-        $('#jurusannya').val('');
-      } else {
-
-        var kelas     = kelasnya.find(x => x.msid === kodeKelas).msdesc,
-            kelas     = kelas.split(",");
-        // console.log(kodeKelas);
-        $('#kelasnya').val(kelas[0]);
-        $('#jurusannya').val(kelas[1]);
-      }
-    })
 
     function readURL(input) {
         if (input.files && input.files[0]) {

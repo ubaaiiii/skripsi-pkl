@@ -143,11 +143,10 @@
                                             <thead>
                                                 <tr>
                                                     <th></th>
-                                                    <th>Nomor Induk</th>
-                                                    <th>Nama</th>
-                                                    <th>Jenis Kelamin</th>
-                                                    <th>Kelas</th>
-                                                    <th>Email</th>
+                                                    <th>ID</th>
+                                                    <th>Nama Perusahaan</th>
+                                                    <th>Nomor Telepon</th>
+                                                    <th>Logo</th>
                                                     <th>Alamat</th>
                                                 </tr>
                                             </thead>
@@ -187,15 +186,15 @@
                 $('.select').select2({allowClear:true,placeholder:"Pilih Salah Satu..."});
 
                 $('.table tbody').on( 'click', '#edit', function () {
-                  var ni = $(this).attr('d-ni');
-                  $('#large .modal-content').load(base_url+'/modal/siswa/ubah/'+ni,function(){
+                  var id = $(this).attr('d-id');
+                  $('#large .modal-content').load(base_url+'/modal/perusahaan/ubah/'+id,function(){
                       $('#large').modal('show');
                   });
                 });
 
                 $('.table tbody').on( 'click', '#view', function () {
-                  var ni = $(this).attr('d-ni');
-                  $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+ni,function(){
+                  var id = $(this).attr('d-id');
+                  $('#large .modal-content').load(base_url+'/modal/perusahaan/lihat/'+id,function(){
                       $('#large').modal('show');
                   });
                 });
@@ -203,14 +202,14 @@
                 $('.table tbody').on( 'click', 'img', function () {
                   if (table.rows().count() !== 0) {
                     var data = table.row($(this).closest('tr')).data();
-                    $('#large .modal-content').load(base_url+'/modal/siswa/lihat/'+data.nomor_induk,function(){
+                    $('#large .modal-content').load(base_url+'/modal/perusahaan/lihat/'+data.nomor_induk,function(){
                         $('#large').modal('show');
                     });
                   }
                 });
 
                 $('.table tbody').on( 'click', '#delete', function () {
-                  var ni    = $(this).attr('d-ni'),
+                  var id    = $(this).attr('d-id'),
                       nama  = $(this).attr('d-nama');
                   Swal.fire({
                     title: 'Apakah Anda Yakin?',
@@ -224,9 +223,9 @@
                   }).then(function (result) {
                     if (result.value) {
                       $.ajax({
-                        url:"/siswa/hapus",
+                        url:"/perusahaan/hapus",
                         type: "post",
-                        data: {'nomor_induk':ni},
+                        data: {'nomor_induk':id},
                         success: function(resp) {
                           table.ajax.reload();
                           Swal.fire({
@@ -241,7 +240,7 @@
                     else if (result.dismiss === Swal.DismissReason.cancel) {
                       Swal.fire({
                         title: 'Dibatalkan',
-                        text: 'Data siswa batal dihapus.',
+                        text: 'Data perusahaan batal dihapus.',
                         type: 'info',
                         confirmButtonClass: 'btn btn-success',
                       })
@@ -250,13 +249,13 @@
                 });
 
                 $('.btn-tambah').click(function(){
-                    $('#large .modal-content').load(base_url+'/modal/siswa',function(){
+                    $('#large .modal-content').load(base_url+'/modal/perusahaan',function(){
                         $('#large').modal('show');
                     });
                 });
 
                 $('.btn-trash').click(function(){
-                    $('#extra-large .modal-content').load(base_url+'/modal/sampah/siswa',function(){
+                    $('#extra-large .modal-content').load(base_url+'/modal/sampah/perusahaan',function(){
                         $('#extra-large').modal('show');
                     });
                 });
@@ -268,92 +267,51 @@
                     },
                     responsive: true,
                     ajax:{
-                        url: "/siswa/data",
+                        url: "/perusahaan/data",
                         type:"POST",
                         dataSrc: ""
                     },
                     columns: [
                       {
-                        data    : "status",
+                        data    : "id",
                         render  : function(data, type, row, meta) {
                           var button = `<div class="btn-group dropdown dropdown-icon-wrapper mr-1 mb-1">
                                           <button type="button" class="btn btn-flat-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               <i class="fa fa-cog dropdown-icon"></i>
                                           </button>
                                           <div class="dropdown-menu ">
-                                              <a id="view" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
+                                              <a id="view" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
                                                   <i class="feather icon-search primary"></i>
                                               </a>
-                                              <a id="edit" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
+                                              <a id="edit" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
                                                   <i class="feather icon-edit-1 warning"></i>
                                               </a>
-                                              <a id="delete" d-nama="`+row.nama+`" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
+                                              <a id="delete" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
                                                   <i class="feather icon-trash-2 danger"></i>
-                                              </a>`;
-                          switch (data) {
-                            case "1":
-                              button  += `<div class="dropdown-divider"></div>
-                                          <a id="salurkan" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
-                                              <i class="feather icon-check-square success"></i>
-                                          </a>`;
-                              break;
-                            case "2":
-                              button  += `<div class="dropdown-divider"></div>
-                                          <a id="berhenti" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
-                                              <i class="feather icon-alert-circle danger"></i>
-                                          </a>`;
-                              break;
-                            case "3":
-                              button  += `<div class="dropdown-divider"></div>
-                                          <a id="nilai" d-ni="`+row.nomor_induk+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai Siswa">
-                                              <i class="feather icon-star warning"></i>
-                                          </a>`;
-                              break;
-                          }
-
-                          button  += `</div></div>`;
+                                              </a>
+                                          </div>
+                                        </div>`;
                           return button;
                         }
                       },
-                      { data    : "nomor_induk"},
-                      {
-                        data    : "nama",
+                      { data    : "id"},
+                      { data    : "nama" },
+                      { data    : "notelp"},
+                      { data    : "logo",
                         render  : function ( data, type, row, meta ) {
-                          var stats = row.stats.split(",");
-                            return `<div class="avatar mr-1">
-                                      <a data-toggle="popover"
-                                         data-html="true"
-                                         data-placement="right"
-                                         data-trigger="hover"
-                                         data-content="<img width='200px' src='/images/users/`+row.foto+`' />"
-                                         data-original-title='<i class="`+stats[3]+" "+stats[1]+`"></i> `+stats[0]+`'
-                                       >
-                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+row.foto+`" alt="Foto Siswa" width="32" height="32">
-                                      <span class="avatar-status-`+stats[2]+`"></span>
-                                      </a>
-                                    </div>` + data;
-                        }
-                      },
-                      {
-                        data    : "jenis_kelamin",
-                        render  : function (data) {
-                          return data == "L" ? "Laki-Laki" : "Perempuan";
-                        }
-                      },
-                      { data    : "kelas"},
-                      { data    : "email",
-                        render  : function (data) {
-                          if (data !== null){
-                            return "<a href='mailto:"+data+"'>"+data+"</a>";
-                          } else {
-                            return `<div class="badge badge-pill bg-gradient-danger"><i>Belum Aktivasi Akun</i></div>`;
-                          }
+                          return `<a data-toggle="popover"
+                                       data-html="true"
+                                       data-placement="right"
+                                       data-trigger="hover"
+                                       data-content="<img width='200px' src='/images/perusahaan/`+data+`' />"
+                                       data-original-title='`+row.nama+`'
+                                     >
+                                     <i class="fa fa-picture-o"></i>
+                                    </a>`;
                         }
                       },
                       { data    : "alamat"},
-                      { data    : "stats", visible:false},
-                      { data    : "foto", visible:false},
-                      { data    : "klas", visible:false},
+                      { data    : "logo", visible:false},
                     ],
                     dom: 'lfBrtip',
                     buttons: [

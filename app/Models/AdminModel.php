@@ -15,6 +15,7 @@ class AdminModel extends Model
                                   'email',
                                   'alamat',
                                   'foto',
+                                  'deleted_at',
                                 ];
     protected $tempReturnType  = 'object';
     protected $useTimestamps   = true;
@@ -84,12 +85,5 @@ class AdminModel extends Model
       $db       = $this->db;
       return $db->getFieldNames('admin');
     }
-
-    public function fieldData()
-    {
-      $db       = $this->db;
-      return $db->getFieldData('admin');
-    }
-
 
 }
