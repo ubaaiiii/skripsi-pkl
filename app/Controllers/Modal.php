@@ -63,10 +63,10 @@ class Modal extends BaseController
 		];
 
 		if ($tipe == 'ubah') {
-			$data['judul_modal']	= '<i class="feather icon-user"></i> Ubah Data Perusahaan';
+			$data['judul_modal']	= '<i class="feather icon-edit"></i> Ubah Data Perusahaan';
 			$data['perusahaan']				=	$this->perusahaanModel->find($id);
 		} else if ($tipe == 'lihat') {
-			$data['judul_modal']	= '<i class="feather icon-user"></i> Data Perusahaan';
+			$data['judul_modal']	= '<i class="feather icon-info"></i> Data Perusahaan';
 			$data['perusahaan']				=	$this->perusahaanModel->find($id);
 		}
 
@@ -88,6 +88,10 @@ class Modal extends BaseController
 			case 'siswa':
 				$data['kolomnya']	=	$this->siswaModel->getFields();
 				$data['primary']	= "nomor_induk";
+				break;
+			case 'perusahaan':
+				$data['kolomnya']	=	$this->perusahaanModel->getFields();
+				$data['primary']	= "id";
 				break;
 
 			default:

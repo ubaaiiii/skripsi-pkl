@@ -9,20 +9,11 @@
 </div>
 <form class="form" method="post" id="form-perusahaan">
   <?= csrf_field(); ?>
-<input type="hidden" id="nomor_induk_real" name="nomor_induk_real" value="<?=isset($perusahaan->id)?$perusahaan->id:'';?>">
+<input type="hidden" id="id" name="id" value="<?=isset($perusahaan->id)?$perusahaan->id:'';?>">
 <div class="modal-body">
   <br />
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="col-12">
-          <div class="form-label-group position-relative has-icon-left">
-              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="nomor_induk" class="form-control" name="nomor_induk" placeholder="ID Perusahaan" value="<?=isset($perusahaan->id)?($perusahaan->id):('');?>">
-              <div class="form-control-position">
-                  <i class="fa fa-id-card"></i>
-              </div>
-              <label for="nomor_induk">ID</label>
-          </div>
-      </div>
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
               <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="nama" class="form-control" name="nama" placeholder="Nama Perusahaan" value="<?=isset($perusahaan->nama)?$perusahaan->nama:'';?>">

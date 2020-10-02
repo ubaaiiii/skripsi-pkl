@@ -45,6 +45,23 @@
                         </a>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
+                        <a href="<?=base_url('data/nilai');?>">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Nilai Siswa</h4>
+                                    <div class="badge badge-primary badge-md">
+                                        <span>&nbsp;<?=$jml_siswa;?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                        <img class="img-fluid" src="<?=base_url('images\pages\nilai.png');?>" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <a href="<?=base_url('data/pembimbing');?>">
                             <div class="card">
                                 <div class="card-header">
@@ -73,6 +90,23 @@
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
                                         <img class="img-fluid" src="<?=base_url('images\pages\perusahaan.png');?>" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <a href="<?=base_url('data/jadwal');?>">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Jadwal PKL</h4>
+                                    <div class="badge badge-primary badge-md">
+                                        <span>&nbsp;<?=$jml_perusahaan;?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                        <img class="img-fluid" src="<?=base_url('images\pages\jadwal.png');?>" alt="">
                                     </div>
                                 </div>
                             </div>

@@ -15,8 +15,8 @@ protected $perusahaanModel;
 
 	public function index($id = false)
 	{
-		$siswa = $this->perusahaanModel;
-		dd($siswa->trashSiswa());
+		$perusahaan = $this->perusahaanModel;
+		dd($perusahaan->trashSiswa());
 	}
 
 	public function data($id = false)
@@ -30,12 +30,12 @@ protected $perusahaanModel;
 
 	public function trash()
 	{
-		return json_encode($this->perusahaanModel->trashSiswa());
+		return json_encode($this->perusahaanModel->onlyDeleted()->findAll());
 	}
 
 	public function tambah()
 	{
-		$siswa = $this->perusahaanModel;
+		$perusahaan = $this->perusahaanModel;
 		if (!$this->validate([
 			'nomor_induk'		=>	'required|integer|is_unique[siswa.nomor_induk]',
 			'nama'					=>	'required|alpha_space',
@@ -67,8 +67,8 @@ protected $perusahaanModel;
 			echo json_encode($validation->getErrors());
 		} else {
 			$gambar = $this->request->getFile('upload_foto');
-			$nmFoto	= $siswa->simpanGambar($gambar,$this->request->getPost('nomor_induk'));
-			$status	=	$siswa->cekSyarat($this->request->getPost('kelas'));
+			$nmFoto	= $perusahaan->simpanGambar($gambar,$this->request->getPost('nomor_induk'));
+			$status	=	$perusahaan->cekSyarat($this->request->getPost('kelas'));
 			$data = [
 				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
 				'nama'          =>  $this->request->getPost('nama'),
@@ -78,16 +78,16 @@ protected $perusahaanModel;
 				'foto'					=>	$nmFoto,
 				'status'				=>	$status,
 			];
-			$siswa->insert($data);
+			$perusahaan->insert($data);
 			echo "berhasil";
 		}
 	}
 
 	public function ubah()
 	{
-		$siswa = $this->perusahaanModel;
+		$perusahaan = $this->perusahaanModel;
 		if ($this->request->getPost('nomor_induk') !== $this->request->getPost('nomor_induk_real')) {
-			$cekSiswa	= $siswa->find($this->request->getPost('nomor_induk'));
+			$cekSiswa	= $perusahaan->find($this->request->getPost('nomor_induk'));
 			if ($cekSiswa !== null) {
 				return "exists";
 			}
@@ -102,24 +102,24 @@ protected $perusahaanModel;
 		];
 		$gambar = $this->request->getFile('upload_foto');
 		if ($gambar->isValid() && ! $gambar->hasMoved()) {
-			$dataSiswa	= $siswa->find($this->request->getPost('nomor_induk'));
+			$dataSiswa	= $perusahaan->find($this->request->getPost('nomor_induk'));
 			$gambarLama	= "/images/users/".$dataSiswa->foto;
 			if (file_exists($gambarLama)) {
 				unlink($gambarLama);
 			}
-			$nmFoto	= $siswa->simpanGambar($gambar);
+			$nmFoto	= $perusahaan->simpanGambar($gambar);
 			$data['foto']		= $nmFoto;
 		}
 
-		$siswa->update($this->request->getPost('nomor_induk_real'),$data);
+		$perusahaan->update($this->request->getPost('nomor_induk_real'),$data);
 		echo "berhasil";
 
 	}
 
 	public function hapus()
 	{
-		$siswa = $this->perusahaanModel;
-		return $siswa->delete($this->request->getPost('nomor_induk'));
+		$perusahaan = $this->perusahaanModel;
+		$perusahaan->delete($this->request->getPost('id'));
 	}
 
 

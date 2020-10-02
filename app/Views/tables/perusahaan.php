@@ -38,103 +38,6 @@
             <section id="column-selectors">
                 <div class="row">
                     <div class="col-12">
-                      <div class="card">
-                        <div class="card-header" style="padding-bottom: 1.5rem;">
-                            <h4 class="card-title">Filter</h4>
-                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                            <div class="heading-elements">
-                                <ul class="list-inline mb-0">
-                                    <li><a data-action="collapse" class=""><i class="feather icon-chevron-down"></i></a></li>
-                                    <li><a id="refresh-filter"><i class="feather icon-rotate-cw users-data-filter"></i></a></li>
-                                    <li><a data-action="close"><i class="feather icon-x"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-content collapse show" style="">
-                            <div class="card-body">
-                                <div class="users-list-filter">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6 col-lg-3">
-                                                <label for="select-kelas">Kelas</label>
-                                                <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-kelas" style="width:100%;">
-                                                        <option value=""></option>
-                                                        <option value=" " selected>Semua</option>
-                                                        <?php
-                                                            $unique = array();
-                                                            foreach($kelas as $k) :
-                                                                $kelasnya = explode(",",$k->msdesc);
-                                                                if ( in_array($kelasnya[0], $unique) ) {
-                                                                    continue;
-                                                                }
-                                                                $unique[] = $kelasnya[0];
-                                                        ?>
-                                                        <option value="<?=$kelasnya[0];?>,"><?=$kelasnya[0];?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-6 col-lg-3">
-                                                <label for="select-jurusan">Jurusan</label>
-                                                <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-jurusan" style="width:100%;">
-                                                        <option value=""></option>
-                                                        <option value=" " selected>Semua</option>
-                                                        <?php
-                                                            $unique = array();
-                                                            foreach($kelas as $j) :
-                                                              $jurusan = explode(",",$j->msdesc);
-                                                              if ( in_array($jurusan[1], $unique) ) {
-                                                                  continue;
-                                                              }
-                                                              $unique[] = $jurusan[1];
-                                                        ?>
-                                                        <option value="<?=$jurusan[1];?>"><?=$jurusan[1];?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-6 col-lg-3">
-                                                <label for="select-status">Status</label>
-                                                <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-status" style="width:100%;">
-                                                        <option value=""></option>
-                                                        <option value=" " selected>Semua</option>
-                                                        <?php
-                                                          foreach ($status as $s) :
-                                                            $statusnya = explode(",",$s->msdesc);
-                                                          ?>
-                                                        <option value="<?=$statusnya[0];?>"><?=$statusnya[0];?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-6 col-lg-3">
-                                                <label for="select-kelamin">Jenis Kelamin</label>
-                                                <fieldset class="form-group">
-                                                    <select class="select form-control" id="select-kelamin" style="width:100%;">
-                                                        <option value=""></option>
-                                                        <option value=" " selected>Semua</option>
-                                                        <option value="Laki-Laki">Laki-Laki</option>
-                                                        <option value="Perempuan">Perempuan</option>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <br>
-                                            <div class="col-12">
-                                                <div class="alert alert-primary" role="alert">
-                                                    <i class="feather icon-info mr-1 align-middle"></i>
-                                                    <span>
-                                                        <strong>Syarat</strong> melakukan <strong>PKL</strong> (Praktek Kerja Lapangan) adalah <strong>harus sudah kelas XI</strong> ke atas.</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -199,10 +102,10 @@
                   });
                 });
 
-                $('.table tbody').on( 'click', 'img', function () {
+                $('.table tbody').on( 'click', 'i.fa-picture-o', function () {
                   if (table.rows().count() !== 0) {
                     var data = table.row($(this).closest('tr')).data();
-                    $('#large .modal-content').load(base_url+'/modal/perusahaan/lihat/'+data.nomor_induk,function(){
+                    $('#large .modal-content').load(base_url+'/modal/perusahaan/lihat/'+data.id,function(){
                         $('#large').modal('show');
                     });
                   }
@@ -225,8 +128,9 @@
                       $.ajax({
                         url:"/perusahaan/hapus",
                         type: "post",
-                        data: {'nomor_induk':id},
+                        data: {'id':id},
                         success: function(resp) {
+                          console.log(resp);
                           table.ajax.reload();
                           Swal.fire({
                             type: "success",
@@ -286,7 +190,7 @@
                                               <a id="edit" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
                                                   <i class="feather icon-edit-1 warning"></i>
                                               </a>
-                                              <a id="delete" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
+                                              <a id="delete" d-nama="`+row.nama+`" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
                                                   <i class="feather icon-trash-2 danger"></i>
                                               </a>
                                           </div>
@@ -294,9 +198,17 @@
                           return button;
                         }
                       },
-                      { data    : "id"},
-                      { data    : "nama" },
-                      { data    : "notelp"},
+                      { data    : "id", visible: false},
+                      { data    : "nama",
+                        render  : function ( data, type, row, meta ) {
+                          return `<a href="https://www.google.com/search?q=`+data.replace(" ","+")+`" target="_blank">`+data+`</a>`;
+                        }
+                      },
+                      { data    : "notelp",
+                        render  : function ( data, type, row, meta ) {
+                          return `<a href="tel:`+data+`">`+data+`</a>`;
+                        }
+                      },
                       { data    : "logo",
                         render  : function ( data, type, row, meta ) {
                           return `<a data-toggle="popover"
@@ -310,7 +222,11 @@
                                     </a>`;
                         }
                       },
-                      { data    : "alamat"},
+                      { data    : "alamat",
+                        render  : function ( data, type, row, meta ) {
+                          return `<a href="http://maps.google.com/maps?q=`+data.replace(" ","+")+`" target="_blank"><i class="fa fa-map-marker warning"></i> `+data+`</a>`;
+                        }
+                      },
                       { data    : "logo", visible:false},
                     ],
                     dom: 'lfBrtip',
