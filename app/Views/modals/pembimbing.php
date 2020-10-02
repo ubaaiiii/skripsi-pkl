@@ -7,34 +7,92 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form class="form" method="post" id="form-perusahaan">
+<form class="form" method="post" id="form-pembimbing">
   <?= csrf_field(); ?>
-<input type="hidden" id="id" name="id" value="<?=isset($perusahaan->id)?$perusahaan->id:'';?>">
+<input type="hidden" id="nomor_induk_real" name="nomor_induk_real" value="<?=isset($pembimbing->nomor_induk)?$pembimbing->nomor_induk:'';?>">
 <div class="modal-body">
   <br />
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="nama" class="form-control" name="nama" placeholder="Nama Perusahaan" value="<?=isset($perusahaan->nama)?$perusahaan->nama:'';?>">
+              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="nomor_induk" class="form-control" name="nomor_induk" placeholder="Nomor Induk" value="<?=isset($pembimbing->nomor_induk)?($pembimbing->nomor_induk):('');?>">
+              <div class="form-control-position">
+                  <i class="fa fa-id-card"></i>
+              </div>
+              <label for="nomor_induk">Nomor Induk</label>
+          </div>
+      </div>
+      <div class="col-12">
+          <div class="form-label-group position-relative has-icon-left">
+              <input type="text" <?=($tipe=='lihat')?('disabled'):('required');?> id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?=isset($pembimbing->nama)?$pembimbing->nama:'';?>">
               <div class="form-control-position">
                   <i class="feather icon-user"></i>
               </div>
-              <label for="nama">Nama Perusahaan</label>
+              <label for="nama">Nama Lengkap</label>
           </div>
+      </div>
+      <div class="col-12">
+        <label for="jenis_kelamin">Jenis Kelamin</label>
+          <div class="form-label-group position-relative">
+              <ul class="list-unstyled mb-0">
+                  <li class="d-inline-block mr-2">
+                      <fieldset>
+                          <div class="vs-radio-con">
+                              <input <?=($tipe=='lihat')?('disabled'):('required');?> type="radio" name="jenis_kelamin" value="L" <?=isset($pembimbing->jenis_kelamin)?(($pembimbing->jenis_kelamin == 'L')?'checked':''):'';?>>
+                              <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                              </span>
+                              <span class="">Laki-Laki</span>
+                          </div>
+                      </fieldset>
+                  </li>
+                  <li class="d-inline-block mr-2">
+                      <fieldset>
+                          <div class="vs-radio-con">
+                              <input <?=($tipe=='lihat')?('disabled'):('required');?> type="radio" name="jenis_kelamin" value="P" <?=isset($pembimbing->jenis_kelamin)?(($pembimbing->jenis_kelamin == 'P')?'checked':''):'';?>>
+                              <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                              </span>
+                              <span class="">Perempuan</span>
+                          </div>
+                      </fieldset>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="col-12">
+          <label for="kelas">Perusahaan</label>
+          <select class="form-control" id="perusahaan" name="perusahaan" <?=($tipe=='lihat')?('disabled'):('required');?> style="width:100%;">
+              <option value="">Pilih Salah Satu...</option>
+              <?php foreach ($perusahaan as $p): ?>
+                <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
+              <?php endforeach; ?>
+          </select>
       </div>
       <div class="col-12 mt-2">
         <div class="form-label-group position-relative has-icon-left">
-              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="notelp" class="form-control" name="notelp" placeholder="Nomor Telepon" value="<?=isset($perusahaan->notelp)?$perusahaan->notelp:'';?>">
+              <input type="number" <?=($tipe=='lihat')?('disabled'):('required');?> id="notelp" class="form-control" name="notelp" placeholder="Nomor Telepon" value="<?=isset($pembimbing->notelp)?$pembimbing->notelp:'';?>">
               <div class="form-control-position">
                 <i class="feather icon-phone"></i>
               </div>
               <label for="notelp">Nomor Telepon</label>
           </div>
       </div>
+      <div class="col-12">
+          <div class="form-label-group position-relative has-icon-left">
+              <input type="email" <?=($tipe=='lihat')?('disabled'):('required');?> id="email" class="form-control" name="email" placeholder="Email" value="<?=isset($pembimbing->email)?$pembimbing->email:'';?>">
+              <div class="form-control-position">
+                  <i class="feather icon-mail"></i>
+              </div>
+              <label for="email">Email</label>
+          </div>
+      </div>
       <div class="col-12 mt-2">
           <fieldset class="form-label-group position-relative has-icon-left">
-              <textarea class="form-control" id="alamat" rows="3" name="alamat" <?=($tipe=='lihat')?('disabled'):('required');?> placeholder="Alamat"><?=isset($perusahaan->alamat)?$perusahaan->alamat:'';?></textarea>
+              <textarea class="form-control" id="alamat" rows="3" name="alamat" <?=($tipe=='lihat')?('disabled'):('required');?> placeholder="Alamat"><?=isset($pembimbing->alamat)?$pembimbing->alamat:'';?></textarea>
               <div class="form-control-position">
                   <i class="fa fa-home"></i>
               </div>
@@ -44,7 +102,7 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="col-12">
-        <label for="upload_foto" style="<?=($tipe == 'lihat')?('display:none;'):('');?>">Logo Perusahaan</label>
+        <label for="upload_foto" style="<?=($tipe == 'lihat')?('display:none;'):('');?>">Foto Ukuran 3 x 4</label>
         <fieldset class="form-group">
             <div class="custom-file" style="<?=($tipe == 'lihat')?('display:none;'):('');?>">
                 <input type="file" <?=($tipe=='tambah')?('required'):('');?> class="custom-file-input" id="upload_foto" name="upload_foto" accept="image/x-png,image/gif,image/jpeg">
@@ -68,15 +126,16 @@
 <script>
   $(document).ready(function(){
     <?php if ($tipe == 'ubah' || $tipe == 'lihat'): ?>
-      $('#imageResult').attr('src','/images/perusahaan/<?=$perusahaan->logo;?>');
+      $('#imageResult').attr('src','/images/users/<?=$pembimbing->foto;?>');
+      $('#perusahaan').val('<?=$pembimbing->id_perusahaan;?>').change();
     <?php endif; ?>
-    $('#form-perusahaan').submit(function(e){
+    $('#form-pembimbing').submit(function(e){
       var buttonLama  = $('#btn-submit').html();
       $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
       $('.modal-footer button').attr('disabled',true);
       e.preventDefault();
       $.ajax({
-        url:"/perusahaan/<?=$tipe;?>",
+        url:"/pembimbing/<?=$tipe;?>",
         data:new FormData(this),
         type:"post",
         processData: false,
@@ -93,7 +152,7 @@
           } else {
             if (resp == 'berhasil') {
               $('.table').DataTable().ajax.reload();
-              toastr.success("Berhasil menyimpan data perusahaan", 'Success!', { "timeOut": 5000 });
+              toastr.success("Berhasil menyimpan data pembimbing", 'Success!', { "timeOut": 5000 });
               $('#large').modal('hide');
             } else {
               toastr.error("Nomor induk sudah terdaftar", 'Gagal!', { "timeOut": 5000 });

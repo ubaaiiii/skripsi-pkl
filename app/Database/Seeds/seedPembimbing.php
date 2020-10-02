@@ -16,20 +16,21 @@ class seedPembimbing extends \CodeIgniter\Database\Seeder
             if ($jenkel == 'male') {
               $jenkel     = 'female';
               $jenkelnya  = 'P';
+              $foto       = 'avatar-s-'.$faker->numberBetween(14, 25).".jpg";
             } else {
               $jenkel     = 'male';
               $jenkelnya  = 'L';
+              $foto       = 'avatar-s-'.$faker->numberBetween(1, 13).".jpg";
             }
             array_push($data,[
               'nomor_induk'   =>  $faker->nik($jenkel),
               'nama'          =>  $faker->name($jenkel),
               'jenis_kelamin' =>  $jenkelnya,
               'email'         =>  $faker->freeEmail($jenkel),
-              'notelp'        =>  str_replace("(+62)","021",str_replace(" ","",$faker->phoneNumber)),
+              'notelp'        =>  str_replace("(+62)","08",str_replace(" ","",$faker->phoneNumber)),
               'alamat'        =>  $faker->address,
               'id_perusahaan' =>  $faker->numberBetween(1, 20),
-              'foto'          =>  'avatar-s-'.$faker->numberBetween(1, 26).".jpg",
-              'verified'      =>  $faker->numberBetween(0, 1),
+              'foto'          =>  $foto,
               'created_at'    =>  Time::instance($faker->dateTimeBetween('-1 years','now','Asia/Jakarta')),
               'updated_at'    =>  Time::now()
             ]);

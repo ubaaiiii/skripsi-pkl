@@ -67,7 +67,7 @@ class Data extends BaseController
 		$data = [
 			'title' 			=> "Data Perusahaan",
 			'subtitle'		=> "Perusahaan",
-			'perusahaan'	=> $this->perusahaanModel->findAll(),
+			'perusahaan'	=> $this->perusahaanModel->where('deleted_at IS NULL')->findAll(),
 			'kelas'				=> $this->masterModel->getData('kelas'),
 			'jurusan'			=> $this->masterModel->getData('kelas'),
 			'status'			=> $this->masterModel->getData('status'),

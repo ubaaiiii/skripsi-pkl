@@ -187,7 +187,7 @@
                                               <a id="view" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
                                                   <i class="feather icon-search primary"></i>
                                               </a>
-                                              <a id="edit" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
+                                              <a id="edit" d-nama="`+row.nama+`" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
                                                   <i class="feather icon-edit-1 warning"></i>
                                               </a>
                                               <a id="delete" d-nama="`+row.nama+`" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">

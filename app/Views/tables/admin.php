@@ -267,7 +267,11 @@
                         }
                       },
                       { data    : "jbtn"},
-                      { data    : "notelp"},
+                      { data    : "notelp",
+                        render  : function ( data, type, row, meta ) {
+                          return `<a href="tel:`+data+`">`+data+`</a>`;
+                        }
+                      },
                       { data    : "email",
                         render  : function (data) {
                           if (data !== null){
@@ -277,7 +281,11 @@
                           }
                         }
                       },
-                      { data    : "alamat"},
+                      { data    : "alamat",
+                        render  : function ( data, type, row, meta ) {
+                          return `<a href="http://maps.google.com/maps?q=`+data.replace(" ","+")+`" target="_blank"><i class="fa fa-map-marker warning"></i> `+data+`</a>`;
+                        }
+                      },
                       { data    : "foto", visible:false},
                     ],
                     dom: 'lfBrtip',

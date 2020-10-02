@@ -3,6 +3,7 @@
 use App\Models\AdminModel;
 use App\Models\SiswaModel;
 use App\Models\PerusahaanModel;
+use App\Models\PembimbingModel;
 use App\Models\MasterModel;
 
 class Modal extends BaseController
@@ -13,6 +14,7 @@ class Modal extends BaseController
 		$this->adminModel				= new AdminModel();
 		$this->siswaModel				= new SiswaModel();
 		$this->perusahaanModel	= new PerusahaanModel();
+		$this->pembimbingModel	= new PembimbingModel();
 		$this->masterModel			= new MasterModel();
 	}
 
@@ -52,6 +54,25 @@ class Modal extends BaseController
 		}
 
 		return view('modals/admin',$data);
+	}
+
+	public function pembimbing($tipe = "tambah", $ni = false)
+	{
+		$data = [
+			'judul_modal'	=> '<i class="feather icon-user-plus"></i> Tambah Data Pembimbing',
+			'tipe'				=> $tipe,
+			'perusahaan'	=> $this->perusahaanModel->where('deleted_at IS NULL')->findAll(),
+		];
+
+		if ($tipe == 'ubah') {
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Ubah Data Pembimbing';
+			$data['pembimbing']		=	$this->pembimbingModel->find($ni);
+		} else if ($tipe == 'lihat') {
+			$data['judul_modal']	= '<i class="feather icon-user"></i> Data Pembimbing';
+			$data['pembimbing']		=	$this->pembimbingModel->find($ni);
+		}
+
+		return view('modals/pembimbing',$data);
 	}
 
 	public function perusahaan($tipe = "tambah", $id = false)

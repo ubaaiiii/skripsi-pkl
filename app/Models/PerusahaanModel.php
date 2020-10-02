@@ -39,5 +39,17 @@ class PerusahaanModel extends Model
       return $db->getFieldNames('perusahaan');
     }
 
-
+    public function tablePerusahaan()
+    {
+      // $db      = $this->db;
+      // $builder = $db->table('perusahaan a');
+      // $builder->select("a.*, b.msdesc 'jbtn'")
+      //         ->join("master b","a.jabatan = b.msid AND b.mstype = 'jabatan'")
+      //         ->where('deleted_at',null);
+      // if ($ni) {
+      //   $builder->where('nomor_induk',$ni);
+      // }
+      //
+      // return $builder->get()->getResult();
+    }
 }

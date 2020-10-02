@@ -22,9 +22,9 @@ protected $perusahaanModel;
 	public function data($id = false)
 	{
 		if ($id) {
-			echo json_encode($this->perusahaanModel->find($id));
+			echo json_encode($this->perusahaanModel->where('deleted_at IS NULL')->find($id));
 		} else {
-			echo json_encode($this->perusahaanModel->findAll());
+			echo json_encode($this->perusahaanModel->where('deleted_at IS NULL')->findAll());
 		}
 	}
 
@@ -37,73 +37,58 @@ protected $perusahaanModel;
 	{
 		$perusahaan = $this->perusahaanModel;
 		if (!$this->validate([
-			'nomor_induk'		=>	'required|integer|is_unique[siswa.nomor_induk]',
-			'nama'					=>	'required|alpha_space',
-			'jenis_kelamin'	=>	'required',
+			'nama'					=>	'required|alpha_space|is_unique[perusahaan.nama]',
+			'notelp'				=>	'required|integer',
 			'alamat'				=>	'required',
-			'kelas'					=>	'required',
 		],
 		[
-			'nomor_induk'		=> [
-				'required'	=> "Nomor induk wajib diisi",
-				'is_unique'	=> "Nomor induk sudah terdaftar atau mungkin terhapus",
-				'integer'		=> "Nomor induk hanya boleh diisi angka",
-			],
 			'nama'					=> [
-				'required'		=> "Nama wajib diisi",
-				'alpha_space'	=> "Nama hanya boleh mengandung huruf dan spasi",
+				'required'		=> "Nama perusahaan wajib diisi",
+				'alpha_space'	=> "Nama perusahaan hanya boleh mengandung huruf dan spasi",
+				'is_unique'		=> "Nama perusahaan sudah terdaftar atau mungkin terhapus",
 			],
-			'jenis_kelamin'	=> [
-				'required'	=> "Wajib memilih jenis kelamin",
+			'notelp'				=> [
+				'required'		=> "Nomor telepon wajib diisi",
+				'integer'			=> "Nomor telepon hanya boleh mengandung angka",
 			],
 			'alamat'				=> [
 				'required'	=> "Alamat wajib diisi",
-			],
-			'kelas'					=> [
-				'required'	=> "Wajib memilih kode kelas",
 			],
 		])) {
 			$validation = \Config\Services::validation();
 			echo json_encode($validation->getErrors());
 		} else {
 			$gambar = $this->request->getFile('upload_foto');
-			$nmFoto	= $perusahaan->simpanGambar($gambar,$this->request->getPost('nomor_induk'));
-			$status	=	$perusahaan->cekSyarat($this->request->getPost('kelas'));
-			$data = [
-				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
-				'nama'          =>  $this->request->getPost('nama'),
-				'jenis_kelamin' =>  $this->request->getPost('jenis_kelamin'),
-				'alamat'        =>  $this->request->getPost('alamat'),
-				'kelas'         =>  $this->request->getPost('kelas'),
-				'foto'					=>	$nmFoto,
-				'status'				=>	$status,
-			];
-			$perusahaan->insert($data);
-			echo "berhasil";
+			if ($gambar->isValid() && ! $gambar->hasMoved()) {
+				$nmFoto	= $perusahaan->simpanGambar($gambar,$this->request->getPost('id'));
+				$data = [
+					'nama'          =>  $this->request->getPost('nama'),
+					'notelp' 				=>  $this->request->getPost('notelp'),
+					'alamat'        =>  $this->request->getPost('alamat'),
+					'logo'					=>	$nmFoto,
+				];
+				$perusahaan->insert($data);
+				echo "berhasil";
+			} else {
+				echo json_encode(['upload_foto' => 'Harap memilih logo perusahaan']);
+			}
 		}
 	}
 
 	public function ubah()
 	{
 		$perusahaan = $this->perusahaanModel;
-		if ($this->request->getPost('nomor_induk') !== $this->request->getPost('nomor_induk_real')) {
-			$cekSiswa	= $perusahaan->find($this->request->getPost('nomor_induk'));
-			if ($cekSiswa !== null) {
-				return "exists";
-			}
-		}
 
 		$data = [
-			'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
 			'nama'          =>  $this->request->getPost('nama'),
-			'jenis_kelamin' =>  $this->request->getPost('jenis_kelamin'),
+			'notelp' 				=>  $this->request->getPost('notelp'),
 			'alamat'        =>  $this->request->getPost('alamat'),
-			'kelas'         =>  $this->request->getPost('kelas'),
 		];
+
 		$gambar = $this->request->getFile('upload_foto');
 		if ($gambar->isValid() && ! $gambar->hasMoved()) {
-			$dataSiswa	= $perusahaan->find($this->request->getPost('nomor_induk'));
-			$gambarLama	= "/images/users/".$dataSiswa->foto;
+			$dataPerusahaan	= $perusahaan->find($this->request->getPost('id'));
+			$gambarLama			= "/images/perusahaan/".$dataPerusahaan->foto;
 			if (file_exists($gambarLama)) {
 				unlink($gambarLama);
 			}
@@ -111,9 +96,8 @@ protected $perusahaanModel;
 			$data['foto']		= $nmFoto;
 		}
 
-		$perusahaan->update($this->request->getPost('nomor_induk_real'),$data);
+		$perusahaan->update($this->request->getPost('id'),$data);
 		echo "berhasil";
-
 	}
 
 	public function hapus()

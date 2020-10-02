@@ -35,7 +35,7 @@
 <script>
   $(document).ready(function() {
     $('#table-sampah tbody').on( 'click', '#restore', function () {
-      var ni = $(this).attr('d-ni');
+      var ni = $(this).attr('d-id');
       $.ajax({
         url     : "../sampah/restore/<?=$table;?>",
         type    : "post",
@@ -51,10 +51,10 @@
     });
 
     $('#table-sampah tbody').on( 'click', '#delete', function () {
-      var ni = $(this).attr('d-ni');
+      var id = $(this).attr('d-id');
       Swal.fire({
         title: 'Apakah Anda Yakin?',
-        html: "Data <b>"+ni+"</b> akan dihapus",
+        html: "Data <b>"+id+"</b> akan dihapus",
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ya, Hapus!',
@@ -66,7 +66,7 @@
           $.ajax({
             url     : "../sampah/delete/<?=$table;?>",
             type    : "post",
-            data    : {"id":ni},
+            data    : {"id":id},
             success : function(resp) {
               console.log(resp);
               if (resp == 'berhasil') {
@@ -102,10 +102,10 @@
           <i class="fa fa-cog dropdown-icon"></i>
           </button>
           <div class="dropdown-menu ">
-          <a id="restore" d-ni="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Kembalikan">
+          <a id="restore" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Kembalikan">
           <i class="fa fa-undo success"></i>
           </a>
-          <a id="delete" d-ni="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus Permanen">
+          <a id="delete" d-id="`+data+`" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus Permanen">
           <i class="feather icon-trash-2 danger"></i>
           </a>
           </div>
