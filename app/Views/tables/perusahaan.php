@@ -50,6 +50,7 @@
                                                     <th>Nama Perusahaan</th>
                                                     <th>Nomor Telepon</th>
                                                     <th>Logo</th>
+                                                    <th>Karyawan</th>
                                                     <th>Alamat</th>
                                                 </tr>
                                             </thead>
@@ -222,6 +223,30 @@
                                     </a>`;
                         }
                       },
+                      { data    : "karyawan",
+                        render  : function ( data, type, row, meta ) {
+                          var html = "";
+                          data = data.split(",");
+                          $.each(data, function(index, value) {
+                            value = value.split("|");
+                            html += `<div class="avatar">
+                                      <a data-toggle="popover"
+                                         data-html="true"
+                                         data-placement="right"
+                                         data-trigger="hover"
+                                         data-content="<img width='200px' src='/images/users/`+value[2]+`' />"
+                                         data-original-title='`+value[1]+`'
+                                         onclick="
+                                          $('#large .modal-content').load('`+base_url+`/modal/pembimbing/lihat/`+value[0]+`',function(){
+                                            $('#large').modal('show');
+                                          });"
+                                       >
+                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/`+value[2]+`" alt="Foto Karyawan" width="32" height="32">
+                                      </a>
+                                    </div>`;
+                          }); 
+                          return html;
+                        }},
                       { data    : "alamat",
                         render  : function ( data, type, row, meta ) {
                           return `<a href="http://maps.google.com/maps?q=`+data.replace(" ","+")+`" target="_blank"><i class="fa fa-map-marker warning"></i> `+data+`</a>`;

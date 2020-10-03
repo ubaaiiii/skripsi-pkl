@@ -22,9 +22,9 @@ protected $perusahaanModel;
 	public function data($id = false)
 	{
 		if ($id) {
-			echo json_encode($this->perusahaanModel->where('deleted_at IS NULL')->find($id));
+			echo json_encode($this->perusahaanModel->tablePerusahaan($id));
 		} else {
-			echo json_encode($this->perusahaanModel->where('deleted_at IS NULL')->findAll());
+			echo json_encode($this->perusahaanModel->tablePerusahaan());
 		}
 	}
 

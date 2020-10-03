@@ -39,17 +39,22 @@ class PerusahaanModel extends Model
       return $db->getFieldNames('perusahaan');
     }
 
-    public function tablePerusahaan()
+    public function tablePerusahaan($id = false)
     {
-      // $db      = $this->db;
-      // $builder = $db->table('perusahaan a');
-      // $builder->select("a.*, b.msdesc 'jbtn'")
-      //         ->join("master b","a.jabatan = b.msid AND b.mstype = 'jabatan'")
-      //         ->where('deleted_at',null);
-      // if ($ni) {
-      //   $builder->where('nomor_induk',$ni);
-      // }
-      //
-      // return $builder->get()->getResult();
+      $db     = $this->db;
+      $sql    = 'SELECT b.*,
+                        Group_concat(Concat(a.nomor_induk, "|", a.nama, "|", a.foto) SEPARATOR ",") as karyawan
+                  FROM   pembimbing a
+                        INNER JOIN perusahaan b
+                                ON a.id_perusahaan = b.id 
+                  WHERE  b.deleted_at IS NULL ';
+      if ($id) {
+        $sql  .= 'AND a.id_perusahaan = "$id" ';
+      };
+
+      $sql    .= 'GROUP  BY id_perusahaan ';
+      $builder  = $db->query($sql);
+      
+      return $builder->getResult();
     }
 }
