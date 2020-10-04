@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 class Dashboard extends BaseController
 {
@@ -8,7 +10,7 @@ class Dashboard extends BaseController
 			'title' 		=> "Dashboard",
 			'subtitle' 	=> "Dashboard",
 		];
-		return view('dashboard',$data);
+		return view('dashboard', $data);
 	}
 
 	//--------------------------------------------------------------------

@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\AdminModel;
 use App\Models\SiswaModel;
@@ -11,13 +13,13 @@ class Sampah extends BaseController
 	protected $siswaModel;
 	protected $perusahaanModel;
 
-  public function __construct()
-  {
+	public function __construct()
+	{
 		$this->adminModel				= new AdminModel();
 		$this->siswaModel				= new SiswaModel();
 		$this->perusahaanModel	= new PerusahaanModel();
-    $this->db = \Config\Database::connect();
-  }
+		$this->db = \Config\Database::connect();
+	}
 
 	public function index()
 	{
@@ -25,7 +27,7 @@ class Sampah extends BaseController
 			'title' 		=> "Profile",
 			'subtitle' 	=> "Profile",
 		];
-		return view('profile',$data);
+		return view('profile', $data);
 	}
 
 	public function restore($tabel)
@@ -36,13 +38,13 @@ class Sampah extends BaseController
 		];
 		switch ($tabel) {
 			case 'admin':
-				$this->adminModel->update($id,$data);
+				$this->adminModel->update($id, $data);
 				break;
 			case 'siswa':
-				$this->siswaModel->update($id,$data);
+				$this->siswaModel->update($id, $data);
 				break;
 			case 'perusahaan':
-				$this->perusahaanModel->update($id,$data);
+				$this->perusahaanModel->update($id, $data);
 				break;
 
 			default:
@@ -57,13 +59,13 @@ class Sampah extends BaseController
 		$id		= $this->request->getPost('id');
 		switch ($tabel) {
 			case 'admin':
-				$this->adminModel->delete($id,true);
+				$this->adminModel->delete($id, true);
 				break;
 			case 'siswa':
-				$this->siswaModel->delete($id,true);
+				$this->siswaModel->delete($id, true);
 				break;
 			case 'perusahaan':
-				$this->perusahaanModel->delete($id,true);
+				$this->perusahaanModel->delete($id, true);
 				break;
 
 			default:
@@ -72,5 +74,4 @@ class Sampah extends BaseController
 		}
 		return "berhasil";
 	}
-
 }

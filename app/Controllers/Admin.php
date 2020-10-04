@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use CodeIgniter\I18n\Time;
 use App\Models\AdminModel;
@@ -6,7 +8,7 @@ use App\Models\AdminModel;
 class Admin extends BaseController
 {
 
-protected $adminModel;
+	protected $adminModel;
 
 	public function __construct()
 	{
@@ -36,48 +38,50 @@ protected $adminModel;
 	public function tambah()
 	{
 		$admin = $this->adminModel;
-		if (!$this->validate([
-			'nomor_induk'		=>	'required|integer|is_unique[admin.nomor_induk]',
-			'nama'					=>	'required|alpha_space',
-			'jenis_kelamin'	=>	'required',
-			'jabatan'				=>	'required',
-			'notelp'				=>	'required|integer',
-			'email'					=>	'required|valid_email',
-			'alamat'				=>	'required',
-		],
-		[
-			'nomor_induk'		=> [
-				'required'		=> "Nomor induk wajib diisi",
-				'is_unique'		=> "Nomor induk sudah terdaftar atau mungkin terhapus",
-				'integer'			=> "Nomor induk hanya boleh mengandung angka",
+		if (!$this->validate(
+			[
+				'nomor_induk'		=>	'required|integer|is_unique[admin.nomor_induk]',
+				'nama'					=>	'required|alpha_space',
+				'jenis_kelamin'	=>	'required',
+				'jabatan'				=>	'required',
+				'notelp'				=>	'required|integer',
+				'email'					=>	'required|valid_email',
+				'alamat'				=>	'required',
 			],
-			'nama'					=> [
-				'required'		=> "Nama wajib diisi",
-				'alpha_space'	=> "Nama hanya boleh mengandung huruf dan spasi",
-			],
-			'jenis_kelamin'	=> [
-				'required'		=> "Wajib memilih jenis kelamin",
-			],
-			'jabatan'				=> [
-				'required'		=> "Jabatan wajib diisi",
-			],
-			'notelp'				=> [
-				'required'		=> "Nomor telepon wajib diisi",
-				'integer'			=> "Nomor telepon hanya boleh mengandung angka",
-			],
-			'email'					=> [
-				'required'		=> "Email wajib diisi",
-				'valid_email'	=> "Email tidak valid",
-			],
-			'alamat'				=> [
-				'required'		=> "Alamat wajib diisi",
-			],
-		])) {
+			[
+				'nomor_induk'		=> [
+					'required'		=> "Nomor induk wajib diisi",
+					'is_unique'		=> "Nomor induk sudah terdaftar atau mungkin terhapus",
+					'integer'			=> "Nomor induk hanya boleh mengandung angka",
+				],
+				'nama'					=> [
+					'required'		=> "Nama wajib diisi",
+					'alpha_space'	=> "Nama hanya boleh mengandung huruf dan spasi",
+				],
+				'jenis_kelamin'	=> [
+					'required'		=> "Wajib memilih jenis kelamin",
+				],
+				'jabatan'				=> [
+					'required'		=> "Jabatan wajib diisi",
+				],
+				'notelp'				=> [
+					'required'		=> "Nomor telepon wajib diisi",
+					'integer'			=> "Nomor telepon hanya boleh mengandung angka",
+				],
+				'email'					=> [
+					'required'		=> "Email wajib diisi",
+					'valid_email'	=> "Email tidak valid",
+				],
+				'alamat'				=> [
+					'required'		=> "Alamat wajib diisi",
+				],
+			]
+		)) {
 			$validation = \Config\Services::validation();
 			echo json_encode($validation->getErrors());
 		} else {
 			$gambar = $this->request->getFile('upload_foto');
-			$nmFoto	= $admin->simpanGambar($gambar,$this->request->getPost('nomor_induk'));
+			$nmFoto	= $admin->simpanGambar($gambar, $this->request->getPost('nomor_induk'));
 			$data = [
 				'nomor_induk'   =>  $this->request->getPost('nomor_induk'),
 				'nama'          =>  $this->request->getPost('nama'),
@@ -113,9 +117,9 @@ protected $adminModel;
 			'alamat'        =>  $this->request->getPost('alamat'),
 		];
 		$gambar = $this->request->getFile('upload_foto');
-		if ($gambar->isValid() && ! $gambar->hasMoved()) {
+		if ($gambar->isValid() && !$gambar->hasMoved()) {
 			$dataadmin	= $admin->find($this->request->getPost('nomor_induk'));
-			$gambarLama	= "/images/users/".$dataadmin->foto;
+			$gambarLama	= "/images/users/" . $dataadmin->foto;
 			if (file_exists($gambarLama)) {
 				unlink($gambarLama);
 			}
@@ -123,9 +127,8 @@ protected $adminModel;
 			$data['foto']		= $nmFoto;
 		}
 
-		$admin->update($this->request->getPost('nomor_induk_real'),$data);
+		$admin->update($this->request->getPost('nomor_induk_real'), $data);
 		echo "berhasil";
-
 	}
 
 	public function hapus()
@@ -133,7 +136,4 @@ protected $adminModel;
 		$admin = $this->adminModel;
 		return $admin->delete($this->request->getPost('nomor_induk'));
 	}
-
-
-
 }

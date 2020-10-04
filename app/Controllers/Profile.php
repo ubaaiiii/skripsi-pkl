@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 class Profile extends BaseController
 {
@@ -8,7 +10,7 @@ class Profile extends BaseController
 			'title' 		=> "Profile",
 			'subtitle' 	=> "Profile",
 		];
-		return view('profile',$data);
+		return view('profile', $data);
 	}
 
 	//--------------------------------------------------------------------

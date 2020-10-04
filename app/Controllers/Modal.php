@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\AdminModel;
 use App\Models\SiswaModel;
@@ -34,7 +36,7 @@ class Modal extends BaseController
 			$data['siswa']				=	$this->siswaModel->find($ni);
 		}
 
-		return view('modals/siswa',$data);
+		return view('modals/siswa', $data);
 	}
 
 	public function admin($tipe = "tambah", $ni = false)
@@ -53,7 +55,7 @@ class Modal extends BaseController
 			$data['admin']				=	$this->adminModel->find($ni);
 		}
 
-		return view('modals/admin',$data);
+		return view('modals/admin', $data);
 	}
 
 	public function pembimbing($tipe = "tambah", $ni = false)
@@ -72,7 +74,7 @@ class Modal extends BaseController
 			$data['pembimbing']		=	$this->pembimbingModel->find($ni);
 		}
 
-		return view('modals/pembimbing',$data);
+		return view('modals/pembimbing', $data);
 	}
 
 	public function perusahaan($tipe = "tambah", $id = false)
@@ -91,13 +93,13 @@ class Modal extends BaseController
 			$data['perusahaan']				=	$this->perusahaanModel->find($id);
 		}
 
-		return view('modals/perusahaan',$data);
+		return view('modals/perusahaan', $data);
 	}
 
 	public function sampah($tabel)
 	{
 		$data = [
-			'judul_modal'	=> '<i class="feather icon-trash-2"></i> Tabel Sampah '.ucwords($tabel),
+			'judul_modal'	=> '<i class="feather icon-trash-2"></i> Tabel Sampah ' . ucwords($tabel),
 			'table'				=> $tabel,
 		];
 
@@ -121,7 +123,7 @@ class Modal extends BaseController
 		}
 		// dd($data);
 
-		return view('modals/sampah',$data);
+		return view('modals/sampah', $data);
 	}
 
 	//--------------------------------------------------------------------

@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use CodeIgniter\I18n\Time;
 use App\Models\PerusahaanModel;
@@ -6,7 +8,7 @@ use App\Models\PerusahaanModel;
 class Perusahaan extends BaseController
 {
 
-protected $perusahaanModel;
+	protected $perusahaanModel;
 
 	public function __construct()
 	{
@@ -36,31 +38,33 @@ protected $perusahaanModel;
 	public function tambah()
 	{
 		$perusahaan = $this->perusahaanModel;
-		if (!$this->validate([
-			'nama'					=>	'required|alpha_space|is_unique[perusahaan.nama]',
-			'notelp'				=>	'required|integer',
-			'alamat'				=>	'required',
-		],
-		[
-			'nama'					=> [
-				'required'		=> "Nama perusahaan wajib diisi",
-				'alpha_space'	=> "Nama perusahaan hanya boleh mengandung huruf dan spasi",
-				'is_unique'		=> "Nama perusahaan sudah terdaftar atau mungkin terhapus",
+		if (!$this->validate(
+			[
+				'nama'					=>	'required|alpha_space|is_unique[perusahaan.nama]',
+				'notelp'				=>	'required|integer',
+				'alamat'				=>	'required',
 			],
-			'notelp'				=> [
-				'required'		=> "Nomor telepon wajib diisi",
-				'integer'			=> "Nomor telepon hanya boleh mengandung angka",
-			],
-			'alamat'				=> [
-				'required'	=> "Alamat wajib diisi",
-			],
-		])) {
+			[
+				'nama'					=> [
+					'required'		=> "Nama perusahaan wajib diisi",
+					'alpha_space'	=> "Nama perusahaan hanya boleh mengandung huruf dan spasi",
+					'is_unique'		=> "Nama perusahaan sudah terdaftar atau mungkin terhapus",
+				],
+				'notelp'				=> [
+					'required'		=> "Nomor telepon wajib diisi",
+					'integer'			=> "Nomor telepon hanya boleh mengandung angka",
+				],
+				'alamat'				=> [
+					'required'	=> "Alamat wajib diisi",
+				],
+			]
+		)) {
 			$validation = \Config\Services::validation();
 			echo json_encode($validation->getErrors());
 		} else {
 			$gambar = $this->request->getFile('upload_foto');
-			if ($gambar->isValid() && ! $gambar->hasMoved()) {
-				$nmFoto	= $perusahaan->simpanGambar($gambar,$this->request->getPost('id'));
+			if ($gambar->isValid() && !$gambar->hasMoved()) {
+				$nmFoto	= $perusahaan->simpanGambar($gambar, $this->request->getPost('id'));
 				$data = [
 					'nama'          =>  $this->request->getPost('nama'),
 					'notelp' 				=>  $this->request->getPost('notelp'),
@@ -86,9 +90,9 @@ protected $perusahaanModel;
 		];
 
 		$gambar = $this->request->getFile('upload_foto');
-		if ($gambar->isValid() && ! $gambar->hasMoved()) {
+		if ($gambar->isValid() && !$gambar->hasMoved()) {
 			$dataPerusahaan	= $perusahaan->find($this->request->getPost('id'));
-			$gambarLama			= "/images/perusahaan/".$dataPerusahaan->foto;
+			$gambarLama			= "/images/perusahaan/" . $dataPerusahaan->foto;
 			if (file_exists($gambarLama)) {
 				unlink($gambarLama);
 			}
@@ -96,7 +100,7 @@ protected $perusahaanModel;
 			$data['foto']		= $nmFoto;
 		}
 
-		$perusahaan->update($this->request->getPost('id'),$data);
+		$perusahaan->update($this->request->getPost('id'), $data);
 		echo "berhasil";
 	}
 
@@ -105,7 +109,4 @@ protected $perusahaanModel;
 		$perusahaan = $this->perusahaanModel;
 		$perusahaan->delete($this->request->getPost('id'));
 	}
-
-
-
 }

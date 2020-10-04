@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 class Tugas extends BaseController
 {
@@ -10,7 +12,7 @@ class Tugas extends BaseController
 			'subtitle' 	=> "Tugas",
 			// 'script'		=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>',
 		];
-		return view('tugas',$data);
+		return view('tugas', $data);
 	}
 
 	public function kegiatan()
@@ -18,9 +20,9 @@ class Tugas extends BaseController
 		$data = [
 			'title' 		=> "Agenda Kegiatan",
 			'subtitle'	=> "Agenda Kegiatan",
-			'script'		=> '<script src="'.base_url('vuexy/app-assets/js/scripts/pages/app-todo.js').'"></script>',
+			'script'		=> '<script src="' . base_url('vuexy/app-assets/js/scripts/pages/app-todo.js') . '"></script>',
 		];
-		return view('tugas/kegiatan',$data);
+		return view('tugas/kegiatan', $data);
 	}
 
 	public function absensi()
@@ -28,9 +30,9 @@ class Tugas extends BaseController
 		$data = [
 			'title' 		=> "Absensi",
 			'subtitle'	=> "Absensi",
-			'script'		=> '<script src="'.base_url('vuexy/app-assets/js/scripts/extensions/fullcalendar.js').'"></script>',
+			'script'		=> '<script src="' . base_url('vuexy/app-assets/js/scripts/extensions/fullcalendar.js') . '"></script>',
 		];
-		return view('tugas/absensi',$data);
+		return view('tugas/absensi', $data);
 	}
 
 	//--------------------------------------------------------------------

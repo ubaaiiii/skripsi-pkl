@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\SiswaModel;
@@ -32,7 +33,7 @@ class Data extends BaseController
 			'subtitle' 				=> "Data",
 			// 'script'				=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>',
 		];
-		return view('data',$data);
+		return view('data', $data);
 	}
 
 	public function siswa()
@@ -46,7 +47,7 @@ class Data extends BaseController
 			'status'			=> $this->masterModel->getData('status'),
 		];
 		// dd($data['kelas']);
-		return view('tables/siswa',$data);
+		return view('tables/siswa', $data);
 	}
 
 	public function pembimbing()
@@ -59,7 +60,7 @@ class Data extends BaseController
 			'jurusan'			=> $this->masterModel->getData('kelas'),
 			'status'			=> $this->masterModel->getData('status'),
 		];
-		return view('tables/pembimbing',$data);
+		return view('tables/pembimbing', $data);
 	}
 
 	public function perusahaan()
@@ -73,7 +74,7 @@ class Data extends BaseController
 			'status'			=> $this->masterModel->getData('status'),
 		];
 		// dd($data['kelas']);
-		return view('tables/perusahaan',$data);
+		return view('tables/perusahaan', $data);
 	}
 
 	public function admin()
@@ -86,7 +87,7 @@ class Data extends BaseController
 			'jurusan'			=> $this->masterModel->getData('kelas'),
 			'status'			=> $this->masterModel->getData('status'),
 		];
-		return view('tables/admin',$data);
+		return view('tables/admin', $data);
 	}
 
 	//--------------------------------------------------------------------

@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\MasterModel;
 
@@ -16,7 +18,7 @@ class Auth extends BaseController
 			$data = [
 				'title'	=>	'Login',
 			];
-			return view('auth/login',$data);
+			return view('auth/login', $data);
 		} else {
 			redirect()->to('dashboard/index');
 		}
@@ -28,7 +30,7 @@ class Auth extends BaseController
 			'title'	=>	'Daftar Siswa',
 			'kelas'	=>	$this->masterModel->getData('kelas'),
 		];
-		return view('auth/reg_siswa',$data);
+		return view('auth/reg_siswa', $data);
 	}
 
 	public function forgot()
@@ -36,7 +38,7 @@ class Auth extends BaseController
 		$data = [
 			'title'	=>	'Lupa Password',
 		];
-		return view('auth/forgot',$data);
+		return view('auth/forgot', $data);
 	}
 
 	public function logout()
@@ -45,6 +47,10 @@ class Auth extends BaseController
 		$data = [
 			'title'	=>	'Login',
 		];
-		return view('auth/login',$data);
+		return view('auth/login', $data);
+	}
+
+	public function login()
+	{
 	}
 }

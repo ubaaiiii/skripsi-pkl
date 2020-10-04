@@ -56,7 +56,7 @@
                                         <div role="tabpanel" class="tab-pane active" id="account-vertical-akun" aria-labelledby="account-pill-akun" aria-expanded="true">
                                             <div class="media">
                                                 <a href="javascript: void(0);">
-                                                    <img src="<?=base_url('vuexy/app-assets/images/portrait/small/avatar-s-12.jpg');?>" class="rounded mr-75" alt="profile image" height="64" width="64">
+                                                    <img src="<?= base_url('vuexy/app-assets/images/portrait/small/avatar-s-12.jpg'); ?>" class="rounded mr-75" alt="profile image" height="64" width="64">
                                                 </a>
                                                 <div class="media-body mt-75">
                                                     <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
@@ -94,18 +94,18 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <?php if(!isset($email)) : ?>
-                                                    <div class="col-12">
-                                                        <div class="alert alert-warning alert-dismissible mb-2" role="alert">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                            <p class="mb-0">
-                                                                Email Anda belum dikonfirmasi. Silakan periksa kotak masuk Anda.
-                                                            </p>
-                                                            <a href="javascript: void(0);">Kirim kembali email konfirmasi</a>
+                                                    <?php if (!isset($email)) : ?>
+                                                        <div class="col-12">
+                                                            <div class="alert alert-warning alert-dismissible mb-2" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                                <p class="mb-0">
+                                                                    Email Anda belum dikonfirmasi. Silakan periksa kotak masuk Anda.
+                                                                </p>
+                                                                <a href="javascript: void(0);">Kirim kembali email konfirmasi</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     <?php endif; ?>
                                                     <div class="col-12">
                                                         <div class="form-group">
@@ -140,8 +140,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                              <label for="katasandi-baru">Katasandi Baru</label>
-                                                              <input type="password" name="katasandi-baru" id="katasandi-baru" class="form-control" placeholder="Katasandi Baru" required data-validation-required-message="Katasandi baru wajib diisi" minlength="6">
+                                                                <label for="katasandi-baru">Katasandi Baru</label>
+                                                                <input type="password" name="katasandi-baru" id="katasandi-baru" class="form-control" placeholder="Katasandi Baru" required data-validation-required-message="Katasandi baru wajib diisi" minlength="6">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -258,8 +258,12 @@
                                                         <div class="form-group">
                                                             <label for="account-twitter">Twitter <i class="fa fa-twitter" style="color:#1A91DA;"></i></label>
                                                             <input type="text" id="account-twitter" class="form-control" placeholder="Tambah tautan" value="https://www.twitter.com">
-                                                            <?php if(!isset($twitter)): ?>
-                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://twitter.com/mandalaschool" target="_blank">https://twitter.com/mandalaschool</a></li></ul></div>
+                                                            <?php if (!isset($twitter)) : ?>
+                                                                <div class="help-block">
+                                                                    <ul role="alert">
+                                                                        <li>Contoh: <a href="https://twitter.com/mandalaschool" target="_blank">https://twitter.com/mandalaschool</a></li>
+                                                                    </ul>
+                                                                </div>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>
@@ -267,8 +271,12 @@
                                                         <div class="form-group">
                                                             <label for="account-facebook">Facebook <i class="fa fa-facebook" style="color:#166FE5;"></i></label>
                                                             <input type="text" id="account-facebook" class="form-control" placeholder="Tambah tautan">
-                                                            <?php if(!isset($facebook)): ?>
-                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.facebook.com/yayasan.mandalahayu" target="_blank">https://www.facebook.com/yayasan.mandalahayu</a></li></ul></div>
+                                                            <?php if (!isset($facebook)) : ?>
+                                                                <div class="help-block">
+                                                                    <ul role="alert">
+                                                                        <li>Contoh: <a href="https://www.facebook.com/yayasan.mandalahayu" target="_blank">https://www.facebook.com/yayasan.mandalahayu</a></li>
+                                                                    </ul>
+                                                                </div>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>
@@ -276,8 +284,12 @@
                                                         <div class="form-group">
                                                             <label for="account-linkedin">LinkedIn <i class="fa fa-linkedin-square" style="color:#0070B1;"></i></label>
                                                             <input type="text" id="account-linkedin" class="form-control" placeholder="Tambah tautan" value="https://www.linkedin.com">
-                                                            <?php if(!isset($linkedin)): ?>
-                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/" target="_blank">https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/</a></li></ul></div>
+                                                            <?php if (!isset($linkedin)) : ?>
+                                                                <div class="help-block">
+                                                                    <ul role="alert">
+                                                                        <li>Contoh: <a href="https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/" target="_blank">https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/</a></li>
+                                                                    </ul>
+                                                                </div>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>
@@ -285,8 +297,12 @@
                                                         <div class="form-group">
                                                             <label for="account-instagram">Instagram <i class="fa fa-instagram" style="color:#E9622E;"></i></label>
                                                             <input type="text" id="account-instagram" class="form-control" placeholder="Tambah tautan">
-                                                            <?php if(!isset($linkedin)): ?>
-                                                                <div class="help-block"><ul role="alert"><li>Contoh: <a href="https://www.instagram.com/osmanka1/" target="_blank">https://www.instagram.com/osmanka1/</a></li></ul></div>
+                                                            <?php if (!isset($linkedin)) : ?>
+                                                                <div class="help-block">
+                                                                    <ul role="alert">
+                                                                        <li>Contoh: <a href="https://www.instagram.com/osmanka1/" target="_blank">https://www.instagram.com/osmanka1/</a></li>
+                                                                    </ul>
+                                                                </div>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>
