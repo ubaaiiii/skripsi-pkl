@@ -25,9 +25,9 @@
                                     <p class="px-2">Selamat datang di website PKL Mandalahayu.</p>
                                     <div class="card-content">
                                         <div class="card-body pt-1">
-                                            <form action="<?= base_url(); ?>">
+                                            <form id="form-login">
                                                 <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                    <input type="text" class="form-control" id="user-name" placeholder="Nama Pengguna / Username" required>
+                                                    <input type="text" class="form-control" id="user-name" name="user-name" placeholder="Nama Pengguna / Username" required>
                                                     <div class="form-control-position">
                                                         <i class="feather icon-user"></i>
                                                     </div>
@@ -35,7 +35,7 @@
                                                 </fieldset>
 
                                                 <fieldset class="form-label-group position-relative has-icon-left">
-                                                    <input type="password" class="form-control" id="user-password" placeholder="Katasandi / Password" required>
+                                                    <input type="password" class="form-control" id="user-password" name="user-password" placeholder="Katasandi / Password" required>
                                                     <div class="form-control-position">
                                                         <i class="feather icon-lock"></i>
                                                     </div>
@@ -66,20 +66,30 @@
                                                         <a class="dropdown-item" href="<?= base_url('auth/pembimbing'); ?>">Sebagai Pembimbing</a>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+                                                <button id="btn-submit" type="submit" class="btn btn-primary float-right btn-inline">Login</button>
                                             </form>
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $('#form-login').submit(function(e) {
+                                                        e.preventDefault();
+                                                        var data = $(this).serialize();
+                                                        $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
+                                                        $('#form-login input').attr('disabled', true);
+                                                        $('#form-login button').attr('disabled', true);
+                                                        $.ajax({
+                                                            url: "../auth/login",
+                                                            data: data,
+                                                            type: "post",
+                                                            success: function(resp) {
+                                                                console.log(resp);
+                                                            }
+                                                        })
+                                                    })
+                                                })
+                                            </script>
                                         </div>
                                     </div>
                                     <div class="login-footer mb-2">
-                                        <!-- <div class="divider">
-                                                <div class="divider-text">OR</div>
-                                            </div>
-                                            <div class="footer-btn d-inline">
-                                                <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>
-                                                <a href="#" class="btn btn-twitter white"><span class="fa fa-twitter"></span></a>
-                                                <a href="#" class="btn btn-google"><span class="fa fa-google"></span></a>
-                                                <a href="#" class="btn btn-github"><span class="fa fa-github-alt"></span></a>
-                                            </div> -->
                                     </div>
                                 </div>
                             </div>

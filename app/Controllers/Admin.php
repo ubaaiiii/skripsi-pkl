@@ -41,34 +41,34 @@ class Admin extends BaseController
 		if (!$this->validate(
 			[
 				'nomor_induk'		=>	'required|integer|is_unique[admin.nomor_induk]',
-				'nama'					=>	'required|alpha_space',
+				'nama'				=>	'required|alpha_space',
 				'jenis_kelamin'	=>	'required',
-				'jabatan'				=>	'required',
+				'jabatan'			=>	'required',
 				'notelp'				=>	'required|integer',
-				'email'					=>	'required|valid_email',
+				'email'				=>	'required|valid_email',
 				'alamat'				=>	'required',
 			],
 			[
 				'nomor_induk'		=> [
 					'required'		=> "Nomor induk wajib diisi",
 					'is_unique'		=> "Nomor induk sudah terdaftar atau mungkin terhapus",
-					'integer'			=> "Nomor induk hanya boleh mengandung angka",
+					'integer'		=> "Nomor induk hanya boleh mengandung angka",
 				],
-				'nama'					=> [
+				'nama'				=> [
 					'required'		=> "Nama wajib diisi",
 					'alpha_space'	=> "Nama hanya boleh mengandung huruf dan spasi",
 				],
 				'jenis_kelamin'	=> [
 					'required'		=> "Wajib memilih jenis kelamin",
 				],
-				'jabatan'				=> [
+				'jabatan'			=> [
 					'required'		=> "Jabatan wajib diisi",
 				],
 				'notelp'				=> [
 					'required'		=> "Nomor telepon wajib diisi",
-					'integer'			=> "Nomor telepon hanya boleh mengandung angka",
+					'integer'		=> "Nomor telepon hanya boleh mengandung angka",
 				],
-				'email'					=> [
+				'email'				=> [
 					'required'		=> "Email wajib diisi",
 					'valid_email'	=> "Email tidak valid",
 				],
@@ -88,9 +88,9 @@ class Admin extends BaseController
 				'jenis_kelamin' =>  $this->request->getPost('jenis_kelamin'),
 				'jabatan'       =>  $this->request->getPost('jabatan'),
 				'notelp'        =>  $this->request->getPost('notelp'),
-				'email'        	=>  $this->request->getPost('email'),
+				'email'         =>  $this->request->getPost('email'),
 				'alamat'        =>  $this->request->getPost('alamat'),
-				'foto'					=>	$nmFoto,
+				'foto'			 =>	$nmFoto,
 			];
 			$admin->insert($data);
 			echo "berhasil";
@@ -113,7 +113,7 @@ class Admin extends BaseController
 			'jenis_kelamin' =>  $this->request->getPost('jenis_kelamin'),
 			'jabatan'       =>  $this->request->getPost('jabatan'),
 			'notelp'        =>  $this->request->getPost('notelp'),
-			'email'        	=>  $this->request->getPost('email'),
+			'email'         =>  $this->request->getPost('email'),
 			'alamat'        =>  $this->request->getPost('alamat'),
 		];
 		$gambar = $this->request->getFile('upload_foto');

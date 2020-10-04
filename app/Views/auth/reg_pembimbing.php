@@ -33,11 +33,11 @@
                                                         <input type="number" id="nomor_induk" name="nomor_induk" class="form-control" placeholder="Nomor Induk" required>
                                                         <label for="nomor_induk">Nomor Induk</label>
                                                     </div>
-                                                    <label for="kelas mt-1">Kelas</label>
-                                                    <select class="form-control" id="kelas" name="kelas" required style="width:100%;">
+                                                    <label for="perusahaan">Perusahaan</label>
+                                                    <select class="form-control" id="perusahaan" name="perusahaan" required style="width:100%;">
                                                         <option value="">Pilih Salah Satu...</option>
-                                                        <?php foreach ($kelas as $k) : ?>
-                                                            <option value="<?= $k->msid; ?>"><?= $k->msid; ?></option>
+                                                        <?php foreach ($perusahaan as $p) : ?>
+                                                            <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                     <br />
