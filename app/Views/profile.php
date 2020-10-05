@@ -54,27 +54,27 @@
                                 <div class="card-body">
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="account-vertical-akun" aria-labelledby="account-pill-akun" aria-expanded="true">
-                                            <div class="media">
-                                                <a href="javascript: void(0);">
-                                                    <img src="<?= base_url('vuexy/app-assets/images/portrait/small/avatar-s-12.jpg'); ?>" class="rounded mr-75" alt="profile image" height="64" width="64">
-                                                </a>
-                                                <div class="media-body mt-75">
-                                                    <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
-                                                        <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Ubah foto</label>
-                                                        <input type="file" id="account-upload" hidden>
-                                                        <button class="btn btn-sm btn-outline-warning ml-50">Reset</button>
-                                                    </div>
-                                                    <p class="text-muted ml-75 mt-50"><small>Tipe yang diizinkan <b>JPG</b>, <b>JPEG</b>, <b>GIF</b> atau <b>PNG</b>. Dengan maksimal ukuran file <b>800 kB</b>.</small></p>
-                                                </div>
-                                            </div>
-                                            <hr>
                                             <form novalidate>
+                                                <div class="media">
+                                                    <a href="javascript: void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="hover" data-content="<img width='200px' src='/images/users/<?= $data->foto; ?>' /><br><h5 class='text-center'>Disabled Animaition</h5>">
+                                                        <img src="<?= base_url('images/users') . "/" . $data->foto; ?>" style="object-fit: cover; object-position: 100% 0;" class="rounded mr-75 border-3 border-danger" alt="profile image" height="64" width="64">
+                                                    </a>
+                                                    <div class="media-body mt-75">
+                                                        <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
+                                                            <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Ubah foto</label>
+                                                            <input type="file" id="account-upload" hidden>
+                                                            <button class="btn btn-sm btn-outline-warning ml-50">Reset</button>
+                                                        </div>
+                                                        <p class="text-muted ml-75 mt-50"><small>Tipe yang diizinkan <b>JPG</b>, <b>JPEG</b>, <b>GIF</b> atau <b>PNG</b>. Dengan maksimal ukuran file <b>800 kB</b>.</small></p>
+                                                    </div>
+                                                </div>
+                                                <hr>
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="controls">
                                                                 <label for="account-username">Nama Pengguna</label>
-                                                                <input type="text" class="form-control" id="account-username" placeholder="Username" value="hermione007" required data-validation-required-message="* Nama pengguna wajib diisi">
+                                                                <input type="text" class="form-control" id="account-username" placeholder="Username" value="<?= $session->user_name; ?>" required data-validation-required-message="* Nama pengguna wajib diisi">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,7 +82,7 @@
                                                         <div class="form-group">
                                                             <div class="controls">
                                                                 <label for="account-name">Nama Lengkap</label>
-                                                                <input type="text" class="form-control" id="account-name" placeholder="Name" value="Hermione Granger" required data-validation-required-message="* Nama lengkap wajib diisi">
+                                                                <input type="text" class="form-control" id="account-name" placeholder="Name" value="<?= $data->nama; ?>" required data-validation-required-message="* Nama lengkap wajib diisi">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -90,11 +90,11 @@
                                                         <div class="form-group">
                                                             <div class="controls">
                                                                 <label for="account-e-mail">E-mail</label>
-                                                                <input type="email" class="form-control" id="account-e-mail" placeholder="Email" value="granger007@hogward.com" required data-validation-email-message="Format email tidak valid" data-validation-required-message="* Email wajib diisi">
+                                                                <input type="email" class="form-control" id="account-e-mail" placeholder="Email" value="<?= $data->email; ?>" required data-validation-email-message="Format email tidak valid" data-validation-required-message="* Email wajib diisi">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <?php if (!isset($email)) : ?>
+                                                    <?php if (!isset($data->email)) : ?>
                                                         <div class="col-12">
                                                             <div class="alert alert-warning alert-dismissible mb-2" role="alert">
                                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -107,24 +107,73 @@
                                                             </div>
                                                         </div>
                                                     <?php endif; ?>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="account-company">Perusahaan</label>
-                                                            <select class="form-control" id="basicSelect" data-validation-required-message="* Perusahaan wajib diisi" required>
-                                                                <option value="">Pilih Salah Satu...</option>
-                                                                <option>IT</option>
-                                                                <option>Blade Runner</option>
-                                                                <option>Thor Ragnarok</option>
-                                                            </select>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
+                                                    <?php
+                                                    switch ($session->user_level) {
+                                                        case ('Admin'):
+                                                    ?>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="account-company">Jabatan</label>
+                                                                    <select class="form-control" id="data-select" name="data-select" data-validation-required-message="* Jabatan wajib diisi" required>
+                                                                        <option value="">Pilih Salah Satu...</option>
+                                                                        <?php foreach ($dataSelect as $d) : ?>
+                                                                            <option value="<?= $d->msid; ?>"><?= $d->msdesc; ?></option>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                    <p class="help-block"></p>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                            break;
+                                                        case ('Pembimbing'):
+                                                        ?>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="account-company">Perusahaan</label>
+                                                                    <select class="form-control" id="data-select" name="data-select" data-validation-required-message="* Perusahaan wajib diisi" required disabled>
+                                                                        <option value="">Pilih Salah Satu...</option>
+                                                                        <?php foreach ($dataSelect as $d) : ?>
+                                                                            <option value="<?= $d->id; ?>"><?= $d->nama; ?></option>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                    <p class="help-block"></p>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                            break;
+                                                        case ('Siswa'):
+                                                        ?>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="account-company">Kode Kelas</label>
+                                                                    <select class="form-control" id="data-select" name="data-select" data-validation-required-message="* Kelas wajib diisi" required>
+                                                                        <option value="">Pilih Salah Satu...</option>
+                                                                        <option>IT</option>
+                                                                        <?php foreach ($dataSelect as $d) : ?>
+                                                                            <option value="<?= $d->msid; ?>"><?= $d->msid; ?></option>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                    <p class="help-block"></p>
+                                                                </div>
+                                                            </div>
+                                                    <?php
+                                                            break;
+                                                    }
+                                                    ?>
                                                     <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                         <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Simpan Perubahan</button>
                                                         <button type="reset" class="btn btn-outline-warning">Batal</button>
                                                     </div>
                                                 </div>
                                             </form>
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $('#data-select').select2({
+                                                        allowClear: true,
+                                                        placeholder: "Pilih Salah Satu.."
+                                                    });
+                                                });
+                                            </script>
                                         </div>
                                         <div class="tab-pane fade " id="account-vertical-password" role="tabpanel" aria-labelledby="account-pill-password" aria-expanded="false">
                                             <form novalidate>
@@ -256,9 +305,15 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="account-twitter">Twitter <i class="fa fa-twitter" style="color:#1A91DA;"></i></label>
-                                                            <input type="text" id="account-twitter" class="form-control" placeholder="Tambah tautan" value="https://www.twitter.com">
-                                                            <?php if (!isset($twitter)) : ?>
+                                                            <?php if (!$medsos || $medsos->twitter == null) { ?>
+                                                                <label for="account-twitter">Twitter <i class="fa fa-twitter" style="color:#1A91DA;"></i></label>
+                                                            <?php } else { ?>
+                                                                <a href="javascript: void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="hover" data-content="<img width='200px' src='https://unavatar.now.sh/twitter/mandalaschool' /><br><h5 class='text-center'>mandalaschool</h5>">
+                                                                    <label for="account-twitter">Twitter <i class="fa fa-twitter" style="color:#1A91DA;"></i></label>
+                                                                </a>
+                                                            <?php } ?>
+                                                            <input type="text" id="account-twitter" class="form-control" placeholder="Tambah tautan" value="<?= (isset($medsos)) ? ($medsos->twitter) : (''); ?>">
+                                                            <?php if (!isset($medsos->twitter)) : ?>
                                                                 <div class="help-block">
                                                                     <ul role="alert">
                                                                         <li>Contoh: <a href="https://twitter.com/mandalaschool" target="_blank">https://twitter.com/mandalaschool</a></li>
@@ -269,9 +324,15 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="account-facebook">Facebook <i class="fa fa-facebook" style="color:#166FE5;"></i></label>
-                                                            <input type="text" id="account-facebook" class="form-control" placeholder="Tambah tautan">
-                                                            <?php if (!isset($facebook)) : ?>
+                                                            <?php if (!$medsos || $medsos->facebook == null) { ?>
+                                                                <label for="account-facebook">Facebook <i class="fa fa-facebook" style="color:#166FE5;"></i></label>
+                                                            <?php } else { ?>
+                                                                <a href="javascript: void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="hover" data-content="<img width='200px' src='https://unavatar.now.sh/facebook/yayasan.mandalahayu' /><br><h5 class='text-center'>yayasan.mandalahayu</h5>">
+                                                                    <label for="account-facebook">Facebook <i class="fa fa-facebook" style="color:#166FE5;"></i></label>
+                                                                </a>
+                                                            <?php } ?>
+                                                            <input type="text" id="account-facebook" class="form-control" placeholder="Tambah tautan" value="<?= (isset($medsos)) ? ($medsos->facebook) : (''); ?>">
+                                                            <?php if (!isset($medsos->facebook)) : ?>
                                                                 <div class="help-block">
                                                                     <ul role="alert">
                                                                         <li>Contoh: <a href="https://www.facebook.com/yayasan.mandalahayu" target="_blank">https://www.facebook.com/yayasan.mandalahayu</a></li>
@@ -283,11 +344,11 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="account-linkedin">LinkedIn <i class="fa fa-linkedin-square" style="color:#0070B1;"></i></label>
-                                                            <input type="text" id="account-linkedin" class="form-control" placeholder="Tambah tautan" value="https://www.linkedin.com">
-                                                            <?php if (!isset($linkedin)) : ?>
+                                                            <input type="text" id="account-linkedin" class="form-control" placeholder="Tambah tautan" value="<?= (isset($medsos)) ? ($medsos->linkedin) : (''); ?>">
+                                                            <?php if (!isset($medsos->linkedin)) : ?>
                                                                 <div class="help-block">
                                                                     <ul role="alert">
-                                                                        <li>Contoh: <a href="https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/" target="_blank">https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/</a></li>
+                                                                        <li>Contoh: <a href="https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7/" target="_blank">https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7</a></li>
                                                                     </ul>
                                                                 </div>
                                                             <?php endif; ?>
@@ -295,12 +356,18 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="account-instagram">Instagram <i class="fa fa-instagram" style="color:#E9622E;"></i></label>
-                                                            <input type="text" id="account-instagram" class="form-control" placeholder="Tambah tautan">
-                                                            <?php if (!isset($linkedin)) : ?>
+                                                            <?php if (!$medsos || $medsos->instagram == null) { ?>
+                                                                <label for="account-instagram">Instagram <i class="fa fa-instagram" style="color:#E9622E;"></i></label>
+                                                            <?php } else { ?>
+                                                                <a href="javascript: void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="hover" data-content="<img width='200px' src='https://unavatar.now.sh/instagram/osmanka1' /><br><h5 class='text-center'>osmanka1</h5>">
+                                                                    <label for="account-instagram">Instagram <i class="fa fa-instagram" style="color:#E9622E;"></i></label>
+                                                                </a>
+                                                            <?php } ?>
+                                                            <input type="text" id="account-instagram" class="form-control" placeholder="Tambah tautan" value="<?= (isset($medsos)) ? ($medsos->instagram) : (''); ?>">
+                                                            <?php if (!isset($medsos->linkedin)) : ?>
                                                                 <div class="help-block">
                                                                     <ul role="alert">
-                                                                        <li>Contoh: <a href="https://www.instagram.com/osmanka1/" target="_blank">https://www.instagram.com/osmanka1/</a></li>
+                                                                        <li>Contoh: <a href="https://www.instagram.com/osmanka1/" target="_blank">https://www.instagram.com/osmanka1</a></li>
                                                                     </ul>
                                                                 </div>
                                                             <?php endif; ?>
@@ -317,6 +384,12 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $('[data-toggle="popover"]').popover({
+                                html: true,
+                                offset: '100px 0' //offset the popover content
+                            });
+                        </script>
                     </div>
                 </div>
             </section>

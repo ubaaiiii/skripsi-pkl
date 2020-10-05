@@ -23,11 +23,6 @@ class Sampah extends BaseController
 
 	public function index()
 	{
-		$data = [
-			'title' 		=> "Profile",
-			'subtitle' 	=> "Profile",
-		];
-		return view('profile', $data);
 	}
 
 	public function restore($tabel)

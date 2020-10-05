@@ -81,7 +81,27 @@
                                                             data: data,
                                                             type: "post",
                                                             success: function(resp) {
-                                                                console.log(resp);
+                                                                resp = JSON.parse(resp);
+                                                                if (resp.result == 'success') {
+                                                                    $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Redirecting...');
+                                                                    Swal.fire({
+                                                                        title: 'Berhasil!',
+                                                                        html: resp.message,
+                                                                        type: resp.result,
+                                                                        timer: 2000,
+                                                                    });
+                                                                    window.location = "<?= base_url(); ?>/dashboard";
+                                                                } else {
+                                                                    $('#btn-submit').html('Login');
+                                                                    $('#form-login input').attr('disabled', false);
+                                                                    $('#form-login button').attr('disabled', false);
+                                                                    Swal.fire({
+                                                                        title: 'Gagal!',
+                                                                        html: resp.message,
+                                                                        type: resp.result,
+                                                                        timer: 2000,
+                                                                    });
+                                                                }
                                                             }
                                                         })
                                                     })

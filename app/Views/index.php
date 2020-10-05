@@ -122,8 +122,15 @@
                                 <li class="dropdown-menu-footer"> <a class="dropdown-item p-1 text-center" href="javascript:void(0)">Read all notifications</a> </li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-user nav-item"> <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-sm-flex d-none"> <span class="user-name text-bold-600">Ubaidillah</span> <span class="user-status">Admin</span> </div><span><img class="round" src="<?= base_url('vuexy/app-assets/images/portrait/small/avatar-s-11.jpg'); ?>" alt="avatar" height="40" width="40"></span>
+                        <li class="dropdown dropdown-user nav-item">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-sm-flex d-none">
+                                    <span class="user-name text-bold-600"><?= $session->user_nama; ?></span>
+                                    <span class="user-status"><?= $session->user_level; ?></span>
+                                </div>
+                                <span>
+                                    <img class="round" style="object-fit: cover; object-position: 100% 0;" src="<?= base_url('images/users/') . "/" . $session->user_foto; ?>" alt="avatar" height="40" width="40">
+                                </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="<?= base_url('profile'); ?>">
@@ -163,33 +170,47 @@
                 <li class=" nav-item"><a href="/"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a> </li>
                 <li class=" nav-item"><a href="/profile"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Profile">Profile</span></a> </li>
                 <li class=" navigation-header"><span>Menu</span> </li>
-                <li class=" nav-item"><a href="#"><i class="fa fa-list-alt"></i><span class="menu-title" data-i18n="Tugas">Tugas</span></a>
-                    <ul class="menu-content">
-                        <li><a href="<?= base_url('tugas/absensi'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absensi">Absensi</span></a> </li>
-                        <li><a href="<?= base_url('tugas/kegiatan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Agenda Kegiatan">Agenda Kegiatan</span></a> </li>
-                    </ul>
-                </li>
-                <li class=" nav-item"><a href="#"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="Monitoring">Monitoring</span></a>
-                    <ul class="menu-content">
-                        <li><a href="<?= base_url('monitoring/absensi'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absen Siswa">Absen Siswa</span></a> </li>
-                        <li><a href="<?= base_url('monitoring/kegiatan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Kegiatan Siswa">Kegiatan Siswa</span></a> </li>
-                    </ul>
-                </li>
-                <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Data">Data</span></a>
-                    <ul class="menu-content">
-                        <li><a href="<?= base_url('data/siswa'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Siswa">Siswa</span></a> </li>
-                        <li><a href="<?= base_url('data/nilai'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Nilai">Nilai</span></a> </li>
-                        <li><a href="<?= base_url('data/pembimbing'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pembimbing">Pembimbing</span></a> </li>
-                        <li><a href="<?= base_url('data/perusahaan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Perusahaan">Perusahaan</span></a> </li>
-                        <li><a href="<?= base_url('data/admin'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Admin">Admin</span></a> </li>
-                        <li><a href="<?= base_url('data/jadwal'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Jadwal PKL">Jadwal PKL</span></a> </li>
-                    </ul>
-                </li>
-                <li class=" nav-item"><a href="#"><i class="fa fa-cog"></i><span class="menu-title" data-i18n="Proses">Proses</span></a>
-                    <ul class="menu-content">
-                        <li><a href="<?= base_url('proses/naik_kelas'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Naik Kelas">Naik Kelas</span></a> </li>
-                    </ul>
-                </li>
+                <?php
+                switch ($session->user_level) {
+                    case ("Siswa"):
+                ?>
+                        <li class=" nav-item"><a href="#"><i class="fa fa-list-alt"></i><span class="menu-title" data-i18n="Tugas">Tugas</span></a>
+                            <ul class="menu-content">
+                                <li><a href="<?= base_url('tugas/absensi'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absensi">Absensi</span></a> </li>
+                                <li><a href="<?= base_url('tugas/kegiatan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Agenda Kegiatan">Agenda Kegiatan</span></a> </li>
+                            </ul>
+                        </li>
+                    <?php
+                        break;
+                    case ("Pembimbing"):
+                    ?>
+                        <li class=" nav-item"><a href="#"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="Monitoring">Monitoring</span></a>
+                            <ul class="menu-content">
+                                <li><a href="<?= base_url('monitoring/absensi'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absen Siswa">Absen Siswa</span></a> </li>
+                                <li><a href="<?= base_url('monitoring/kegiatan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Kegiatan Siswa">Kegiatan Siswa</span></a> </li>
+                            </ul>
+                        </li>
+                    <?php
+                        break;
+                    case ("Admin"):
+                    ?>
+                        <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Data">Data</span></a>
+                            <ul class="menu-content">
+                                <li><a href="<?= base_url('data/siswa'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Siswa">Siswa</span></a> </li>
+                                <li><a href="<?= base_url('data/nilai'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Nilai">Nilai</span></a> </li>
+                                <li><a href="<?= base_url('data/pembimbing'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pembimbing">Pembimbing</span></a> </li>
+                                <li><a href="<?= base_url('data/perusahaan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Perusahaan">Perusahaan</span></a> </li>
+                                <li><a href="<?= base_url('data/admin'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Admin">Admin</span></a> </li>
+                                <li><a href="<?= base_url('data/jadwal'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Jadwal PKL">Jadwal PKL</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class=" nav-item"><a href="#"><i class="fa fa-cog"></i><span class="menu-title" data-i18n="Proses">Proses</span></a>
+                            <ul class="menu-content">
+                                <li><a href="<?= base_url('proses/naik_kelas'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Naik Kelas">Naik Kelas</span></a> </li>
+                            </ul>
+                        </li>
+                <?php break;
+                } ?>
             </ul>
         </div>
     </div><?= $this->renderSection('content'); ?> <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
@@ -232,9 +253,11 @@
     <script src="<?= base_url('vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js'); ?>"> </script>
     <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/validation/form-validation.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/select/form-select2.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/js/scripts/extensions/toastr.js'); ?>"></script> <?php if (isset($script)) {
-                                                                                                        echo $script;
-                                                                                                    }; ?> <script>
+    <script src="<?= base_url('vuexy/app-assets/js/scripts/extensions/toastr.js'); ?>"></script>
+    <?php if (isset($script)) {
+        echo $script;
+    }; ?>
+    <script>
         $(document).ready(function() {
             var $elem = $('span:contains("<?= $subtitle; ?>")').filter(function() {
                 return $(this).text() === '<?= $subtitle; ?>';

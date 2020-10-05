@@ -20,18 +20,17 @@ class Auth extends BaseController
 		$this->adminModel			= new AdminModel();
 		$this->pembimbingModel	= new PembimbingModel();
 		$this->authModel			= new AuthModel();
-		$this->session				= session();
 	}
 
 	public function index()
 	{
-		if (!session('user_mandala')) {
+		if (!session('user_name')) {
 			$data = [
 				'title'	=>	'Login',
 			];
 			return view('auth/login', $data);
 		} else {
-			redirect()->to('dashboard/index');
+			return redirect()->to('/dashboard');
 		}
 	}
 
@@ -105,14 +104,15 @@ class Auth extends BaseController
 						'user_name'		=> $user[0]->username,
 						'user_level'	=> ucwords($user[0]->level),
 						'user_nama'		=> ucwords($dataUser->nama),
-						'nomor_induk'	=> ucwords($dataUser->nomor_induk),
+						'user_foto'		=> $dataUser->foto,
+						'nomor_induk'	=> $dataUser->nomor_induk,
 					];
 
 					$this->session->set($dataSession);
-					return "berhasil";
+					return json_encode(['result' => 'success', 'message' => 'Berhasil masuk, sedang mengalihkan ke halaman dashboard...']);
 				}
 			} else {
-				return "failed";
+				return json_encode(['result' => 'error', 'message' => 'Nama Pengguna dan Katasandi tidak cocok']);
 			}
 		}
 	}

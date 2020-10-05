@@ -222,14 +222,14 @@
                 data: "logo",
                 render: function(data, type, row, meta) {
                   return `<a data-toggle="popover"
-                                       data-html="true"
-                                       data-placement="right"
-                                       data-trigger="hover"
-                                       data-content="<img width='200px' src='/images/perusahaan/` + data + `' />"
-                                       data-original-title='` + row.nama + `'
-                                     >
-                                     <i class="fa fa-picture-o"></i>
-                                    </a>`;
+                             data-html="true"
+                             data-placement="right"
+                             data-trigger="hover"
+                             data-content="<img width='200px' src='/images/perusahaan/` + data + `' />"
+                             data-original-title='` + row.nama + `'
+                          >
+                            <i class="fa fa-picture-o"></i>
+                          </a>`;
                 }
               },
               {
