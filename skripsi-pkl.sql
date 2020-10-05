@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2020 at 08:22 AM
+-- Generation Time: Oct 05, 2020 at 11:09 AM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -448,26 +448,26 @@ CREATE TABLE `perusahaan` (
 --
 
 INSERT INTO `perusahaan` (`id`, `nama`, `alamat`, `notelp`, `logo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'UD Hasanah Yuliarti', 'Jln. Mulyadi No. 359, Pagar Alam 11049, SumUt', '0218612286796', 'logo-perusahaan-13.png', '2020-07-17 21:27:31', '2020-10-03 02:55:27', NULL),
-(2, 'PT Widiastuti Tbk', 'Psr. Suryo Pranoto No. 761, Pangkal Pinang 66166, DKI', '099355390724', 'logo-perusahaan-23.png', '2020-03-03 13:09:02', '2020-10-03 02:55:28', NULL),
-(3, 'Perum Widiastuti Tbk', 'Jr. Gegerkalong Hilir No. 321, Bau-Bau 42988, BaBel', '0217510308739', 'logo-perusahaan-7.png', '2020-02-15 13:14:11', '2020-10-03 02:39:01', NULL),
-(4, 'Perum Haryanti Hardiansyah', 'Psr. Labu No. 109, Tangerang 72072, PapBar', '02165558931253', 'logo-perusahaan-1.png', '2020-08-11 02:58:17', '2020-10-02 02:56:45', NULL),
-(5, 'Perum Haryanti', 'Kpg. Moch. Ramdan No. 698, Singkawang 89762, Papua', '0217252982360', 'logo-perusahaan-3.png', '2020-04-27 15:25:19', '2020-10-02 02:56:45', NULL),
-(6, 'PT Hidayat Mulyani Tbk', 'Ds. Elang No. 605, Pasuruan 74866, Papua', '09189398205', 'logo-perusahaan-24.png', '2020-05-26 19:47:34', '2020-10-02 02:56:45', NULL),
-(7, 'Perum Utami', 'Ds. Dr. Junjunan No. 108, Langsa 65298, JaTim', '021233540784', 'logo-perusahaan-13.png', '2020-02-18 22:24:08', '2020-10-02 02:56:45', NULL),
-(8, 'PD Rahimah Andriani Tbk', 'Kpg. Industri No. 264, Bandar Lampung 74193, Aceh', '021847479993', 'logo-perusahaan-18.png', '2020-08-15 02:29:53', '2020-10-02 02:56:45', NULL),
-(9, 'Perum Januar', 'Jr. Suharso No. 233, Tual 34304, KalTeng', '0213481840798', 'logo-perusahaan-23.png', '2020-03-25 05:08:22', '2020-10-02 02:56:45', NULL),
-(10, 'PD Putra Zulaika Tbk', 'Ds. Bara Tambar No. 877, Batam 11386, KalTeng', '0215500828224', 'logo-perusahaan-22.png', '2020-01-25 16:07:57', '2020-10-02 02:56:45', NULL),
-(11, 'CV Pudjiastuti', 'Gg. Sunaryo No. 504, Sibolga 71980, Bengkulu', '0219835406537', 'logo-perusahaan-7.png', '2019-11-03 10:55:22', '2020-10-02 02:56:45', NULL),
-(12, 'PT Mandala Sitorus (Persero) Tbk', 'Ds. Jamika No. 226, Banjar 91761, Jambi', '02148897081902', 'logo-perusahaan-19.png', '2020-08-24 21:19:36', '2020-10-02 02:56:45', NULL),
-(13, 'UD Tarihoran Waluyo Tbk', 'Gg. Tubagus Ismail No. 34, Probolinggo 99207, SulSel', '02143728344612', 'logo-perusahaan-9.png', '2020-05-10 22:46:50', '2020-10-02 02:56:45', NULL),
-(14, 'CV Hartati', 'Ds. Sumpah Pemuda No. 26, Padangsidempuan 46090, Bengkulu', '02126416133463', 'logo-perusahaan-19.png', '2020-02-03 16:33:20', '2020-10-02 02:56:45', NULL),
-(15, 'PT Rahayu Saptono', 'Kpg. Sudiarto No. 46, Medan 46872, NTT', '021222125493', 'logo-perusahaan-9.png', '2020-07-23 07:04:41', '2020-10-02 02:56:45', NULL),
-(16, 'PT Pertiwi', 'Gg. Baladewa No. 276, Padang 86905, Banten', '0218883010473', 'logo-perusahaan-6.png', '2020-07-04 16:04:30', '2020-10-02 02:56:45', NULL),
-(17, 'PD Damanik Rahimah Tbk', 'Gg. Sampangan No. 851, Jayapura 91374, Riau', '03319972175', 'logo-perusahaan-12.png', '2019-12-03 17:12:22', '2020-10-02 02:56:45', NULL),
-(18, 'PT Yuniar (Persero) Tbk', 'Dk. Bara Tambar No. 592, Banjar 47759, JaBar', '02181355604523', 'logo-perusahaan-25.png', '2019-10-20 01:56:50', '2020-10-02 02:56:45', NULL),
-(19, 'PT Nuraini Saragih', 'Ki. Banda No. 245, Pekanbaru 60095, SulUt', '06975233340', 'logo-perusahaan-26.png', '2020-02-10 21:16:11', '2020-10-02 02:56:45', NULL),
-(20, 'UD Pertiwi Sihombing (Persero) Tbk', 'Kpg. Ujung No. 956, Banjarbaru 10081, Aceh', '066032441047', 'logo-perusahaan-5.png', '2020-03-13 06:10:33', '2020-10-02 02:56:45', NULL);
+(1, 'PT. Syncrum Logistics', 'Jl. Selayar B2-1, Kawasan Industri MM2100 Cibitung, Mekarwangi, Kec. Cikarang Bar., Bekasi, Jawa Barat 17520', '(021) 89984000', 'logo-syncrum.png', '2020-09-20 18:12:14', '2020-10-05 14:45:33', NULL),
+(2, 'PT. Indomatsumoto Press & Dies Industries', 'Jl. Toyogiri Sel. No.92, Jatimulya, Kec. Tambun Sel., Bekasi, Jawa Barat 17510', '(021) 8807438', 'indomatsumoto.png', '2020-09-27 02:09:04', '2020-10-05 14:45:33', NULL),
+(3, 'PT. CABININDO PUTRA', 'Jl. Toyogiri Selatan, Jatimulya, Tambun Selatan Bekasi 17510 - Jawa Barat - Indonesia', '021-8804701', 'logo-cabinindo-300x300-1.png', '2020-09-07 13:23:23', '2020-10-05 14:45:33', NULL),
+(4, 'PT. Solusi Rekatama Makmur', 'Kawasan Industri MM2100, Jl. Selayar Blok B2 No. 3A, Cibitung, Mekarwangi, Kec. Cikarang Bar., Bekasi, Jawa Barat 17520', '(021) 89983535', '9283438_018dcfed-b29a-4b47-8015-688b982e7ba9.png', '2020-09-10 21:44:26', '2020-10-05 14:45:33', NULL),
+(5, 'PT. Denko Wahana Industries', 'Jl. Sulawesi III No.km.28, RT.1/RW.7, Gandamekar, Kec. Cikarang Bar., Bekasi, Jawa Barat 17530', '(021) 8980066', '1445231448logo-denko-wahana-industri.png', '2020-09-26 05:46:45', '2020-10-05 14:45:33', NULL),
+(6, 'PT. Narumi Indonesia', 'Jl. Citanduy 6 No.Plot 7K, 2, Sukaresmi, Cikarang Sel., Bekasi, Jawa Barat 17550', '(021) 8970905', 'PT Narumi Indonesia.jpg', '2020-10-02 20:55:10', '2020-10-05 14:45:33', NULL),
+(7, 'PT. Adhi Persada Properti', 'RT.004/RW.021, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17510', '(021) 82653404', 'adhi-persada.jpg', '2020-09-20 00:30:22', '2020-10-05 14:45:33', NULL),
+(8, 'PT. Dela Cemara Indah', 'Jl. H. Saimun Dalam, Cibuntu, Kec. Cibitung, Bekasi, Jawa Barat 17520', '(021) 88320255', 'dela-cemara-indah.jpg', '2020-09-25 21:01:02', '2020-10-05 14:45:33', NULL),
+(9, 'PT. NSK Bearings Manufacturing Indonesia', 'Kawasan Berikat MM2100 Blok M4, Gandamekar, Kec. Cikarang Bar., Bekasi, Jawa Barat 17520', '(021) 8980155', 'PT-NSK-Bearings-Manufacturing-Indonesia.png', '2020-10-03 16:48:48', '2020-10-05 14:45:33', NULL),
+(10, 'PT. Rhythm Kyoshin Indonesia', 'Blok T Kawasan MM 2100, Jl. Bali I No.1, Gandamekar, Kec. Cikarang Bar., Bekasi, Jawa Barat 17530', '(021) 8980945', 'PT Rhythm Kyoshin Indonesia.jpg', '2020-09-25 06:15:40', '2020-10-05 14:45:33', NULL),
+(11, 'PT. Mitsubishi Electric Indonesia', 'Lippo Cikarang, Delta Silicon 5, Jl. Kenari Raya No.7A, Sukamahi, Kec. Cikarang Pusat, Bekasi, Jawa Barat 17530', '(021) 29617797', 'mitsubishi-electric.jpg', '2020-09-19 14:06:38', '2020-10-05 14:45:33', NULL),
+(12, 'PT. Hung-A Indonesia', 'Jalan Raya Inti II Blok C5, Cibatu, Cikarang Sel., Bekasi, Jawa Barat 17530', '(021) 8972071', 'hung-A-1.jpg', '2020-09-16 13:00:57', '2020-10-05 14:45:33', NULL),
+(13, 'PT. Hirundo Tyre Utama', 'Hyundai, Jl.Inti II blok C.7 No.2,3,dan 3A, Jl. Kawasan, Cibatu, Cikarang Sel., Bekasi, Jawa Barat 17520', '(021) 89915858', 'hirundo-tyre.jpg', '2020-09-18 07:59:35', '2020-10-05 14:45:33', NULL),
+(14, 'PT. Dharma Precision Tools', 'Jl. Raya Inti, Cibatu, Cikarang Sel., Bekasi, Jawa Barat 17530', '(021) 8972312', '1534752095dpt.png', '2020-09-06 10:09:50', '2020-10-05 14:45:33', NULL),
+(15, 'PT. Dharma Precision Parts', 'Jl. Jababeka VI Gandasari Cikarang Barat Kabupaten Bekasi Jawa Barat, Telaga Asih, Kec. Cikarang Bar., Bekasi, Jawa Barat 17530', '(021) 8936602', '1534752287dpp.png', '2020-10-01 12:05:07', '2020-10-05 14:45:33', NULL),
+(16, 'PT. Garbaloka Persada', 'Jl. Margahayu No.99 C, RT.004/RW.015, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113', '(021) 8824524', 'garbaloka.png', '2020-09-12 15:10:50', '2020-10-05 14:45:33', NULL),
+(17, 'PT. Skyworth Industry Indonesia', 'Kawasan Ejip Industral Park Plot 5G, Jl. Citanduy Raya, Sukaresmi, Cikarang Sel., Bekasi, Jawa Barat 17530', '(021) 8970462', 'skyworth.png', '2020-09-23 00:53:36', '2020-10-05 14:45:33', NULL),
+(18, 'PT. Mayora Indonesia', 'Jl. Jawa Blok H No.10, Gandamekar, Kec. Cikarang Bar., Bekasi, Jawa Barat 17530', '(021) 8980194', 'thumb300px-20181108-112118-92c02.jpg', '2020-09-11 16:10:11', '2020-10-05 14:45:33', NULL),
+(19, 'PT. Tirta Alam Segar', 'Kawasan Industri MM 2100 Kav. Blok B1-2 Jl. Kalimantan Cibitung, Gandamekar, Kec. Cikarang Bar., Bekasi, Jawa Barat 17520', '(021) 8980188', 'PT Tirta Alam Segar.png', '2020-09-13 15:24:53', '2020-10-05 14:45:33', NULL),
+(20, 'PT. Higashifuji Indonesia', 'Kawasan Industri MM 2100, Jl. Jawa Blok H No.12, Gandamekar, Cikarang Barat, Gandamekar, Kec. Cikarang Bar., Bekasi, Jawa Barat 17520', '(021) 8980144', 'PT-Higashifuji-Indonesia.png', '2020-09-27 13:48:36', '2020-10-05 14:45:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -2822,7 +2822,7 @@ ALTER TABLE `nilai_pkl`
 -- AUTO_INCREMENT for table `perusahaan`
 --
 ALTER TABLE `perusahaan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
