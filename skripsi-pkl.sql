@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2020 at 11:09 AM
+-- Generation Time: Oct 05, 2020 at 11:38 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -251,12 +251,19 @@ INSERT INTO `master` (`msid`, `msdesc`, `mstype`) VALUES
 --
 
 CREATE TABLE `media_sosial` (
-  `id_user` int(11) NOT NULL,
+  `nomor_induk` varchar(25) NOT NULL,
   `twitter` text NOT NULL,
   `facebook` text NOT NULL,
   `linkedin` text NOT NULL,
   `instagram` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `media_sosial`
+--
+
+INSERT INTO `media_sosial` (`nomor_induk`, `twitter`, `facebook`, `linkedin`, `instagram`) VALUES
+('3101372906084391', 'https://twitter.com/mandalaschool', 'https://www.facebook.com/yayasan.mandalahayu', 'https://www.linkedin.com/in/rizqi-ubaidillah-43989a1b7', 'https://www.instagram.com/osmanka1');
 
 -- --------------------------------------------------------
 
@@ -1521,7 +1528,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('ade.kusuma.ap1', 'a4cbaccb421e64933660f766644b5446', 'kemba.lestari@yahoo.com', '3101372906084391', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('ade.putra.ak3', 'e48714838a62fe414ca2cc392b10c2b9', 'myuniar@yahoo.com', '7109930903019094', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('ade.susanti.rpl3', 'c499aa6093f9b411f28c31984b9c8129', 'arahayu@gmail.com', '7318844205078796', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('adiarja.naradi.ak1', 'dc87bf2e70f8a8eadb4a38862062db74', 'izulkarnain@gmail.com', '9210131704912584', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -1529,6 +1535,7 @@ INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `c
 ('adikara.simanjuntak.ap2', 'd39305f65ef6645342902bd0eed086dc', 'setya.widiastuti@yahoo.com', '7322042706169860', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('adinata.panji.rpl3', '7235ab8e58a6922f51556701aa35a8b5', 'tlazuardi@yahoo.co.id', '3310191407059414', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('adinata.pratama.ak1', 'a6bd233359a2ecc37c55afd536d264ad', 'ynasyidah@gmail.com', '1214912006141437', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'emailnya.ubai@gmail.com', '1103685501149839', 'admin', '2020-10-03 04:43:39', '2020-10-03 04:43:39', NULL),
 ('agnes.gabriella.ap1', '923e7196b097c3196911c930cd94dc71', 'saefullah.suci@yahoo.co.id', '1219304505006244', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('agnes.namaga.ak3', '9781a8c5b803c0dad1f57afcdfea2e81', 'yulia.haryanti@yahoo.com', '3314897008015899', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('aisyah.bella.rpl2', 'a05e4b6195dc9d881ec1c190ff7d790a', 'fhariyah@yahoo.co.id', '5317945905948294', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -1538,7 +1545,6 @@ INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `c
 ('ajeng.pudjiastuti.ap3', '315886cf2dac5532fa8aa721fef7f68a', 'siregar.salsabila@gmail.co.id', '1307996608147817', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('ajeng.riyanti.ap1', '2f6557b8cf6dd75d5bb64517a64778f1', 'epadmasari@gmail.com', '6303206204068034', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('ajiman.mandala.9262', '96d6793e7150ca5190aa571329576036', 'jarwa.zulkarnain@gmail.com', '3510802601999262', 'admin', '2020-10-03 04:43:39', '2020-10-03 04:43:39', NULL),
-('ajimat.wijaya.7209', 'e816aabf0295a17180fd7bbf1c40ddb3', 'aryani.erik@gmail.com', '1602282402117209', 'pembimbing', '2020-10-03 04:44:22', '2020-10-03 04:44:22', NULL),
 ('ajimin.aditya.4741', 'ac9400574d8c674f5f3f5b4193d1d072', 'jagapati13@gmail.co.id', '1802750304204741', 'admin', '2020-10-03 04:43:39', '2020-10-03 04:43:39', NULL),
 ('ajiono.baktianto.ap2', '86e3cb544b800f7f94e0a72cd79319b1', 'sihotang.eli@gmail.co.id', '9202610503929099', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('ajiono.megantara.ap2', '9564f400dd84dcf0b12de7a5e11f41b8', 'wirda12@yahoo.com', '3272791910056564', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -1821,9 +1827,9 @@ INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `c
 ('farhunnisa.agustina.rpl3', 'a9c8af05dad62f13631c03eef36916bd', 'kartika41@gmail.co.id', '6104575103936370', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('farhunnisa.hesti.rpl1', '1bfe35d0145f2acc42c82b2731fc896c', 'etamba@gmail.co.id', '3579984701124321', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('farhunnisa.utami.7552', 'e71dc0e0602fe98dec03a1b8fc29dfd5', 'yulia.winarsih@yahoo.co.id', '7107634205007552', 'pembimbing', '2020-10-03 04:44:22', '2020-10-03 04:44:22', NULL),
-('farhunnisa.utami.ap3', '553992ed351464ad932d85b1577d26ea', 'xhutagalung@yahoo.co.id', '7107636904007552', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL);
+('farhunnisa.utami.ap3', '553992ed351464ad932d85b1577d26ea', 'xhutagalung@yahoo.co.id', '7107636904007552', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
+('farhunnisa.zulaikai.rpl1', 'e9f8c25704afef236fce9fef426b5b01', 'kusmawati.citra@yahoo.co.id', '3278004105150127', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL);
 INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('farhunnisa.zulaikai.rpl1', 'e9f8c25704afef236fce9fef426b5b01', 'kusmawati.citra@yahoo.co.id', '3278004105150127', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('fathonah.padmasari.rpl3', '323ebbeef7fd5979cb2256da8defd587', 'kiandra77@gmail.com', '1672927003038216', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('febi.kuswandari.3012', '6367eeb5008e3bb5a8d265e9f3adf899', 'slamet92@gmail.co.id', '6304434710903012', 'pembimbing', '2020-10-03 04:44:22', '2020-10-03 04:44:22', NULL),
 ('febi.kuswandari.rpl2', '4f11a727b35d7d42b04b38a7c729bb11', 'kzulkarnain@gmail.co.id', '6304434410903012', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -2123,9 +2129,9 @@ INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `c
 ('kenes.saragih.rpl1', '15179073d2a3958a299ebdaa4a5cbc40', 'dlaksmiwati@gmail.com', '7501092505181384', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('kenzie.daliman.ak1', '7872b28cefff09fd70b7045a9e9b8a37', 'laksmiwati.ina@yahoo.co.id', '5307190911027031', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('kenzie.wasita.ak1', 'f525ce6ef06ce88c24690183c35364f6', 'tpuspasari@gmail.com', '1501723108126587', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
-('kezia.fujiati.rpl2', 'ae5c828840e7ea64c2ef030b70fa8bb7', 'suartini.hilda@yahoo.co.id', '3510694111158154', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL);
+('kezia.fujiati.rpl2', 'ae5c828840e7ea64c2ef030b70fa8bb7', 'suartini.hilda@yahoo.co.id', '3510694111158154', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
+('kezia.nadia.ap3', '2cdc5db549fa0cd3071fc0936b1d5b32', 'dimaz.uyainah@yahoo.com', '3578756310951618', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL);
 INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('kezia.nadia.ap3', '2cdc5db549fa0cd3071fc0936b1d5b32', 'dimaz.uyainah@yahoo.com', '3578756310951618', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('kiandra.andriani.rpl3', 'fd3dd12221343036c462517a59a30d57', 'wardi.yolanda@gmail.co.id', '9106944504053288', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('kiandra.maryati.rpl1', '2fa1d4c03fc1c0fe3eeb88a3e8015208', 'raditya.nuraini@yahoo.co.id', '1804997105034122', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('kiandra.palastri.ak1', 'e9a1d0b4a7d74d19cd09e15795cd896c', 'omandala@gmail.co.id', '3471585408981194', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -2360,6 +2366,7 @@ INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `c
 ('paulin.nova.rpl1', '655590fbb2737d0e5ad89cc585ff8e10', 'hasanah.jane@gmail.com', '3520056012061019', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('paulin.uyainah.2107', 'e09e18fab56bbc74e2c7bd51bc82c5b8', 'jaga.uyainah@yahoo.co.id', '1502025107162107', 'pembimbing', '2020-10-03 04:44:22', '2020-10-03 04:44:22', NULL),
 ('paulin.uyainah.ap2', 'cc50e81b8cd851380c6728c6e611fce1', 'daru.kuswandari@gmail.co.id', '1502024707162107', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
+('pembimbing', '9d98460ff5d64814e7d341a965f38db1', 'aryani.erik@gmail.com', '1602282402117209', 'pembimbing', '2020-10-03 04:44:22', '2020-10-03 04:44:22', NULL),
 ('pia.ika.3130', '90226cfddf4c5ccd2ec634bad9ffa03c', 'ysudiati@yahoo.co.id', '1218235107143130', 'admin', '2020-10-03 04:43:39', '2020-10-03 04:43:39', NULL),
 ('pia.nasyidah.9108', '705f0b18ab9d4e5cc3aad4613ca19fe1', 'gastuti@gmail.co.id', '7314226312079108', 'pembimbing', '2020-10-03 04:44:22', '2020-10-03 04:44:22', NULL),
 ('pia.tira.ak1', '8657c299e5009dba43c953ee335e7860', 'swaskita@gmail.co.id', '1276516706124346', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -2524,6 +2531,7 @@ INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `c
 ('shania.permata.ak3', '91768d6dd4fce8fed0ae2bbeeddaea48', 'puput73@yahoo.co.id', '9128405403057394', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('silvia.almira.ap3', '64e75c5417b99acf24dab90256797efb', 'aisyah.susanti@gmail.co.id', '5106255501960052', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('silvia.yulianti.ap2', '1840241f8fc18e046655163e70d42ef3', 'fsitumorang@gmail.com', '7209307005160503', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
+('siswa', 'bcd724d15cde8c47650fda962968f102', 'kemba.lestari@yahoo.com', '3101372906084391', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('siti.gabriella.rpl3', 'a7c589aedb8a7f1f3f746b52ae5b0032', 'sirait.jelita@gmail.co.id', '1275154104143267', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('siti.hassanah.ak2', '3f416b874329bd52cb58b797cdff4058', 'nilam.melani@yahoo.com', '1174355212103939', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('siti.michelle.ap1', 'd7c1d2262a65d66c7427a5e4d535000b', 'pangestu.widya@yahoo.co.id', '7373974107957312', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -2603,7 +2611,6 @@ INSERT INTO `users` (`username`, `password`, `email`, `nomor_induk`, `level`, `c
 ('unggul.sihotang.ak3', '8223b8db2e4aa73e05a7ff1545338f44', 'pangeran73@gmail.co.id', '6472462001982514', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('unjani.nuraini.ap1', '35ccdc949308f9ad24ad90439fed2e4d', 'opuspasari@yahoo.com', '6501157010088579', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('unjani.rahimah.ak1', '3621754b66f7709bb1a424a547906630', 'halim.gawati@gmail.com', '3323037003089309', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
-('user', '5f4dcc3b5aa765d61d8327deb882cf99', 'emailnya.ubai@gmail.com', '1103685501149839', 'admin', '2020-10-03 04:43:39', '2020-10-03 04:43:39', NULL),
 ('usman.marsudi.ap1', 'a25b16836515c32160b28f738b51b8b8', 'saefullah.mujur@yahoo.com', '6213512308995701', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('usman.panji.ap3', 'c63352d958b73c45a34da36546e285da', 'aris19@gmail.com', '7606831906951783', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
 ('usyi.agustina.rpl3', 'fcac384a1d41a9c2eda732f16dc204b8', 'elma.budiman@yahoo.com', '3510734201172053', 'siswa', '2020-10-03 04:41:51', '2020-10-03 04:41:51', NULL),
@@ -2752,6 +2759,12 @@ ALTER TABLE `jadwal_pkl`
 --
 ALTER TABLE `master`
   ADD UNIQUE KEY `msid` (`msid`);
+
+--
+-- Indexes for table `media_sosial`
+--
+ALTER TABLE `media_sosial`
+  ADD PRIMARY KEY (`nomor_induk`);
 
 --
 -- Indexes for table `migrations`
