@@ -22,21 +22,15 @@
                     <div class="col-md-3 mb-2 mb-md-0">
                         <ul class="nav nav-pills flex-column mt-md-0 mt-1">
                             <li class="nav-item">
-                                <a class="nav-link d-flex py-75 active" id="account-pill-akun" data-toggle="pill" href="#account-vertical-akun" aria-expanded="true">
+                                <a class="nav-link d-flex py-75 active" id="account-pill-info" data-toggle="pill" href="#account-vertical-info" aria-expanded="true">
                                     <i class="feather icon-user mr-50 font-medium-3"></i>
-                                    Akun
+                                    Info
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link d-flex py-75" id="account-pill-password" data-toggle="pill" href="#account-vertical-password" aria-expanded="false">
                                     <i class="feather icon-lock mr-50 font-medium-3"></i>
                                     Ubah Katasandi
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex py-75" id="account-pill-info" data-toggle="pill" href="#account-vertical-info" aria-expanded="false">
-                                    <i class="feather icon-info mr-50 font-medium-3"></i>
-                                    Info
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -51,13 +45,13 @@
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-content">
-            <div class="card-body">
+                                <div class="card-body">
                                     <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="account-vertical-akun" aria-labelledby="account-pill-akun" aria-expanded="true">
-                                            <form novalidate>
+                                        <div role="tabpanel" class="tab-pane active" id="account-vertical-info" aria-labelledby="account-pill-info" aria-expanded="true">
+                                            <form novalidate id="form-info">
                                                 <div class="media">
-                                                    <a href="javascript: void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="hover" data-content="<img width='200px' src='/images/users/<?= $data->foto; ?>' /><br><h5 class='text-center'>Disabled Animaition</h5>">
-                                                        <img src="<?= base_url('images/users') . "/" . $data->foto; ?>" style="object-fit: cover; object-position: 100% 0;" class="rounded mr-75 border-3 border-danger" alt="profile image" height="64" width="64">
+                                                    <a href="javascript: void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="hover" data-content="<img width='200px' src='/images/users/<?= $data->foto; ?>' /><?= ($session->user_level == 'Siswa') ? ("<br><h5 class='text-center " . explode(",", $data->stats)[1] . "'>" . explode(",", $data->stats)[0] . "</h5>") : (''); ?>">
+                                                        <img src="<?= base_url('images/users') . "/" . $data->foto; ?>" style="object-fit: cover; object-position: 100% 0;" class="rounded mr-75 <?= ($session->user_level == 'Siswa') ? ('border-3 border-' . explode(",", $data->stats)[1]) : (''); ?>" alt="profile image" height="64" width="64">
                                                     </a>
                                                     <div class="media-body mt-75">
                                                         <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
@@ -71,28 +65,31 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <div class="form-group">
-                                                            <div class="controls">
-                                                                <label for="account-username">Nama Pengguna</label>
-                                                                <input type="text" class="form-control" id="account-username" placeholder="Username" value="<?= $session->user_name; ?>" required data-validation-required-message="* Nama pengguna wajib diisi">
+                                                        <fieldset class="form-label-group form-group mt-2 position-relative has-icon-left">
+                                                            <input type="text" class="form-control" id="user-name" name="user-name" placeholder="Nama Pengguna" d-lama="<?= $session->user_name; ?>" value="<?= $session->user_name; ?>" required data-validation-required-message="* Nama pengguna wajib diisi">
+                                                            <div class="form-control-position">
+                                                                <i class="feather icon-user"></i>
                                                             </div>
-                                                        </div>
+                                                            <label for="user-name">Nama Pengguna</label>
+                                                        </fieldset>
                                                     </div>
                                                     <div class="col-12">
-                                                        <div class="form-group">
-                                                            <div class="controls">
-                                                                <label for="account-name">Nama Lengkap</label>
-                                                                <input type="text" class="form-control" id="account-name" placeholder="Name" value="<?= $data->nama; ?>" required data-validation-required-message="* Nama lengkap wajib diisi">
+                                                        <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                            <input type="text" class="form-control" id="user-nama" name="user-nama" placeholder="Name" d-lama="<?= $data->nama; ?>" value="<?= $data->nama; ?>" required data-validation-required-message="* Nama lengkap wajib diisi">
+                                                            <div class="form-control-position">
+                                                                <i class="fa fa-id-card-o"></i>
                                                             </div>
-                                                        </div>
+                                                            <label for="user-nama">Nama Lengkap</label>
+                                                        </fieldset>
                                                     </div>
                                                     <div class="col-12">
-                                                        <div class="form-group">
-                                                            <div class="controls">
-                                                                <label for="account-e-mail">E-mail</label>
-                                                                <input type="email" class="form-control" id="account-e-mail" placeholder="Email" value="<?= $data->email; ?>" required data-validation-email-message="Format email tidak valid" data-validation-required-message="* Email wajib diisi">
+                                                        <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                            <input type="email" class="form-control" id="user-email" name="user-email" placeholder="Email" d-lama="<?= $data->email; ?>" value="<?= $data->email; ?>" required data-validation-email-message="Format email tidak valid" data-validation-required-message="* Email wajib diisi">
+                                                            <div class="form-control-position">
+                                                                <i class="feather icon-mail"></i>
                                                             </div>
-                                                        </div>
+                                                            <label for="user-email">E-mail</label>
+                                                        </fieldset>
                                                     </div>
                                                     <?php if (!isset($data->email)) : ?>
                                                         <div class="col-12">
@@ -112,62 +109,86 @@
                                                         case ('Admin'):
                                                     ?>
                                                             <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="account-company">Jabatan</label>
-                                                                    <select class="form-control" id="data-select" name="data-select" data-validation-required-message="* Jabatan wajib diisi" required>
-                                                                        <option value="">Pilih Salah Satu...</option>
-                                                                        <?php foreach ($dataSelect as $d) : ?>
-                                                                            <option value="<?= $d->msid; ?>"><?= $d->msdesc; ?></option>
-                                                                        <?php endforeach; ?>
-                                                                    </select>
-                                                                    <p class="help-block"></p>
-                                                                </div>
+                                                                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                                    <input type="text" class="form-control" id="jabatan" placeholder="Jabatan" d-lama="<?= $data->jabatan; ?>" value="<?= $data->jabatan; ?>" data-validation-required-message="* Jabatan wajib diisi">
+                                                                    <div class="form-control-position">
+                                                                        <i class="feather icon-mail"></i>
+                                                                    </div>
+                                                                    <label for="jabatan">Jabatan</label>
+                                                                </fieldset>
                                                             </div>
                                                         <?php
                                                             break;
                                                         case ('Pembimbing'):
                                                         ?>
                                                             <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="account-company">Perusahaan</label>
-                                                                    <select class="form-control" id="data-select" name="data-select" data-validation-required-message="* Perusahaan wajib diisi" required disabled>
-                                                                        <option value="">Pilih Salah Satu...</option>
-                                                                        <?php foreach ($dataSelect as $d) : ?>
-                                                                            <option value="<?= $d->id; ?>"><?= $d->nama; ?></option>
-                                                                        <?php endforeach; ?>
-                                                                    </select>
-                                                                    <p class="help-block"></p>
-                                                                </div>
+                                                                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                                    <input type="text" class="form-control" id="perusahaan" placeholder="Perusahaan" d-lama="<?= $data->perusahaan; ?>" value="<?= $data->perusahaan; ?>" data-validation-required-message="* Perusahaan wajib diisi">
+                                                                    <div class="form-control-position">
+                                                                        <i class="feather icon-mail"></i>
+                                                                    </div>
+                                                                    <label for="perusahaan">Perusahaan</label>
+                                                                </fieldset>
                                                             </div>
                                                         <?php
                                                             break;
                                                         case ('Siswa'):
                                                         ?>
                                                             <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="account-company">Kode Kelas</label>
-                                                                    <select class="form-control" id="data-select" name="data-select" data-validation-required-message="* Kelas wajib diisi" required>
-                                                                        <option value="">Pilih Salah Satu...</option>
-                                                                        <option>IT</option>
-                                                                        <?php foreach ($dataSelect as $d) : ?>
-                                                                            <option value="<?= $d->msid; ?>"><?= $d->msid; ?></option>
-                                                                        <?php endforeach; ?>
-                                                                    </select>
-                                                                    <p class="help-block"></p>
-                                                                </div>
+                                                                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                                    <input type="text" class="form-control" id="kode-kelas" disabled placeholder="Kode Kelas" d-lama="<?= $data->kelas; ?>" value="<?= $data->kelas; ?>" data-validation-required-message="* Kode Kelas wajib diisi">
+                                                                    <div class="form-control-position">
+                                                                        <i class="feather icon-users"></i>
+                                                                    </div>
+                                                                    <label for="kode-kelas">Kode Kelas</label>
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                                    <input type="text" class="form-control" id="kode-kelas" disabled placeholder="Kode Kelas" d-lama="<?= explode(",", $data->klas)[0]; ?>" value="<?= explode(",", $data->klas)[0]; ?>" data-validation-required-message="* Kode Kelas wajib diisi">
+                                                                    <div class="form-control-position">
+                                                                        <i class="fa fa-object-ungroup"></i>
+                                                                    </div>
+                                                                    <label for="kode-kelas">Kelas</label>
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                                    <input type="text" class="form-control" id="kode-kelas" disabled placeholder="Kode Kelas" d-lama="<?= explode(",", $data->klas)[1]; ?>" value="<?= explode(",", $data->klas)[1]; ?>" data-validation-required-message="* Kode Kelas wajib diisi">
+                                                                    <div class="form-control-position">
+                                                                        <i class="fa fa-object-group"></i>
+                                                                    </div>
+                                                                    <label for="kode-kelas">Jurusan</label>
+                                                                </fieldset>
                                                             </div>
                                                     <?php
                                                             break;
                                                     }
                                                     ?>
+                                                    <div class="col-12">
+                                                        <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                            <textarea class="form-control" id="user-alamat" rows="3" placeholder="Alamat" d-lama="<?= $data->alamat; ?>"><?= $data->alamat; ?></textarea>
+                                                            <div class="form-control-position">
+                                                                <i class="fa fa-home"></i>
+                                                            </div>
+                                                            <label for="user-alamat">Alamat</label>
+                                                        </fieldset>
+                                                    </div>
                                                     <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                        <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Simpan Perubahan</button>
+                                                        <button id="btn-submit-info" type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Simpan Perubahan</button>
                                                         <button type="reset" class="btn btn-outline-warning">Batal</button>
                                                     </div>
                                                 </div>
                                             </form>
                                             <script>
                                                 $(document).ready(function() {
+                                                    $('#form-info').each(function() {
+                                                        var form_data = new FormData();
+                                                        $(this).data('serialized', form_data);
+                                                    }).on('change input', function() {
+                                                        var form_data1 = new FormData();
+                                                        $(this).find('#btn-submit-info').attr('disabled', form_data1 == $(this).data('serialized'));
+                                                    });
                                                     $('#data-select').select2({
                                                         allowClear: true,
                                                         placeholder: "Pilih Salah Satu.."
@@ -200,97 +221,6 @@
                                                                 <label for="katasandi-baru2">Ulangi Katasandi</label>
                                                                 <input type="password" name="katasandi-baru2" class="form-control" required id="katasandi-baru2" data-validation-match-match="katasandi-baru" placeholder="Ulangi Kata Sandi" data-validation-required-message="Harap mengulangi katasandi" minlength="6">
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                        <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Simpan Perubahan</button>
-                                                        <button type="reset" class="btn btn-outline-warning">Batal</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane fade" id="account-vertical-info" role="tabpanel" aria-labelledby="account-pill-info" aria-expanded="false">
-                                            <form novalidate>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="accountTextarea">Bio</label>
-                                                            <textarea class="form-control" id="accountTextarea" rows="3" placeholder="Your Bio data here..."></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <div class="controls">
-                                                                <label for="account-birth-date">Birth date</label>
-                                                                <input type="text" class="form-control birthdate-picker" required placeholder="Birth date" id="account-birth-date" data-validation-required-message="This birthdate field is required">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="accountSelect">Country</label>
-                                                            <select class="form-control" id="accountSelect">
-                                                                <option>USA</option>
-                                                                <option>India</option>
-                                                                <option>Canada</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="languageselect2">Languages</label>
-                                                            <select class="form-control" id="languageselect2" multiple="multiple">
-                                                                <option value="English" selected>English</option>
-                                                                <option value="Spanish">Spanish</option>
-                                                                <option value="French">French</option>
-                                                                <option value="Russian">Russian</option>
-                                                                <option value="German">German</option>
-                                                                <option value="Arabic" selected>Arabic</option>
-                                                                <option value="Sanskrit">Sanskrit</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <div class="controls">
-                                                                <label for="account-phone">Phone</label>
-                                                                <input type="text" class="form-control" id="account-phone" required placeholder="Phone number" value="(+656) 254 2568" data-validation-required-message="This phone number field is required">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="account-website">Website</label>
-                                                            <input type="text" class="form-control" id="account-website" placeholder="Website address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="musicselect2">Favourite Music</label>
-                                                            <select class="form-control" id="musicselect2" multiple="multiple">
-                                                                <option value="Rock">Rock</option>
-                                                                <option value="Jazz" selected>Jazz</option>
-                                                                <option value="Disco">Disco</option>
-                                                                <option value="Pop">Pop</option>
-                                                                <option value="Techno">Techno</option>
-                                                                <option value="Folk" selected>Folk</option>
-                                                                <option value="Hip hop">Hip hop</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="moviesselect2">Favourite movies</label>
-                                                            <select class="form-control" id="moviesselect2" multiple="multiple">
-                                                                <option value="The Dark Knight" selected>The Dark Knight
-                                                                </option>
-                                                                <option value="Harry Potter" selected>Harry Potter</option>
-                                                                <option value="Airplane!">Airplane!</option>
-                                                                <option value="Perl Harbour">Perl Harbour</option>
-                                                                <option value="Spider Man">Spider Man</option>
-                                                                <option value="Iron Man" selected>Iron Man</option>
-                                                                <option value="Avatar">Avatar</option>
-                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">

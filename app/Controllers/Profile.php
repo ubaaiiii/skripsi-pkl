@@ -41,7 +41,7 @@ class Profile extends BaseController
 				break;
 
 			case ("Siswa"):
-				$dataUser = $this->siswaModel->find($session->nomor_induk);
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
 				$dataSelect	= $this->masterModel->getData('kelas');
 				break;
 
