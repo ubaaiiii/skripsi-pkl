@@ -65,10 +65,12 @@
                         <ul class="nav navbar-nav">
                             <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
                         </ul>
-                        <ul class="nav navbar-nav bookmark-icons">
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Kegiatan"><i class="ficon feather icon-check-square"></i></a></li>
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Absensi"><i class="ficon feather icon-clock"></i></a> </li>
-                        </ul>
+                        <?php if ($session->user_level == 'Siswa') { ?>
+                            <ul class="nav navbar-nav bookmark-icons">
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Kegiatan"><i class="ficon feather icon-check-square"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Absensi"><i class="ficon feather icon-clock"></i></a> </li>
+                            </ul>
+                        <?php } ?>
                     </div>
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span class="badge badge-pill badge-primary badge-up">5</span></a>
@@ -174,10 +176,15 @@
                 switch ($session->user_level) {
                     case ("Siswa"):
                 ?>
-                        <li class=" nav-item"><a href="#"><i class="fa fa-list-alt"></i><span class="menu-title" data-i18n="Tugas">Tugas</span></a>
+                        <li class=" nav-item"><a href=""><i class="fa fa-list-alt"></i><span class="menu-title" data-i18n="Tugas">Tugas</span></a>
                             <ul class="menu-content">
                                 <li><a href="<?= base_url('tugas/absensi'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absensi">Absensi</span></a> </li>
                                 <li><a href="<?= base_url('tugas/kegiatan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Agenda Kegiatan">Agenda Kegiatan</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Data">Data</span></a>
+                            <ul class="menu-content">
+                                <li><a href="<?= base_url('data/nilai'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Nilai">Nilai</span></a> </li>
                             </ul>
                         </li>
                     <?php

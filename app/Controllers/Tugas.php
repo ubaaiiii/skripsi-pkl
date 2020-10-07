@@ -4,9 +4,19 @@ namespace App\Controllers;
 
 class Tugas extends BaseController
 {
+	public function __construct()
+	{
+		# code...
+	}
 
 	public function index()
 	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Siswa'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 		$data = [
 			'title' 		=> "Tugas",
 			'subtitle' 	=> "Tugas",
@@ -18,6 +28,12 @@ class Tugas extends BaseController
 
 	public function kegiatan()
 	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Siswa'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 		$data = [
 			'title' 		=> "Agenda Kegiatan",
 			'subtitle'	=> "Agenda Kegiatan",
@@ -29,6 +45,12 @@ class Tugas extends BaseController
 
 	public function absensi()
 	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Siswa'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 		$data = [
 			'title' 		=> "Absensi",
 			'subtitle'	=> "Absensi",

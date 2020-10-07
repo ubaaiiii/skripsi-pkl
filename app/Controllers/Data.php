@@ -22,6 +22,9 @@ class Data extends BaseController
 
 	public function index()
 	{
+		if (!session('user_name')) {
+			return redirect()->to('/auth');
+		}
 		// $faker = \Faker\Factory::create('id_ID');
 		// dd($faker->phoneNumber);
 		$data = [
@@ -39,6 +42,12 @@ class Data extends BaseController
 
 	public function siswa()
 	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Admin'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 		$data = [
 			'title' 			=> "Data Siswa",
 			'subtitle'		=> "Siswa",
@@ -54,6 +63,12 @@ class Data extends BaseController
 
 	public function pembimbing()
 	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Admin'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 		$data = [
 			'title' 			=> "Data Pembimbing",
 			'subtitle'		=> "Pembimbing",
@@ -68,6 +83,12 @@ class Data extends BaseController
 
 	public function perusahaan()
 	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Admin'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 		$data = [
 			'title' 			=> "Data Perusahaan",
 			'subtitle'		=> "Perusahaan",
@@ -83,6 +104,12 @@ class Data extends BaseController
 
 	public function admin()
 	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Admin'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 		$data = [
 			'title' 			=> "Data Admin",
 			'subtitle'		=> "Admin",

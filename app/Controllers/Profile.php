@@ -24,6 +24,9 @@ class Profile extends BaseController
 
 	public function index()
 	{
+		if (!session('user_name')) {
+			return redirect()->to('/auth');
+		}
 		$session = $this->session;
 
 		switch ($session->user_level) {

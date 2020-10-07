@@ -51,7 +51,7 @@
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-content">
-                                <div class="card-body">
+            <div class="card-body">
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="account-vertical-akun" aria-labelledby="account-pill-akun" aria-expanded="true">
                                             <form novalidate>
