@@ -90,7 +90,9 @@
                                                                         type: resp.result,
                                                                         timer: 2000,
                                                                     });
-                                                                    window.location = "<?= base_url(); ?>/dashboard";
+                                                                    setTimeout(function() {
+                                                                        window.location = "<?= base_url(); ?>/dashboard";
+                                                                    }, 500);
                                                                 } else {
                                                                     $('#btn-submit').html('Login');
                                                                     $('#form-login input').attr('disabled', false);
