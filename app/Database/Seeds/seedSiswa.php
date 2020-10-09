@@ -17,9 +17,11 @@ class seedSiswa extends \CodeIgniter\Database\Seeder
       if ($jenkel == 'male') {
         $jenkel     = 'female';
         $jenkelnya  = 'P';
+        $foto       = 'foto-siswa-' . $faker->numberBetween(1, 35) . ".jpg";
       } else {
         $jenkel     = 'male';
         $jenkelnya  = 'L';
+        $foto       = 'foto-siswa-' . $faker->numberBetween(36, 77) . ".jpg";
       }
       $kelas = $faker->randomElement([
         'X AK 1',
@@ -53,22 +55,25 @@ class seedSiswa extends \CodeIgniter\Database\Seeder
       $kelasnya = explode(" ", $kelas);
       if ($kelasnya[0] == 'X') {
         $status = 0;
+        $email  = null;
       } else {
         $status = $faker->numberBetween(1, 3);
+        $email  = $faker->freeEmail($jenkel);
       }
       array_push($data, [
         'nomor_induk'   =>  $faker->nik($jenkel),
         'nama'          =>  $faker->name($jenkel),
         'jenis_kelamin' =>  $jenkelnya,
         'alamat'        =>  $faker->address,
-        'email'         =>  $faker->freeEmail($jenkel),
+        'email'         =>  $email,
         'kelas'         =>  $kelas,
-        'foto'          =>  'foto-siswa-' . $faker->numberBetween(1, 77) . ".jpg",
+        'foto'          =>  $foto,
         'status'        =>  $status,
         'created_at'    =>  Time::instance($faker->dateTimeBetween('-1 years', 'now', 'Asia/Jakarta')),
         'updated_at'    =>  Time::now()
       ]);
     }
+
     $this->db->table('siswa')->insertBatch($data);
   }
 }
