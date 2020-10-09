@@ -29,7 +29,7 @@
           <div class="form-group breadcrum-right">
             <div class="">
               <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-trash" type="button" data-toggle="tooltip" data-placement="left" title="Data <?= $subtitle; ?> Yang Terhapus"><i class="feather icon-trash-2"></i></button>
-              <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?= $subtitle; ?>"><i class="feather icon-user-plus"></i></button>
+              <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle btn-tambah" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Data <?= $subtitle; ?>"><i class="fa fa-calendar-plus-o"></i></button>
             </div>
           </div>
         </div>
@@ -262,7 +262,7 @@
           });
 
           $('.btn-trash').click(function() {
-            $('#extra-large .modal-content').load(base_url + '/modal/sampah/siswa', function() {
+            $('#extra-large .modal-content').load(base_url + '/modal/sampah/jadwal', function() {
               $('#extra-large').modal('show');
             });
           });

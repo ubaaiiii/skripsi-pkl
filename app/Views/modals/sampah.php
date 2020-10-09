@@ -145,6 +145,9 @@
         $('[data-toggle="popover"]').popover();
         $('#table-sampah thead th').click();
       },
+      initComplete: function() {
+        $('#table-sampah thead th').click();
+      }
     });
 
     $('.table').on('show.bs.dropdown', function() {

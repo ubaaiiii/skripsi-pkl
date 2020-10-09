@@ -91,19 +91,6 @@
                                                             <label for="user-email">E-mail</label>
                                                         </fieldset>
                                                     </div>
-                                                    <?php if (!isset($data->email)) : ?>
-                                                        <div class="col-12">
-                                                            <div class="alert alert-warning alert-dismissible mb-2" role="alert">
-                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                                <p class="mb-0">
-                                                                    Email Anda belum dikonfirmasi. Silakan periksa kotak masuk Anda.
-                                                                </p>
-                                                                <a href="javascript: void(0);">Kirim kembali email konfirmasi</a>
-                                                            </div>
-                                                        </div>
-                                                    <?php endif; ?>
                                                     <?php
                                                     switch ($session->user_level) {
                                                         case ('Admin'):

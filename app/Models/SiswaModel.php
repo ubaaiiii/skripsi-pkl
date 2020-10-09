@@ -28,11 +28,15 @@ class SiswaModel extends Model
 
   public function __construct()
   {
-    $this->db = \Config\Database::connect();
+    $this->db       = \Config\Database::connect();
+    $this->session  = session();
   }
 
   public function tableSiswa($ni = false)
   {
+    $session = $this->session;
+    if ($session->user_level !== 'Admin' || $session->user_level !== 'Pembimbing') {
+    }
     $db      = $this->db;
     $builder = $db->table('siswa a');
     $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas'")

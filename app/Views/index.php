@@ -138,12 +138,14 @@
                                 <a class="dropdown-item" href="<?= base_url('profile'); ?>">
                                     <i class="feather icon-user"></i> Edit Profile
                                 </a>
-                                <a class="dropdown-item" href="<?= base_url('tugas/absensi'); ?>">
-                                    <i class="feather icon-clock"></i> Absensi
-                                </a>
-                                <a class="dropdown-item" href="<?= base_url('tugas/kegiatan'); ?>">
-                                    <i class="feather icon-check-square"></i> Kegiatan
-                                </a>
+                                <?php if ($session->user_level == 'Siswa') { ?>
+                                    <a class="dropdown-item" href="<?= base_url('tugas/absensi'); ?>">
+                                        <i class="feather icon-clock"></i> Absensi
+                                    </a>
+                                    <a class="dropdown-item" href="<?= base_url('tugas/kegiatan'); ?>">
+                                        <i class="feather icon-check-square"></i> Kegiatan
+                                    </a>
+                                <?php } ?>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="<?= base_url('auth/logout'); ?>">
                                     <i class="feather icon-power"></i> Logout
@@ -197,6 +199,11 @@
                                 <li><a href="<?= base_url('monitoring/kegiatan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Kegiatan Siswa">Kegiatan Siswa</span></a> </li>
                             </ul>
                         </li>
+                        <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Data">Data</span></a>
+                            <ul class="menu-content">
+                                <li><a href="<?= base_url('data/jadwal'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Siswa">Siswa</span></a> </li>
+                            </ul>
+                        </li>
                     <?php
                         break;
                     case ("Admin"):
@@ -211,11 +218,13 @@
                                 <li><a href="<?= base_url('data/jadwal'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Jadwal PKL">Jadwal PKL</span></a> </li>
                             </ul>
                         </li>
-                        <li class=" nav-item"><a href="#"><i class="fa fa-cog"></i><span class="menu-title" data-i18n="Proses">Proses</span></a>
-                            <ul class="menu-content">
-                                <li><a href="<?= base_url('proses/naik_kelas'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Naik Kelas">Naik Kelas</span></a> </li>
-                            </ul>
-                        </li>
+                        <?php if ($data->jabatan === 'kepsek') { ?>
+                            <li class=" nav-item"><a href="#"><i class="fa fa-cog"></i><span class="menu-title" data-i18n="Proses">Proses</span></a>
+                                <ul class="menu-content">
+                                    <li><a href="<?= base_url('proses/naik_kelas'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Naik Kelas">Naik Kelas</span></a> </li>
+                                </ul>
+                            </li>
+                        <?php } ?>
                 <?php break;
                 } ?>
             </ul>

@@ -27,6 +27,24 @@ class Data extends BaseController
 		}
 		// $faker = \Faker\Factory::create('id_ID');
 		// dd($faker->phoneNumber);
+		$session = $this->session;
+		switch ($session->user_level) {
+			case ("Admin"):
+				$dataUser = $this->adminModel->find($session->nomor_induk);
+				break;
+
+			case ("Pembimbing"):
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			case ("Siswa"):
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
+				break;
+
+			default:
+				return redirect()->to('/auth');
+		}
+
 		$data = [
 			'jml_siswa'				=> $this->siswaModel->countAllResults(),
 			'jml_pembimbing'		=> $this->pembimbingModel->countAllResults(),
@@ -34,7 +52,8 @@ class Data extends BaseController
 			'jml_admin'				=> $this->adminModel->countAllResults(),
 			'title' 					=> "Data",
 			'subtitle' 				=> "Data",
-			'session'				=> $this->session,
+			'session'				=> $session,
+			'data'					=> $dataUser,
 			// 'script'				=> '<script src="'.base_url('app-assets/js/script/siswa.js').'"></script>',
 		];
 		return view('data', $data);
@@ -48,6 +67,23 @@ class Data extends BaseController
 		} else if (!in_array(session('user_level'), ['Admin'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
+		$session = $this->session;
+		switch ($session->user_level) {
+			case ("Admin"):
+				$dataUser = $this->adminModel->find($session->nomor_induk);
+				break;
+
+			case ("Pembimbing"):
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			case ("Siswa"):
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
+				break;
+
+			default:
+				return redirect()->to('/auth');
+		}
 		$data = [
 			'title' 			=> "Data Siswa",
 			'subtitle'		=> "Siswa",
@@ -55,10 +91,50 @@ class Data extends BaseController
 			'kelas'			=> $this->masterModel->getData('kelas'),
 			'jurusan'		=> $this->masterModel->getData('kelas'),
 			'status'			=> $this->masterModel->getData('status'),
-			'session'		=> $this->session,
+			'session'		=> $session,
+			'data'			=> $dataUser,
 		];
 		// dd($data['kelas']);
 		return view('tables/siswa', $data);
+	}
+
+	public function jadwal()
+	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Admin', 'Pembimbing'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+		$session = $this->session;
+		switch ($session->user_level) {
+			case ("Admin"):
+				$dataUser = $this->adminModel->find($session->nomor_induk);
+				break;
+
+			case ("Pembimbing"):
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			case ("Siswa"):
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
+				break;
+
+			default:
+				return redirect()->to('/auth');
+		}
+		$data = [
+			'title' 			=> "Data Jadwal PKL",
+			'subtitle'		=> "Jadwal PKL",
+			'perusahaan'	=> $this->perusahaanModel->findAll(),
+			'kelas'			=> $this->masterModel->getData('kelas'),
+			'jurusan'		=> $this->masterModel->getData('kelas'),
+			'status'			=> $this->masterModel->getData('status'),
+			'session'		=> $this->session,
+			'data'			=> $dataUser,
+		];
+		// dd($data['kelas']);
+		return view('tables/jadwal', $data);
 	}
 
 	public function pembimbing()
@@ -69,6 +145,23 @@ class Data extends BaseController
 		} else if (!in_array(session('user_level'), ['Admin'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
+		$session = $this->session;
+		switch ($session->user_level) {
+			case ("Admin"):
+				$dataUser = $this->adminModel->find($session->nomor_induk);
+				break;
+
+			case ("Pembimbing"):
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			case ("Siswa"):
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
+				break;
+
+			default:
+				return redirect()->to('/auth');
+		}
 		$data = [
 			'title' 			=> "Data Pembimbing",
 			'subtitle'		=> "Pembimbing",
@@ -76,7 +169,8 @@ class Data extends BaseController
 			'kelas'			=> $this->masterModel->getData('kelas'),
 			'jurusan'		=> $this->masterModel->getData('kelas'),
 			'status'			=> $this->masterModel->getData('status'),
-			'session'		=> $this->session,
+			'session'		=> $session,
+			'data'			=> $dataUser,
 		];
 		return view('tables/pembimbing', $data);
 	}
@@ -89,6 +183,23 @@ class Data extends BaseController
 		} else if (!in_array(session('user_level'), ['Admin'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
+		$session = $this->session;
+		switch ($session->user_level) {
+			case ("Admin"):
+				$dataUser = $this->adminModel->find($session->nomor_induk);
+				break;
+
+			case ("Pembimbing"):
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			case ("Siswa"):
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
+				break;
+
+			default:
+				return redirect()->to('/auth');
+		}
 		$data = [
 			'title' 			=> "Data Perusahaan",
 			'subtitle'		=> "Perusahaan",
@@ -96,7 +207,8 @@ class Data extends BaseController
 			'kelas'			=> $this->masterModel->getData('kelas'),
 			'jurusan'		=> $this->masterModel->getData('kelas'),
 			'status'			=> $this->masterModel->getData('status'),
-			'session'		=> $this->session,
+			'session'		=> $session,
+			'data'			=> $dataUser,
 		];
 		// dd($data['kelas']);
 		return view('tables/perusahaan', $data);
@@ -110,6 +222,23 @@ class Data extends BaseController
 		} else if (!in_array(session('user_level'), ['Admin'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
+		$session = $this->session;
+		switch ($session->user_level) {
+			case ("Admin"):
+				$dataUser = $this->adminModel->find($session->nomor_induk);
+				break;
+
+			case ("Pembimbing"):
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			case ("Siswa"):
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
+				break;
+
+			default:
+				return redirect()->to('/auth');
+		}
 		$data = [
 			'title' 			=> "Data Admin",
 			'subtitle'		=> "Admin",
@@ -117,7 +246,8 @@ class Data extends BaseController
 			'jabatan'		=> $this->masterModel->getData('jabatan'),
 			'jurusan'		=> $this->masterModel->getData('kelas'),
 			'status'			=> $this->masterModel->getData('status'),
-			'session'		=> $this->session,
+			'session'		=> $session,
+			'data'			=> $dataUser,
 		];
 		return view('tables/admin', $data);
 	}

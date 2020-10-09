@@ -36,7 +36,7 @@ class Profile extends BaseController
 				break;
 
 			case ("Pembimbing"):
-				$dataUser = $this->pembimbingModel->find($session->nomor_induk);
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
 				$dataSelect	= $this->perusahaanModel->findAll();
 				break;
 
@@ -48,6 +48,7 @@ class Profile extends BaseController
 			default:
 				return redirect()->to('/auth');
 		}
+		// dd($dataUser);
 
 		$medsos = $this->medsosModel->find($session->nomor_induk);
 		// dd($medsos);
