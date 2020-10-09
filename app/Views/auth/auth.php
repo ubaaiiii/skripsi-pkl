@@ -85,6 +85,22 @@
 
     <!-- BEGIN: Page JS-->
     <script src="<?= base_url('vuexy/app-assets/js/scripts/extensions/toastr.js'); ?>"></script>
+    <script>
+        $(document).ready(function() {
+            <?php
+            echo $session->getFlashdata('message');
+            if ($session->getFlashdata('message') != null) {
+                echo "
+                    Swal.fire(
+                        'Kesalahan!',
+                        '" . $session->getFlashdata('message') . "',
+                        'error'
+                    );
+                    ";
+            }
+            ?>
+        });
+    </script>
     <!-- END: Page JS-->
 
 </body>

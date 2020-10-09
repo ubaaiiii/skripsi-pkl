@@ -20,13 +20,43 @@ class Auth extends BaseController
 		$this->adminModel			= new AdminModel();
 		$this->pembimbingModel	= new PembimbingModel();
 		$this->authModel			= new AuthModel();
+		$this->session				= session();
+		$this->email				= \Config\Services::email();
+	}
+
+	private function sendEmail($proses, $to, $title, $message)
+	{
+		if ($proses == 'view') {
+			return $message;
+		}
+		$this->email->setFrom('pkl.mandalahayu@gmail.com', 'PKL Mandalahayu');
+		$this->email->setTo($to);
+
+		$this->email->setSubject($title);
+		$this->email->setMessage($message);
+
+		if (!$this->email->send()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function nyoba()
+	{
+		$data = [
+			'title' => 'Kirim Email',
+
+		];
+		$this->sendEmail('kirim', 'emailnya.ubai@gmail.com', 'Nyoba Kirim Email', view('email/pulihkan_akun', $data));
 	}
 
 	public function index()
 	{
 		if (!session('user_name')) {
 			$data = [
-				'title'	=>	'Login',
+				'title'		=>	'Login',
+				'session' 	=> $this->session,
 			];
 			return view('auth/login', $data);
 		} else {
@@ -37,8 +67,9 @@ class Auth extends BaseController
 	public function siswa()
 	{
 		$data = [
-			'title'	=>	'Sebagai Siswa',
-			'kelas'	=>	$this->masterModel->getData('kelas'),
+			'title'		=>	'Sebagai Siswa',
+			'kelas'		=>	$this->masterModel->getData('kelas'),
+			'session' 	=> $this->session,
 		];
 		return view('auth/reg_siswa', $data);
 	}
@@ -48,6 +79,7 @@ class Auth extends BaseController
 		$data = [
 			'title'			=>	'Sebagai Pembimbing',
 			'perusahaan'	=>	$this->perusahaanModel->where('deleted_at is null')->findAll(),
+			'session' 		=> $this->session,
 		];
 		return view('auth/reg_pembimbing', $data);
 	}
@@ -55,7 +87,8 @@ class Auth extends BaseController
 	public function forgot()
 	{
 		$data = [
-			'title'	=>	'Lupa Password',
+			'title'		=>	'Lupa Password',
+			'session' 	=> $this->session,
 		];
 		return view('auth/forgot', $data);
 	}
@@ -64,7 +97,8 @@ class Auth extends BaseController
 	{
 		$this->session->destroy();
 		$data = [
-			'title'	=>	'Login',
+			'title'		=>	'Login',
+			'session' 	=> $this->session,
 		];
 		return view('auth/login', $data);
 	}
