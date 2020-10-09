@@ -123,14 +123,6 @@
                             </select>
                           </fieldset>
                         </div>
-                        <br>
-                        <div class="col-12">
-                          <div class="alert alert-primary" role="alert">
-                            <i class="feather icon-info mr-1 align-middle"></i>
-                            <span>
-                              <strong>Syarat</strong> melakukan <strong>PKL</strong> (Praktek Kerja Lapangan) adalah <strong>harus sudah kelas XI</strong> ke atas.</span>
-                          </div>
-                        </div>
                       </div>
                     </form>
                   </div>
@@ -146,11 +138,13 @@
                         <tr>
                           <th></th>
                           <th>Nomor Induk</th>
-                          <th>Nama</th>
-                          <th>Jenis Kelamin</th>
-                          <th>Kelas</th>
-                          <th>Email</th>
-                          <th>Alamat</th>
+                          <th>Siswa</th>
+                          <th>Penanggung Jawab</th>
+                          <th>Pembimbing</th>
+                          <th>Perusahaan</th>
+                          <th>Jadwal Mulai PKL<br><i>(thn-bln-tgl)</i></th>
+                          <th>Jadwal Selesai PKL<br><i>(thn-bln-tgl)</i></th>
+                          <th>PKL Selesai<br><i>(thn-bln-tgl jam:mnt:dtk)</i></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -193,25 +187,16 @@
 
           $('.table tbody').on('click', '#edit', function() {
             var ni = $(this).attr('d-ni');
-            $('#large .modal-content').load(base_url + '/modal/siswa/ubah/' + ni, function() {
+            $('#large .modal-content').load(base_url + '/modal/jadwal/ubah/' + ni, function() {
               $('#large').modal('show');
             });
           });
 
           $('.table tbody').on('click', '#view', function() {
             var ni = $(this).attr('d-ni');
-            $('#large .modal-content').load(base_url + '/modal/siswa/lihat/' + ni, function() {
+            $('#large .modal-content').load(base_url + '/modal/jadwal/lihat/' + ni, function() {
               $('#large').modal('show');
             });
-          });
-
-          $('.table tbody').on('click', 'img', function() {
-            if (table.rows().count() !== 0) {
-              var data = table.row($(this).closest('tr')).data();
-              $('#large .modal-content').load(base_url + '/modal/siswa/lihat/' + data.nomor_induk, function() {
-                $('#large').modal('show');
-              });
-            }
           });
 
           $('.table tbody').on('click', '#delete', function() {
@@ -229,10 +214,10 @@
             }).then(function(result) {
               if (result.value) {
                 $.ajax({
-                  url: "/siswa/hapus",
+                  url: "/jadwal/hapus",
                   type: "post",
                   data: {
-                    'nomor_induk': ni
+                    'ni_siswa': ni
                   },
                   success: function(resp) {
                     table.ajax.reload();
@@ -247,7 +232,7 @@
               } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire({
                   title: 'Dibatalkan',
-                  text: 'Data siswa batal dihapus.',
+                  text: 'Data jadwal batal dihapus.',
                   type: 'info',
                   confirmButtonClass: 'btn btn-success',
                 })
@@ -256,7 +241,7 @@
           });
 
           $('.btn-tambah').click(function() {
-            $('#large .modal-content').load(base_url + '/modal/siswa', function() {
+            $('#large .modal-content').load(base_url + '/modal/jadwal', function() {
               $('#large').modal('show');
             });
           });
@@ -274,7 +259,7 @@
             },
             responsive: true,
             ajax: {
-              url: "/siswa/data",
+              url: "/jadwal/data",
               type: "POST",
               dataSrc: ""
             },
@@ -286,33 +271,33 @@
                                               <i class="fa fa-cog dropdown-icon"></i>
                                           </button>
                                           <div class="dropdown-menu ">
-                                              <a id="view" d-ni="` + row.nomor_induk + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
+                                              <a id="view" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
                                                   <i class="feather icon-search primary"></i>
                                               </a>
                                               <?php if ($session->user_level == 'Admin') : ?>
-                                              <a id="edit" d-ni="` + row.nomor_induk + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
+                                              <a id="edit" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
                                                   <i class="feather icon-edit-1 warning"></i>
                                               </a>
-                                              <a id="delete" d-nama="` + row.nama + `" d-ni="` + row.nomor_induk + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
+                                              <a id="delete" d-nama="` + row.nama + `" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
                                                   <i class="feather icon-trash-2 danger"></i>
                                               </a>
                                               <?php endif; ?>`;
                   switch (data) {
                     case "1":
                       button += `<div class="dropdown-divider"></div>
-                                          <a id="salurkan" d-ni="` + row.nomor_induk + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
+                                          <a id="salurkan" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
                                               <i class="feather icon-check-square success"></i>
                                           </a>`;
                       break;
                     case "2":
                       button += `<div class="dropdown-divider"></div>
-                                          <a id="berhenti" d-ni="` + row.nomor_induk + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
+                                          <a id="berhenti" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
                                               <i class="feather icon-alert-circle danger"></i>
                                           </a>`;
                       break;
                     case "3":
                       button += `<div class="dropdown-divider"></div>
-                                          <a id="nilai" d-ni="` + row.nomor_induk + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai Siswa">
+                                          <a id="nilai" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai Siswa">
                                               <i class="feather icon-star warning"></i>
                                           </a>`;
                       break;
@@ -323,65 +308,87 @@
                 }
               },
               {
-                data: "nomor_induk"
+                data: "ni_siswa"
               },
               {
-                data: "nama",
+                data: "nm_siswa",
                 render: function(data, type, row, meta) {
-                  var stats = row.stats.split(",");
-                  return `<div class="avatar mr-1">
-                                      <a data-toggle="popover"
-                                         data-html="true"
-                                         data-placement="right"
-                                         data-trigger="hover"
-                                         data-content="<img width='200px' src='/images/users/` + row.foto + `' />"
-                                         data-original-title='<span class="fa-stack" style="vertical-align: top;">
-                                            <i class="fa fa-circle fa-stack-2x white"></i>
-                                            <i class="` + stats[3] + " " + stats[1] + ` fa-stack-1x"></i>
-                                         </span> ` + stats[0] + `'
-                                       >
-                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.foto + `" alt="Foto Siswa" width="32" height="32">
-                                      <span class="avatar-status-` + stats[2] + `"></span>
-                                      </a>
-                                    </div>` + data;
+                  return `<div class="avatar">
+                            <a data-toggle="popover"
+                                data-html="true"
+                                data-placement="right"
+                                data-trigger="hover"
+                                data-content="<img width='200px' src='/images/users/` + row.ft_siswa + `' />"
+                                data-original-title='` + data + `'
+                                onclick="
+                                $('#large .modal-content').load('` + base_url + `/modal/siswa/lihat/` + row.ni_siswa + `',function(){
+                                  $('#large').modal('show');
+                                });"
+                              >
+                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_siswa + `" alt="Foto Siswa" width="32" height="32">
+                            </a>
+                          </div>` + data;
                 }
               },
               {
-                data: "jenis_kelamin",
-                render: function(data) {
-                  return data == "L" ? "Laki-Laki" : "Perempuan";
-                }
-              },
-              {
-                data: "kelas"
-              },
-              {
-                data: "email",
-                render: function(data) {
-                  if (data !== null) {
-                    return "<a href='mailto:" + data + "'>" + data + "</a>";
-                  } else {
-                    return `<div class="badge badge-pill bg-gradient-danger"><i>Belum Aktivasi Akun</i></div>`;
-                  }
-                }
-              },
-              {
-                data: "alamat",
+                data: "nm_admin",
                 render: function(data, type, row, meta) {
-                  return `<a href="http://maps.google.com/maps?q=` + data.replace(" ", "+") + `" target="_blank"><i class="fa fa-map-marker warning"></i> ` + data + `</a>`;
+                  return `<div class="avatar">
+                            <a data-toggle="popover"
+                                data-html="true"
+                                data-placement="right"
+                                data-trigger="hover"
+                                data-content="<img width='200px' src='/images/users/` + row.ft_admin + `' />"
+                                data-original-title='` + data + `'
+                                onclick="
+                                $('#large .modal-content').load('` + base_url + `/modal/admin/lihat/` + row.ni_penyalur + `',function(){
+                                  $('#large').modal('show');
+                                });"
+                              >
+                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_admin + `" alt="Foto Siswa" width="32" height="32">
+                            </a>
+                          </div>` + data;
                 }
               },
               {
-                data: "stats",
-                visible: false
+                data: "nm_pembimbing",
+                render: function(data, type, row, meta) {
+                  return `<div class="avatar">
+                            <a data-toggle="popover"
+                                data-html="true"
+                                data-placement="right"
+                                data-trigger="hover"
+                                data-content="<img width='200px' src='/images/users/` + row.ft_pembimbing + `' />"
+                                data-original-title='` + data + `'
+                                onclick="
+                                $('#large .modal-content').load('` + base_url + `/modal/pembimbing/lihat/` + row.ni_pembimbing + `',function(){
+                                  $('#large').modal('show');
+                                });"
+                              >
+                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_pembimbing + `" alt="Foto Siswa" width="32" height="32">
+                            </a>
+                          </div>` + data;
+                }
               },
               {
-                data: "foto",
-                visible: false
+                data: "nm_perusahaan",
+                render: function(data, type, row, meta) {
+                  return `<a href="javascript:void(0);" onclick="
+                                    $('#large .modal-content').load('` + base_url + `/modal/perusahaan/lihat/` + row.id_perusahaan + `',function(){
+                                        $('#large').modal('show');
+                                    });
+                                    ">` + data + `</a>`;
+                }
               },
               {
-                data: "klas",
-                visible: false
+                data: "jadwal_mulai",
+              },
+              {
+                data: "jadwal_selesai",
+              },
+              {
+                data: "tgl_diselesaikan",
+                defaultContent: "<i class='success'>Belum diselesaikan</i>"
               },
             ],
             dom: 'lfBrtip',

@@ -149,7 +149,9 @@
   $(document).ready(function() {
     <?php if ($tipe == 'ubah' || $tipe == 'lihat') : ?>
       $('#imageResult').attr('src', '/images/users/<?= $siswa->foto; ?>');
-      $('#kelas').val('<?= $siswa->kelas; ?>').change();
+      setTimeout(function() {
+        $('#kelas').val('<?= $siswa->kelas; ?>').change();
+      }, 100);
     <?php endif; ?>
     $('#form-siswa').submit(function(e) {
       $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');

@@ -34,11 +34,21 @@ class JadwalModel extends Model
   public function tableJadwal($id = false)
   {
     $session = $this->session;
-    if ($session->user_level !== 'Admin' || $session->user_level !== 'Pembimbing') {
+    if ($session->user_level != 'Admin' && $session->user_level != 'Pembimbing') {
+      return [];
     }
     $db      = $this->db;
     $builder = $db->table('jadwal_pkl a');
-    $builder->select("a.*, b.nama 'nm_siswa', c.nama 'nm_perusahaan', d.nama 'nm_pembimbing', e.nama 'nm_admin'")
+    $builder->select("a.*,
+                      b.nama      'nm_siswa',
+                      b.foto      'ft_siswa',
+                      b.status    'status',
+                      c.nama      'nm_perusahaan',
+                      d.nama      'nm_pembimbing',
+                      d.foto      'ft_pembimbing',
+                      e.nama      'nm_admin',
+                      e.foto      'ft_admin'
+                    ")
       ->join("siswa b", "a.ni_siswa = b.nomor_induk")
       ->join("perusahaan c", "a.id_perusahaan = c.id")
       ->join("pembimbing d", "a.ni_pembimbing = d.nomor_induk")

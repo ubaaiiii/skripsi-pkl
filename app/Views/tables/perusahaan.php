@@ -50,7 +50,7 @@
                           <th>Nama Perusahaan</th>
                           <th>Nomor Telepon</th>
                           <th>Logo</th>
-                          <th>Karyawan</th>
+                          <th>Pembimbing</th>
                           <th>Alamat</th>
                         </tr>
                       </thead>
