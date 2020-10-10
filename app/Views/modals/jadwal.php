@@ -57,7 +57,7 @@
         <div class="col-12">
           <label for="ni_pembimbing">Pembimbing</label>
           <select class="form-control select" id="ni_pembimbing" disabled name="ni_pembimbing" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> style="width:100%;">
-            <option value="">Pilih Salah Satu...</option>
+            <option value="">Harap Memilih Perusahaan...</option>
           </select>
         </div><br>
         <div class="col-12">
@@ -177,6 +177,8 @@
         $("#ni_pembimbing").removeAttr('disabled');
       } else {
         $("#ni_pembimbing").prop('disabled', true);
+        $('#ni_pembimbing').empty();
+        $('#ni_pembimbing').append('<option value="">Harap Memilih Perusahaan..</option>');
       }
       $('#ni_pembimbing').select2('val', '');
     });

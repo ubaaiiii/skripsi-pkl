@@ -48,9 +48,16 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/calendars/fullcalendar.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/forms/validation/form-validation.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/extensions/toastr.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/daterangepicker.min.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/assets/css/style.css'); ?>">
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/jquery.min.js'); ?>"></script>
+    <script>
+        $.noConflict();
+    </script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/vendors.min.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/toastr.min.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/daterangepicker/moment.min.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/daterangepicker/daterangepicker.min.js'); ?>"></script>
     <script>
         var base_url = "<?= base_url(); ?>";
     </script>

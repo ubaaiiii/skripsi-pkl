@@ -58,41 +58,13 @@
                     <form>
                       <div class="row">
                         <div class="col-12 col-sm-6 col-lg-3">
-                          <label for="select-kelas">Kelas</label>
+                          <label for="select-perusahaan">Perusahaan</label>
                           <fieldset class="form-group">
-                            <select class="select form-control" id="select-kelas" style="width:100%;">
+                            <select class="select form-control" id="select-perusahaan" style="width:100%;">
                               <option value=""></option>
                               <option value=" " selected>Semua</option>
-                              <?php
-                              $unique = array();
-                              foreach ($kelas as $k) :
-                                $kelasnya = explode(",", $k->msdesc);
-                                if (in_array($kelasnya[0], $unique)) {
-                                  continue;
-                                }
-                                $unique[] = $kelasnya[0];
-                              ?>
-                                <option value="<?= $kelasnya[0]; ?>,"><?= $kelasnya[0]; ?></option>
-                              <?php endforeach; ?>
-                            </select>
-                          </fieldset>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-3">
-                          <label for="select-jurusan">Jurusan</label>
-                          <fieldset class="form-group">
-                            <select class="select form-control" id="select-jurusan" style="width:100%;">
-                              <option value=""></option>
-                              <option value=" " selected>Semua</option>
-                              <?php
-                              $unique = array();
-                              foreach ($kelas as $j) :
-                                $jurusan = explode(",", $j->msdesc);
-                                if (in_array($jurusan[1], $unique)) {
-                                  continue;
-                                }
-                                $unique[] = $jurusan[1];
-                              ?>
-                                <option value="<?= $jurusan[1]; ?>"><?= $jurusan[1]; ?></option>
+                              <?php foreach ($perusahaan as $p) : ?>
+                                <option value="<?= $p->nama; ?>"><?= $p->nama; ?></option>
                               <?php endforeach; ?>
                             </select>
                           </fieldset>
@@ -101,26 +73,27 @@
                           <label for="select-status">Status</label>
                           <fieldset class="form-group">
                             <select class="select form-control" id="select-status" style="width:100%;">
-                              <option value=""></option>
+
                               <option value=" " selected>Semua</option>
-                              <?php
-                              foreach ($status as $s) :
-                                $statusnya = explode(",", $s->msdesc);
-                              ?>
-                                <option value="<?= $statusnya[0]; ?>"><?= $statusnya[0]; ?></option>
-                              <?php endforeach; ?>
+                              <option value="Telah diselesaikan">Telah Selesai</option>
+                              <option value="Belum diselesaikan">Belum Selesai</option>
                             </select>
                           </fieldset>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                          <label for="select-kelamin">Jenis Kelamin</label>
+                          <label for="select-jadwal">Jadwal PKL</label>
                           <fieldset class="form-group">
-                            <select class="select form-control" id="select-kelamin" style="width:100%;">
-                              <option value=""></option>
-                              <option value=" " selected>Semua</option>
-                              <option value="Laki-Laki">Laki-Laki</option>
-                              <option value="Perempuan">Perempuan</option>
+                            <select class="form-control" id="select-jadwal" style="width:100%;">
+                              <option value="" selected></option>
+                              <option value="3">Jadwal Mulai PKL</option>
+                              <option value="4">Jadwal Selesai PKL</option>
                             </select>
+                          </fieldset>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                          <label for="range-jadwal">Rentang Tanggal</label>
+                          <fieldset class="form-group">
+                            <input type="text" disabled id="range-jadwal" class="form-control" name="range-jadwal" placeholder="Pilih Rentang Tanggal...">
                           </fieldset>
                         </div>
                       </div>
@@ -139,12 +112,12 @@
                           <th></th>
                           <th>Nomor Induk</th>
                           <th>Siswa</th>
-                          <th>Penanggung Jawab</th>
-                          <th>Pembimbing</th>
-                          <th>Perusahaan</th>
                           <th>Jadwal Mulai PKL<br><i>(thn-bln-tgl)</i></th>
                           <th>Jadwal Selesai PKL<br><i>(thn-bln-tgl)</i></th>
                           <th>PKL Selesai<br><i>(thn-bln-tgl jam:mnt:dtk)</i></th>
+                          <th>Perusahaan</th>
+                          <th>Pembimbing</th>
+                          <th>Penanggung Jawab</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -171,16 +144,71 @@
           });
 
           $('.select').change(function() {
-            var kelas = $('#select-kelas').val(),
-              jurusan = $('#select-jurusan').val(),
+            var kelas = $('#select-perusahaan').val(),
               status = $('#select-status').val(),
-              kelamin = $('#select-kelamin').val(),
-              keyword = kelas + " " + jurusan + " " + status + " " + kelamin;
-            console.log(keyword);
+              keyword = kelas + " " + status;
             table.search(keyword).draw();
-          })
+          });
+
+          $('#range-jadwal').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+              cancelLabel: 'All Periode'
+            }
+          });
+
+          $('#range-jadwal').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+            minDateFilter = picker.startDate.format('YYYY-MM-DD')
+            maxDateFilter = picker.endDate.format('YYYY-MM-DD')
+            table.draw();
+          });
+
+          $('#range-jadwal').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('All Periode');
+            minDateFilter = "";
+            maxDateFilter = "";
+            table.draw();
+          });
+
+          minDateFilter = "";
+          maxDateFilter = "";
+
+          $.fn.dataTableExt.afnFiltering.push(
+            function(oSettings, aData, iDataIndex) {
+
+              if (typeof aData._date == 'undefined') {
+                aData._date = new Date(aData[1]).getTime();
+              }
+              if (typeof minDateFilter == 'string') {
+                minDateFilter = new Date(minDateFilter).getTime();
+              }
+              if (typeof maxDateFilter == 'string') {
+                maxDateFilter = new Date(maxDateFilter).getTime();
+              }
+
+              if (minDateFilter && !isNaN(minDateFilter)) {
+                if (aData._date < minDateFilter) {
+                  return false;
+                }
+              }
+
+              if (maxDateFilter && !isNaN(maxDateFilter)) {
+                if (aData._date > maxDateFilter) {
+                  return false;
+                }
+              }
+
+              return true;
+            }
+          );
 
           $('.select').select2({
+            allowClear: true,
+            placeholder: "Pilih Salah Satu..."
+          });
+
+          $('#select-jadwal').select2({
             allowClear: true,
             placeholder: "Pilih Salah Satu..."
           });
@@ -331,23 +359,29 @@
                 }
               },
               {
-                data: "nm_admin",
+                data: "jadwal_mulai",
+              },
+              {
+                data: "jadwal_selesai",
+              },
+              {
+                data: "tgl_diselesaikan",
                 render: function(data, type, row, meta) {
-                  return `<div class="avatar">
-                            <a data-toggle="popover"
-                                data-html="true"
-                                data-placement="right"
-                                data-trigger="hover"
-                                data-content="<img width='200px' src='/images/users/` + row.ft_admin + `' />"
-                                data-original-title='` + data + `'
-                                onclick="
-                                $('#large .modal-content').load('` + base_url + `/modal/admin/lihat/` + row.ni_penyalur + `',function(){
-                                  $('#large').modal('show');
-                                });"
-                              >
-                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_admin + `" alt="Foto Siswa" width="32" height="32">
-                            </a>
-                          </div>` + data;
+                  if (data == null) {
+                    return "<i class='success'>Belum diselesaikan</i>";
+                  } else {
+                    return data + `<p style="display:none;">Telah diselesaikan</p>`;
+                  }
+                },
+              },
+              {
+                data: "nm_perusahaan",
+                render: function(data, type, row, meta) {
+                  return `<a href="javascript:void(0);" onclick="
+                                    $('#large .modal-content').load('` + base_url + `/modal/perusahaan/lihat/` + row.id_perusahaan + `',function(){
+                                        $('#large').modal('show');
+                                    });
+                                    ">` + data + `</a>`;
                 }
               },
               {
@@ -371,24 +405,24 @@
                 }
               },
               {
-                data: "nm_perusahaan",
+                data: "nm_admin",
                 render: function(data, type, row, meta) {
-                  return `<a href="javascript:void(0);" onclick="
-                                    $('#large .modal-content').load('` + base_url + `/modal/perusahaan/lihat/` + row.id_perusahaan + `',function(){
-                                        $('#large').modal('show');
-                                    });
-                                    ">` + data + `</a>`;
+                  return `<div class="avatar">
+                            <a data-toggle="popover"
+                                data-html="true"
+                                data-placement="right"
+                                data-trigger="hover"
+                                data-content="<img width='200px' src='/images/users/` + row.ft_admin + `' />"
+                                data-original-title='` + data + `'
+                                onclick="
+                                $('#large .modal-content').load('` + base_url + `/modal/admin/lihat/` + row.ni_penyalur + `',function(){
+                                  $('#large').modal('show');
+                                });"
+                              >
+                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_admin + `" alt="Foto Siswa" width="32" height="32">
+                            </a>
+                          </div>` + data;
                 }
-              },
-              {
-                data: "jadwal_mulai",
-              },
-              {
-                data: "jadwal_selesai",
-              },
-              {
-                data: "tgl_diselesaikan",
-                defaultContent: "<i class='success'>Belum diselesaikan</i>"
               },
             ],
             dom: 'lfBrtip',
