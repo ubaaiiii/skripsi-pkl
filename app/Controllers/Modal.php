@@ -41,6 +41,26 @@ class Modal extends BaseController
 		return view('modals/siswa', $data);
 	}
 
+	public function jadwal($tipe = "tambah", $id = false)
+	{
+		$data = [
+			'judul_modal'		=> '<i class="fa fa-calendar-plus-o"></i> Tambah Jadwal PKL',
+			'tipe'				=> $tipe,
+			'kelas'				=> $this->masterModel->getData('kelas'),
+			'siswa'				=> $this->siswaModel->where('status', 1)->findAll(),
+			'pembimbing'		=> $this->pembimbingModel->where('email IS NOT NULL')->findAll(),
+			'perusahaan'		=> $this->perusahaanModel->where('status', 1)->findAll(),
+		];
+
+		if ($tipe == 'ubah') {
+			$data['judul_modal']		= '<i class="feather icon-user"></i> Ubah Jadwal PKL';
+		} else if ($tipe == 'lihat') {
+			$data['judul_modal']		= '<i class="feather icon-user"></i> Jadwal PKL';
+		}
+
+		return view('modals/jadwal', $data);
+	}
+
 	public function admin($tipe = "tambah", $ni = false)
 	{
 		$data = [
