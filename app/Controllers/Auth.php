@@ -24,16 +24,14 @@ class Auth extends BaseController
 		$this->email				= \Config\Services::email();
 	}
 
-	private function sendEmail($proses, $to, $title, $message)
+	private function sendEmail($to, $title, $message, $altmessage)
 	{
-		if ($proses == 'view') {
-			return $message;
-		}
 		$this->email->setFrom('pkl.mandalahayu@gmail.com', 'PKL Mandalahayu');
 		$this->email->setTo($to);
 
 		$this->email->setSubject($title);
 		$this->email->setMessage($message);
+		$this->email->setAltMessage($altmessage);
 
 		if (!$this->email->send()) {
 			return false;
@@ -44,11 +42,21 @@ class Auth extends BaseController
 
 	public function nyoba()
 	{
+		$parser = \Config\Services::parser();
+		$token  = csrf_hash();
 		$data = [
-			'title' => 'Kirim Email',
-
+			'title' 		=> 'Email Pemulihan',
+			'gambar'		=> 'https://i.ibb.co/xf90Jtq/forgot-password.png',
+			'nama' 		=> 'James Bond',
+			'pengantar' => 'Sepertinya anda melupakan sesuatu',
+			'judul' 		=> 'Pulihkan Katasandi',
+			'isi_email'	=> 'Anda telah mencoba memulihkan katasandi melalui web PKL SMK Mandalahayu, klik tombol berikut untuk memulihkan katasandi Anda.',
+			'tombol'		=> 'Pulihkan',
+			'link'		=> 'http://localhost:8080/auth/pulihkan/' . $token,
+			'alt'			=> 'Pemulihan Akun PKL|Mandalahayu a/n Rizqi Ubaidillah (Siswa)',
 		];
-		$this->sendEmail('kirim', 'emailnya.ubai@gmail.com', 'Nyoba Kirim Email', view('email/pulihkan_akun', $data));
+		// $this->sendEmail('emailnya.ubai@gmail.com', 'Nyoba Kirim Email', $parser->setData($data)->render('email/pulihkan_akun'), $data['alt']);
+		echo $parser->setData($data)->render('email/pulihkan_akun');
 	}
 
 	public function index()
