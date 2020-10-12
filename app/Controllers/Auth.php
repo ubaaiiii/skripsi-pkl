@@ -74,31 +74,43 @@ class Auth extends BaseController
 
 	public function siswa()
 	{
-		$data = [
-			'title'		=>	'Sebagai Siswa',
-			'kelas'		=>	$this->masterModel->getData('kelas'),
-			'session' 	=> $this->session,
-		];
-		return view('auth/reg_siswa', $data);
+		if (!session('user_name')) {
+			$data = [
+				'title'		=>	'Sebagai Siswa',
+				'kelas'		=>	$this->masterModel->getData('kelas'),
+				'session' 	=> $this->session,
+			];
+			return view('auth/reg_siswa', $data);
+		} else {
+			return redirect()->to('/dashboard');
+		}
 	}
 
 	public function pembimbing()
 	{
-		$data = [
-			'title'			=>	'Sebagai Pembimbing',
-			'perusahaan'	=>	$this->perusahaanModel->where('deleted_at is null')->findAll(),
-			'session' 		=> $this->session,
-		];
-		return view('auth/reg_pembimbing', $data);
+		if (!session('user_name')) {
+			$data = [
+				'title'			=>	'Sebagai Pembimbing',
+				'perusahaan'	=>	$this->perusahaanModel->where('deleted_at is null')->findAll(),
+				'session' 		=> $this->session,
+			];
+			return view('auth/reg_pembimbing', $data);
+		} else {
+			return redirect()->to('/dashboard');
+		}
 	}
 
 	public function forgot()
 	{
-		$data = [
-			'title'		=>	'Lupa Password',
-			'session' 	=> $this->session,
-		];
-		return view('auth/forgot', $data);
+		if (!session('user_name')) {
+			$data = [
+				'title'		=>	'Lupa Password',
+				'session' 	=> $this->session,
+			];
+			return view('auth/forgot', $data);
+		} else {
+			return redirect()->to('/dashboard');
+		}
 	}
 
 	public function logout()
@@ -157,5 +169,10 @@ class Auth extends BaseController
 				return json_encode(['result' => 'error', 'message' => 'Nama Pengguna dan Katasandi tidak cocok']);
 			}
 		}
+	}
+
+	public function pulihkan($token)
+	{
+		$user = $this->authModel->where('token', $token)->findAll();
 	}
 }
