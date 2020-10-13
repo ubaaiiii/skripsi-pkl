@@ -171,8 +171,23 @@ class Auth extends BaseController
 		}
 	}
 
-	public function pulihkan($token)
+	public function pulihkan($token = false)
 	{
-		$user = $this->authModel->where('token', $token)->findAll();
+		if ($token) {
+			$user = $this->authModel->asObject()->where('token', $token)->limit(1)->find();
+			if (count($user) > 0) {
+				$user = $user[0];
+				$data = [
+					'title'		=>	'Reset Katasandi',
+					'session' 	=> $this->session,
+					'data'		=> $user,
+				];
+				return view('auth/pulihkan', $data);
+			} else {
+				return redirect()->to('/auth');
+			}
+		} else {
+			return redirect()->to('/auth');
+		}
 	}
 }

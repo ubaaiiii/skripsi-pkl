@@ -15,6 +15,7 @@ class AuthModel extends Model
     'email',
     'nomor_induk',
     'level',
+    'token',
     'deleted_at',
   ];
   protected $useTimestamps   = true;
@@ -22,12 +23,6 @@ class AuthModel extends Model
 
   public function __construct()
   {
-    $this->db       = \Config\Database::connect();
-  }
-
-  public function cekLogin($username, $password)
-  {
-    $db = $this->db;
-    return $db->table('users')->getWhere(['username' => $username, 'password' => $password]);
+    $this->db = \Config\Database::connect();
   }
 }

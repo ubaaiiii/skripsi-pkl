@@ -49,6 +49,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/pages/authentication.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/extensions/toastr.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/extensions/sweetalert2.min.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/forms/validation/form-validation.css'); ?>">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -75,6 +76,8 @@
 
     <!-- BEGIN: Page Vendor JS-->
     <script src="<?= base_url('vuexy/app-assets/vendors/js/forms/select/select2.full.min.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/js/scripts/forms/validation/form-validation.js'); ?>"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
