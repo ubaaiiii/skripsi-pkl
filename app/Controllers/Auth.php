@@ -135,18 +135,19 @@ class Auth extends BaseController
 			];
 			$user = $this->authModel->asObject()->where($dataLogin)->limit(1)->find();
 			if (count($user) > 0) {
-				if ($user[0]->deleted_at !== null) {
+				$user = $user[0];
+				if ($user->deleted_at !== null) {
 					return json_encode(['user-name' => 'Akun anda telah terhapus, harap menghubungi Admin']);
 				} else {
-					switch ($user[0]->level) {
+					switch ($user->level) {
 						case 'admin':
-							$dataUser = $this->adminModel->find($user[0]->nomor_induk);
+							$dataUser = $this->adminModel->find($user->nomor_induk);
 							break;
 						case 'siswa':
-							$dataUser = $this->siswaModel->find($user[0]->nomor_induk);
+							$dataUser = $this->siswaModel->find($user->nomor_induk);
 							break;
 						case 'pembimbing':
-							$dataUser = $this->pembimbingModel->find($user[0]->nomor_induk);
+							$dataUser = $this->pembimbingModel->find($user->nomor_induk);
 							break;
 
 						default:
@@ -155,8 +156,8 @@ class Auth extends BaseController
 					}
 
 					$dataSession = [
-						'user_name'		=> $user[0]->username,
-						'user_level'	=> ucwords($user[0]->level),
+						'user_name'		=> $user->username,
+						'user_level'	=> ucwords($user->level),
 						'user_nama'		=> ucwords($dataUser->nama),
 						'user_foto'		=> $dataUser->foto,
 						'nomor_induk'	=> $dataUser->nomor_induk,
@@ -177,10 +178,26 @@ class Auth extends BaseController
 			$user = $this->authModel->asObject()->where('token', $token)->limit(1)->find();
 			if (count($user) > 0) {
 				$user = $user[0];
+				switch ($user->level) {
+					case 'admin':
+						$dataUser = $this->adminModel->find($user->nomor_induk);
+						break;
+					case 'siswa':
+						$dataUser = $this->siswaModel->find($user->nomor_induk);
+						break;
+					case 'pembimbing':
+						$dataUser = $this->pembimbingModel->find($user->nomor_induk);
+						break;
+
+					default:
+						return redirect()->to('/auth');
+						break;
+				}
 				$data = [
 					'title'		=>	'Reset Katasandi',
 					'session' 	=> $this->session,
-					'data'		=> $user,
+					'data'		=> $dataUser,
+					'login'		=> $user,
 				];
 				return view('auth/pulihkan', $data);
 			} else {
@@ -188,6 +205,41 @@ class Auth extends BaseController
 			}
 		} else {
 			return redirect()->to('/auth');
+		}
+	}
+
+	public function reset($token)
+	{
+		if (!$this->validate(
+			[
+				'katasandi_baru'	=>	'required',
+				'katasandi_baru2'	=>	'required|matches[katasandi_baru]',
+			],
+			[
+				'katasandi_baru'	=> [
+					'required'		=> "Katasandi wajib diisi",
+				],
+				'katasandi_baru2'	=> [
+					'required'		=> "Katasandi wajib diulangi",
+					'matches'		=> "Ulangi katasandi tidak cocok",
+				],
+			]
+		)) {
+			$validation = \Config\Services::validation();
+			echo json_encode($validation->getErrors());
+		} else {
+			$user = $this->authModel->asObject()->where('token', $token)->limit(1)->find();
+			if (count($user) > 0) {
+				$user = $user[0];
+				$data = [
+					'password'   	=>  md5($this->request->getPost('katasandi_baru')),
+					'token'        =>  null,
+				];
+				$this->authModel->update($user->username, $data);
+				return "berhasil";
+			} else {
+				return json_encode(['failed' => 'Mohon maaf token anda kadaluarsa!']);
+			}
 		}
 	}
 }

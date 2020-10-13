@@ -22,33 +22,76 @@
                                             <h4 class="mb-0">Reset Katasandi</h4>
                                         </div>
                                     </div>
+                                    <p class="px-2 mb-0">
+                                        Hai, <?= $data->nama; ?><br>
+                                        Silahkan masukkan katasandi baru.
+                                    </p>
                                     <div class="card-content">
                                         <div class="card-body">
                                             <form id="form-password-baru" novalidate autocomplete="off">
                                                 <?= csrf_field(); ?>
-                                                <input type="hidden" name="nomor_induk" value="<?= $data->nomor_induk; ?>">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                                <label for="katasandi-baru">Katasandi Baru</label>
-                                                                <input type="password" name="katasandi-baru" id="katasandi-baru" class="form-control" placeholder="Katasandi Baru" required data-validation-required-message="Katasandi baru wajib diisi" data-validation-minlength-message="Setidaknya mengandung 6 karakter" minlength="6">
+                                                                <label for="katasandi_baru">Katasandi Baru</label>
+                                                                <input type="password" name="katasandi_baru" id="katasandi_baru" class="form-control" placeholder="Katasandi Baru" required data-validation-required-message="Katasandi baru wajib diisi" data-validation-minlength-message="Setidaknya mengandung 6 karakter" minlength="6">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                                <label for="katasandi-baru2">Ulangi Katasandi</label>
-                                                                <input type="password" name="katasandi-baru2" class="form-control" required id="katasandi-baru2" data-validation-match-match="katasandi-baru" placeholder="Ulangi Kata Sandi" data-validation-required-message="Harap mengulangi katasandi" minlength="6">
+                                                                <label for="katasandi_baru2">Ulangi Katasandi</label>
+                                                                <input type="password" name="katasandi_baru2" class="form-control" required id="katasandi_baru2" data-validation-match-match="katasandi_baru" placeholder="Ulangi Kata Sandi" data-validation-required-message="Harap mengulangi katasandi" minlength="6">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="float-md-right d-block mb-1">
-                                                    <button type="submit" class="btn btn-primary btn-block px-75">Simpan</button>
+                                                <div class="col-12">
+                                                    <button id="btn-submit" type="submit" class="btn btn-primary btn-block px-75">Simpan</button>
                                                 </div>
                                             </form>
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $('#form-password-baru').submit(function(e) {
+                                                        e.preventDefault;
+                                                        var data = $(this).serialize();
+                                                        $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
+                                                        $.ajax({
+                                                            url: "/auth/reset/<?= $login->token; ?>",
+                                                            data: data,
+                                                            type: "post",
+                                                            success: function(resp) {
+                                                                if (resp == 'berhasil') {
+                                                                    $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Redirecting...');
+                                                                    Swal.fire({
+                                                                        title: 'Berhasil!',
+                                                                        html: resp.message,
+                                                                        type: resp.result,
+                                                                        timer: 2000,
+                                                                    });
+                                                                    setTimeout(function() {
+                                                                        window.location = "<?= base_url(); ?>/auth";
+                                                                    }, 500);
+                                                                } else {
+                                                                    Swal.fire({
+                                                                        title: 'Gagal!',
+                                                                        html: resp.message,
+                                                                        type: resp.result,
+                                                                        timer: 2000,
+                                                                    });
+                                                                    setTimeout(function() {
+                                                                        window.location = "<?= base_url(); ?>/auth";
+                                                                    }, 500);
+                                                                }
+                                                            }
+                                                        })
+
+                                                        return false;
+                                                    })
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>

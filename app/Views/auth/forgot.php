@@ -25,18 +25,18 @@
                                     <p class="px-2 mb-0">Harap masukkan email yang terdaftar, akan kami kirim link ubah katasandi.</p>
                                     <div class="card-content">
                                         <div class="card-body">
-                                            <form action="index.html">
+                                            <form id="form-forgot" novalidate>
                                                 <div class="form-label-group">
-                                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email">
+                                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required data-validation-email-message to override>
                                                     <label for="inputEmail">Email</label>
                                                 </div>
+                                                <div class="float-md-left d-block mb-1">
+                                                    <a href="<?= base_url('auth'); ?>" class="btn btn-outline-primary btn-block px-75">Kembali ke Login</a>
+                                                </div>
+                                                <div class="float-md-right d-block mb-1">
+                                                    <button type="submit" id="btn-submit" class="btn btn-primary btn-block px-75">Kirim Email Pemulihan</button>
+                                                </div>
                                             </form>
-                                            <div class="float-md-left d-block mb-1">
-                                                <a href="<?= base_url('auth'); ?>" class="btn btn-outline-primary btn-block px-75">Kembali ke Login</a>
-                                            </div>
-                                            <div class="float-md-right d-block mb-1">
-                                                <a href="#" class="btn btn-primary btn-block px-75">Kirim</a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
