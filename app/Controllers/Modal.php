@@ -134,6 +134,10 @@ class Modal extends BaseController
 				$data['kolomnya']	=	$this->siswaModel->getFields();
 				$data['primary']	= "nomor_induk";
 				break;
+			case 'pembimbing':
+				$data['kolomnya']	=	$this->pembimbingModel->getFields();
+				$data['primary']	= "nomor_induk";
+				break;
 			case 'perusahaan':
 				$data['kolomnya']	=	$this->perusahaanModel->getFields();
 				$data['primary']	= "id";

@@ -143,12 +143,16 @@
           "html": true,
         });
         $('[data-toggle="popover"]').popover();
-        $('#table-sampah thead th').click();
+        $('thead').click();
       },
       initComplete: function() {
-        $('#table-sampah thead th').click();
+        $('thead').click();
       }
     });
+
+    setTimeout(function() {
+      $('thead').click();
+    }, 500);
 
     $('.table').on('show.bs.dropdown', function() {
       $('.table').css("overflow", "inherit");
