@@ -26,9 +26,11 @@
                                     <div class="card-content">
                                         <div class="card-body">
                                             <form id="form-forgot" novalidate>
-                                                <div class="form-label-group">
-                                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required data-validation-email-message to override>
-                                                    <label for="inputEmail">Email</label>
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" data-validation-email-message="Alamat email tidak valid" data-validation-required-message="Email wajib diisi" aria-invalid="false">
+                                                        <div class="help-block"></div>
+                                                    </div>
                                                 </div>
                                                 <div class="float-md-left d-block mb-1">
                                                     <a href="<?= base_url('auth'); ?>" class="btn btn-outline-primary btn-block px-75">Kembali ke Login</a>
@@ -37,6 +39,47 @@
                                                     <button type="submit" id="btn-submit" class="btn btn-primary btn-block px-75">Kirim Email Pemulihan</button>
                                                 </div>
                                             </form>
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $('#form-forgot').submit(function(e) {
+                                                        e.preventDefault();
+                                                        var data = $(this).serialize();
+                                                        $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i> Mengecek Email...');
+                                                        $('#form-forgot input').attr('disabled', true);
+                                                        $('#form-forgot button').attr('disabled', true);
+                                                        $.ajax({
+                                                            url: "../auth/cekemail",
+                                                            data: data,
+                                                            type: "post",
+                                                            success: function(resp) {
+                                                                resp = JSON.parse(resp);
+                                                                if (resp.result == 'success') {
+                                                                    $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i> Redirecting...');
+                                                                    Swal.fire({
+                                                                        title: 'Berhasil!',
+                                                                        html: resp.message,
+                                                                        type: resp.result,
+                                                                        timer: 2000,
+                                                                    }).then(function() {
+                                                                        window.location = "<?= base_url(); ?>/auth";
+                                                                    });
+                                                                } else {
+                                                                    $('#btn-submit').html('Kirim Email Pemulihan');
+                                                                    $('#form-forgot input').attr('disabled', false);
+                                                                    $('#form-forgot button').attr('disabled', false);
+                                                                    Swal.fire({
+                                                                        title: 'Gagal!',
+                                                                        html: resp.message,
+                                                                        type: resp.result,
+                                                                        timer: 2000,
+                                                                    });
+                                                                }
+                                                            }
+                                                        });
+                                                        return false;
+                                                    });
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -44,9 +87,8 @@
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-        </section>
-
     </div>
 </div>
 <?= $this->endSection(); ?>

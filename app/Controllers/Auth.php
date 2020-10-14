@@ -172,6 +172,68 @@ class Auth extends BaseController
 		}
 	}
 
+	public function cekEmail()
+	{
+		if (!$this->validate(
+			[
+				'email'	=>	'required|valid_email',
+			],
+			[
+				'email'				=> [
+					'required'		=> "Email wajib diisi",
+					'valid_email'	=> "Harap cek kembali Email anda, sepertinya tidak valid.",
+				],
+			]
+		)) {
+			$validation = \Config\Services::validation();
+			echo json_encode($validation->getErrors());
+		} else {
+			$user = $this->authModel->asObject()->where('email', $this->request->getPost('email'))->limit(1)->find();
+			if (count($user) > 0) {
+				$user = $user[0];
+				switch ($user->level) {
+					case 'admin':
+						$dataUser = $this->adminModel->find($user->nomor_induk);
+						break;
+					case 'siswa':
+						$dataUser = $this->siswaModel->find($user->nomor_induk);
+						break;
+					case 'pembimbing':
+						$dataUser = $this->pembimbingModel->find($user->nomor_induk);
+						break;
+
+					default:
+						return redirect()->to('/auth');
+						break;
+				}
+				$parser = \Config\Services::parser();
+				$token  = csrf_hash();
+				$data = [
+					'title' 		=> 'Email Pemulihan',
+					'gambar'		=> 'https://i.ibb.co/xf90Jtq/forgot-password.png',
+					'nama' 		=> $dataUser->nama,
+					'pengantar' => 'Sepertinya anda melupakan sesuatu',
+					'judul' 		=> 'Pulihkan Katasandi',
+					'isi_email'	=> 'Anda telah mencoba memulihkan katasandi melalui web PKL SMK Mandalahayu, klik tombol berikut untuk memulihkan katasandi Anda.',
+					'tombol'		=> 'Pulihkan',
+					'link'		=> 'http://localhost:8080/auth/pulihkan/' . $token,
+					'alt'			=> 'Pemulihan Akun PKL|Mandalahayu a/n ' . ucwords($dataUser->nama) . ' (' . ucwords($user->level) . ')',
+				];
+				$updToken = [
+					'token'	=> $token,
+				];
+				$this->authModel->update($user->username, $updToken);
+				if ($this->sendEmail($user->email, $data['title'], $parser->setData($data)->render('email/pulihkan_akun'), $data['alt'])) {
+					echo json_encode(['result' => "success", 'message' => 'Email pemulihan berhasil dikirim, harap cek email masuk anda.']);
+				} else {
+					echo json_encode(['result' => "error", 'message' => 'Email tidak terkirim.']);
+				}
+			} else {
+				echo json_encode(['result' => "error", 'message' => 'Email yang anda masukkan tidak terdaftar.']);
+			}
+		}
+	}
+
 	public function pulihkan($token = false)
 	{
 		if ($token) {
@@ -201,7 +263,7 @@ class Auth extends BaseController
 				];
 				return view('auth/pulihkan', $data);
 			} else {
-				return redirect()->to('/auth');
+				throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Token tidak ditemukan");
 			}
 		} else {
 			return redirect()->to('/auth');

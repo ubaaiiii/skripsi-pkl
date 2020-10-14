@@ -24,6 +24,7 @@
                                     </div>
                                     <p class="px-2 mb-0">
                                         Hai, <?= $data->nama; ?><br>
+                                        Username anda: <b><?= $login->username; ?></b><br>
                                         Silahkan masukkan katasandi baru.
                                     </p>
                                     <div class="card-content">
