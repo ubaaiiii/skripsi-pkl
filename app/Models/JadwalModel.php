@@ -6,19 +6,19 @@ use CodeIgniter\Model;
 
 class JadwalModel extends Model
 {
-  protected $table          = 'jadwal';
+  protected $table          = 'jadwal_pkl';
   protected $primaryKey     = 'id';
   protected $useSoftDeletes = true;
   protected $allowedFields  = [
-    'ni_siswa',
+    'nomor_surat',
+    'tgl_terima_info',
     'id_perusahaan',
+    'jumlah_siswa',
+    'ni_siswa',
+    'tgl_mulai',
+    'tgl_selesai',
     'ni_pembimbing',
-    'ni_penyalur',
-    'jadwal_mulai',
-    'jadwal_selesai',
-    'jumlah_bulan',
-    'tgl_diselesaikan',
-    'catatan',
+    'ni_admin',
     'deleted_at',
   ];
   protected $tempReturnType  = 'object';
@@ -39,43 +39,44 @@ class JadwalModel extends Model
     }
     $db      = $this->db;
     $builder = $db->table('jadwal_pkl a');
-    $builder->select("a.*,
-                      b.nama      'nm_siswa',
-                      b.foto      'ft_siswa',
-                      b.status    'status',
-                      c.nama      'nm_perusahaan',
-                      d.nama      'nm_pembimbing',
-                      d.foto      'ft_pembimbing',
-                      e.nama      'nm_admin',
-                      e.foto      'ft_admin'
-                    ")
-      ->join("siswa b", "a.ni_siswa = b.nomor_induk")
-      ->join("perusahaan c", "a.id_perusahaan = c.id")
-      ->join("pembimbing d", "a.ni_pembimbing = d.nomor_induk")
-      ->join("admin e", "a.ni_penyalur = e.nomor_induk")
+    $builder->select("a.*, 
+                      b.nama nama_perusahaan,
+                      c.nama nama_pembimbing,
+                      d.nama nama_admin")
+      ->join("perusahaan b", "a.id_perusahaan = b.id")
+      ->join("pembimbing c", "a.ni_pembimbing = c.nomor_induk")
+      ->join("admin d", "a.ni_admin = d.nomor_induk")
       ->where('a.deleted_at', null);
     if ($id) {
       $builder->where('a.id', $id);
     }
 
     return $builder->get()->getResult();
+    // return $builder->getCompiledSelect();
   }
 
   public function trashJadwal($id = false)
   {
+    $session = $this->session;
+    if ($session->user_level != 'Admin' && $session->user_level != 'Pembimbing') {
+      return [];
+    }
     $db      = $this->db;
     $builder = $db->table('jadwal_pkl a');
-    $builder->select("a.*, b.nama 'nm_siswa', c.nama 'nm_perusahaan', d.nama 'nm_pembimbing', e.nama 'nm_admin'")
-      ->join("siswa b", "a.ni_siswa = b.nomor_induk")
-      ->join("perusahaan c", "a.id_perusahaan = c.id")
-      ->join("pembimbing d", "a.ni_pembimbing = d.nomor_induk")
-      ->join("admin e", "a.ni_penyalur = e.nomor_induk")
-      ->where('a.deleted_at IS NOT NULL');
+    $builder->select("a.*, 
+                      b.nama nama_perusahaan,
+                      c.nama nama_pembimbing,
+                      d.nama nama_admin")
+      ->join("perusahaan b", "a.id_perusahaan = b.id")
+      ->join("pembimbing c", "a.ni_pembimbing = c.nomor_induk")
+      ->join("admin d", "a.ni_admin = d.nomor_induk")
+      ->where('a.deleted_at IS NOT', null);
     if ($id) {
       $builder->where('a.id', $id);
     }
 
-    return $builder->get()->getResult();
+    // return $builder->get()->getResult();
+    return $builder->getCompiledSelect();
   }
 
   public function getFields()

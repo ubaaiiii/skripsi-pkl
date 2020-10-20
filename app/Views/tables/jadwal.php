@@ -110,11 +110,13 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>Nomor Induk</th>
+                          <th>Nomor Surat</th>
+                          <th>Tgl Terima Info<br><i>(thn-bln-tgl)</i></th>
+                          <th>Perusahaan</th>
                           <th>Siswa</th>
-                          <th>Jadwal Mulai PKL<br><i>(thn-bln-tgl)</i></th>
-                          <th>Jadwal Selesai PKL<br><i>(thn-bln-tgl)</i></th>
-                          <th>PKL Selesai<br><i>(thn-bln-tgl jam:mnt:dtk)</i></th>
+                          <th>Tgl Mulai PKL<br><i>(thn-bln-tgl)</i></th>
+                          <th>Tgl Selesai PKL<br><i>(thn-bln-tgl)</i></th>
+                          <th>PKL Diselesaikan<br><i>(thn-bln-tgl jam:mnt:dtk)</i></th>
                           <th>Perusahaan</th>
                           <th>Pembimbing</th>
                           <th>Penanggung Jawab</th>
