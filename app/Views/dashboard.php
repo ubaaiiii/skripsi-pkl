@@ -32,65 +32,89 @@
                     <h2 class="content-header-title ml-1">Menu</h2>
                 </div> -->
                 <div class="alert alert-primary">
-                    Menu
+                    Menu <?= $session->user_level; ?>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('tugas'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Tugas</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\tugas.png'); ?>" alt="Tugas">
+                    <?php if (in_array(
+                        $session->user_level,
+                        ['Siswa']
+                    )) { ?>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('tugas'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Tugas</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\tugas.png'); ?>" alt="Tugas">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('monitoring'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Monitoring</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\monitoring.png'); ?>" alt="Monitoring">
+                            </a>
+                        </div>
+                    <?php }
+                    if (in_array(
+                        $session->user_level,
+                        ['Admin', 'Pembimbing']
+                    )) { ?>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('monitoring'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Monitoring</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\monitoring.png'); ?>" alt="Monitoring">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('data'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Data</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\data.png'); ?>" alt="Data">
+                            </a>
+                        </div>
+                    <?php }
+                    if (in_array(
+                        $session->user_level,
+                        ['Admin', 'Pembimbing', 'Siswa']
+                    )) { ?>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Data</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\data.png'); ?>" alt="Data">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('proses'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Proses</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\proses.png'); ?>" alt="Proses">
+                            </a>
+                        </div>
+                        <?php
+                    }
+                    if (in_array(
+                        $session->user_level,
+                        ['Admin']
+                    )) {
+                        if ($data->jabatan == 'kepsek') {
+                        ?>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="<?= base_url('proses'); ?>">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Proses</h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body card-dashboard">
+                                                <img class="img-fluid mx-auto d-block" src="<?= base_url('images\pages\proses.png'); ?>" alt="Proses">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
+                    <?php }
+                    } ?>
                 </div>
             </section>
             <!-- Column selectors with Export Options and print table -->

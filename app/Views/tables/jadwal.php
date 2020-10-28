@@ -75,8 +75,8 @@
                             <select class="select form-control" id="select-status" style="width:100%;">
 
                               <option value=" " selected>Semua</option>
-                              <option value="Telah diselesaikan">Telah Selesai</option>
-                              <option value="Belum diselesaikan">Belum Selesai</option>
+                              <option value="Telah Diselesaikan">Telah Selesai</option>
+                              <option value="Belum Diselesaikan">Belum Selesai</option>
                             </select>
                           </fieldset>
                         </div>
@@ -110,14 +110,12 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>Nomor Surat</th>
                           <th>Tgl Terima Info<br><i>(thn-bln-tgl)</i></th>
                           <th>Perusahaan</th>
                           <th>Siswa</th>
                           <th>Tgl Mulai PKL<br><i>(thn-bln-tgl)</i></th>
                           <th>Tgl Selesai PKL<br><i>(thn-bln-tgl)</i></th>
                           <th>PKL Diselesaikan<br><i>(thn-bln-tgl jam:mnt:dtk)</i></th>
-                          <th>Perusahaan</th>
                           <th>Pembimbing</th>
                           <th>Penanggung Jawab</th>
                         </tr>
@@ -301,35 +299,32 @@
                                               <i class="fa fa-cog dropdown-icon"></i>
                                           </button>
                                           <div class="dropdown-menu ">
-                                              <a id="view" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
+                                              <a id="view" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
                                                   <i class="feather icon-search primary"></i>
                                               </a>
                                               <?php if ($session->user_level == 'Admin') : ?>
-                                              <a id="edit" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
+                                              <a id="edit" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
                                                   <i class="feather icon-edit-1 warning"></i>
                                               </a>
-                                              <a id="delete" d-nama="` + row.nama + `" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
+                                              <a id="delete" d-nama="` + row.nomor_surat + `" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
                                                   <i class="feather icon-trash-2 danger"></i>
                                               </a>
                                               <?php endif; ?>`;
                   switch (data) {
-                    case "1":
+                    case "JD01":
                       button += `<div class="dropdown-divider"></div>
-                                          <a id="salurkan" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
+                                          <a id="salurkan" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
                                               <i class="feather icon-check-square success"></i>
                                           </a>`;
                       break;
-                    case "2":
+                    case "JD02":
                       button += `<div class="dropdown-divider"></div>
-                                          <a id="berhenti" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
+                                          <a id="berhenti" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
                                               <i class="feather icon-alert-circle danger"></i>
                                           </a>`;
                       break;
-                    case "3":
-                      button += `<div class="dropdown-divider"></div>
-                                          <a id="nilai" d-ni="` + row.ni_siswa + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Nilai Siswa">
-                                              <i class="feather icon-star warning"></i>
-                                          </a>`;
+                    default:
+                      button = `Error 404 Status`;
                       break;
                   }
 
@@ -338,46 +333,10 @@
                 }
               },
               {
-                data: "ni_siswa"
+                data: "tgl_terima_info"
               },
               {
-                data: "nm_siswa",
-                render: function(data, type, row, meta) {
-                  return `<div class="avatar">
-                            <a data-toggle="popover"
-                                data-html="true"
-                                data-placement="right"
-                                data-trigger="hover"
-                                data-content="<img width='200px' src='/images/users/` + row.ft_siswa + `' />"
-                                data-original-title='` + data + `'
-                                onclick="
-                                $('#large .modal-content').load('` + base_url + `/modal/siswa/lihat/` + row.ni_siswa + `',function(){
-                                  $('#large').modal('show');
-                                });"
-                              >
-                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_siswa + `" alt="Foto Siswa" width="32" height="32">
-                            </a>
-                          </div>` + data;
-                }
-              },
-              {
-                data: "jadwal_mulai",
-              },
-              {
-                data: "jadwal_selesai",
-              },
-              {
-                data: "tgl_diselesaikan",
-                render: function(data, type, row, meta) {
-                  if (data == null) {
-                    return "<i class='success'>Belum diselesaikan</i>";
-                  } else {
-                    return data + `<p style="display:none;">Telah diselesaikan</p>`;
-                  }
-                },
-              },
-              {
-                data: "nm_perusahaan",
+                data: "nama_perusahaan",
                 render: function(data, type, row, meta) {
                   return `<a href="javascript:void(0);" onclick="
                                     $('#large .modal-content').load('` + base_url + `/modal/perusahaan/lihat/` + row.id_perusahaan + `',function(){
@@ -387,44 +346,64 @@
                 }
               },
               {
-                data: "nm_pembimbing",
+                data: "ni_siswa",
                 render: function(data, type, row, meta) {
-                  return `<div class="avatar">
-                            <a data-toggle="popover"
-                                data-html="true"
-                                data-placement="right"
-                                data-trigger="hover"
-                                data-content="<img width='200px' src='/images/users/` + row.ft_pembimbing + `' />"
-                                data-original-title='` + data + `'
-                                onclick="
-                                $('#large .modal-content').load('` + base_url + `/modal/pembimbing/lihat/` + row.ni_pembimbing + `',function(){
-                                  $('#large').modal('show');
-                                });"
-                              >
-                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_pembimbing + `" alt="Foto Siswa" width="32" height="32">
-                            </a>
-                          </div>` + data;
+                  var html = "<span style='display:none;'>" + row.jumlah_siswa + "</span>";
+                  data = data.split(",");
+                  $.each(data, function(index, value) {
+                    value = value.split("|");
+                    html += `<div class="avatar">
+                                      <a data-toggle="popover"
+                                         data-html="true"
+                                         data-placement="right"
+                                         data-trigger="hover"
+                                         data-content="<img width='200px' src='/images/users/` + value[2] + `' />"
+                                         data-original-title='` + value[1] + `'
+                                         onclick="
+                                          $('#large .modal-content').load('` + base_url + `/modal/siswa/lihat/` + value[0] + `',function(){
+                                            $('#large').modal('show');
+                                          });"
+                                       >
+                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + value[2] + `" alt="Foto Karyawan" width="32" height="32">
+                                      </a>
+                                    </div>`;
+                  });
+                  return html;
                 }
               },
               {
-                data: "nm_admin",
+                data: "tgl_mulai"
+              },
+              {
+                data: "tgl_selesai"
+              },
+              {
+                data: "tgl_diselesaikan",
                 render: function(data, type, row, meta) {
-                  return `<div class="avatar">
-                            <a data-toggle="popover"
-                                data-html="true"
-                                data-placement="right"
-                                data-trigger="hover"
-                                data-content="<img width='200px' src='/images/users/` + row.ft_admin + `' />"
-                                data-original-title='` + data + `'
-                                onclick="
-                                $('#large .modal-content').load('` + base_url + `/modal/admin/lihat/` + row.ni_penyalur + `',function(){
-                                  $('#large').modal('show');
-                                });"
-                              >
-                              <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + row.ft_admin + `" alt="Foto Siswa" width="32" height="32">
-                            </a>
-                          </div>` + data;
+                  if (data === null) {
+                    return "<i>Belum Diselesaikan</i>";
+                  } else {
+                    return data + "<i style='display:none;'>Telah Diselesaikan</i>";
+                  }
                 }
+              },
+              {
+                data: "nama_pembimbing"
+              },
+              {
+                data: "nama_admin"
+              },
+              {
+                data: "id",
+                visible: false
+              },
+              {
+                data: "id_perusahaan",
+                visible: false
+              },
+              {
+                data: "jumlah_siswa",
+                visible: false
               },
             ],
             dom: 'lfBrtip',
