@@ -74,7 +74,7 @@
                           <fieldset class="form-group">
                             <select class="select form-control" id="select-status" style="width:100%;">
 
-                              <option value=" " selected>Semua</option>
+                              <option value="" selected>Semua</option>
                               <option value="Telah Diselesaikan">Telah Selesai</option>
                               <option value="Belum Diselesaikan">Belum Selesai</option>
                             </select>
@@ -110,6 +110,7 @@
                       <thead>
                         <tr>
                           <th></th>
+                          <th>Nomor Surat</th>
                           <th>Tgl Terima Info<br><i>(thn-bln-tgl)</i></th>
                           <th>Perusahaan</th>
                           <th>Siswa</th>
@@ -214,21 +215,21 @@
           });
 
           $('.table tbody').on('click', '#edit', function() {
-            var ni = $(this).attr('d-ni');
+            var ni = $(this).attr('d-id');
             $('#large .modal-content').load(base_url + '/modal/jadwal/ubah/' + ni, function() {
               $('#large').modal('show');
             });
           });
 
           $('.table tbody').on('click', '#view', function() {
-            var ni = $(this).attr('d-ni');
+            var ni = $(this).attr('d-id');
             $('#large .modal-content').load(base_url + '/modal/jadwal/lihat/' + ni, function() {
               $('#large').modal('show');
             });
           });
 
           $('.table tbody').on('click', '#delete', function() {
-            var ni = $(this).attr('d-ni'),
+            var ni = $(this).attr('d-id'),
               nama = $(this).attr('d-nama');
             Swal.fire({
               title: 'Apakah Anda Yakin?',
@@ -299,29 +300,38 @@
                                               <i class="fa fa-cog dropdown-icon"></i>
                                           </button>
                                           <div class="dropdown-menu ">
-                                              <a id="view" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
+                                              <a id="view" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Lihat">
                                                   <i class="feather icon-search primary"></i>
-                                              </a>
-                                              <?php if ($session->user_level == 'Admin') : ?>
-                                              <a id="edit" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
-                                                  <i class="feather icon-edit-1 warning"></i>
-                                              </a>
-                                              <a id="delete" d-nama="` + row.nomor_surat + `" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
-                                                  <i class="feather icon-trash-2 danger"></i>
-                                              </a>
-                                              <?php endif; ?>`;
+                                              </a>`;
                   switch (data) {
+                    case "JD00":
+                      button += ` <?php if ($session->user_level == 'Admin') : ?>
+                                  <a id="edit" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
+                                      <i class="feather icon-edit-1 warning"></i>
+                                  </a>
+                                  <a id="delete" d-nama="` + row.nomor_surat + `" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
+                                      <i class="feather icon-trash-2 danger"></i>
+                                  </a>
+                                  <?php endif; ?>
+                                  <div class="dropdown-divider"></div>
+                                    <a id="mulai" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Surat Pengantar">
+                                        <i class="feather icon-printer success"></i>
+                                    </a>
+                                    <a id="mulai" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Mulai PKL">
+                                        <i class="feather icon-check-square success"></i>
+                                    </a>`;
+                      break;
                     case "JD01":
                       button += `<div class="dropdown-divider"></div>
-                                          <a id="salurkan" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
-                                              <i class="feather icon-check-square success"></i>
-                                          </a>`;
+                                    <a id="salurkan" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
+                                        <i class="feather icon-check-square success"></i>
+                                    </a>`;
                       break;
                     case "JD02":
                       button += `<div class="dropdown-divider"></div>
-                                          <a id="berhenti" d-ni="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
-                                              <i class="feather icon-alert-circle danger"></i>
-                                          </a>`;
+                                    <a id="berhenti" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
+                                        <i class="feather icon-alert-circle danger"></i>
+                                    </a>`;
                       break;
                     default:
                       button = `Error 404 Status`;
@@ -331,6 +341,9 @@
                   button += `</div></div>`;
                   return button;
                 }
+              },
+              {
+                data: "nomor_surat"
               },
               {
                 data: "tgl_terima_info"

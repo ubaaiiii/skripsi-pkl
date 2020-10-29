@@ -75,8 +75,8 @@ class JadwalModel extends Model
       $builder->where('a.id', $id);
     }
 
-    // return $builder->get()->getResult();
-    return $builder->getCompiledSelect();
+    return $builder->get()->getResult();
+    // return $builder->getCompiledSelect();
   }
 
   public function getFields()

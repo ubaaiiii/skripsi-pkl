@@ -57,5 +57,6 @@ class PerusahaanModel extends Model
     $builder  = $db->query($sql);
 
     return $builder->getResult();
+    // return $builder->getCompiledSelect();
   }
 }

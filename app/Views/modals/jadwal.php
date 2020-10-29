@@ -29,7 +29,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<form class="form" method="post" id="form-siswa">
+<form class="form" method="post" id="form-jadwal">
   <?= csrf_field(); ?>
   <div class="modal-body">
     <br />
@@ -53,94 +53,25 @@
           <select class="form-control select" id="ni_pembimbing" disabled name="ni_pembimbing" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> style="width:100%;">
             <option value="">Harap Memilih Perusahaan...</option>
           </select>
-        </div>
-        <div class="col-12">
-          <label for="ni_pembimbing">Siswa</label>
-          <select class="max-length form-control" multiple="multiple" name="ni_siswa[]" id="ni_siswa">
-            <?php foreach ($siswa as $s) : ?>
-              <option value="<?= $s->nomor_induk; ?>"><?= $s->nama; ?></option>
-            <?php endforeach; ?>
-          </select>
         </div><br>
         <div class="col-12">
           <div class="form-label-group position-relative has-icon-left">
-            <input type="text" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?= isset($siswa->nama) ? $siswa->nama : ''; ?>">
+            <input style="background-color:#fff;" readonly type="text" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> id="range-jadwal" class="form-control" name="range-jadwal" placeholder="Pilih Rentang Tanggal">
             <div class="form-control-position">
-              <i class="feather icon-user"></i>
+              <i class="feather icon-calendar"></i>
             </div>
-            <label for="nama">Nama Lengkap</label>
+            <label for="range-jadwal">Jadwal PKL</label>
           </div>
-        </div>
-        <div class="col-12">
-          <label for="jenis_kelamin">Jenis Kelamin</label>
-          <div class="form-label-group position-relative">
-            <ul class="list-unstyled mb-0">
-              <li class="d-inline-block mr-2">
-                <fieldset>
-                  <div class="vs-radio-con">
-                    <input <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> type="radio" name="jenis_kelamin" value="L" <?= isset($siswa->jenis_kelamin) ? (($siswa->jenis_kelamin == 'L') ? 'checked' : '') : ''; ?>>
-                    <span class="vs-radio">
-                      <span class="vs-radio--border"></span>
-                      <span class="vs-radio--circle"></span>
-                    </span>
-                    <span class="">Laki-Laki</span>
-                  </div>
-                </fieldset>
-              </li>
-              <li class="d-inline-block mr-2">
-                <fieldset>
-                  <div class="vs-radio-con">
-                    <input <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> type="radio" name="jenis_kelamin" value="P" <?= isset($siswa->jenis_kelamin) ? (($siswa->jenis_kelamin == 'P') ? 'checked' : '') : ''; ?>>
-                    <span class="vs-radio">
-                      <span class="vs-radio--border"></span>
-                      <span class="vs-radio--circle"></span>
-                    </span>
-                    <span class="">Perempuan</span>
-                  </div>
-                </fieldset>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 mt-2">
-          <div class="form-label-group position-relative has-icon-left">
-            <input type="text" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> id="kelasnya" class="form-control" name="kelasnya" disabled placeholder="Kelas">
-            <div class="form-control-position">
-              <i class="feather icon-users"></i>
-            </div>
-            <label for="kelasnya">Kelas</label>
-          </div>
-        </div>
-        <div class="col-12">
-          <div class="form-label-group position-relative has-icon-left">
-            <input type="text" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> id="jurusannya" class="form-control" name="jurusannya" disabled placeholder="Jurusan">
-            <div class="form-control-position">
-              <i class="feather icon-star"></i>
-            </div>
-            <label for="jurusannya">Jurusan</label>
-          </div>
-        </div>
-        <div class="col-12 mt-2">
-          <fieldset class="form-label-group position-relative has-icon-left">
-            <textarea class="form-control" id="alamat" rows="3" name="alamat" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> placeholder="Alamat"><?= isset($siswa->alamat) ? $siswa->alamat : ''; ?></textarea>
-            <div class="form-control-position">
-              <i class="fa fa-home"></i>
-            </div>
-            <label for="alamat">Alamat</label>
-          </fieldset>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="col-12">
-          <label for="upload_foto" style="<?= ($tipe == 'lihat') ? ('display:none;') : (''); ?>">Foto Ukuran 3 x 4</label>
-          <fieldset class="form-group">
-            <div class="custom-file" style="<?= ($tipe == 'lihat') ? ('display:none;') : (''); ?>">
-              <input type="file" <?= ($tipe == 'tambah') ? ('required') : (''); ?> class="custom-file-input" id="upload_foto" name="upload_foto" accept="image/x-png,image/gif,image/jpeg">
-              <label class="custom-file-label" id="upload-label" for="upload_foto">Pilih file</label>
-            </div>
-            <p style="<?= ($tipe == 'lihat') ? ('display:none;') : (''); ?>" class="font-italic text-black text-center mt-1">Gambar akan ditampilkan pada kotak di bawah.</p>
-            <div class="image-area"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-          </fieldset>
+          <label for="ni_pembimbing">Pilih Siswa</label>
+          <select class="max-length form-control" multiple="multiple" name="ni_siswa[]" id="ni_siswa" placeholder="Pilih Maksimal 10 Siswa">
+            <?php foreach ($siswa as $s) : ?>
+              <option style="text-overflow: ellipsis;" value="<?= $s->nomor_induk; ?>"><?= $s->nomor_induk . " - " . $s->nama; ?></option>
+            <?php endforeach; ?>
+          </select>
         </div>
       </div>
     </div>
@@ -155,12 +86,24 @@
 
 <script>
   $(document).ready(function() {
-    <?php if ($tipe == 'ubah' || $tipe == 'lihat') : ?>
-      $('#imageResult').attr('src', '/images/users/<?= $siswa->foto; ?>');
-      setTimeout(function() {
-        $('#kelas').val('<?= $siswa->kelas; ?>').change();
-      }, 100);
-    <?php endif; ?>
+    $(function() {
+      $('input#range-jadwal').daterangepicker({
+          opens: 'left',
+          endDate: moment().locale('id').startOf('day').add(3, 'month'),
+          autoApply: true,
+          maxSpan: {
+            "months": 3
+          },
+          opens: "center",
+          drops: "up",
+          locale: {
+            format: "DD MMMM YYYY",
+          },
+        },
+        function(start, end, label) {
+          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+    });
 
     $('#id_perusahaan').change(function() {
       var id = $(this).val(),
@@ -185,7 +128,7 @@
       $('#ni_pembimbing').select2('val', '');
     });
 
-    $('#form-siswa').submit(function(e) {
+    $('#form-jadwal').submit(function(e) {
       $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
       $('.modal-footer button').attr('disabled', true);
       e.preventDefault();
@@ -225,7 +168,6 @@
       })
     })
 
-
     $('.select').select2({
       allowClear: true,
       placeholder: 'Pilih Salah Satu...'
@@ -235,59 +177,7 @@
       dropdownAutoWidth: true,
       width: '100%',
       maximumSelectionLength: 10,
-      placeholder: "Pilih maksimum 10 siswa"
+      placeholder: "Pilih maksimal 10 siswa"
     });
-
-    var kelasnya = <?= json_encode($kelas); ?>;
-    $('#kelas').change(function() {
-      var kodeKelas = $(this).val();
-      if (kodeKelas == "") {
-        $('#kelasnya').val('');
-        $('#jurusannya').val('');
-      } else {
-
-        var kelas = kelasnya.find(x => x.msid === kodeKelas).msdesc,
-          kelas = kelas.split(",");
-        // console.log(kodeKelas);
-        $('#kelasnya').val(kelas[0]);
-        $('#jurusannya').val(kelas[1]);
-      }
-    })
-
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-          $('#imageResult')
-            .attr('src', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $(function() {
-      $('#upload_foto').on('change', function() {
-        readURL(input);
-      });
-      $('#btn-reset').click(function() {
-        $('#imageResult').attr('src', null);
-        $('#upload-label').text('Pilih file');
-      })
-    });
-
-    /*  ==========================================
-        SHOW UPLOADED IMAGE NAME
-    * ========================================== */
-    var input = document.getElementById('upload_foto');
-    var infoArea = document.getElementById('upload-label');
-
-    input.addEventListener('change', showFileName);
-
-    function showFileName(event) {
-      var input = event.srcElement;
-      var fileName = input.files[0].name;
-      infoArea.textContent = 'File name: ' + fileName;
-    }
   })
 </script>

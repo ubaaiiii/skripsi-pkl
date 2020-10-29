@@ -418,7 +418,7 @@
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
                                                                     </span>
                                                                 </span>
-                                                                <span>Frontend</span>
+                                                                <span>Aktifitas</span>
                                                             </div>
                                                         </div>
                                                         <div class="dropdown-item">
@@ -440,7 +440,7 @@
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
                                                                     </span>
                                                                 </span>
-                                                                <span>Doc</span>
+                                                                <span>Dokumen</span>
                                                             </div>
                                                         </div>
                                                         <div class="dropdown-item">
@@ -451,7 +451,7 @@
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
                                                                     </span>
                                                                 </span>
-                                                                <span>Bugs</span>
+                                                                <span>Kendala</span>
                                                             </div>
                                                         </div>
                                                     </div>
