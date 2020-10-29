@@ -388,10 +388,46 @@
                 }
               },
               {
-                data: "nama_pembimbing"
+                data: "pembimbing",
+                render: function(data, type, row, meta) {
+                  data = data.split("|");
+                  return `<div class="avatar">
+                                      <a data-toggle="popover"
+                                         data-html="true"
+                                         data-placement="right"
+                                         data-trigger="hover"
+                                         data-content="<img width='200px' src='/images/users/` + data[2] + `' />"
+                                         data-original-title='` + data[1] + `'
+                                         onclick="
+                                          $('#large .modal-content').load('` + base_url + `/modal/pembimbing/lihat/` + data[0] + `',function(){
+                                            $('#large').modal('show');
+                                          });"
+                                       >
+                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + data[2] + `" alt="Foto sKaryawan" width="32" height="32">
+                                      </a>
+                                    </div>` + data[1];
+                }
               },
               {
-                data: "nama_admin"
+                data: "admin",
+                render: function(data, type, row, meta) {
+                  data = data.split("|");
+                  return `<div class="avatar">
+                                      <a data-toggle="popover"
+                                         data-html="true"
+                                         data-placement="right"
+                                         data-trigger="hover"
+                                         data-content="<img width='200px' src='/images/users/` + data[2] + `' />"
+                                         data-original-title='` + data[1] + `'
+                                         onclick="
+                                          $('#large .modal-content').load('` + base_url + `/modal/admin/lihat/` + data[0] + `',function(){
+                                            $('#large').modal('show');
+                                          });"
+                                       >
+                                        <img style="object-fit: cover; object-position: 100% 0;" src="/images/users/` + data[2] + `" alt="Foto sKaryawan" width="32" height="32">
+                                      </a>
+                                    </div>` + data[1];
+                }
               },
               {
                 data: "id",

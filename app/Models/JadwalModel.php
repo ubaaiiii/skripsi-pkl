@@ -41,8 +41,8 @@ class JadwalModel extends Model
     $builder = $db->table('jadwal_pkl a');
     $builder->select("a.*, 
                       b.nama nama_perusahaan,
-                      c.nama nama_pembimbing,
-                      d.nama nama_admin")
+                      CONCAT(a.ni_pembimbing,'|',c.nama,'|',c.foto) pembimbing,
+                      CONCAT(a.ni_admin,'|',d.nama,'|',d.foto) admin")
       ->join("perusahaan b", "a.id_perusahaan = b.id")
       ->join("pembimbing c", "a.ni_pembimbing = c.nomor_induk")
       ->join("admin d", "a.ni_admin = d.nomor_induk")

@@ -31,19 +31,13 @@
 </div>
 <form class="form" method="post" id="form-siswa">
   <?= csrf_field(); ?>
-  <input type="hidden" id="nomor_induk_real" name="nomor_induk_real" value="<?= isset($siswa->nomor_induk) ? $siswa->nomor_induk : ''; ?>">
   <div class="modal-body">
     <br />
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="col-12">
-          <label for="ni_siswa">Siswa</label>
-          <select class="form-control select" id="ni_siswa" name="ni_siswa" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> style="width:100%;">
-            <option value="">Pilih Salah Satu...</option>
-            <?php foreach ($siswa as $s) : ?>
-              <option value="<?= $s->nomor_induk; ?>"><?= $s->nomor_induk . " - " . $s->nama; ?></option>
-            <?php endforeach; ?>
-          </select>
+          <label for="ni_siswa">Tanggal Terima Info</label>
+          <input type="date" class="form-control">
         </div>
         <div class="col-12">
           <label for="id_perusahaan">Perusahaan</label>
@@ -58,6 +52,14 @@
           <label for="ni_pembimbing">Pembimbing</label>
           <select class="form-control select" id="ni_pembimbing" disabled name="ni_pembimbing" <?= ($tipe == 'lihat') ? ('disabled') : ('required'); ?> style="width:100%;">
             <option value="">Harap Memilih Perusahaan...</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <label for="ni_pembimbing">Siswa</label>
+          <select class="max-length form-control" multiple="multiple" name="ni_siswa[]" id="ni_siswa">
+            <?php foreach ($siswa as $s) : ?>
+              <option value="<?= $s->nomor_induk; ?>"><?= $s->nama; ?></option>
+            <?php endforeach; ?>
           </select>
         </div><br>
         <div class="col-12">
@@ -227,6 +229,13 @@
     $('.select').select2({
       allowClear: true,
       placeholder: 'Pilih Salah Satu...'
+    });
+
+    $(".max-length").select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      maximumSelectionLength: 10,
+      placeholder: "Pilih maksimum 10 siswa"
     });
 
     var kelasnya = <?= json_encode($kelas); ?>;
