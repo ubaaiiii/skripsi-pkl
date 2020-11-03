@@ -37,7 +37,7 @@
       <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="col-12">
           <label for="ni_siswa">Tanggal Terima Info</label>
-          <input type="date" class="form-control">
+          <input type="date" class="form-control" value="<?= date('Y-m-d'); ?>">
         </div>
         <div class="col-12">
           <label for="id_perusahaan">Perusahaan</label>
