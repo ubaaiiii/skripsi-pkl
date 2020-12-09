@@ -304,4 +304,20 @@ class Auth extends BaseController
 			}
 		}
 	}
+
+	public function validasi()
+	{
+		$nis	 = $this->request->getPost('nomor_induk');
+		$kelas = $this->request->getPost('kelas');
+
+		if ($this->siswaModel->validasi($nis, $kelas)) {
+			echo "validate";
+		} else {
+			echo "not-validate";
+		}
+	}
+
+	public function aktifasi()
+	{
+	}
 }

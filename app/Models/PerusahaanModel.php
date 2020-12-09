@@ -43,17 +43,18 @@ class PerusahaanModel extends Model
   public function tablePerusahaan($id = false)
   {
     $db     = $this->db;
-    $sql    = 'SELECT b.*,
-                        Group_concat(Concat(a.nomor_induk, "|", a.nama, "|", a.foto) SEPARATOR ",") as karyawan
-                  FROM   pembimbing a
-                        INNER JOIN perusahaan b
-                                ON a.id_perusahaan = b.id 
-                  WHERE  b.deleted_at IS NULL ';
+    $sql    = ' SELECT b.*,
+                    Group_concat(Concat(a.nomor_induk, "|", a.nama, "|", a.foto) SEPARATOR ",") as karyawan,
+                    count(a.nomor_induk) as jumlah
+                FROM   pembimbing a
+                    INNER JOIN perusahaan b
+                            ON a.id_perusahaan = b.id 
+                WHERE  b.deleted_at IS NULL ';
     if ($id) {
       $sql  .= 'AND a.id_perusahaan = "$id" ';
     };
 
-    $sql    .= 'GROUP  BY id_perusahaan ';
+    $sql    .= 'GROUP BY b.id ';
     $builder  = $db->query($sql);
 
     return $builder->getResult();

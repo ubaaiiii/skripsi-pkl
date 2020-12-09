@@ -95,4 +95,26 @@ class SiswaModel extends Model
     $db       = $this->db;
     return $db->getFieldNames('siswa');
   }
+
+  public function validasi($nis, $kelas)
+  {
+    $db      = $this->db;
+    $builder = $db->table('siswa');
+    $builder->select("*")
+      ->where('nomor_induk', $nis)
+      ->where('kelas', $kelas);
+    if ($builder->countAllResults() !== 0) {
+      $builder->select("*")
+        ->where('nomor_induk', $nis)
+        ->where('kelas', $kelas)
+        ->where('email IS NOT NULL');
+      if ($builder->countAllResults() !== 0) {
+        return "activated";
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
 }

@@ -34,6 +34,9 @@
 </div>
 <script>
   $(document).ready(function() {
+    $('.modal').on('shown.bs.modal', function() {
+      $('thead').click();
+    });
     $('#table-sampah tbody').on('click', '#restore', function() {
       var ni = $(this).attr('d-id');
       $.ajax({

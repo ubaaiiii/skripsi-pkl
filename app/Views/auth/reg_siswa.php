@@ -28,6 +28,7 @@
                                             <form id="form-auth-siswa">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" id="cek-akun" name="cek-akun" value="not-validate">
+                                                <input type="hidden" id="nin" name="nin">
                                                 <div id="cek">
                                                     <div class="form-label-group mt-1">
                                                         <input type="number" id="nomor_induk" name="nomor_induk" class="form-control" placeholder="Nomor Induk" required>
@@ -43,23 +44,8 @@
                                                     <br />
                                                     <br />
                                                 </div>
-                                                <div id="cek-done" hidden="hidden">
-                                                    <div class="form-label-group">
-                                                        <input type="text" id="username" required class="form-control" placeholder="Username">
-                                                        <label for="username">Username</label>
-                                                    </div>
-                                                    <div class="form-label-group">
-                                                        <input type="email" id="inputEmail" required class="form-control" placeholder="Email">
-                                                        <label for="inputEmail">Email</label>
-                                                    </div>
-                                                    <div class="form-label-group">
-                                                        <input type="password" id="inputPassword" required class="form-control" placeholder="Password">
-                                                        <label for="inputPassword">Password</label>
-                                                    </div>
-                                                    <div class="form-label-group">
-                                                        <input type="password" id="inputConfPassword" required class="form-control" placeholder="Confirm Password">
-                                                        <label for="inputConfPassword">Confirm Password</label>
-                                                    </div>
+                                                <div id="cek-done">
+
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-12">
@@ -90,18 +76,48 @@
                                                         e.preventDefault();
                                                         var data = $(this).serialize(),
                                                             validasi = $('#cek-akun').val();
+                                                        console.log(data);
                                                         if (validasi == 'not-validate') {
                                                             $.ajax({
-                                                                url: "/auth/validate",
+                                                                url: "/auth/validasi",
                                                                 data: data,
                                                                 type: "post",
                                                                 success: function(resp) {
+                                                                    if (resp == 'validate') {
+                                                                        $('#nin').val($('#nomor_induk').val());
+                                                                        $('#nomor_induk').prop('disabled', true);
+                                                                        $('#kelas').prop('disabled', true);
+                                                                        $('#cek-done').append(`<div class="form-label-group">
+                                                                                        <input type="text" id="username" required class="form-control" placeholder="Username">
+                                                                                        <label for="username">Username</label>
+                                                                                    </div>
+                                                                                    <div class="form-label-group">
+                                                                                        <input type="email" id="inputEmail" required class="form-control" placeholder="Email">
+                                                                                        <label for="inputEmail">Email</label>
+                                                                                    </div>
+                                                                                    <div class="form-label-group">
+                                                                                        <input type="password" id="inputPassword" required class="form-control" placeholder="Password">
+                                                                                        <label for="inputPassword">Password</label>
+                                                                                    </div>
+                                                                                    <div class="form-label-group">
+                                                                                        <input type="password" id="inputConfPassword" required class="form-control" placeholder="Confirm Password">
+                                                                                        <label for="inputConfPassword">Confirm Password</label>
+                                                                                    </div>`);
+                                                                    } else {
+                                                                        Swal.fire({
+                                                                            title: 'Data Siswa Tidak Ditemukan!',
+                                                                            html: 'Harap menghubungi bagian Hubungan Industri (HUBIN).',
+                                                                            type: 'warning',
+                                                                        });
+                                                                    }
+                                                                },
+                                                                error: function(resp) {
                                                                     console.log(resp);
                                                                 }
                                                             });
                                                         } else if (validasi == 'validate') {
                                                             $.ajax({
-                                                                url: "/auth/activate",
+                                                                url: "/auth/aktivasi",
                                                                 data: data,
                                                                 type: "post",
                                                                 success: function(resp) {

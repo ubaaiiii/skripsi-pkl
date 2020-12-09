@@ -104,6 +104,13 @@
                                                                         timer: 2000,
                                                                     });
                                                                 }
+                                                            },
+                                                            error: function(resp) {
+                                                                Swal.fire({
+                                                                    title: 'Error!',
+                                                                    html: resp,
+                                                                    type: 'error',
+                                                                });
                                                             }
                                                         })
                                                     })
