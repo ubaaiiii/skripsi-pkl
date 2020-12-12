@@ -63,7 +63,7 @@
                                                     </div>
                                                 </div>
                                                 <a href="<?= base_url('auth'); ?>" class="btn btn-outline-primary float-left btn-inline mb-50">Login</a>
-                                                <button type="submit" id="btn-cek" class="btn btn-primary float-right btn-inline mb-50">Cek Akun</a>
+                                                <button type="submit" id="btn-submit" class="btn btn-primary float-right btn-inline mb-50">Cek Akun</a>
                                             </form>
                                             <script>
                                                 $(document).ready(function() {
@@ -75,8 +75,12 @@
                                                     $('#form-auth-siswa').submit(function(e) {
                                                         e.preventDefault();
                                                         var data = $(this).serialize(),
-                                                            validasi = $('#cek-akun').val();
-                                                        console.log(data);
+                                                            validasi = $('#cek-akun').val(),
+                                                            htmlLama = $('#btn-submit').html();
+                                                        $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
+                                                        $('#form-auth-siswa input').attr('disabled', true);
+                                                        $('#form-auth-siswa button').attr('disabled', true);
+                                                        $('#form-auth-siswa select').attr('disabled', true);
                                                         if (validasi == 'not-validate') {
                                                             $.ajax({
                                                                 url: "/auth/validasi",
@@ -84,25 +88,32 @@
                                                                 type: "post",
                                                                 success: function(resp) {
                                                                     if (resp == 'validate') {
+                                                                        $('#cek-akun').val(resp);
                                                                         $('#nin').val($('#nomor_induk').val());
                                                                         $('#nomor_induk').prop('disabled', true);
                                                                         $('#kelas').prop('disabled', true);
                                                                         $('#cek-done').append(`<div class="form-label-group">
-                                                                                        <input type="text" id="username" required class="form-control" placeholder="Username">
+                                                                                        <input type="text" id="username" name="username" required class="form-control" placeholder="Username">
                                                                                         <label for="username">Username</label>
                                                                                     </div>
                                                                                     <div class="form-label-group">
-                                                                                        <input type="email" id="inputEmail" required class="form-control" placeholder="Email">
-                                                                                        <label for="inputEmail">Email</label>
+                                                                                        <input type="email" id="email" name="email" required class="form-control" placeholder="Email">
+                                                                                        <label for="email">Email</label>
                                                                                     </div>
                                                                                     <div class="form-label-group">
-                                                                                        <input type="password" id="inputPassword" required class="form-control" placeholder="Password">
-                                                                                        <label for="inputPassword">Password</label>
+                                                                                        <input type="password" id="password" name="password" required class="form-control" placeholder="Password">
+                                                                                        <label for="password">Password</label>
                                                                                     </div>
                                                                                     <div class="form-label-group">
                                                                                         <input type="password" id="inputConfPassword" required class="form-control" placeholder="Confirm Password">
                                                                                         <label for="inputConfPassword">Confirm Password</label>
                                                                                     </div>`);
+                                                                    } else if (resp == 'activated') {
+                                                                        Swal.fire({
+                                                                            title: 'Data Siswa Telah Terdaftar',
+                                                                            html: 'Klik <strong><b><a href="/auth/forgot">disini</a></b></strong> jika anda lupa katasandi',
+                                                                            type: 'warning',
+                                                                        });
                                                                     } else {
                                                                         Swal.fire({
                                                                             title: 'Data Siswa Tidak Ditemukan!',
@@ -116,6 +127,7 @@
                                                                 }
                                                             });
                                                         } else if (validasi == 'validate') {
+                                                          // console.log(data);
                                                             $.ajax({
                                                                 url: "/auth/aktivasi",
                                                                 data: data,
@@ -125,6 +137,10 @@
                                                                 }
                                                             });
                                                         }
+                                                        $('#btn-submit').html(htmlLama);
+                                                        $('#form-auth-siswa input').attr('disabled', false);
+                                                        $('#form-auth-siswa button').attr('disabled', false);
+                                                        $('#form-auth-siswa select').attr('disabled', false);
                                                     })
                                                 })
                                             </script>

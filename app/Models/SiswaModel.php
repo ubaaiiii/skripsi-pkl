@@ -111,7 +111,7 @@ class SiswaModel extends Model
       if ($builder->countAllResults() !== 0) {
         return "activated";
       } else {
-        return true;
+        return "validate";
       }
     } else {
       return false;

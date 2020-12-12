@@ -310,14 +310,24 @@ class Auth extends BaseController
 		$nis	 = $this->request->getPost('nomor_induk');
 		$kelas = $this->request->getPost('kelas');
 
-		if ($this->siswaModel->validasi($nis, $kelas)) {
-			echo "validate";
+		if ($result = $this->siswaModel->validasi($nis, $kelas)) {
+			echo $result;
 		} else {
 			echo "not-validate";
 		}
 	}
 
-	public function aktifasi()
+	public function aktivasi()
 	{
+		$nis	 		= $this->request->getPost('nin');
+		$username = $this->request->getPost('username');
+		$email 		= $this->request->getPost('email');
+		$password = $this->request->getPost('password');
+
+		if ($result = $this->siswaModel->aktivasi($nis, $username, $email, $password)) {
+			echo $result;
+		} else {
+			echo "not-validate";
+		}
 	}
 }
