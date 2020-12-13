@@ -74,8 +74,8 @@
                         </ul>
                         <?php if ($session->user_level == 'Siswa') { ?>
                             <ul class="nav navbar-nav bookmark-icons">
-                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Kegiatan"><i class="ficon feather icon-check-square"></i></a></li>
-                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Absensi"><i class="ficon feather icon-clock"></i></a> </li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= base_url('tugas/kegiatan'); ?>" data-toggle="tooltip" data-placement="top" title="Kegiatan"><i class="ficon feather icon-check-square"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= base_url('tugas/absensi'); ?>" data-toggle="tooltip" data-placement="top" title="Absensi"><i class="ficon feather icon-clock"></i></a> </li>
                             </ul>
                         <?php } ?>
                     </div>
@@ -225,6 +225,12 @@
                                 <li><a href="<?= base_url('data/perusahaan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Perusahaan">Perusahaan</span></a> </li>
                                 <li><a href="<?= base_url('data/admin'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Admin">Admin</span></a> </li>
                                 <li><a href="<?= base_url('data/jadwal'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Jadwal PKL">Jadwal PKL</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class=" nav-item"><a href="#"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="Monitoring">Monitoring</span></a>
+                            <ul class="menu-content">
+                                <li><a href="<?= base_url('monitoring/absensi'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Absen Siswa">Absen Siswa</span></a> </li>
+                                <li><a href="<?= base_url('monitoring/kegiatan'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Kegiatan Siswa">Kegiatan Siswa</span></a> </li>
                             </ul>
                         </li>
                         <?php if ($data->jabatan === 'kepsek') { ?>

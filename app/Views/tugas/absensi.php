@@ -60,19 +60,19 @@
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="cal-event-category">
                                                 <span class="dropdown-item business" data-color="success">
                                                     <span class="bullet bullet-success bullet-sm mr-25"></span>
-                                                    Business
+                                                    Tepat Waktu
                                                 </span>
                                                 <span class="dropdown-item work" data-color="warning">
                                                     <span class="bullet bullet-warning bullet-sm mr-25"></span>
-                                                    Work
+                                                    Terlambat
                                                 </span>
                                                 <span class="dropdown-item personal" data-color="danger">
                                                     <span class="bullet bullet-danger bullet-sm mr-25"></span>
-                                                    Personal
+                                                    Tidak Masuk
                                                 </span>
                                                 <span class="dropdown-item others" data-color="primary">
                                                     <span class="bullet bullet-primary bullet-sm mr-25"></span>
-                                                    Others
+                                                    Izin
                                                 </span>
                                             </div>
                                         </div>

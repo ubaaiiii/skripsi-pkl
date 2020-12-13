@@ -40,15 +40,16 @@ class SiswaModel extends Model
     }
     $db      = $this->db;
     $builder = $db->table('siswa a');
-    $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas', d.msdesc 'jkel'")
+    $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas', d.msdesc 'jkel', f.nama 'perusahaan'")
       ->join("master b", "a.status = b.msid")
       ->join("master c", "a.kelas = c.msid")
       ->join("master d", "a.jenis_kelamin = d.msid")
-      ->where('deleted_at', null);
+      ->join("jadwal_pkl e", "e.ni_siswa like concat('%', a.nomor_induk, '%')", 'left')
+      ->join("perusahaan f", "e.id_perusahaan = f.id", 'left')
+      ->where('a.deleted_at', null);
     if ($ni) {
-      $builder->where('nomor_induk', $ni);
+      $builder->where('a.nomor_induk', $ni);
     }
-
     return $builder->get()->getResult();
   }
 

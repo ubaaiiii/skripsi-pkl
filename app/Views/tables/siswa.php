@@ -383,6 +383,10 @@
                 data: "klas",
                 visible: false
               },
+              {
+                data: "perusahaan",
+                visible: false
+              },
             ],
             dom: 'lfBrtip',
             buttons: [{
@@ -427,6 +431,11 @@
             }],
             aaSorting: [],
           });
+          <?php
+          if (session('user_level') == 'Pembimbing') {
+            echo "table.columns( 10 ).search( '" . $data->perusahaan . "' ).draw();";
+          }
+          ?>
         });
       </script>
       <!-- Column selectors with Export Options and print table -->
