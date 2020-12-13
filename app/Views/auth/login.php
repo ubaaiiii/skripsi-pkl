@@ -43,17 +43,6 @@
                                                 </fieldset>
                                                 <div class="form-group d-flex justify-content-between align-items-center">
                                                     <div class="text-left">
-                                                        <fieldset class="checkbox">
-                                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                <input type="checkbox">
-                                                                <span class="vs-checkbox">
-                                                                    <span class="vs-checkbox--check">
-                                                                        <i class="vs-icon feather icon-check"></i>
-                                                                    </span>
-                                                                </span>
-                                                                <span class="">Ingat Saya</span>
-                                                            </div>
-                                                        </fieldset>
                                                     </div>
                                                     <div class="text-right"><a href="<?= base_url('auth/forgot'); ?>" class="card-link">Lupa Katasandi?</a></div>
                                                 </div>

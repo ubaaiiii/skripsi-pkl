@@ -94,7 +94,7 @@
                                                             htmlLama = $('#btn-submit').html();
                                                         if (validasi == 'not-validate') {
                                                             $.ajax({
-                                                                url: "/auth/validasi",
+                                                                url: "/auth/validasi/siswa",
                                                                 data: data,
                                                                 type: "post",
                                                                 success: function(resp) {
@@ -107,7 +107,7 @@
                                                                         $('#cek-done input').attr('required', true);
                                                                     } else if (resp == 'activated') {
                                                                         Swal.fire({
-                                                                            title: 'Data Siswa Telah Terdaftar',
+                                                                            title: 'Data Siswa Sudah Teraktivasi',
                                                                             html: 'Klik <strong><b><a href="/auth/forgot">disini</a></b></strong> jika anda lupa katasandi',
                                                                             type: 'warning',
                                                                         });
@@ -138,7 +138,9 @@
                                                                         type: resp.result,
                                                                     });
                                                                     if (resp.result == 'success') {
-                                                                        window.location.href = '/auth';
+                                                                        setTimeout(function() {
+                                                                            window.location.href = '/auth';
+                                                                        }, 500);
                                                                     }
                                                                 }
                                                             });

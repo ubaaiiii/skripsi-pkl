@@ -19,22 +19,23 @@
                                 <div class="card rounded-0 mb-0 p-2">
                                     <div class="card-header pt-50 pb-1">
                                         <div class="card-title">
-                                            <h4 class="mb-0">Validasi Akun</h4>
+                                            <h4 class="mb-0">Pengaktifan Akun Pembimbing PKL</h4>
                                         </div>
                                     </div>
-                                    <p class="px-2">Isi form berikut untuk membuat akun.</p>
+                                    <p class="px-2">Isi form berikut.</p>
                                     <div class="card-content">
                                         <div class="card-body pt-0">
                                             <form id="form-auth-siswa">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" id="cek-akun" name="cek-akun" value="not-validate">
+                                                <input type="hidden" id="nin" name="nin">
                                                 <div id="cek">
                                                     <div class="form-label-group">
                                                         <input type="number" id="nomor_induk" name="nomor_induk" class="form-control" placeholder="Nomor Induk" required>
                                                         <label for="nomor_induk">Nomor Induk</label>
                                                     </div>
                                                     <label for="perusahaan">Perusahaan</label>
-                                                    <select class="form-control" id="perusahaan" name="perusahaan" required style="width:100%;">
+                                                    <select class="form-control select" id="perusahaan" name="perusahaan" required style="width:100%;">
                                                         <option value="">Pilih Salah Satu...</option>
                                                         <?php foreach ($perusahaan as $p) : ?>
                                                             <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
@@ -43,18 +44,18 @@
                                                     <br />
                                                     <br />
                                                 </div>
-                                                <div id="cek-done" hidden="hidden">
+                                                <div id="cek-done" style="display:none;">
                                                     <div class="form-label-group">
-                                                        <input type="text" id="username" class="form-control" placeholder="Username">
+                                                        <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                                                         <label for="username">Username</label>
                                                     </div>
                                                     <div class="form-label-group">
-                                                        <input type="email" id="inputEmail" class="form-control" placeholder="Email">
-                                                        <label for="inputEmail">Email</label>
+                                                        <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                                                        <label for="email">Email</label>
                                                     </div>
                                                     <div class="form-label-group">
-                                                        <input type="password" id="inputPassword" class="form-control" placeholder="Password">
-                                                        <label for="inputPassword">Password</label>
+                                                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                                                        <label for="password">Password</label>
                                                     </div>
                                                     <div class="form-label-group">
                                                         <input type="password" id="inputConfPassword" class="form-control" placeholder="Confirm Password">
@@ -71,7 +72,7 @@
                                                                         <i class="vs-icon feather icon-check"></i>
                                                                     </span>
                                                                 </span>
-                                                                <span class=""> Saya setuju mendaftar akun.</span>
+                                                                <span class=""> Saya setuju mengaktifkan akun.</span>
                                                             </div>
                                                         </fieldset>
                                                     </div>
@@ -79,6 +80,77 @@
                                                 <a href="<?= base_url('auth'); ?>" class="btn btn-outline-primary float-left btn-inline mb-50">Login</a>
                                                 <button type="submit" id="btn-cek" class="btn btn-primary float-right btn-inline mb-50">Cek Akun</a>
                                             </form>
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $(".select").select2({
+                                                        allowClear: true,
+                                                        placeholder: "Pilih Salah Satu..",
+                                                    });
+
+                                                    $('#form-auth-siswa').submit(function(e) {
+                                                        e.preventDefault();
+                                                        var data = $(this).serialize(),
+                                                            validasi = $('#cek-akun').val(),
+                                                            htmlLama = $('#btn-submit').html();
+                                                        if (validasi == 'not-validate') {
+                                                            $.ajax({
+                                                                url: "/auth/validasi/pembimbing",
+                                                                data: data,
+                                                                type: "post",
+                                                                success: function(resp) {
+                                                                    if (resp == 'validate') {
+                                                                        $('#cek-akun').val(resp);
+                                                                        $('#nin').val($('#nomor_induk').val());
+                                                                        $('#nomor_induk').prop('disabled', true);
+                                                                        $('#perusahaan').prop('disabled', true);
+                                                                        $('#cek-done').css('display', 'block');
+                                                                        $('#cek-done input').attr('required', true);
+                                                                    } else if (resp == 'activated') {
+                                                                        Swal.fire({
+                                                                            title: 'Data Pembimbing Sudah Teraktivasi',
+                                                                            html: 'Klik <strong><b><a href="/auth/forgot">disini</a></b></strong> jika anda lupa katasandi',
+                                                                            type: 'warning',
+                                                                        });
+                                                                    } else {
+                                                                        Swal.fire({
+                                                                            title: 'Data Pembimbing Tidak Ditemukan!',
+                                                                            html: 'Harap menghubungi bagian Hubungan Industri (HUBIN) SMK Mandalahayu, atau sampaikan kepada siswa.',
+                                                                            type: 'warning',
+                                                                        });
+                                                                    }
+                                                                },
+                                                                error: function(resp) {
+                                                                    console.log(resp);
+                                                                }
+                                                            });
+                                                        } else if (validasi == 'validate') {
+                                                            console.log(data);
+                                                            $.ajax({
+                                                                url: "/auth/aktivasi/pembimbing",
+                                                                data: data,
+                                                                type: "post",
+                                                                success: function(resp) {
+                                                                    resp = JSON.parse(resp);
+                                                                    // console.log(resp);
+                                                                    Swal.fire({
+                                                                        title: resp.result,
+                                                                        html: resp.response,
+                                                                        type: resp.result,
+                                                                    });
+                                                                    if (resp.result == 'success') {
+                                                                        setTimeout(function() {
+                                                                            window.location.href = '/auth';
+                                                                        }, 500);
+                                                                    }
+                                                                },
+                                                                error: function(resp) {
+                                                                    console.log(resp);
+                                                                }
+                                                            });
+                                                        }
+                                                    })
+                                                })
+                                            </script>
                                         </div>
                                     </div>
                                 </div>

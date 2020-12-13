@@ -15,6 +15,7 @@ class SiswaModel extends Model
     'jenis_kelamin',
     'alamat',
     'absensi',
+    'email',
     'kelas',
     'id_pembimbing',
     'id_perusahaaan',

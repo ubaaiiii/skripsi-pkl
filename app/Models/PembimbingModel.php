@@ -71,4 +71,26 @@ class PembimbingModel extends Model
     $db       = $this->db;
     return $db->getFieldNames('pembimbing');
   }
+
+  public function validasi($nis, $perusahaan)
+  {
+    $db      = $this->db;
+    $builder = $db->table('pembimbing');
+    $builder->select("*")
+      ->where('nomor_induk', $nis)
+      ->where('id_perusahaan', $perusahaan);
+    if ($builder->countAllResults() !== 0) {
+      $builder->select("*")
+        ->where('nomor_induk', $nis)
+        ->where('id_perusahaan', $perusahaan)
+        ->where('email IS NOT NULL');
+      if ($builder->countAllResults() !== 0) {
+        return "activated";
+      } else {
+        return "validate";
+      }
+    } else {
+      return false;
+    }
+  }
 }

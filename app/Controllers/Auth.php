@@ -307,12 +307,18 @@ class Auth extends BaseController
 		}
 	}
 
-	public function validasi()
+	public function validasi($sebagai)
 	{
-		$nis	 = $this->request->getPost('nomor_induk');
-		$kelas = $this->request->getPost('kelas');
+		$var1	 	= $this->request->getPost('nomor_induk');
+		if ($sebagai == 'siswa') {
+			$var2 	= $this->request->getPost('kelas');
+			$model	= $this->siswaModel;
+		} elseif ($sebagai == 'pembimbing') {
+			$var2 	= $this->request->getPost('perusahaan');
+			$model	= $this->pembimbingModel;
+		}
 
-		if ($result = $this->siswaModel->validasi($nis, $kelas)) {
+		if ($result = $model->validasi($var1, $var2)) {
 			echo $result;
 		} else {
 			echo "not-validate";
@@ -328,17 +334,19 @@ class Auth extends BaseController
 			'nomor_induk'	=> $this->request->getPost('nin'),
 			'level'			=> $sebagai,
 		];
+		$nomor_induk	= $data['nomor_induk'];
+		$email			= $data['email'];
 
 		if ($result = $this->userModel->aktivasi($sebagai, $data['username'], $data['email'])) {
 			if ($result['result'] == 'success') {
 				$this->userModel->insert($data);
+				if ($sebagai == 'siswa') {
+					$model = $this->siswaModel;
+				} elseif ($sebagai == 'pembimbing') {
+					$model = $this->pembimbingModel;
+				}
+				$model->update($nomor_induk, ['email' => $email]);
 			}
-			if ($sebagai == 'siswa') {
-				$tabel = $this->siswaModel;
-			} elseif ($sebagai == 'pembimbing') {
-				$tabel = $this->pembimbingModel;
-			}
-			$tabel->update($data['nomor_induk'], ['email' => $data['email']]);
 			echo json_encode($result);
 		} else {
 			echo json_encode(['result' => 'error', 'response' => 'Gagal Aktivasi']);
