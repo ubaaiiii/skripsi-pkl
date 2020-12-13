@@ -44,8 +44,23 @@
                                                     <br />
                                                     <br />
                                                 </div>
-                                                <div id="cek-done">
-
+                                                <div id="cek-done" style="display:none;">
+                                                    <div class="form-label-group">
+                                                        <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+                                                        <label for="username">Username</label>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                                                        <label for="email">Email</label>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                                                        <label for="password">Password</label>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <input type="password" id="inputConfPassword" class="form-control" placeholder="Confirm Password">
+                                                        <label for="inputConfPassword">Confirm Password</label>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-12">
@@ -77,10 +92,6 @@
                                                         var data = $(this).serialize(),
                                                             validasi = $('#cek-akun').val(),
                                                             htmlLama = $('#btn-submit').html();
-                                                        $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Loading');
-                                                        $('#form-auth-siswa input').attr('disabled', true);
-                                                        $('#form-auth-siswa button').attr('disabled', true);
-                                                        $('#form-auth-siswa select').attr('disabled', true);
                                                         if (validasi == 'not-validate') {
                                                             $.ajax({
                                                                 url: "/auth/validasi",
@@ -92,22 +103,8 @@
                                                                         $('#nin').val($('#nomor_induk').val());
                                                                         $('#nomor_induk').prop('disabled', true);
                                                                         $('#kelas').prop('disabled', true);
-                                                                        $('#cek-done').append(`<div class="form-label-group">
-                                                                                        <input type="text" id="username" name="username" required class="form-control" placeholder="Username">
-                                                                                        <label for="username">Username</label>
-                                                                                    </div>
-                                                                                    <div class="form-label-group">
-                                                                                        <input type="email" id="email" name="email" required class="form-control" placeholder="Email">
-                                                                                        <label for="email">Email</label>
-                                                                                    </div>
-                                                                                    <div class="form-label-group">
-                                                                                        <input type="password" id="password" name="password" required class="form-control" placeholder="Password">
-                                                                                        <label for="password">Password</label>
-                                                                                    </div>
-                                                                                    <div class="form-label-group">
-                                                                                        <input type="password" id="inputConfPassword" required class="form-control" placeholder="Confirm Password">
-                                                                                        <label for="inputConfPassword">Confirm Password</label>
-                                                                                    </div>`);
+                                                                        $('#cek-done').css('display', 'block');
+                                                                        $('#cek-done input').attr('required', true);
                                                                     } else if (resp == 'activated') {
                                                                         Swal.fire({
                                                                             title: 'Data Siswa Telah Terdaftar',
@@ -127,20 +124,25 @@
                                                                 }
                                                             });
                                                         } else if (validasi == 'validate') {
-                                                          // console.log(data);
+                                                            // console.log(data);
                                                             $.ajax({
-                                                                url: "/auth/aktivasi",
+                                                                url: "/auth/aktivasi/siswa",
                                                                 data: data,
                                                                 type: "post",
                                                                 success: function(resp) {
-                                                                    console.log(resp);
+                                                                    resp = JSON.parse(resp);
+                                                                    // console.log(resp);
+                                                                    Swal.fire({
+                                                                        title: resp.result,
+                                                                        html: resp.response,
+                                                                        type: resp.result,
+                                                                    });
+                                                                    if (resp.result == 'success') {
+                                                                        window.location.href = '/auth';
+                                                                    }
                                                                 }
                                                             });
                                                         }
-                                                        $('#btn-submit').html(htmlLama);
-                                                        $('#form-auth-siswa input').attr('disabled', false);
-                                                        $('#form-auth-siswa button').attr('disabled', false);
-                                                        $('#form-auth-siswa select').attr('disabled', false);
                                                     })
                                                 })
                                             </script>

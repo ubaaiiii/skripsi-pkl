@@ -27,4 +27,23 @@ class UserModel extends Model
     $this->db       = \Config\Database::connect();
     $this->session  = session();
   }
+
+  public function aktivasi($sebagai, $username, $email)
+  {
+    $db      = $this->db;
+    $builder = $db->table('users');
+    $builder->select("*")
+      ->where('username', $username);
+    if ($builder->countAllResults() !== 0) {
+      return ['result' => 'error', 'response' => 'Username Yang Sama Telah Digunakan'];
+    } else {
+      $builder->select("*")
+        ->where('email', $email);
+      if ($builder->countAllResults() !== 0) {
+        return ['result' => 'error', 'response' => 'Email Yang Sama Telah Digunakan'];
+      } else {
+        return ['result' => 'success', 'response' => 'User ' . $username . '(' . $sebagai . ') telah berhasil diaktifkan.'];
+      }
+    }
+  }
 }

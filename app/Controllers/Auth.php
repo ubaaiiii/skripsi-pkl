@@ -8,6 +8,7 @@ use App\Models\SiswaModel;
 use App\Models\AdminModel;
 use App\Models\PembimbingModel;
 use App\Models\AuthModel;
+use App\Models\UserModel;
 
 class Auth extends BaseController
 {
@@ -20,6 +21,7 @@ class Auth extends BaseController
 		$this->adminModel			= new AdminModel();
 		$this->pembimbingModel	= new PembimbingModel();
 		$this->authModel			= new AuthModel();
+		$this->userModel			= new UserModel();
 		$this->session				= session();
 		$this->email				= \Config\Services::email();
 	}
@@ -317,17 +319,29 @@ class Auth extends BaseController
 		}
 	}
 
-	public function aktivasi()
+	public function aktivasi($sebagai)
 	{
-		$nis	 		= $this->request->getPost('nin');
-		$username = $this->request->getPost('username');
-		$email 		= $this->request->getPost('email');
-		$password = $this->request->getPost('password');
+		$data = [
+			'username'		=> $this->request->getPost('username'),
+			'password'		=>	md5($this->request->getPost('password')),
+			'email'			=>	$this->request->getPost('email'),
+			'nomor_induk'	=> $this->request->getPost('nin'),
+			'level'			=> $sebagai,
+		];
 
-		if ($result = $this->siswaModel->aktivasi($nis, $username, $email, $password)) {
-			echo $result;
+		if ($result = $this->userModel->aktivasi($sebagai, $data['username'], $data['email'])) {
+			if ($result['result'] == 'success') {
+				$this->userModel->insert($data);
+			}
+			if ($sebagai == 'siswa') {
+				$tabel = $this->siswaModel;
+			} elseif ($sebagai == 'pembimbing') {
+				$tabel = $this->pembimbingModel;
+			}
+			$tabel->update($data['nomor_induk'], ['email' => $data['email']]);
+			echo json_encode($result);
 		} else {
-			echo "not-validate";
+			echo json_encode(['result' => 'error', 'response' => 'Gagal Aktivasi']);
 		}
 	}
 }
