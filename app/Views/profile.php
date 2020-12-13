@@ -48,7 +48,7 @@
                                 <div class="card-body">
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="account-vertical-info" aria-labelledby="account-pill-info" aria-expanded="true">
-                                            <form novalidate id="form-info">
+                                            <form id="form-info">
                                                 <div class="media">
                                                     <a href="javascript: void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="hover" data-content="<img width='200px' src='/images/users/<?= $data->foto; ?>' /><?= ($session->user_level == 'Siswa') ? ("<br><h5 class='text-center " . explode(",", $data->stats)[1] . "'>" . explode(",", $data->stats)[0] . "</h5>") : (''); ?>">
                                                         <img src="<?= base_url('images/users') . "/" . $data->foto; ?>" style="object-fit: cover; object-position: 100% 0;" class="rounded mr-75 <?= ($session->user_level == 'Siswa') ? ('border-3 border-' . explode(",", $data->stats)[1]) : (''); ?>" alt="profile image" height="64" width="64">

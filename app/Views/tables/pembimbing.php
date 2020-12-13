@@ -355,6 +355,12 @@
             }],
             aaSorting: [],
           });
+
+          <?php
+          if (session('user_level') == 'Pembimbing') {
+            echo "table.columns( 4 ).search( '" . $data->perusahaan . "' ).draw();";
+          }
+          ?>
         });
       </script>
       <!-- Column selectors with Export Options and print table -->

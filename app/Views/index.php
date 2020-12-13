@@ -209,6 +209,8 @@
                         <li class=" nav-item"><a href="#"><i class="fa fa-th-list"></i><span class="menu-title" data-i18n="Data">Data</span></a>
                             <ul class="menu-content">
                                 <li><a href="<?= base_url('data/jadwal'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Jadwal PKL">Jadwal PKL</span></a> </li>
+                                <li><a href="<?= base_url('data/nilai'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Nilai">Nilai</span></a> </li>
+                                <li><a href="<?= base_url('data/siswa'); ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Siswa">Siswa</span></a> </li>
                             </ul>
                         </li>
                     <?php

@@ -27,108 +27,114 @@
             <!-- Column selectors with Export Options and print table -->
             <section id="column-selectors">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('data/siswa'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Siswa</h4>
-                                    <div class="badge badge-primary badge-md">
-                                        <span>&nbsp;<?= $jml_siswa; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                    <?php if (in_array(session('user_level'), ['Admin', 'Pembimbing', 'Siswa'])) { ?>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data/nilai'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Nilai Siswa</h4>
+                                        <div class="badge badge-primary badge-md">
+                                            <span>&nbsp;<?= $jml_siswa; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid" src="<?= base_url('images\pages\nilai.png'); ?>" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid" src="<?= base_url('images\pages\siswa.png'); ?>" alt="">
+                            </a>
+                        </div>
+                    <?php } ?>
+                    <?php if (in_array(session('user_level'), ['Admin', 'Pembimbing'])) { ?>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data/siswa'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Siswa</h4>
+                                        <div class="badge badge-primary badge-md">
+                                            <span>&nbsp;<?= $jml_siswa; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid" src="<?= base_url('images\pages\siswa.png'); ?>" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('data/nilai'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Nilai Siswa</h4>
-                                    <div class="badge badge-primary badge-md">
-                                        <span>&nbsp;<?= $jml_siswa; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data/pembimbing'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Pembimbing</h4>
+                                        <div class="badge badge-primary badge-md">
+                                            <span>&nbsp;<?= $jml_pembimbing; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-user-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid" src="<?= base_url('images\pages\pembimbing.png'); ?>" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid" src="<?= base_url('images\pages\nilai.png'); ?>" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data/jadwal'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Jadwal PKL</h4>
+                                        <div class="badge badge-primary badge-md">
+                                            <span>&nbsp;<?= $jml_perusahaan; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid" src="<?= base_url('images\pages\jadwal.png'); ?>" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('data/pembimbing'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Pembimbing</h4>
-                                    <div class="badge badge-primary badge-md">
-                                        <span>&nbsp;<?= $jml_pembimbing; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-user-check"></i>
+                            </a>
+                        </div>
+                    <?php } ?>
+                    <?php if (in_array(session('user_level'), ['Admin'])) { ?>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data/perusahaan'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Perusahaan</h4>
+                                        <div class="badge badge-primary badge-md">
+                                            <span>&nbsp;<?= $jml_perusahaan; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid" src="<?= base_url('images\pages\perusahaan.png'); ?>" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid" src="<?= base_url('images\pages\pembimbing.png'); ?>" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data/admin'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Admin</h4>
+                                        <div class="badge badge-primary badge-md">
+                                            <span>&nbsp;<?= $jml_admin; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid" src="<?= base_url('images\pages\admin.png'); ?>" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('data/perusahaan'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Perusahaan</h4>
-                                    <div class="badge badge-primary badge-md">
-                                        <span>&nbsp;<?= $jml_perusahaan; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
-                                    </div>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid" src="<?= base_url('images\pages\perusahaan.png'); ?>" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('data/jadwal'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Jadwal PKL</h4>
-                                    <div class="badge badge-primary badge-md">
-                                        <span>&nbsp;<?= $jml_perusahaan; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
-                                    </div>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid" src="<?= base_url('images\pages\jadwal.png'); ?>" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="<?= base_url('data/admin'); ?>">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Admin</h4>
-                                    <div class="badge badge-primary badge-md">
-                                        <span>&nbsp;<?= $jml_admin; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-users"></i>
-                                    </div>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <img class="img-fluid" src="<?= base_url('images\pages\admin.png'); ?>" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    <?php } ?>
                 </div>
             </section>
             <!-- Column selectors with Export Options and print table -->

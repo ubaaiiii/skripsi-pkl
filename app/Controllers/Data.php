@@ -64,7 +64,7 @@ class Data extends BaseController
 		if (!session('user_name')) {
 			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
 			return redirect()->to('/auth');
-		} else if (!in_array(session('user_level'), ['Admin'])) {
+		} else if (!in_array(session('user_level'), ['Admin', 'Pembimbing'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 		$session = $this->session;
@@ -75,10 +75,6 @@ class Data extends BaseController
 
 			case ("Pembimbing"):
 				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
-				break;
-
-			case ("Siswa"):
-				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
 				break;
 
 			default:
@@ -116,10 +112,6 @@ class Data extends BaseController
 				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
 				break;
 
-			case ("Siswa"):
-				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
-				break;
-
 			default:
 				return redirect()->to('/auth');
 		}
@@ -142,7 +134,7 @@ class Data extends BaseController
 		if (!session('user_name')) {
 			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
 			return redirect()->to('/auth');
-		} else if (!in_array(session('user_level'), ['Admin'])) {
+		} else if (!in_array(session('user_level'), ['Admin', 'Pembimbing'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 		$session = $this->session;
@@ -153,10 +145,6 @@ class Data extends BaseController
 
 			case ("Pembimbing"):
 				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
-				break;
-
-			case ("Siswa"):
-				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
 				break;
 
 			default:
@@ -193,10 +181,6 @@ class Data extends BaseController
 				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
 				break;
 
-			case ("Siswa"):
-				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
-				break;
-
 			default:
 				return redirect()->to('/auth');
 		}
@@ -220,6 +204,40 @@ class Data extends BaseController
 			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
 			return redirect()->to('/auth');
 		} else if (!in_array(session('user_level'), ['Admin'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+		$session = $this->session;
+		switch ($session->user_level) {
+			case ("Admin"):
+				$dataUser = $this->adminModel->find($session->nomor_induk);
+				break;
+
+			case ("Pembimbing"):
+				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			default:
+				return redirect()->to('/auth');
+		}
+		$data = [
+			'title' 			=> "Data Admin",
+			'subtitle'		=> "Admin",
+			'perusahaan'	=> $this->perusahaanModel->findAll(),
+			'jabatan'		=> $this->masterModel->getData('jabatan'),
+			'jurusan'		=> $this->masterModel->getData('kelas'),
+			'status'			=> $this->masterModel->getData('status'),
+			'session'		=> $session,
+			'data'			=> $dataUser,
+		];
+		return view('tables/admin', $data);
+	}
+
+	public function nilai()
+	{
+		if (!session('user_name')) {
+			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
+			return redirect()->to('/auth');
+		} else if (!in_array(session('user_level'), ['Admin', 'Pembimbing', 'Siswa'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 		$session = $this->session;
