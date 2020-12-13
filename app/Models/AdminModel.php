@@ -33,8 +33,9 @@ class AdminModel extends Model
   {
     $db      = $this->db;
     $builder = $db->table('admin a');
-    $builder->select("a.*, b.msdesc 'jbtn'")
+    $builder->select("a.*, b.msdesc 'jbtn', c.msdesc 'jkel'")
       ->join("master b", "a.jabatan = b.msid AND b.mstype = 'jabatan'")
+      ->join("master c", "a.jenis_kelamin = c.msid AND c.mstype = 'jkel'")
       ->where('deleted_at', null);
     if ($ni) {
       $builder->where('nomor_induk', $ni);

@@ -91,15 +91,24 @@
                                                             <label for="user-email">E-mail</label>
                                                         </fieldset>
                                                     </div>
+                                                    <div class="col-12">
+                                                        <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                            <input type="text" class="form-control" id="jenis-kelamin" disabled placeholder="Jenis Kelamin" d-lama="<?= $data->jkel; ?>" value="<?= $data->jkel; ?>" data-validation-required-message="* Jenis kelamin wajib diisi">
+                                                            <div class="form-control-position">
+                                                                <i class="fa fa-venus-mars"></i>
+                                                            </div>
+                                                            <label for="jenis-kelamin">Jenis Kelamin</label>
+                                                        </fieldset>
+                                                    </div>
                                                     <?php
                                                     switch ($session->user_level) {
                                                         case ('Admin'):
                                                     ?>
                                                             <div class="col-12">
                                                                 <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                                    <input type="text" class="form-control" id="jabatan" placeholder="Jabatan" d-lama="<?= $data->jabatan; ?>" value="<?= $data->jabatan; ?>" data-validation-required-message="* Jabatan wajib diisi">
+                                                                    <input type="text" class="form-control" id="jabatan" disabled placeholder="Jabatan" d-lama="<?= $data->jabatan; ?>" value="<?= $data->jabatan; ?>" data-validation-required-message="* Jabatan wajib diisi">
                                                                     <div class="form-control-position">
-                                                                        <i class="feather icon-mail"></i>
+                                                                        <i class="fa fa-users"></i>
                                                                     </div>
                                                                     <label for="jabatan">Jabatan</label>
                                                                 </fieldset>
@@ -110,9 +119,9 @@
                                                         ?>
                                                             <div class="col-12">
                                                                 <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                                    <input type="text" class="form-control" id="perusahaan" placeholder="Perusahaan" d-lama="<?= $data->perusahaan; ?>" value="<?= $data->perusahaan; ?>" data-validation-required-message="* Perusahaan wajib diisi">
+                                                                    <input type="text" class="form-control" id="perusahaan" disabled placeholder="Perusahaan" d-lama="<?= $data->perusahaan; ?>" value="<?= $data->perusahaan; ?>" data-validation-required-message="* Perusahaan wajib diisi">
                                                                     <div class="form-control-position">
-                                                                        <i class="feather icon-mail"></i>
+                                                                        <i class="fa fa-users"></i>
                                                                     </div>
                                                                     <label for="perusahaan">Perusahaan</label>
                                                                 </fieldset>
@@ -132,20 +141,20 @@
                                                             </div>
                                                             <div class="col-12">
                                                                 <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                                    <input type="text" class="form-control" id="kode-kelas" disabled placeholder="Kode Kelas" d-lama="<?= explode(",", $data->klas)[0]; ?>" value="<?= explode(",", $data->klas)[0]; ?>" data-validation-required-message="* Kode Kelas wajib diisi">
+                                                                    <input type="text" class="form-control" id="kelas" disabled placeholder="Kode Kelas" d-lama="<?= explode(",", $data->klas)[0]; ?>" value="<?= explode(",", $data->klas)[0]; ?>" data-validation-required-message="* Kode Kelas wajib diisi">
                                                                     <div class="form-control-position">
                                                                         <i class="fa fa-object-ungroup"></i>
                                                                     </div>
-                                                                    <label for="kode-kelas">Kelas</label>
+                                                                    <label for="kelas">Kelas</label>
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-12">
                                                                 <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                                    <input type="text" class="form-control" id="kode-kelas" disabled placeholder="Kode Kelas" d-lama="<?= explode(",", $data->klas)[1]; ?>" value="<?= explode(",", $data->klas)[1]; ?>" data-validation-required-message="* Kode Kelas wajib diisi">
+                                                                    <input type="text" class="form-control" id="jurusan" disabled placeholder="Kode Kelas" d-lama="<?= explode(",", $data->klas)[1]; ?>" value="<?= explode(",", $data->klas)[1]; ?>" data-validation-required-message="* Kode Kelas wajib diisi">
                                                                     <div class="form-control-position">
                                                                         <i class="fa fa-object-group"></i>
                                                                     </div>
-                                                                    <label for="kode-kelas">Jurusan</label>
+                                                                    <label for="jurusan">Jurusan</label>
                                                                 </fieldset>
                                                             </div>
                                                     <?php

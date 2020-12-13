@@ -31,7 +31,7 @@ class Profile extends BaseController
 
 		switch ($session->user_level) {
 			case ("Admin"):
-				$dataUser = $this->adminModel->find($session->nomor_induk);
+				$dataUser = $this->adminModel->tableAdmin($session->nomor_induk)[0];
 				$dataSelect	= $this->masterModel->getData('jabatan');
 				break;
 
@@ -60,8 +60,36 @@ class Profile extends BaseController
 			'dataSelect' 	=> $dataSelect,
 			'medsos'			=>	$medsos,
 		];
+		// dd($data['data']);
 		return view('profile', $data);
 	}
+
+	public function updatePhoto($sebagai)
+	{
+	}
+
+	public function updateProfile($sebagai)
+	{
+		$data = [
+			'nama'	=> $this->request->getPost('user-nama'),
+			'email'	=> $this->request->getPost('user-email'),
+			'alamat'	=> $this->request->getPost('alamat'),
+		];
+		$dataLogin =	[
+			'username'	=> $this->request->getPost('user-name'),
+			'email'		=> $data['email'],
+		];
+
+		if ($sebagai == 'admin') {
+			$model = $this->adminModel;
+		} elseif ($sebagai == 'pembimbing') {
+			$model = $this->pembimbingModel;
+		} elseif ($sebagai == 'siswa') {
+			$model = $this->siswaModel;
+		}
+	}
+
+
 
 	//--------------------------------------------------------------------
 

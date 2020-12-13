@@ -40,9 +40,10 @@ class SiswaModel extends Model
     }
     $db      = $this->db;
     $builder = $db->table('siswa a');
-    $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas'")
+    $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas', d.msdesc 'jkel'")
       ->join("master b", "a.status = b.msid")
       ->join("master c", "a.kelas = c.msid")
+      ->join("master d", "a.jenis_kelamin = d.msid")
       ->where('deleted_at', null);
     if ($ni) {
       $builder->where('nomor_induk', $ni);

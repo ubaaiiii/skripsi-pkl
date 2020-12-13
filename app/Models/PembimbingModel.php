@@ -33,8 +33,9 @@ class PembimbingModel extends Model
   {
     $db      = $this->db;
     $builder = $db->table('pembimbing a');
-    $builder->select("a.*, b.nama 'perusahaan'")
+    $builder->select("a.*, b.nama 'perusahaan', c.msdesc 'jkel'")
       ->join("perusahaan b", "a.id_perusahaan = b.id")
+      ->join("master c", "a.jenis_kelamin = c.msid AND c.mstype = 'jkel'")
       ->where('a.deleted_at', null);
     if ($ni) {
       $builder->where('nomor_induk', $ni);
