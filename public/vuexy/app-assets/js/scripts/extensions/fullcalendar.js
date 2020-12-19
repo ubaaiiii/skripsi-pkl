@@ -37,6 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
             addNew: {
                 text: ' Absen',
                 click: function() {
+                    var now = new Date(),
+                        tipe = "";
+                    if (now.getHours() < 1) {
+                        tipe = colors.success;
+                    } else {
+                        tipe = colors.warning;
+                    }
+                    $.ajax({
+                        url: base_url + "/tugas/cekAbsen/",
+                        data: { 'tipe': tipe }
+                    });
                     var calDate = new Date,
                         todaysDate = calDate.toISOString().slice(0, 10),
                         todaysTime = new Date().toLocaleTimeString();
@@ -61,12 +72,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         start: startDate,
                         end: correctEndDate,
                         description: eventDescription,
-                        color: evtColor,
+                        color: tipe,
                         dataEventColor: eventColor,
                         allDay: true
                     });
                 }
-            }
+            },
         },
         header: {
             left: "addNew",
