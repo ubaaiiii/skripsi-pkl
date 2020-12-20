@@ -30,7 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // calendar init
     var calendarEl = document.getElementById('fc-default');
+    var dataEvents = [];
+    // $.ajax({
+    //     url: base_url + "/tugas/loadabsen",
+    //     success: function(resp) {
 
+    //     }
+    // });
     var calendar = new FullCalendar.Calendar(calendarEl, {
         locale: 'id',
         plugins: ["dayGrid", "timeGrid", "interaction"],
@@ -58,10 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     // $("#cal-start-date").val(todaysDate);
                     // $("#cal-end-date").val(todaysDate);
                     // $(".modal-calendar #cal-start-date").attr("disabled", true);
-                    $.ajax({
-                        url: base_url + "/tugas/cekAbsen/",
-                        data: { 'tipe': tipe }
-                    });
+                    // $.ajax({
+                    //     url: base_url + "/tugas/cekAbsen/",
+                    //     data: { 'tipe': tipe }
+                    // });
                     var calDate = new Date,
                         todaysDate = calDate.toISOString().slice(0, 10),
                         todaysTime = calDate.toLocaleTimeString(),
@@ -111,21 +117,12 @@ document.addEventListener('DOMContentLoaded', function() {
             left: "addNew",
             right: "prev,title,next"
         },
-        events: [{
-            'id': '1',
-            'title': new Date().toLocaleTimeString(),
-            'start': new Date().toISOString().slice(0, 10),
-            'end': new Date().toISOString().slice(0, 10),
-            'editable': false,
-            'color': colors.success,
-            'allDay': true
-        }],
+        events: "/tugas/loadabsen",
         displayEventTime: true,
         navLinks: true,
-        editable: true,
         allDay: true,
         navLinkDayClick: function(date) {
-            $(".modal-calendar").modal("show");
+            // $(".modal-calendar").modal("show");
         },
         dateClick: function(info) {
             $(".modal-calendar #cal-start-date").val(info.dateStr).attr("disabled", true);

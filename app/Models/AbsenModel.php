@@ -28,6 +28,27 @@ class AbsenModel extends Model
     $this->db = \Config\Database::connect();
   }
 
+  public function getLoadAbsensi($ni = false, $start, $end)
+  {
+    $db      = $this->db;
+    $builder = $db->table('absensi');
+    $builder->select("id,
+                      right(tgl_masuk,8) 'title',
+                      tgl_masuk 'start',
+                      tgl_keluar 'end',
+                      0 'editable',
+                      tipe 'color',
+                      1 'allDay'")
+      ->where('tgl_masuk BETWEEN "' . $start . '" AND "' . $end . '"')
+      ->where('deleted_at', null);
+    if ($ni) {
+      $builder->where('ni_siswa', $ni);
+    }
+
+    return $builder->get()->getResult();
+    // print_r($db->getLastQuery());
+  }
+
   public function tableAbsensi($ni = false)
   {
     $db      = $this->db;
