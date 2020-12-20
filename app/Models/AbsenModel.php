@@ -58,7 +58,7 @@ class AbsenModel extends Model
     }
     $array2 = $builder->get()->getResult();
 
-    return $array3 = array_merge($array1, $array2);
+    return array_merge($array1, $array2);
     // print_r($db->getLastQuery());
   }
 

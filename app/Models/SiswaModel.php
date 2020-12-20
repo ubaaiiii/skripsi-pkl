@@ -40,7 +40,7 @@ class SiswaModel extends Model
     }
     $db      = $this->db;
     $builder = $db->table('siswa a');
-    $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas', d.msdesc 'jkel', f.nama 'perusahaan'")
+    $builder->select("a.*, b.msdesc 'stats', c.msdesc 'klas', d.msdesc 'jkel', f.nama 'perusahaan', e.id 'jadwal_id'")
       ->join("master b", "a.status = b.msid")
       ->join("master c", "a.kelas = c.msid")
       ->join("master d", "a.jenis_kelamin = d.msid")

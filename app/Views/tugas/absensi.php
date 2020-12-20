@@ -188,10 +188,9 @@
                                     // $("#cal-start-date").val(todaysDate);
                                     // $("#cal-end-date").val(todaysDate);
                                     // $(".modal-calendar #cal-start-date").attr("disabled", true);
-                                    // $.ajax({
-                                    //     url: base_url + "/tugas/cekAbsen/",
-                                    //     data: { 'tipe': tipe }
-                                    // });
+                                    $.ajax({
+                                        url: base_url + "/tugas/cekAbsen/" + tipe,
+                                    });
                                     var calDate = new Date,
                                         todaysDate = calDate.toIsoString().slice(0, 10),
                                         todaysTime = calDate.toLocaleTimeString('id-ID', {

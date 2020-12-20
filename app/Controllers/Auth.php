@@ -146,7 +146,7 @@ class Auth extends BaseController
 							$dataUser = $this->adminModel->find($user->nomor_induk);
 							break;
 						case 'siswa':
-							$dataUser = $this->siswaModel->find($user->nomor_induk);
+							$dataUser = $this->siswaModel->tableSiswa($user->nomor_induk)[0];
 							break;
 						case 'pembimbing':
 							$dataUser = $this->pembimbingModel->find($user->nomor_induk);
@@ -156,7 +156,8 @@ class Auth extends BaseController
 							return "salah level";
 							break;
 					}
-
+					// var_dump($dataUser);
+					// die;
 					$dataSession = [
 						'user_name'		=> $user->username,
 						'user_level'	=> ucwords($user->level),
@@ -164,6 +165,10 @@ class Auth extends BaseController
 						'user_foto'		=> $dataUser->foto,
 						'nomor_induk'	=> $dataUser->nomor_induk,
 					];
+
+					if ($user->level == 'siswa') {
+						$dataSession['id_jadwal'] = $dataUser->jadwal_id;
+					}
 
 					$this->session->set($dataSession);
 					return json_encode(['result' => 'success', 'message' => 'Berhasil masuk, sedang mengalihkan ke halaman dashboard...']);

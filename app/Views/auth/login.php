@@ -76,6 +76,7 @@
                                                             type: "post",
                                                             success: function(resp) {
                                                                 resp = JSON.parse(resp);
+                                                                // console.log(resp);
                                                                 if (resp.result == 'success') {
                                                                     $('#btn-submit').html('<i class="fa fa-spinner fa-pulse"></i>  Redirecting...');
                                                                     Swal.fire({
@@ -100,11 +101,12 @@
                                                                 }
                                                             },
                                                             error: function(resp) {
-                                                                Swal.fire({
-                                                                    title: 'Error!',
-                                                                    html: resp,
-                                                                    type: 'error',
-                                                                });
+                                                                console.log(resp);
+                                                                // Swal.fire({
+                                                                //     title: 'Error!',
+                                                                //     html: resp,
+                                                                //     type: 'error',
+                                                                // });
                                                             }
                                                         })
                                                     })
