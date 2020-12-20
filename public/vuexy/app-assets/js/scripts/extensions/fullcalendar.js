@@ -32,25 +32,23 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('fc-default');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'id',
         plugins: ["dayGrid", "timeGrid", "interaction"],
         customButtons: {
             addNew: {
                 text: ' Absen',
                 click: function() {
                     var now = new Date(),
-                        tipe = "";
-                    if (now.getHours() < 1) {
+                        tipe = "",
+                        pesan = "",
+                        batasWaktu = 1;
+                    if (now.getHours() < batasWaktu) {
                         tipe = colors.success;
+                        pesan = { 'icon': 'success', 'title': 'Tepat Waktu!', 'message': 'Terima kasih telah datang sebelum pukul ' + ("00" + batasWaktu).slice(-2) + ':00' };
                     } else {
                         tipe = colors.warning;
+                        pesan = { 'icon': 'warning', 'title': 'Terlambat!', 'message': 'Datanglah sebelum pukul ' + ("00" + batasWaktu).slice(-2) + ':00' };
                     }
-                    $.ajax({
-                        url: base_url + "/tugas/cekAbsen/",
-                        data: { 'tipe': tipe }
-                    });
-                    var calDate = new Date,
-                        todaysDate = calDate.toISOString().slice(0, 10),
-                        todaysTime = new Date().toLocaleTimeString();
                     // $(".modal-calendar").modal("show");
                     // $(".modal-calendar .cal-submit-event").addClass("d-none");
                     // $(".modal-calendar .remove-event").addClass("d-none");
@@ -60,21 +58,51 @@ document.addEventListener('DOMContentLoaded', function() {
                     // $("#cal-start-date").val(todaysDate);
                     // $("#cal-end-date").val(todaysDate);
                     // $(".modal-calendar #cal-start-date").attr("disabled", true);
-
-                    var eventTitle = todaysTime,
-                        startDate = $("#cal-start-date").val(),
-                        endDate = $("#cal-end-date").val(),
-                        eventDescription = $("#cal-description").val(),
+                    $.ajax({
+                        url: base_url + "/tugas/cekAbsen/",
+                        data: { 'tipe': tipe }
+                    });
+                    var calDate = new Date,
+                        todaysDate = calDate.toISOString().slice(0, 10),
+                        todaysTime = calDate.toLocaleTimeString(),
+                        eventTitle = todaysTime,
+                        startDate = todaysDate,
+                        endDate = todaysDate,
                         correctEndDate = new Date(endDate);
-                    calendar.addEvent({
-                        id: "newEvent",
-                        title: eventTitle,
-                        start: startDate,
-                        end: correctEndDate,
-                        description: eventDescription,
-                        color: tipe,
-                        dataEventColor: eventColor,
-                        allDay: true
+
+
+                    Swal.fire({
+                        title: 'Kamu yakin?',
+                        text: "Absen/Izin tidak akan dapat diubah",
+                        showCancelButton: true,
+                        confirmButtonText: 'Absen',
+                        confirmButtonColor: colors.success,
+                        cancelButtonText: 'Izin',
+                        cancelButtonColor: colors.primary,
+                    }).then((result) => {
+                        if (result.value) {
+                            calendar.addEvent({
+                                id: "newEvent",
+                                title: eventTitle,
+                                start: startDate,
+                                editable: false,
+                                end: correctEndDate,
+                                color: tipe,
+                                allDay: true
+                            });
+                            console.log('absen');
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            pesan = { 'icon': 'info', 'title': 'Diizinkan', 'message': 'Harap meminta izin kepada pembimbing PKL.' };
+                            console.log('izin');
+                        }
+                        Swal.fire(
+                            pesan.title,
+                            pesan.message,
+                            pesan.icon
+                        )
                     });
                 }
             },
@@ -83,6 +111,15 @@ document.addEventListener('DOMContentLoaded', function() {
             left: "addNew",
             right: "prev,title,next"
         },
+        events: [{
+            'id': '1',
+            'title': new Date().toLocaleTimeString(),
+            'start': new Date().toISOString().slice(0, 10),
+            'end': new Date().toISOString().slice(0, 10),
+            'editable': false,
+            'color': colors.success,
+            'allDay': true
+        }],
         displayEventTime: true,
         navLinks: true,
         editable: true,

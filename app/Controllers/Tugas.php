@@ -73,8 +73,14 @@ class Tugas extends BaseController
 			echo json_encode($result);
 		} else {
 			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
-			return redirect()->to('/auth/logout');
+			return redirect()->to('/auth');
 		}
+	}
+
+	public function loadAbsen()
+	{
+		$nomor_induk = session('nomor_induk');
+		$tabel 	= $this->absenModel;
 	}
 
 	public function absensi()

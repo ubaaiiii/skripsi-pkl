@@ -22,6 +22,11 @@
                                             <h4 class="mb-0">Login</h4>
                                         </div>
                                     </div>
+                                    <?php if ($session->message) { ?>
+                                        <script>
+                                            alert('<?= $session->message; ?>');
+                                        </script>
+                                    <?php } ?>
                                     <p class="px-2">Selamat datang di website PKL Mandalahayu.</p>
                                     <div class="card-content">
                                         <div class="card-body pt-1">

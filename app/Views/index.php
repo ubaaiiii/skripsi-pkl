@@ -50,6 +50,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/css/plugins/extensions/toastr.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/app-assets/vendors/css/daterangepicker.min.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vuexy/assets/css/style.css'); ?>">
+    <!-- js head -->
     <script src="<?= base_url('vuexy/app-assets/vendors/js/jquery.min.js'); ?>"></script>
     <script>
         $.noConflict();
@@ -58,9 +59,6 @@
     <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/toastr.min.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/daterangepicker/moment.min.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/daterangepicker/daterangepicker.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/moment.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/fullcalendar.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/js/scripts/extensions/fullcalendar.js'); ?>"></script>
     <script>
         var base_url = "<?= base_url(); ?>";
     </script>
@@ -264,6 +262,10 @@
     <footer class="footer footer-static footer-light">
         <!-- <p class="clearfix blue-grey lighten-2 mb-0"> <span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span> <span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span> <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button> </p>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
     </footer>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/sweetalert2.all.min.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/moment.min.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/fullcalendar.min.js'); ?>"></script>
+    <script src="<?= base_url('vuexy/app-assets/js/scripts/extensions/fullcalendar.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/extensions/daygrid.min.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/extensions/timegrid.min.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/calendar/extensions/interactions.min.js'); ?>"></script>
@@ -271,7 +273,6 @@
     <script src="<?= base_url('vuexy/app-assets/vendors/js/pickers/pickadate/picker.date.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/forms/select/select2.full.min.js'); ?>"></script>
-    <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/sweetalert2.all.min.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/vendors/js/extensions/polyfill.min.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/js/core/app-menu.js'); ?>"></script>
     <script src="<?= base_url('vuexy/app-assets/js/core/app.js'); ?>"></script>
