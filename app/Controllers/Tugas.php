@@ -81,21 +81,23 @@ class Tugas extends BaseController
 	{
 		$nomor_induk = session('nomor_induk');
 		$tabel 	= $this->absenModel;
-		$start	= str_replace("+07:00", "", str_replace("T", " ", $this->request->getGet('start')));
-		$end		= str_replace("+07:00", "", str_replace("T", " ", $this->request->getGet('end')));
 
 		if ($nomor_induk) {
-			$dataAbsen = $tabel->getLoadAbsensi($nomor_induk, $start, $end);
-			// foreach ($dataAbsen as $row) {
-			// 	$data[] = array(
-			// 		'id'	=> $row->id,
-			// 		'title' => $row->title,
-			// 		'start' => $row->start,
-			// 		'end' => $row->end
-			// 	);
-			// }
-			echo json_encode($dataAbsen);
-			// echo json_encode($data);
+			$dataAbsen = $tabel->getLoadAbsensi($nomor_induk);
+			$data = [];
+			foreach ($dataAbsen as $row) {
+				$data[] = array(
+					'id'	=> (int)$row->id,
+					'title' => $row->title,
+					'start' => $row->start,
+					'end' => $row->end,
+					'editable' => (int)$row->editable,
+					'color' => $row->color,
+					'allDay' => (int)$row->allDay,
+				);
+			}
+			// echo "'" . json_encode($dataAbsen) . "'";
+			return $data;
 		} else {
 			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
 			return redirect()->to('/auth');
@@ -113,6 +115,7 @@ class Tugas extends BaseController
 		$data = [
 			'title' 		=> "Absensi",
 			'subtitle'	=> "Absensi",
+			'dataAbsen'	=> $this->loadAbsen(),
 			// 'script'		=> '<script src="' . base_url('vuexy/app-assets/js/scripts/extensions/fullcalendar.js') . '"></script>',
 			'session'	=> $this->session,
 		];

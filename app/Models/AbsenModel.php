@@ -28,24 +28,37 @@ class AbsenModel extends Model
     $this->db = \Config\Database::connect();
   }
 
-  public function getLoadAbsensi($ni = false, $start, $end)
+  public function getLoadAbsensi($ni = false)
   {
     $db      = $this->db;
     $builder = $db->table('absensi');
     $builder->select("id,
                       right(tgl_masuk,8) 'title',
                       tgl_masuk 'start',
-                      tgl_keluar 'end',
-                      0 'editable',
+                      tgl_masuk 'end',
+                      false 'editable',
                       tipe 'color',
-                      1 'allDay'")
-      ->where('tgl_masuk BETWEEN "' . $start . '" AND "' . $end . '"')
+                      true 'allDay'")
       ->where('deleted_at', null);
     if ($ni) {
       $builder->where('ni_siswa', $ni);
     }
+    $array1 = $builder->get()->getResult();
+    $builder = $db->table('absensi');
+    $builder->select("id,
+                      right(tgl_keluar,8) 'title',
+                      tgl_keluar 'start',
+                      tgl_keluar 'end',
+                      false 'editable',
+                      tipe 'color',
+                      true 'allDay'")
+      ->where('deleted_at', null);
+    if ($ni) {
+      $builder->where('ni_siswa', $ni);
+    }
+    $array2 = $builder->get()->getResult();
 
-    return $builder->get()->getResult();
+    return $array3 = array_merge($array1, $array2);
     // print_r($db->getLastQuery());
   }
 
