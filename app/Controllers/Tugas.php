@@ -46,13 +46,16 @@ class Tugas extends BaseController
 		return view('tugas/kegiatan', $data);
 	}
 
-	public function cekAbsen($tipe = false)
+	public function cekAbsen()
 	{
 		$this->db = \Config\Database::connect();
 		$nomor_induk = session('nomor_induk');
 		$id_jadwal = session('id_jadwal');
 		$tabel 	= $this->absenModel;
-		$hariIni = date('Y-m-d h:m:s');
+		$hariIni = $this->request->getPost('tgl');
+		$tglnya = substr($hariIni, 0, 10);
+		$tipe = ($this->request->getPost('tipe') == 'telat') ? ("#ff9f43") : ("#28c76f");
+
 		if ($nomor_induk) {
 			$data = [
 				'id_jadwal' => $id_jadwal,
@@ -62,7 +65,7 @@ class Tugas extends BaseController
 				'tipe'		=> $tipe,
 				'ket'			=> null,
 			];
-			$dataAbsen = $tabel->where('ni_siswa', $nomor_induk)->where('tgl_masuk like "%' . $hariIni . '%"')->find();
+			$dataAbsen = $tabel->where('ni_siswa', $nomor_induk)->where('tgl_masuk like "%' . $tglnya . '%"')->find();
 			// print_r($this->db->getLastQuery());
 			if (count($dataAbsen) > 0) {
 				if (count($dataAbsen) > 1) {
@@ -73,6 +76,10 @@ class Tugas extends BaseController
 				}
 			} else {
 				$result = ['result' => 'error', 'message' => 'Belum Absen'];
+				// bikin absen masuk
+				if ($tabel->insert($data)) {
+					$result = ['result' => 'success', 'message' => 'Berhasil Absen Masuk (' . $hariIni . ')'];
+				}
 			}
 			echo json_encode($result);
 		} else {

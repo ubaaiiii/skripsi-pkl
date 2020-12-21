@@ -131,12 +131,6 @@
                     // calendar init
                     var calendarEl = document.getElementById('fc-default');
                     var dataEvents = [];
-                    // $.ajax({
-                    //     url: base_url + "/tugas/loadabsen",
-                    //     success: function(resp) {
-
-                    //     }
-                    // });
                     Date.prototype.toIsoString = function() {
                         var tzo = -this.getTimezoneOffset(),
                             dif = tzo >= 0 ? '+' : '-',
@@ -161,36 +155,29 @@
                                 text: ' Absen',
                                 click: function() {
                                     var now = new Date(),
-                                        tipe = "",
+                                        warna = "",
                                         pesan = "",
-                                        batasWaktu = 1;
+                                        tipe = "",
+                                        batasWaktu = 8;
+
                                     if (now.getHours() < batasWaktu) {
-                                        tipe = colors.success;
+                                        warna = colors.success;
+                                        tipe = "tepat";
                                         pesan = {
                                             'icon': 'success',
                                             'title': 'Tepat Waktu!',
                                             'message': 'Terima kasih telah datang sebelum pukul ' + ("00" + batasWaktu).slice(-2) + ':00'
                                         };
                                     } else {
-                                        tipe = colors.warning;
+                                        warna = colors.warning;
+                                        tipe = "telat";
                                         pesan = {
                                             'icon': 'warning',
                                             'title': 'Terlambat!',
                                             'message': 'Datanglah sebelum pukul ' + ("00" + batasWaktu).slice(-2) + ':00'
                                         };
                                     }
-                                    // $(".modal-calendar").modal("show");
-                                    // $(".modal-calendar .cal-submit-event").addClass("d-none");
-                                    // $(".modal-calendar .remove-event").addClass("d-none");
-                                    // $(".modal-calendar .cal-add-event").removeClass("d-none")
-                                    // $(".modal-calendar .cancel-event").removeClass("d-none")
-                                    // $(".modal-calendar .add-category .chip").remove();
-                                    // $("#cal-start-date").val(todaysDate);
-                                    // $("#cal-end-date").val(todaysDate);
-                                    // $(".modal-calendar #cal-start-date").attr("disabled", true);
-                                    $.ajax({
-                                        url: base_url + "/tugas/cekAbsen/" + tipe,
-                                    });
+
                                     var calDate = new Date,
                                         todaysDate = calDate.toIsoString().slice(0, 10),
                                         todaysTime = calDate.toLocaleTimeString('id-ID', {
@@ -199,8 +186,8 @@
                                         eventTitle = todaysTime,
                                         startDate = todaysDate,
                                         endDate = todaysDate,
-                                        correctEndDate = new Date(endDate);
-                                    console.log(calDate.toISOString());
+                                        correctEndDate = new Date(endDate),
+                                        kirimTgl = todaysDate + " " + todaysTime;
 
                                     Swal.fire({
                                         title: 'Kamu yakin?',
@@ -212,16 +199,33 @@
                                         cancelButtonColor: colors.primary,
                                     }).then((result) => {
                                         if (result.value) {
-                                            calendar.addEvent({
-                                                id: "newEvent",
-                                                title: eventTitle,
-                                                start: startDate,
-                                                editable: false,
-                                                end: correctEndDate,
-                                                color: tipe,
-                                                allDay: true
+                                            $.ajax({
+                                                url: base_url + "/tugas/cekAbsen/",
+                                                data: {
+                                                    'tipe': tipe,
+                                                    'tgl': kirimTgl,
+                                                },
+                                                type: "post",
+                                                success: function(resp) {
+                                                    resp = JSON.parse(resp);
+                                                    if (resp.result == 'success') {
+                                                        calendar.addEvent({
+                                                            id: "newEvent",
+                                                            title: eventTitle,
+                                                            start: startDate,
+                                                            editable: false,
+                                                            end: correctEndDate,
+                                                            color: warna,
+                                                            allDay: true
+                                                        });
+                                                        Swal.fire(
+                                                            pesan.title,
+                                                            pesan.message,
+                                                            pesan.icon
+                                                        );
+                                                    }
+                                                }
                                             });
-                                            console.log('absen');
                                         } else if (
                                             /* Read more about handling dismissals below */
                                             result.dismiss === Swal.DismissReason.cancel
@@ -232,12 +236,12 @@
                                                 'message': 'Harap meminta izin kepada pembimbing PKL.'
                                             };
                                             console.log('izin');
+                                            Swal.fire(
+                                                pesan.title,
+                                                pesan.message,
+                                                pesan.icon
+                                            );
                                         }
-                                        Swal.fire(
-                                            pesan.title,
-                                            pesan.message,
-                                            pesan.icon
-                                        )
                                     });
                                 }
                             },
