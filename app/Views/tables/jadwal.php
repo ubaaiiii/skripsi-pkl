@@ -304,7 +304,7 @@
                                                   <i class="feather icon-search primary"></i>
                                               </a>`;
                   switch (data) {
-                    case "JD00":
+                    case null:
                       button += ` <?php if ($session->user_level == 'Admin') : ?>
                                   <a id="edit" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Ubah">
                                       <i class="feather icon-edit-1 warning"></i>
@@ -312,29 +312,25 @@
                                   <a id="delete" d-nama="` + row.nomor_surat + `" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Hapus">
                                       <i class="feather icon-trash-2 danger"></i>
                                   </a>
-                                  <?php endif; ?>
                                   <div class="dropdown-divider"></div>
-                                    <a id="mulai" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Surat Pengantar">
-                                        <i class="feather icon-printer success"></i>
-                                    </a>
-                                    <a id="mulai" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Mulai PKL">
-                                        <i class="feather icon-check-square success"></i>
-                                    </a>`;
-                      break;
-                    case "JD01":
-                      button += `<div class="dropdown-divider"></div>
                                     <a id="salurkan" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
                                         <i class="feather icon-check-square success"></i>
-                                    </a>`;
-                      break;
-                    case "JD02":
-                      button += `<div class="dropdown-divider"></div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
                                     <a id="berhenti" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
                                         <i class="feather icon-alert-circle danger"></i>
+                                    </a>
+                                  <?php endif; ?>
+                                  <div class="dropdown-divider"></div>
+                                    <a href="/jadwal/print" target="_blank" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Surat Pengantar">
+                                        <i class="feather icon-printer success"></i>
                                     </a>`;
                       break;
                     default:
-                      button = `Error 404 Status`;
+                      button += `<div class="dropdown-divider"></div>
+                                    <a id="mulai" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Nilai">
+                                        <i class="feather icon-printer success"></i>
+                                    </a>`;
                       break;
                   }
 

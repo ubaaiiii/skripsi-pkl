@@ -9,7 +9,10 @@
 		"codeigniter4/framework": "^4",
 		"fzaninotto/faker": "^1.9",
 		"monken/cli-create": "^0.3.1",
-		"tecnickcom/tcpdf": "^6.3"
+		"tecnickcom/tcpdf": "^6.3",
+		"dompdf/dompdf": "^0.8.6",
+		"fpdf/fpdf": "^1.82",
+		"mpdf/mpdf": "^8.0"
 	},
 	"require-dev": {
 		"mikey179/vfsstream": "1.6.*",
