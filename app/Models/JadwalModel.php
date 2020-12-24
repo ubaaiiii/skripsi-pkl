@@ -34,7 +34,7 @@ class JadwalModel extends Model
   public function tableJadwal($id = false)
   {
     $session = $this->session;
-    if ($session->user_level != 'Admin' && $session->user_level != 'Pembimbing') {
+    if ($session->user_level != 'Admin' && $session->user_level != 'Pembimbing' && $session->user_level != 'Siswa') {
       return [];
     }
     $db      = $this->db;
@@ -58,7 +58,7 @@ class JadwalModel extends Model
   public function trashJadwal($id = false)
   {
     $session = $this->session;
-    if ($session->user_level != 'Admin' && $session->user_level != 'Pembimbing') {
+    if ($session->user_level != 'Admin' && $session->user_level != 'Pembimbing' && $session->user_level != 'Siswa') {
       return [];
     }
     $db      = $this->db;

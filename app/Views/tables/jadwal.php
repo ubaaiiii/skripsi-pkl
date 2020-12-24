@@ -293,7 +293,7 @@
               dataSrc: ""
             },
             columns: [{
-                data: "status",
+                data: "tgl_diselesaikan",
                 render: function(data, type, row, meta) {
                   var button = `<div class="btn-group dropdown dropdown-icon-wrapper mr-1 mb-1">
                                           <button type="button" class="btn btn-flat-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

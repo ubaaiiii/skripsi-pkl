@@ -45,6 +45,23 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="<?= base_url('data/jadwal'); ?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Jadwal PKL</h4>
+                                        <div class="badge badge-primary badge-md">
+                                            <span>&nbsp;<?= $jml_perusahaan; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body card-dashboard">
+                                            <img class="img-fluid" src="<?= base_url('images\pages\jadwal.png'); ?>" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     <?php } ?>
                     <?php if (in_array(session('user_level'), ['Admin', 'Pembimbing'])) { ?>
                         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -76,23 +93,6 @@
                                     <div class="card-content">
                                         <div class="card-body card-dashboard">
                                             <img class="img-fluid" src="<?= base_url('images\pages\pembimbing.png'); ?>" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <a href="<?= base_url('data/jadwal'); ?>">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Jadwal PKL</h4>
-                                        <div class="badge badge-primary badge-md">
-                                            <span>&nbsp;<?= $jml_perusahaan; ?></span>&nbsp;&nbsp;&nbsp;<i class="feather icon-check-circle"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="card-body card-dashboard">
-                                            <img class="img-fluid" src="<?= base_url('images\pages\jadwal.png'); ?>" alt="">
                                         </div>
                                     </div>
                                 </div>

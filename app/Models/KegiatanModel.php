@@ -23,6 +23,7 @@ class KegiatanModel extends Model
     'info',
     'favorite',
     'is_deleted',
+    'deleted_at',
   ];
   protected $tempReturnType  = 'object';
   protected $useTimestamps   = true;
@@ -33,44 +34,10 @@ class KegiatanModel extends Model
     $this->db = \Config\Database::connect();
   }
 
-  public function getLoadAbsensi($ni = false)
+  public function tableKegiatan($ni = false)
   {
     $db      = $this->db;
-    $builder = $db->table('absensi');
-    $builder->select("id,
-                      right(tgl_masuk,8) 'title',
-                      tgl_masuk 'start',
-                      tgl_masuk 'end',
-                      false 'editable',
-                      tipe 'color',
-                      true 'allDay'")
-      ->where('deleted_at', null);
-    if ($ni) {
-      $builder->where('ni_siswa', $ni);
-    }
-    $array1 = $builder->get()->getResult();
-    $builder = $db->table('absensi');
-    $builder->select("id,
-                      right(tgl_keluar,8) 'title',
-                      tgl_keluar 'start',
-                      tgl_keluar 'end',
-                      false 'editable',
-                      tipe 'color',
-                      true 'allDay'")
-      ->where('deleted_at', null);
-    if ($ni) {
-      $builder->where('ni_siswa', $ni);
-    }
-    $array2 = $builder->get()->getResult();
-
-    return array_merge($array1, $array2);
-    // print_r($db->getLastQuery());
-  }
-
-  public function tableAbsensi($ni = false)
-  {
-    $db      = $this->db;
-    $builder = $db->table('absensi a');
+    $builder = $db->table('kegiatan a');
     $builder->select("a.*")
       ->where('deleted_at', null);
     if ($ni) {
@@ -80,14 +47,14 @@ class KegiatanModel extends Model
     return $builder->get()->getResult();
   }
 
-  public function trashAbsensi($ni = false)
+  public function trashKegiatan($ni = false)
   {
     $db      = $this->db;
-    $builder = $db->table('absensi');
+    $builder = $db->table('kegiatan');
     $builder->select("*")
       ->where('deleted_at IS NOT NULL');
     if ($ni) {
-      $builder->where('id', $ni);
+      $builder->where('ni_siswa', $ni);
     }
 
     return $builder->get()->getResult();
@@ -95,7 +62,6 @@ class KegiatanModel extends Model
 
   public function getFields()
   {
-    $db       = $this->db;
-    return $db->getFieldNames('absensi');
+    return $this->db->getFieldNames('kegiatan');
   }
 }

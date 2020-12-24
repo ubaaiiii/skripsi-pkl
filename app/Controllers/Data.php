@@ -99,7 +99,7 @@ class Data extends BaseController
 		if (!session('user_name')) {
 			$this->session->setFlashdata('message', 'Harap login terlebih dahulu');
 			return redirect()->to('/auth');
-		} else if (!in_array(session('user_level'), ['Admin', 'Pembimbing'])) {
+		} else if (!in_array(session('user_level'), ['Admin', 'Pembimbing', 'Siswa'])) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 		$session = $this->session;
@@ -110,6 +110,10 @@ class Data extends BaseController
 
 			case ("Pembimbing"):
 				$dataUser = $this->pembimbingModel->tablePembimbing($session->nomor_induk)[0];
+				break;
+
+			case ("Siswa"):
+				$dataUser = $this->siswaModel->tableSiswa($session->nomor_induk)[0];
 				break;
 
 			default:
