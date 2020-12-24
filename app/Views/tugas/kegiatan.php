@@ -17,25 +17,57 @@
                         </div>
                         <div class="sidebar-menu-list">
                             <div class="list-group list-group-filters font-medium-1">
-                                <a href="#" class="list-group-item list-group-item-action border-0 pt-0 active">
-                                    <i class="font-medium-5 feather icon-mail mr-50"></i> Semua Kegiatan
+                                <a data="semua" class="filter selected list-group-item list-group-item-action border-0 pt-0 active">
+                                    <i class="font-medium-5 feather icon-mail mr-50"></i> Semua Kegiatan (<?= $semua; ?>)
                                 </a>
                             </div>
                             <hr>
                             <h5 class="mt-2 mb-1 pt-25">Filter</h5>
                             <div class="list-group list-group-filters font-medium-1">
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-star mr-50"></i> Favorit</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-info mr-50"></i> Penting</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-check mr-50"></i> Selesai</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-trash mr-50"></i> Dihapus</a>
+                                <a data="favorite" class="filter list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-star mr-50"></i> Favorit (<?= $favorite; ?>)</a>
+                                <a data="penting" class="filter list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-info mr-50"></i> Penting (<?= $penting; ?>)</a>
+                                <a data="completed" class="filter list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-check mr-50"></i> Selesai (<?= $selesai; ?>)</a>
+                                <a data="deleted" class="filter list-group-item list-group-item-action border-0"><i class="font-medium-5 feather icon-trash mr-50"></i> Dihapus (<?= $dihapus; ?>)</a>
                             </div>
                             <hr>
                             <h5 class="mt-2 mb-1 pt-25">Label</h5>
                             <div class="list-group list-group-labels font-medium-1">
-                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-primary mr-1"></span> Aktifitas</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-warning mr-1"></span> Backend</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-success mr-1"></span> Dokumen</a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span class="bullet bullet-danger mr-1"></span> Kendala</a>
+                                <div class="vs-checkbox-con">
+                                    <input type="checkbox" class="label" data-value="aktifitas">
+                                    <span class="vs-checkbox">
+                                        <span class="vs-checkbox--check">
+                                            <i class="vs-icon feather icon-check mr-0"></i>
+                                        </span>
+                                    </span>
+                                    <span>Aktifitas</span>
+                                </div>
+                                <div class="vs-checkbox-con vs-checkbox-warning">
+                                    <input type="checkbox" checked class="label" data-value="tugas">
+                                    <span class="vs-checkbox">
+                                        <span class="vs-checkbox--check">
+                                            <i class="vs-icon feather icon-check mr-0"></i>
+                                        </span>
+                                    </span>
+                                    <span>Tugas</span>
+                                </div>
+                                <div class="vs-checkbox-con vs-checkbox-success">
+                                    <input type="checkbox" class="label" data-value="dokumen">
+                                    <span class="vs-checkbox">
+                                        <span class="vs-checkbox--check">
+                                            <i class="vs-icon feather icon-check mr-0"></i>
+                                        </span>
+                                    </span>
+                                    <span>Dokumen</span>
+                                </div>
+                                <div class="vs-checkbox-con vs-checkbox-danger">
+                                    <input type="checkbox" class="label" data-value="kendala">
+                                    <span class="vs-checkbox">
+                                        <span class="vs-checkbox--check">
+                                            <i class="vs-icon feather icon-check mr-0"></i>
+                                        </span>
+                                    </span>
+                                    <span>Kendala</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -62,46 +94,46 @@
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="todoLabel">
                                                     <div class="dropdown-item">
                                                         <div class="vs-checkbox-con">
-                                                            <input type="checkbox" data-color="primary" data-value="Frontend">
+                                                            <input type="checkbox" data-color="primary" data-value="Aktifitas">
                                                             <span class="vs-checkbox">
                                                                 <span class="vs-checkbox--check">
                                                                     <i class="vs-icon feather icon-check mr-0"></i>
                                                                 </span>
                                                             </span>
-                                                            <span>Frontend</span>
+                                                            <span>Aktifitas</span>
                                                         </div>
                                                     </div>
                                                     <div class="dropdown-item">
                                                         <div class="vs-checkbox-con">
-                                                            <input type="checkbox" data-color="warning" data-value="Backend">
+                                                            <input type="checkbox" data-color="warning" data-value="Tugas">
                                                             <span class="vs-checkbox">
                                                                 <span class="vs-checkbox--check">
                                                                     <i class="vs-icon feather icon-check mr-0"></i>
                                                                 </span>
                                                             </span>
-                                                            <span>Backend</span>
+                                                            <span>Tugas</span>
                                                         </div>
                                                     </div>
                                                     <div class="dropdown-item">
                                                         <div class="vs-checkbox-con">
-                                                            <input type="checkbox" data-color="success" data-value="Doc">
+                                                            <input type="checkbox" data-color="success" data-value="Dokumen">
                                                             <span class="vs-checkbox">
                                                                 <span class="vs-checkbox--check">
                                                                     <i class="vs-icon feather icon-check mr-0"></i>
                                                                 </span>
                                                             </span>
-                                                            <span>Doc</span>
+                                                            <span>Dokumen</span>
                                                         </div>
                                                     </div>
                                                     <div class="dropdown-item">
                                                         <div class="vs-checkbox-con">
-                                                            <input type="checkbox" data-color="danger" data-value="Bug">
+                                                            <input type="checkbox" data-color="danger" data-value="Kendala">
                                                             <span class="vs-checkbox">
                                                                 <span class="vs-checkbox--check">
                                                                     <i class="vs-icon feather icon-check mr-0"></i>
                                                                 </span>
                                                             </span>
-                                                            <span>Bug</span>
+                                                            <span>Kendala</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -152,81 +184,66 @@
                                 </div>
                                 <div class="todo-task-list list-group">
                                     <ul class="todo-task-list-wrapper media-list">
-                                        <li class="todo-item" data-toggle="modal" data-target="#editTaskModal">
-                                            <div class="todo-title-wrapper d-flex justify-content-between mb-50">
-                                                <div class="todo-title-area d-flex align-items-center">
-                                                    <div class="title-wrapper d-flex">
-                                                        <div class="vs-checkbox-con">
-                                                            <input type="checkbox">
-                                                            <span class="vs-checkbox vs-checkbox-sm">
-                                                                <span class="vs-checkbox--check">
-                                                                    <i class="vs-icon feather icon-check"></i>
+                                        <?php foreach ($kegiatan as $row) { ?>
+                                            <li class="todo-item <?= ($row->is_finished) ? ('completed') : (''); ?> <?= ($row->is_deleted) ? ('deleted danger') : (''); ?> <?= ($row->favorite) ? ('favorite') : (''); ?> <?= ($row->info) ? ('penting') : (''); ?> <?= ($row->aktifitas) ? ('aktifitas') : (''); ?> <?= ($row->tugas) ? ('tugas') : (''); ?> <?= ($row->dokumen) ? ('dokumen') : (''); ?> <?= ($row->kendala) ? ('kendala') : (''); ?> " data-toggle="modal" data-target="#editTaskModal">
+                                                <div class="todo-title-wrapper d-flex justify-content-between mb-50">
+                                                    <div class="todo-title-area d-flex align-items-center">
+                                                        <div class="title-wrapper d-flex">
+                                                            <div class="vs-checkbox-con">
+                                                                <input type="checkbox" <?= ($row->is_finished) ? ('checked') : (''); ?>>
+                                                                <span class="vs-checkbox vs-checkbox-sm">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
                                                                 </span>
-                                                            </span>
-                                                        </div>
-                                                        <h6 class="todo-title mt-50 mx-50">Meet Jane ❤️</h6>
-                                                    </div>
-                                                    <div class="chip-wrapper">
-                                                        <div class="chip mb-0">
-                                                            <div class="chip-body">
-                                                                <span class="chip-text" data-value="Aktifitas"><span class="bullet bullet-primary bullet-xs"></span> Aktifitas</span>
                                                             </div>
+                                                            <h6 class="todo-title mt-50 mx-50"><?= $row->judul; ?></h6>
                                                         </div>
-                                                        <div class="chip mb-0">
-                                                            <div class="chip-body">
-                                                                <span class="chip-text" data-value="Backend"><span class="bullet bullet-warning bullet-xs"></span> Backend</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="chip mb-0">
-                                                            <div class="chip-body">
-                                                                <span class="chip-text" data-value="Dokumen"><span class="bullet bullet-success bullet-xs"></span> Dokumen</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="chip mb-0">
-                                                            <div class="chip-body">
-                                                                <span class="chip-text" data-value="Kendala"><span class="bullet bullet-danger bullet-xs"></span> Kendala</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="float-right todo-item-action d-flex">
-                                                    <a class='todo-item-info success'><i class="feather icon-info"></i></a>
-                                                    <a class='todo-item-favorite warning'><i class="feather icon-star"></i></a>
-                                                    <a class='todo-item-delete'><i class="feather icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                            <p class="todo-desc truncate mb-0">Toffee sugar plum oat cake tiramisu tart bonbon gingerbread cheesecake cake.</p>
-                                        </li>
-                                        <li class="todo-item completed" data-toggle="modal" data-target="#editTaskModal">
-                                            <div class="todo-title-wrapper d-flex justify-content-between mb-50">
-                                                <div class="todo-title-area d-flex align-items-center">
-                                                    <div class="title-wrapper d-flex">
-                                                        <div class="vs-checkbox-con">
-                                                            <input type="checkbox" checked>
-                                                            <span class="vs-checkbox vs-checkbox-sm">
-                                                                <span class="vs-checkbox--check">
-                                                                    <i class="vs-icon feather icon-check"></i>
-                                                                </span>
-                                                            </span>
-                                                        </div>
-                                                        <h6 class="todo-title mt-50 mx-50">Skype Tommy</h6>
-                                                    </div>
-                                                    <div class="chip-wrapper">
-                                                        <div class="chip mb-0">
-                                                            <div class="chip-body">
-                                                                <span class="chip-text" data-value="Bug"><span class="bullet bullet-danger bullet-xs"></span> Bug</span>
-                                                            </div>
+                                                        <div class="chip-wrapper">
+                                                            <?php if ($row->aktifitas) { ?>
+                                                                <div class="chip mb-0">
+                                                                    <div class="chip-body">
+                                                                        <span class="chip-text" data-value="Aktifitas"><span class="bullet bullet-primary bullet-xs"></span> Aktifitas</span>
+                                                                    </div>
+                                                                </div>
+                                                            <?php }
+                                                            if ($row->tugas) { ?>
+                                                                <div class="chip mb-0">
+                                                                    <div class="chip-body">
+                                                                        <span class="chip-text" data-value="Tugas"><span class="bullet bullet-warning bullet-xs"></span> Tugas</span>
+                                                                    </div>
+                                                                </div>
+                                                            <?php }
+                                                            if ($row->dokumen) { ?>
+                                                                <div class="chip mb-0">
+                                                                    <div class="chip-body">
+                                                                        <span class="chip-text" data-value="Dokumen"><span class="bullet bullet-success bullet-xs"></span> Dokumen</span>
+                                                                    </div>
+                                                                </div>
+                                                            <?php }
+                                                            if ($row->kendala) { ?>
+                                                                <div class="chip mb-0">
+                                                                    <div class="chip-body">
+                                                                        <span class="chip-text" data-value="Kendala"><span class="bullet bullet-danger bullet-xs"></span> Kendala</span>
+                                                                    </div>
+                                                                </div>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <div class="float-right todo-item-action d-flex">
+                                                        <a class='todo-item-info <?= ($row->info) ? ('success') : (''); ?>'><i class="feather icon-info"></i></a>
+                                                        <a class='todo-item-favorite <?= ($row->favorite) ? ('warning') : (''); ?>'><i class="feather icon-star"></i></a>
+                                                        <?php if ($row->is_deleted) { ?>
+                                                            <a class='todo-item-restore danger'><i class="feather icon-rotate-ccw"></i></a>
+                                                        <?php } else { ?>
+                                                            <a class='todo-item-delete'><i class="feather icon-trash"></i></a>
+                                                        <?php } ?>
+                                                    </div>
                                                 </div>
-                                                <div class="float-right todo-item-action d-flex">
-                                                    <a class='todo-item-info'><i class="feather icon-info"></i></a>
-                                                    <a class='todo-item-favorite'><i class="feather icon-star"></i></a>
-                                                    <a class='todo-item-delete'><i class="feather icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                            <p class="todo-desc truncate mb-0">Tart oat cake sesame snaps lollipop croissant cake biscuit.</p>
-                                        </li>
+                                                <p class="todo-desc truncate mb-0"><?= $row->deskripsi; ?></p>
+                                                <small class="text-muted">dibuat tanggal: <?= $row->created_at ?></small>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                     <div class="no-results">
                                         <h5>No Items Found</h5>
@@ -257,7 +274,7 @@
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="todoEditLabel">
                                                         <div class="dropdown-item">
                                                             <div class="vs-checkbox-con">
-                                                                <input type="checkbox" data-color="primary" data-value="Frontend">
+                                                                <input type="checkbox" data-color="primary" data-value="Aktifitas">
                                                                 <span class="vs-checkbox">
                                                                     <span class="vs-checkbox--check">
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
@@ -268,18 +285,18 @@
                                                         </div>
                                                         <div class="dropdown-item">
                                                             <div class="vs-checkbox-con">
-                                                                <input type="checkbox" data-color="warning" data-value="Backend">
+                                                                <input type="checkbox" data-color="warning" data-value="Tugas">
                                                                 <span class="vs-checkbox">
                                                                     <span class="vs-checkbox--check">
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
                                                                     </span>
                                                                 </span>
-                                                                <span>Backend</span>
+                                                                <span>Tugas</span>
                                                             </div>
                                                         </div>
                                                         <div class="dropdown-item">
                                                             <div class="vs-checkbox-con">
-                                                                <input type="checkbox" data-color="success" data-value="Doc">
+                                                                <input type="checkbox" data-color="success" data-value="Dokumen">
                                                                 <span class="vs-checkbox">
                                                                     <span class="vs-checkbox--check">
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
@@ -290,7 +307,7 @@
                                                         </div>
                                                         <div class="dropdown-item">
                                                             <div class="vs-checkbox-con">
-                                                                <input type="checkbox" data-color="danger" data-value="Bug">
+                                                                <input type="checkbox" data-color="danger" data-value="Kendala">
                                                                 <span class="vs-checkbox">
                                                                     <span class="vs-checkbox--check">
                                                                         <i class="vs-icon feather icon-check mr-0"></i>
@@ -329,4 +346,47 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        function filtering() {
+            var filter = "." + $('.filter.selected').attr('data'),
+                label = $('.label:checkbox:checked').map(function() {
+                    return $(this).attr('data-value');
+                }).get(),
+                selected_label = "";
+
+            console.log(filter);
+            $.each(label, function(i, v) {
+                selected_label += "." + v;
+                // if (i < label.length - 1) {
+                //     selected_label += ", ";
+                // }
+            });
+            console.log(selected_label);
+
+            $('li.todo-item').css('display', 'none');
+            if (filter == '.semua' && label.length == 0) {
+                $('li.todo-item').removeAttr('style');
+            } else if (label.length != 0) {
+                $(selected_label).removeAttr('style');
+            } else {
+                $(filter + selected_label).removeAttr('style');
+            }
+        }
+        $('.filter').click(function() {
+            $('.filter').removeClass('selected');
+            $(this).addClass('selected');
+            filtering();
+        })
+        $('.todo-item-restore').click(function() {
+            $(this).toggleClass('todo-item-delete todo-item-restore');
+            $(this).html('<i class="feather icon-trash"></i>');
+            $(this).closest('li').removeClass('deleted');
+            $(this).closest('li').removeClass('danger');
+        });
+        $('.label').click(function() {
+            filtering();
+        })
+    })
+</script>
 <?= $this->endSection(); ?>
