@@ -322,7 +322,7 @@
                                     </a>
                                   <?php endif; ?>
                                   <div class="dropdown-divider"></div>
-                                    <a href="/jadwal/print" target="_blank" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Surat Pengantar">
+                                    <a href="/jadwal/print_surat_pengantar?id=` + row.id + `" target="_blank" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Surat Pengantar">
                                         <i class="feather icon-printer success"></i>
                                     </a>`;
                       break;

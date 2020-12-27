@@ -3,6 +3,28 @@
 namespace App\Controllers;
 
 use App\Models\JadwalModel;
+use App\Models\SiswaModel;
+use App\Models\AdminModel;
+use TCPDF;
+
+class MYPDF extends TCPDF
+{
+
+	public function Header()
+	{
+		$headerData = $this->getHeaderData();
+		$this->SetFont('helvetica', 'B', 10);
+		$this->writeHTML($headerData['string']);
+	}
+
+	public function Footer($tambahan = null)
+	{
+		$this->SetY(-15);
+		$this->SetFont('helvetica', 'I', 8);
+		$this->Cell(0, 10, $tambahan . ' SMK Mandalahayu - [halaman' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages() . ']', 0, false, 'C', 0, '', 0, false, 'T', 'M');
+	}
+}
+
 
 class Jadwal extends BaseController
 {
@@ -12,6 +34,8 @@ class Jadwal extends BaseController
 	public function __construct()
 	{
 		$this->jadwalModel = new JadwalModel();
+		$this->siswaModel = new SiswaModel();
+		$this->adminModel = new AdminModel();
 	}
 
 	public function index($id = false)
@@ -160,71 +184,60 @@ class Jadwal extends BaseController
 		return view('surat/pengantar', $data);
 	}
 
-	public function print($tipe = null)
+	public function print_surat_pengantar()
 	{
-		$view = \Config\Services::renderer();
-		// $pageContent = $view->render('surat/pengantar');
-		// die;
-		$pdf = new \Mpdf\Mpdf();
-		$pdf->SetTopMargin(35);
-		$pdf->SetAutoPageBreak(true, 20);
+		$jadwal = $this->jadwalModel;
+		$id_jadwal = $this->request->getVar('id');
+		$data_surat = $jadwal->getSurat($id_jadwal);
+		$data['data'] = $data_surat;
+		// dd($data_surat);
 
-		$pdf->SetHTMLHeader('
-			<table id="header" width="100%" style="border-bottom: 1px double;vertical-align: middle; font-family: serif; font-size: 8pt; color: #000000;"><tr>
-			<td width="7%" align="left"><img width="100px" src="https://i.ibb.co/5XDJ14L/logo-mandalahayu.png"></td>
-			<td align="center">
-				<b style="font-size: 170%;">SMK Mandalahayu</b><br>
-				<p style="font-size: 110%;">Jl. Margahayu Jaya No.304-312 RT.007/RW.017, Margahayu,<br>
-				Kecamatan Bekasi Timur, Kota Bekasi, Jawa Barat 17113<br>
-				Telp: (021) 88346805</p>
-			</td>
-			</tr></table>
-			');
+		$data_siswa = explode(",", $data_surat[0]->ni_siswa);
+		foreach ($data_siswa as $siswa) {
+			$nik = explode("|", $siswa)[0];
+			$datanya_siswa[] = $this->siswaModel->tableSiswa($nik)[0];
+		}
 
-		$pdf->SetHTMLFooter('
-			<table width="100%" style="border-top: 1px solid; vertical-align: bottom; font-family: serif; font-size: 8pt; color: #000000;"><tr>
-			<td width="7%" align="left" style="font-style: italic;">Surat Pengantar PKL</td>
-			<td width="30%" style="text-align: right;font-style: italic;  ">Halaman {PAGENO}/{nbpg}</td>
-			</tr></table>
-			');
-		$data = [
-			'nomor_surat' 	=> '191/SMK-YMH/PKL/E.5/X/2019',
-			'perihal'		=> 'Pengantar Praktik Kerja/Magang',
-			'perusahaan'	=> 'PT. Duta Hita Jaya',
-			'tempat'			=> 'Bekasi',
-			'tgl_terima'	=> '22 Oktober 2020',
-			'no_reff'		=> '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
-			'perihal2'		=> 'Praktik Kerja Industri (PRAKERIN)',
-			'jumlah_siswa'	=> '3 (Tiga)',
-			'siswa'			=> [
-				[
-					'nama' 			=> 'Alya Maharani Putri',
-					'nomor_induk'	=> '181910224',
-					'kelas_jurusan' =>	'XI AP 1',
-					'ket'				=> null
-				],
-				[
-					'nama' 			=> 'Desi Yuliana',
-					'nomor_induk'	=> '181910228',
-					'kelas_jurusan' =>	'XI AP 1',
-					'ket'				=> null
-				],
-				[
-					'nama' 			=> 'Mutiara Hasanah',
-					'nomor_induk'	=> '181910242',
-					'kelas_jurusan' =>	'XI AP 1',
-					'ket'				=> null
-				],
-			],
+		$data_cp = explode(",", $data_surat[0]->ni_contact_person);
+		foreach ($data_cp as $cp) {
+			$datanya_cp[] = $this->adminModel->tableAdmin($cp)[0];
+		}
 
-		];
-		// dd($data);
-		$pdf->WriteHTML(view('surat/pengantar', $data));
-		// $pdfFilePath = "uploads/pdf/surat-pengantar-pkl-" . time() . ".pdf";
-		$pdfFilePath = "uploads/pdf/surat-pengantar-pkl.pdf";
+		$data['datanya_siswa'] = $datanya_siswa;
+		$data['datanya_cp'] = $datanya_cp;
 
-		// $pdf->SetJS('this.print();');
-		$dataPdf = $pdf->Output($pdfFilePath, "F");
-		return redirect()->to("../" . $pdfFilePath);
+		// $pdf = new \TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+		$pdf = new MYPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+
+		$pdf->setHeaderData($ln = '', $lw = 0, $ht = '', $hs = '
+		<table id="header" style="border-bottom: 1px dotted;vertical-align: middle; font-family: serif; font-size: 8pt;width:100%">
+			<tr>
+				<td width="15%" align="left"><img width="100px" src="/images/logo/logo-mandalahayu.png"></td>
+				<td width="85%" align="center">
+					<b style="font-size: 200%;">SMK Mandalahayu</b>
+					<p style="font-size: 150%;">Jl. Margahayu Jaya No.304-312 RT.007/RW.017, Margahayu,<br>
+						Kecamatan Bekasi Timur, Kota Bekasi, Jawa Barat 17113<br>
+						Telp: (021) 88346805</p>
+				</td>
+			</tr>
+		</table>', $tc = array(0, 0, 0), $lc = array(0, 0, 0));
+		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+
+		$pdf->SetTitle('Surat Pengantar PKL SMK Mandalahayu');
+		$pdf->SetHeaderMargin(10);
+		$pdf->SetTopMargin(45);
+		$pdf->setFooterMargin(20);
+		$pdf->SetAutoPageBreak(true);
+		$pdf->SetAuthor('Author');
+		// $pdf->SetDisplayMode('real', 'default');
+
+		$pdf->AddPage();
+
+		// $pdf->Write(1, view('surat/pengantar'));
+		$pdf->writeHTML(view('surat/pengantar', $data));
+		header('Content-Type: application/pdf');
+		$pdf->Output('Surat Pengantar PKL.pdf', 'I');
+		exit();
 	}
 }
