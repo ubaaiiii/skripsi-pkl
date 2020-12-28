@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\JadwalModel;
+use App\Models\NilaiModel;
 use App\Models\SiswaModel;
 use App\Models\AdminModel;
 use TCPDF;
@@ -45,6 +46,7 @@ class Jadwal extends BaseController
 	public function __construct()
 	{
 		$this->jadwalModel = new JadwalModel();
+		$this->nilaiModel = new NilaiModel();
 		$this->siswaModel = new SiswaModel();
 		$this->adminModel = new AdminModel();
 	}
@@ -195,8 +197,9 @@ class Jadwal extends BaseController
 		return view('surat/pengantar', $data);
 	}
 
-	public function print_nilai($id_jadwal)
+	public function print_nilai($id_jadwal, $ni_siswa)
 	{
+		$nilai = $this->nilaiModel;
 		$jadwal = $this->jadwalModel;
 		$data_surat = $jadwal->getSurat($id_jadwal);
 		$data['data'] = $data_surat;
