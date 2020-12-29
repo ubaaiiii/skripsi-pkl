@@ -313,24 +313,18 @@
                                       <i class="feather icon-trash-2 danger"></i>
                                   </a>
                                   <div class="dropdown-divider"></div>
-                                    <a id="salurkan" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Salurkan PKL">
-                                        <i class="feather icon-check-square success"></i>
-                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a id="berhenti" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Berhentikan PKL">
                                         <i class="feather icon-alert-circle danger"></i>
                                     </a>
                                   <?php endif; ?>
                                   <div class="dropdown-divider"></div>
-                                    <a href="/jadwal/print_surat_pengantar?id=` + row.id + `" target="_blank" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Surat Pengantar">
+                                    <a href="/jadwal/print_surat_pengantar/` + row.id + `" target="_blank" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Surat Pengantar">
                                         <i class="feather icon-printer success"></i>
                                     </a>`;
                       break;
                     default:
-                      button += `<div class="dropdown-divider"></div>
-                                    <a id="mulai" d-id="` + row.id + `" class="dropdown-item waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="Cetak Nilai">
-                                        <i class="feather icon-printer success"></i>
-                                    </a>`;
+                      button += ``;
                       break;
                   }
 

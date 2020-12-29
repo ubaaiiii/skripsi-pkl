@@ -367,7 +367,9 @@
             $('li.todo-item').css('display', 'none');
             if (filter == '.semua' && label.length == 0) {
                 $('li.todo-item').removeAttr('style');
-            } else if (label.length != 0) {
+            } else if (filter != '.semua' && label.length == 0) {
+                $(filter).removeAttr('style');
+            } else if (filter == '.semua' && label.length != 0) {
                 $(selected_label).removeAttr('style');
             } else {
                 $(filter + selected_label).removeAttr('style');
