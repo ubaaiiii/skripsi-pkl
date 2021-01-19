@@ -35,6 +35,10 @@
  		padding: 2px
  	}
 
+ 	table.ket td {
+ 		padding: 0px;
+ 	}
+
  	th {
  		text-align: center;
  		font-weight: bold;
@@ -188,7 +192,7 @@
  		<td>&nbsp;<br>&nbsp;</td>
  	</tr>
  </table>
- <table align="right" width="100%">
+ <table align="right" width="100%" class="ket">
  	<tr>
  		<td width="75%">&nbsp;</td>
  		<td width="27%" align="center">Bekasi, <?= tgl_indo(date('Y-m-d')); ?></td>
